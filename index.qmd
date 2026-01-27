@@ -1,0 +1,36 @@
+---
+title: "Index"
+subtitle: "Remotely Sensing Cities and Environments"
+author: "Your Name"
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+---
+
+# Welcome
+
+This is my learning diary for **CASA0023: Remotely Sensing Cities and Environments**.
+
+The diary is organised by week. Each entry follows the same structure:
+
+-   **Summary** – key ideas from the lecture/practical, in my own words\
+-   **Applications** – examples of how these ideas are used (papers, policy, real-world cases)\
+-   **Reflection** – what I understood well, what I’m unsure about, and how I might use it later
+
+# Links
+
+-   **GitHub repository:** 
+-   **Slides (Week 2):** (put your xaringan URL here once published)
+
+# Module overview (quick notes)
+
+-   **Assessment 1 (30%)**: Group presentation (10 minutes), policy-focused EO pitch\
+-   **Assessment 2 (70%)**: Weekly learning diary (this site)
+
+# How I’m working
+
+-   Tools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)
+-   Data note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.

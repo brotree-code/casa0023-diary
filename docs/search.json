@@ -1,0 +1,12 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CASA0023 Learning Diary",
+    "section": "",
+    "text": "Welcome\nThis is my learning diary for CASA0023: Remotely Sensing Cities and Environments.\nThe diary is organised by week. Each entry follows the same structure:\n\nSummary – key ideas from the lecture/practical, in my own words\n\nApplications – examples of how these ideas are used (papers, policy, real-world cases)\n\nReflection – what I understood well, what I’m unsure about, and how I might use it later\n\n\n\nLinks\n\nGitHub repository: (put your repo link here)\nSlides (Week 2): (put your xaringan URL here once published)\n\n\n\nModule overview (quick notes)\n\nAssessment 1 (30%): Group presentation (10 minutes), policy-focused EO pitch\n\nAssessment 2 (70%): Weekly learning diary (this site)\n\n\n\nHow I’m working\n\nTools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)\nData note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Index</span>"
+    ]
+  }
+]

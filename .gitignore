@@ -1,0 +1,81 @@
+# ----------------------------
+# OS junk
+# ----------------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# R / RStudio junk
+# ----------------------------
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# ----------------------------
+# Quarto / knitr caches (safe to ignore)
+# ----------------------------
+.quarto/
+*_cache/
+*.utf8.md
+*.knit.md
+
+# ----------------------------
+# Remote sensing / big data (DON'T upload)
+# Adjust these folder names to match yours
+# ----------------------------
+data/
+raw_data/
+processed_data/
+outputs/
+temp/
+tmp/
+downloads/
+prac_*/
+
+# Common EO file types (often huge)
+*.SAFE/
+*.zip
+*.tar
+*.tar.gz
+*.gz
+*.7z
+*.rar
+
+*.tif
+*.tiff
+*.jp2
+*.img
+*.hdf
+*.nc
+*.grd
+*.grib
+*.bil
+*.bsq
+*.bip
+
+# LiDAR
+*.las
+*.laz
+
+# SNAP products / GIS artifacts
+*.dim
+*.data/
+*.snap
+*.snaphu
+*.qgz~
+*.qgs~
+
+# ----------------------------
+# IMPORTANT: GitHub Pages output must be kept
+# ----------------------------
+!docs/
+!docs/**
+
+# ----------------------------
+# Keep your diary images folder
+# ----------------------------
+!images/
+!images/**
+
+/.quarto/
