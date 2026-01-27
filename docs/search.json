@@ -4,9 +4,99 @@
     "href": "index.html",
     "title": "CASA0023 Learning Diary",
     "section": "",
-    "text": "Welcome\nThis is my learning diary for CASA0023: Remotely Sensing Cities and Environments.\nThe diary is organised by week. Each entry follows the same structure:\n\nSummary – key ideas from the lecture/practical, in my own words\n\nApplications – examples of how these ideas are used (papers, policy, real-world cases)\n\nReflection – what I understood well, what I’m unsure about, and how I might use it later\n\n\n\nLinks\n\nGitHub repository: (put your repo link here)\nSlides (Week 2): (put your xaringan URL here once published)\n\n\n\nModule overview (quick notes)\n\nAssessment 1 (30%): Group presentation (10 minutes), policy-focused EO pitch\n\nAssessment 2 (70%): Weekly learning diary (this site)\n\n\n\nHow I’m working\n\nTools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)\nData note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.",
+    "text": "Welcome\nThis is my learning diary for CASA0023: Remotely Sensing Cities and Environments.\nThe diary is organised by week. Each entry follows the same structure:\n\nSummary – key ideas from the lecture/practical, in my own words\n\nApplications – examples of how these ideas are used (papers, policy, real-world cases)\n\nReflection – what I understood well, what I’m unsure about, and how I might use it later\n\n\n\nLinks\n\nGitHub repository:\nSlides (Week 2): (put your xaringan URL here once published)\n\n\n\nModule overview (quick notes)\n\nAssessment 1 (30%): Group presentation (10 minutes), policy-focused EO pitch\n\nAssessment 2 (70%): Weekly learning diary (this site)\n\n\n\nHow I’m working\n\nTools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)\nData note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Index</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html",
+    "href": "week1.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "Study area",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html#study-area",
+    "href": "week1.html#study-area",
+    "title": "Week 1",
+    "section": "",
+    "text": "City: XXX\n\nWhy this city? (e.g., rapid urban growth / heat risk / green space / flooding / air quality)\nROI boundary source (if any): (e.g., GADM level ?, local boundary, manual polygon)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html#data-used-metadata",
+    "href": "week1.html#data-used-metadata",
+    "title": "Week 1",
+    "section": "Data used (metadata)",
+    "text": "Data used (metadata)\n\nSentinel-2\n\nProduct: Sentinel-2 MSI L2A (BOA / surface reflectance)\nDate:\n\nCloud filter:\n\nTile / Product ID:\n\n\n\nLandsat\n\nProduct: Landsat Collection 2 Level 2 (OLI/TIRS)\nDate / Scene ID:\n\nCloud filter:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html#summary-what-i-did-key-ideas",
+    "href": "week1.html#summary-what-i-did-key-ideas",
+    "title": "Week 1",
+    "section": "Summary (what I did & key ideas)",
+    "text": "Summary (what I did & key ideas)\n\nKey ideas from Lecture 1\n\nRemote sensing measures electromagnetic radiation (EMR) interacting with Earth surface/atmosphere.\nEMR described by wavelength and frequency:\n\\[\\lambda = \\frac{c}{v}\\]\nDifferent materials have different spectral responses → band combos/indices work.\nObservations vary with illumination/viewing geometry (BRDF) → comparisons need consistent preprocessing.\n\n\n\nWorkflow (what I did in order)\n\nSelected city + searched scenes by date & cloud cover.\nDownloaded Sentinel-2 L2A (tile-based) and Landsat L2 (bundle).\nExplored bands/composites in QGIS/SNAP.\nChecked image statistics (histogram/scatterplot).\n(Optional) Exported subsets for later analysis in R.\n\n\n\nPractical 1 notes\n\nSentinel-2 (Copernicus Browser): (fill steps + settings)\nQGIS exploration: (bands, stack, composites, contrast enhancement observation)\nSNAP exploration: (open zip/MTL, RGB, histogram, scatterplot)\nResampling / masking decisions (if done): (NN/bilinear? 10m→20m? why)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html#applications-why-this-matters",
+    "href": "week1.html#applications-why-this-matters",
+    "title": "Week 1",
+    "section": "Applications (why this matters)",
+    "text": "Applications (why this matters)\n\nApplication 1 — Urban vegetation & green infrastructure\n\nPossible indicators: (NDVI, vegetation cover, seasonal change)\nSensor choice justification:\nLimitations:\n\n\n\nApplication 2 — Long-term urban change / land cover\n\nMonitor: (urban expansion, impervious surface, bare soil)\nWhy Landsat archive matters:\nLimitations:\n\n\n\nApplication 3 — Evidence-informed policy\n\nWhich policy target/metric could EO help quantify?\nRisks: BRDF/seasonality/scale mismatch → need consistent preprocessing & clear definitions.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html#reflection-what-i-learned-what-confused-me-next-steps",
+    "href": "week1.html#reflection-what-i-learned-what-confused-me-next-steps",
+    "title": "Week 1",
+    "section": "Reflection (what I learned, what confused me, next steps)",
+    "text": "Reflection (what I learned, what confused me, next steps)\n\nSentinel vs Landsat (my comparison)\n\nSpatial resolution:\n\nTemporal resolution / archive:\n\nSpectral coverage / band overlap:\n\nProducts & preprocessing level (L2A / Level-2):\n\nPractical usability (download structure, file sizes, QA):\n\n\n\nSoftware comparison (QGIS vs SNAP vs R)\n\nQGIS:\n\nSNAP:\n\nR (terra/stars):\n\n\n\nSpectral signatures (what I observed)\n\nExpected patterns across bands (vegetation / water / bare soil / urban)\nHow resampling/pixel size could affect signatures:\n\n\n\nAssumptions & limitations (this week)\n\nSingle-date scene:\nCloud/shadow:\nGeometry (BRDF) + seasonality:\nCross-sensor comparability:\n\n\n\nNext steps\n\nDefine a clearer research question tied to a metric/policy.\nStandardise preprocessing (CRS, resampling choice, masking extent).\nMore systematic POIs (sampling design, reduce subjectivity).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html#repo-notes-gitgithub-hygiene",
+    "href": "week1.html#repo-notes-gitgithub-hygiene",
+    "title": "Week 1",
+    "section": "Repo notes (Git/GitHub hygiene)",
+    "text": "Repo notes (Git/GitHub hygiene)\n\nMy .gitignore ignores large EO files (e.g., .tif, .jp2, .SAFE, .zip) and data folders (e.g., data/), but keeps docs/ for GitHub Pages.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html#glossary-optional",
+    "href": "week1.html#glossary-optional",
+    "title": "Week 1",
+    "section": "Glossary (optional)",
+    "text": "Glossary (optional)\n\nEO:\n\nBOA / TOA:\n\nBRDF:\n\nResampling:\n\nSpectral signature:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
+    ]
+  },
+  {
+    "objectID": "week1.html#figures-optional",
+    "href": "week1.html#figures-optional",
+    "title": "Week 1",
+    "section": "Figures (optional)",
+    "text": "Figures (optional)\n\nTrue colour composite (city, date)\n\nFalse colour composite / histogram / scatterplot (with 1–2 line captions)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
     ]
   }
 ]

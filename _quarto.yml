@@ -7,9 +7,12 @@ book:
   author: "Jianshu Wu"
   chapters:
     - index.qmd
-#    - week1.qmd
+    - week1.qmd
 #    - week2.qmd
 
 format:
   html:
     toc: true
+    toc-depth: 2
+    toc-location: right
+    number-sections: false

@@ -1,0 +1,108 @@
+---
+title: "Week 1"
+subtitle: "Getting started with remote sensing"
+author: "Jianshu Wu"
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+---
+
+## Study area
+- **City:** XXX  
+- **Why this city?** (e.g., rapid urban growth / heat risk / green space / flooding / air quality)
+- **ROI boundary source (if any):** (e.g., GADM level ?, local boundary, manual polygon)
+
+## Data used (metadata)
+### Sentinel-2
+- **Product:** Sentinel-2 MSI **L2A (BOA / surface reflectance)**
+- **Date:**  
+- **Cloud filter:**  
+- **Tile / Product ID:**  
+
+### Landsat
+- **Product:** Landsat Collection 2 Level 2 (OLI/TIRS)
+- **Date / Scene ID:**  
+- **Cloud filter:**  
+
+## Summary (what I did & key ideas)
+
+### Key ideas from Lecture 1
+- Remote sensing measures **electromagnetic radiation (EMR)** interacting with Earth surface/atmosphere.
+- EMR described by **wavelength** and **frequency**:  
+  $$\lambda = \frac{c}{v}$$
+- Different materials have different **spectral responses** → band combos/indices work.
+- Observations vary with illumination/viewing geometry (**BRDF**) → comparisons need consistent preprocessing.
+
+### Workflow (what I did in order)
+1. Selected city + searched scenes by date & cloud cover.
+2. Downloaded Sentinel-2 L2A (tile-based) and Landsat L2 (bundle).
+3. Explored bands/composites in QGIS/SNAP.
+4. Checked image statistics (histogram/scatterplot).
+5. (Optional) Exported subsets for later analysis in R.
+
+### Practical 1 notes
+- **Sentinel-2 (Copernicus Browser):** (fill steps + settings)
+- **QGIS exploration:** (bands, stack, composites, contrast enhancement observation)
+- **SNAP exploration:** (open zip/MTL, RGB, histogram, scatterplot)
+- **Resampling / masking decisions (if done):** (NN/bilinear? 10m→20m? why)
+
+## Applications (why this matters)
+### Application 1 — Urban vegetation & green infrastructure
+- Possible indicators: (NDVI, vegetation cover, seasonal change)
+- Sensor choice justification:
+- Limitations:
+
+### Application 2 — Long-term urban change / land cover
+- Monitor: (urban expansion, impervious surface, bare soil)
+- Why Landsat archive matters:
+- Limitations:
+
+### Application 3 — Evidence-informed policy
+- Which policy target/metric could EO help quantify?
+- Risks: BRDF/seasonality/scale mismatch → need consistent preprocessing & clear definitions.
+
+## Reflection (what I learned, what confused me, next steps)
+
+### Sentinel vs Landsat (my comparison)
+- **Spatial resolution:**  
+- **Temporal resolution / archive:**  
+- **Spectral coverage / band overlap:**  
+- **Products & preprocessing level (L2A / Level-2):**  
+- **Practical usability (download structure, file sizes, QA):**  
+
+### Software comparison (QGIS vs SNAP vs R)
+- **QGIS:**  
+- **SNAP:**  
+- **R (terra/stars):**  
+
+### Spectral signatures (what I observed)
+- Expected patterns across bands (vegetation / water / bare soil / urban)
+- How resampling/pixel size could affect signatures:
+
+### Assumptions & limitations (this week)
+- Single-date scene:
+- Cloud/shadow:
+- Geometry (BRDF) + seasonality:
+- Cross-sensor comparability:
+
+### Next steps
+- Define a clearer research question tied to a metric/policy.
+- Standardise preprocessing (CRS, resampling choice, masking extent).
+- More systematic POIs (sampling design, reduce subjectivity).
+
+## Repo notes (Git/GitHub hygiene)
+- My `.gitignore` ignores large EO files (e.g., `.tif`, `.jp2`, `.SAFE`, `.zip`) and data folders (e.g., `data/`), but keeps `docs/` for GitHub Pages.
+
+## Glossary (optional)
+- **EO:**  
+- **BOA / TOA:**  
+- **BRDF:**  
+- **Resampling:**  
+- **Spectral signature:**  
+
+## Figures (optional)
+- True colour composite (city, date)  
+- False colour composite / histogram / scatterplot (with 1–2 line captions)
