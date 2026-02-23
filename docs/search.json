@@ -102,11 +102,11 @@
   {
     "objectID": "week2.html",
     "href": "week2.html",
-    "title": "Week 2: 传感器展示 (Sensor Presentation)",
+    "title": "````markdown",
     "section": "",
-    "text": "1. 传感器展示 (Presentation)\n本周的核心任务是使用 R 语言中的 xaringan 包，制作一个关于特定对地观测传感器的交互式 HTML 演示文稿。\n下方是我嵌入的关于 Landsat 计划的幻灯片。（提示：点击幻灯片内部，然后按键盘上的 O 键，即可触发像铺瓷砖一样的全局概览视图！）",
+    "text": "1. Sensor Presentation\ntitle: “Week 2: Sensor Presentation” subtitle: “Focus on Landsat 8/9 (OLI & TIRS)” author: “Jianshu Wu” date: last-modified format: html: toc: true toc-depth: 2 number-sections: false —\nThis week’s core task is to use the xaringan package in R to create an interactive HTML presentation about a specific Earth observation sensor.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: Sensor Presentation</span>"
     ]
   },
   {
@@ -124,7 +124,7 @@
     "href": "week2.html#应用案例与文献-applications",
     "title": "Week 2: 传感器展示 (Sensor Presentation)",
     "section": "3. 应用案例与文献 (Applications)",
-    "text": "3. 应用案例与文献 (Applications)\n多光谱和热红外数据的结合，使 Landsat 成为城市环境监测的得力工具。一个经典的应用是计算归一化植被指数 (NDVI) 来评估城市绿色基础设施，进而将其与地表温度 (LST) 的变化进行相关性分析。\n这种关系通常使用以下公式进行量化计算：\n\\[NDVI = \\frac{NIR - Red}{NIR + Red}\\]\n对应到 Landsat 8/9 的具体波段，公式转换为：\n\\[NDVI = \\frac{Band 5 - Band 4}{Band 5 + Band 4}\\]\n\n案例研究：城市热岛效应 (UHI)\n相关研究严重依赖 Landsat 的 TIRS 波段来反演地表温度 (LST)。例如，许多研究利用 Landsat 数据来绘制城市地图，直观地展示当自然地表植被被不透水面（如水泥、沥青）取代后，局部温度是如何显著升高的。",
+    "text": "3. 应用案例与文献 (Applications)\n多光谱和热红外数据的结合，使 Landsat 成为城市环境监测的得力工具。一个经典的应用是计算归一化植被指数 (NDVI) 来评估城市绿色基础设施，进而将其与地表温度 (LST) 的变化进行相关性分析。\n这种关系通常使用以下公式进行量化计算：\n\\[NDVI = \\frac{NIR - Red}{NIR + Red}\\]\n对应到 Landsat 8/9 的具体波段，公式转换为：\n\\[NDVI = \\frac{Band 5 - Band 4}{Band 5 + Band 4}\\] ### 案例研究：城市热岛效应 (UHI)\n利用 Landsat 8/9 的热红外波段 (TIRS)，我们可以反演地表温度 (LST)。下方展示了典型的城市热力分布，其中亮红色代表由于密集的建筑和道路引起的高温区域。\n\n\n\nLandsat 衍生出的地表温度 (LST) 展示图。红色区域对应城市热岛。\n\n\n\n分析提示：这类热力图是城市规划中评估绿色基础设施（如公园、屋顶绿化）缓解温度效果的关键依据。",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
     ]
@@ -154,9 +154,69 @@
     "href": "week2.html#参考文献-references",
     "title": "Week 2: 传感器展示 (Sensor Presentation)",
     "section": "5. 参考文献 (References)",
-    "text": "5. 参考文献 (References)\n\nLoveland, T. R., & Dwyer, J. L. (2012). ‘Landsat: Building a strong future’, Remote Sensing of Environment, 122, pp. 22-29.\nWulder, M. A., Masek, J. G., Cohen, W. B., Loveland, T. R., & Woodcock, C. E. (2012). ‘Opening the archive: How free data has enabled the science and monitoring promise of Landsat’, Remote Sensing of Environment, 122, pp. 2-10.",
+    "text": "5. 参考文献 (References)\n\nWulder, M. A., Masek, J. G., Cohen, W. B., Loveland, T. R., & Woodcock, C. E. (2012). Opening the archive: How free data has enabled the science and monitoring promise of Landsat, Remote Sensing of Environment, 122, pp. 2–10. DOI: https://doi.org/10.1016/j.rse.2012.01.010\nLoveland, T. R., & Dwyer, J. L. (2012). Landsat: Building a strong future, Remote Sensing of Environment, 122, pp. 22–29. DOI: https://doi.org/10.1016/j.rse.2011.09.022",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
+    ]
+  },
+  {
+    "objectID": "week2.html#传感器展示-presentation",
+    "href": "week2.html#传感器展示-presentation",
+    "title": "Week 2: 传感器展示 (Sensor Presentation)",
+    "section": "",
+    "text": "💡 下方是我嵌入的关于 Landsat 计划的幻灯片，请直接点击这里：查看 Landsat 幻灯片全文。",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
+    ]
+  },
+  {
+    "objectID": "week2.html#sensor-presentation",
+    "href": "week2.html#sensor-presentation",
+    "title": "````markdown",
+    "section": "",
+    "text": "💡 Below is my embedded slide deck about the Landsat program. Please click here directly: View the full Landsat presentation.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: Sensor Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "week2.html#sensor-summary-and-independent-reflection",
+    "href": "week2.html#sensor-summary-and-independent-reflection",
+    "title": "````markdown",
+    "section": "2. Sensor Summary and Independent Reflection",
+    "text": "2. Sensor Summary and Independent Reflection\nAlthough the slides cover the fundamental knowledge of Landsat, in my independent exploration I conducted a horizontal comparison with another mainstream optical sensor, Sentinel-2.\nAlthough Sentinel-2 provides higher spatial resolution (up to 10 meters) and a faster revisit cycle (5 days), Landsat still holds an irreplaceable position in urban climate research. This is mainly because it carries a Thermal Infrared Sensor (TIRS) and possesses an unparalleled historical data archive.\nTable 1: Quick Comparison for Urban Remote Sensing Applications\n\n\n\n\n\n\n\n\n\nKey Feature\nLandsat 8/9 (OLI & TIRS)\nSentinel-2 (MSI)\nImplications for Urban Research\n\n\n\n\nOptical Resolution\n30 m\n10 m – 60 m\nSentinel-2 is more suitable for mapping fine-scale street-level vegetation.\n\n\nThermal Infrared Bands\nYes (originally 100 m, resampled to 30 m)\nNo\nLandsat is indispensable for mapping Urban Heat Island (UHI) effects.\n\n\nData Archive\nSince 1972\nSince 2015\nLandsat is the only option for tracking urban expansion over decades.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: Sensor Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "week2.html#applications-and-literature",
+    "href": "week2.html#applications-and-literature",
+    "title": "````markdown",
+    "section": "3. Applications and Literature",
+    "text": "3. Applications and Literature\nThe combination of multispectral and thermal infrared data makes Landsat a powerful tool for urban environmental monitoring. A classic application is calculating the Normalized Difference Vegetation Index (NDVI) to assess urban green infrastructure, and then analyzing its correlation with Land Surface Temperature (LST).\nThis relationship is typically quantified using the following formula:\n\\[NDVI = \\frac{NIR - Red}{NIR + Red}\\]\nFor Landsat 8/9, the formula corresponds to specific bands as:\n\\[NDVI = \\frac{Band\\ 5 - Band\\ 4}{Band\\ 5 + Band\\ 4}\\]\n\nCase Study: Urban Heat Island (UHI)\nUsing the thermal infrared bands (TIRS) of Landsat 8/9, we can retrieve Land Surface Temperature (LST). The figure below shows a typical urban thermal distribution, where bright red areas represent high-temperature zones caused by dense buildings and roads.\n\n\n\nLand Surface Temperature (LST) derived from Landsat. Red areas indicate urban heat islands.\n\n\n\nAnalysis Tip: Such thermal maps are key evidence in urban planning when evaluating the cooling effects of green infrastructure (e.g., parks and green roofs).",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: Sensor Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "week2.html#learning-reflection",
+    "href": "week2.html#learning-reflection",
+    "title": "````markdown",
+    "section": "4. Learning Reflection",
+    "text": "4. Learning Reflection\n\nOn Sensors and Earth Observation\nMy biggest takeaway this week is recognizing the crucial importance of Open Data Policies. Wulder et al. (2012) accurately pointed out that opening the Landsat archive fundamentally transformed the trajectory of remote sensing science. However, I also became aware of the “trade-offs” in remote sensing technology: you cannot have everything. Landsat sacrifices some spatial resolution (30 m) in exchange for broader coverage and thermal infrared capability. In future work, I am particularly interested in Data Fusion—combining Landsat’s thermal infrared data with Sentinel-2’s high-resolution optical data to achieve the “best of both worlds” in precise urban microclimate analysis.\n\n\nOn Technical Workflow (Reproducible Research)\nBeyond understanding the sensor itself, producing this slide deck was a steep but rewarding learning curve. Transitioning from traditional PowerPoint-based production to code-driven presentations (Xaringan), and publishing them online via GitHub Pages, forced me to deeply understand the concept of Reproducibility. Writing slides in plain text (Markdown) and directly integrating R code means that my data analysis and presentation of results are no longer disconnected—an approach that will greatly benefit my future academic research.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: Sensor Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "week2.html#references",
+    "href": "week2.html#references",
+    "title": "````markdown",
+    "section": "5. References",
+    "text": "5. References\n\nWulder, M. A., Masek, J. G., Cohen, W. B., Loveland, T. R., & Woodcock, C. E. (2012).\nOpening the archive: How free data has enabled the science and monitoring promise of Landsat,\nRemote Sensing of Environment, 122, pp. 2–10.\nDOI: 10.1016/j.rse.2012.01.010\nLoveland, T. R., & Dwyer, J. L. (2012).\nLandsat: Building a strong future,\nRemote Sensing of Environment, 122, pp. 22–29.\nDOI: 10.1016/j.rse.2011.09.022",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: Sensor Presentation</span>"
     ]
   }
 ]
