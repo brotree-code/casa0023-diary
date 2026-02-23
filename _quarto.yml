@@ -8,7 +8,7 @@ book:
   chapters:
     - index.qmd
     - week1.qmd
-#    - week2.qmd
+    - week2.qmd
 
 format:
   html:
