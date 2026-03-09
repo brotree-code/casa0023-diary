@@ -1,18 +1,51 @@
 project:
-  type: book
+  type: website  
   output-dir: docs
 
-book:
+author: "Jianshu Wu"
+
+website:
   title: "CASA0023 Learning Diary"
-  author: "Jianshu Wu"
-  chapters:
-    - index.qmd
-    - week1.qmd
-    - week2.qmd
+  repo-url: "https://github.com/brotree-code/casa0023-diary" 
+  repo-actions: [source, issue]
+  search: true
+
+  
+  navbar:
+    background: light  
+    pinned: false  
+    
+    right:
+      - icon: github
+        href: "https://github.com/brotree-code/casa0023-diary"
+        aria-label: GitHub
+
+  
+  sidebar:
+    style: docked
+    contents:
+      - text: "Welcome"
+        file: index.qmd
+      - text: "Week 1: Intro & Spectral" 
+        file: week1.qmd
+      - text: "Week 2: Sensor Presentation"
+        file: week2.qmd
 
 format:
   html:
+    
+    theme:
+      light: flatly
+      dark: darkly
+      
+    header-includes: |
+      <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    mainfont: "Nunito"
+    fontsize: 1.1em       
+    fontcolor: "#333333"  
+
     toc: true
-    toc-depth: 2
+    toc-depth: 3
     toc-location: right
+    code-fold: true
     number-sections: false

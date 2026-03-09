@@ -1,13 +1,7 @@
 ---
-title: "Index"
+title: "Learning diary"
 subtitle: "Remotely Sensing Cities and Environments"
-author: "Jianshu Wu"
-date: last-modified
-format:
-  html:
-    toc: true
-    toc-depth: 2
-    number-sections: false
+date: "2026-01-24"
 ---
 
 # Welcome
@@ -22,8 +16,8 @@ The diary is organised by week. Each entry follows the same structure:
 
 # Links
 
--   **GitHub repository:** 
--   **Slides (Week 2):** (put your xaringan URL here once published)
+* 🔗 [**GitHub Repository**](https://github.com/brotree-code/casa0023-diary)
+* 📊 [**Slides (Week 2): Landsat Program Presentation**](https://brotree-code.github.io/casa0023-presentation/)
 
 # Module overview (quick notes)
 

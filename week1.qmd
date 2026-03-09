@@ -1,97 +1,103 @@
 ---
-title: "第一周：遥感导论与光谱分析实战"
-subtitle: "Sentinel-2 与 Landsat-9 在贵阳市的对比研究"
-author: "吴建树 (Jianshu Wu)"
-date: last-modified
-format:
-  html:
-    toc: true
-    toc-depth: 3
-    number-sections: false
-    code-fold: true
+title: "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice"
+subtitle: "A Comparative Study of Multisource Data (Sentinel-2 & Landsat-9) in My Hometown, Guiyang"
+date: "2026-01-24"
 ---
 
-## 1. 传感器总结与独立思考 (Summary & Independent Thought)
+## 1. Content Summary & Independent Thought
 
-### 1.1 传感器特性：Sentinel-2 MSI
-本周的学习重点在于理解对地观测传感器的核心参数。在实践中，我处理了覆盖中国贵阳市的 **Sentinel-2 MSI (Level-2A)** 影像。该产品提供地表反射率数据，对于精确的光谱分析至关重要。Sentinel-2 凭借其平衡的“四种分辨率”在城市研究中表现卓越：
+### 1.1 Physical Fundamentals of Remote Sensing & EMR
+This week's learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions. Through the lecture, I grasped the core formula of electromagnetic waves: $\lambda = c/v$, where wavelength is inversely proportional to frequency.
 
-* **空间分辨率**：核心波段达到 10m，能够捕捉精细的城市纹理。
-* **光谱分辨率**：包含 13 个光谱波段，涵盖从可见光到短波红外（SWIR）。
-* **时间分辨率**：凭借 A/B 双星实现 5 天的重访周期。
-* **辐射分辨率**：12 位深度，能够存储 4,096 个亮度等级。
+::: {.callout-note}
+Before the sensor detects the Earth's surface, the energy undergoes complex interactions:
 
-![SNAP 中的重采样与裁剪处理过程，展示了针对贵阳行政边界的初步处理。](images/snap_processing_clipping.png)
+* **Atmospheric Interactions**: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.
+* **Surface Interactions**: Energy is absorbed, transmitted, or reflected by the surface. The sensor's task is precisely to capture this reflected energy, which carries information about the surface features.
+:::
 
-### 1.2 研究区域选择：为什么选择贵阳？
-贵阳不仅是我的**家乡**，也是研究中国西南山地城市化的典型案例。
+### 1.2 Critical Review of the Four Resolutions
+The lecture emphasized the "four resolutions" that determine the success of remote sensing applications:
 
-* **情感联结**：作为在这座城市长大的人，通过卫星之眼重新审视家乡的变迁，赋予了这项科研任务深层的人文关怀。
-* **研究价值**：贵阳独特的喀斯特地貌和多云气候给光学遥感带来了巨大挑战。
-* **分辨率重要性**：贵阳剧烈的地形起伏和快速的城市扩张，使得 Sentinel-2 的 10m 分辨率在识别碎片化绿地和高密度建筑群时显得尤为重要。
+* **Spatial Resolution**: Determines the smallest observable feature. Sentinel-2's 10m resolution offers a significant advantage at the urban scale.
+* **Spectral Resolution**: The number and width of bands. I realized that a "spectral signature" is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.
+* **Temporal Resolution**: The revisit period, which is crucial for dynamic environmental monitoring.
+* **Radiometric Resolution**: The sensor's sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).
 
+### 1.3 Independent Thought: Why Choose My Hometown, Guiyang?
+I selected my hometown, **Guiyang**, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:
 
+* **Complexity of Karst Topography**: Guiyang's rugged terrain leads to a pronounced "Bidirectional Reflectance Distribution Function (BRDF)" effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.
+* **Data Balancing Act**: While Sentinel-2 excels in spatial precision, Landsat's historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood.
 
-### 1.3 独立思考：分辨率的权衡与数据丰裕
-在对比中我发现，Sentinel-2 的高时间分辨率非常适合监测贵阳多云天气下的影像缝隙。然而，Landsat 自 1972 年以来的存档数据对于追踪我记忆中家乡几十年的变迁是不可替代的。这种“时间跨度”与“空间精度”的权衡，说明了多源数据融合才是未来城市研究的必然趋势。
+![Figure 1: Pre-processing workflow in SNAP, including resampling and masking Sentinel-2 data for Guiyang.](images/snap_pre_processing.png)
 
 ---
 
-## 2. 应用案例：地物增强与全球制图 (Applications)
+## 2. Applications
 
-### 2.1 缨帽变换 (Tasseled Cap Transformation, TCT)
-在应用层面，我不仅观察了原始波段，还在 SNAP 中执行了**缨帽变换**。通过波段运算，我得到了三个具有明确物理意义的分量：
+### 2.1 Tasseled Cap Transformation (TCT) in Urban Morphology
+In practice, I applied the **Tasseled Cap Transformation (TCT)**. This is not just a dimensionality reduction technique, but an extraction of biophysical indicators:
 
-* **亮度 (Brightness)**：反映了家乡城市建设用地的反射强度。
-* **绿度 (Greenness)**：突出了贵阳作为山水城市丰富的植被信号。
-* **湿度 (Wetness)**：有效识别了南明河及红枫湖等关键水体。
+* **Brightness**: Effectively extracted the high-density built-up areas, such as the newly emerged "Big Data Centers" in Guiyang.
+* **Greenness**: Helped me identify the green corridors preserved during the rapid expansion of Guiyang, a designated National Forest City.
+* **Wetness**: Successfully extracted the Nanming River and Hongfeng Lake water systems, which is vital for evaluating the ecological functions of urban blue-green spaces.
 
-![SNAP 中的 TCT RGB 显示效果图（R:亮度, G:绿度, B:湿度），绿色代表森林，亮粉色代表城市建筑。](images/snap_tasseled_cap_rgb.png)
+![Figure 2: TCT RGB rendering of Guiyang (R: Brightness, G: Greenness, B: Wetness). The bright areas clearly illustrate the building density in the urban center.](images/snap_tct_view.png)
 
-通过生成**散点图 (Scatter Plot)**，我观察到地物在“亮度-绿度”空间中呈现出经典的“缨帽”形状分布。
-
-
-
-### 2.2 全球尺度应用：ESA WorldCover
-Sentinel-2 数据被广泛应用于 **ESA WorldCover 10m** 等项目。这种高精度地图允许城市规划者从社区尺度区分建筑区与绿色基础设施，这对我分析贵阳的城市绿地可达性具有重要启发。
+### 2.2 Cross-Sensor Research: Insights from ESA WorldCover
+The **ESA WorldCover 10m** project mentioned in the lecture demonstrates the tremendous potential of 10m resolution in real-time urban monitoring. Compared to traditional 30m Landsat data, high-resolution Sentinel data can significantly reduce "mixed pixels" at urban edges. However, I also recognize that in cloudy, high-altitude regions, single optical applications have bottlenecks. In the future, it is essential to integrate active SAR sensor data capable of "penetrating clouds."
 
 ---
 
-## 3. 技术流程：从 SNAP 到 R 的光谱统计分析 (Work Logic)
+## 3. Technical Workflow and Statistical Analysis
 
-### 3.1 空间对齐与 POI 采样
-在 QGIS 中，我验证了 Sentinel 和 Landsat 影像的地理配准精度。通过 **同步视图 (Synchronise Views)** 功能，我在家乡熟悉的坐标上精确标注了水体、森林、城市等兴趣点 (POIs) 样本。
+### 3.1 Automated Workflow from SNAP to R
+My technical pathway achieved a closed loop from spatial processing to statistical modeling:
 
-![QGIS 验证截图：展示了多源影像图层与数字化 POI 矢量文件的完美空间套合。](images/qgis_verification.png)
+1.  **SNAP Processing**: Completed resampling, georegistration, and image subsetting based on vector boundaries.
+2.  **R Sampling**: Utilized the `terra` package to extract pixel values and encapsulated a `band_fun` function to achieve batch extraction and Long Format data tidying.
+3.  **QGIS Validation**: Ensured perfect spatial alignment of multi-source imagery within the same geographical space.
 
-### 3.2 基于 R 的光谱签名分析
-在 R 中，我使用 `terra` 包提取了像元值，并计算了不同地物的平均光谱特征：
+::: {layout-ncol=2}
+![Figure 3-A: Spatial alignment of Landsat-9 imagery and POIs](images/qgis_alignment_LC09.png)
 
-* **光谱曲线绘制**：我计算了各波段下的平均反射率。正如实验所示，光谱特征代表了地物在不同波长下的“指纹”。
-* **密度图分析**：通过密度图观察到城市像元反射率的高异质性，反映了贵阳复杂的建筑材质分布。
+![Figure 3-B: Spatial alignment of Sentinel-2 imagery and POIs](images/qgis_alignment_S2C.png)
+:::
+*Figure 3: QGIS spatial consistency validation. The perfect alignment of multi-source satellite imagery and my digitized training points (POIs) in the same coordinate system is the core prerequisite ensuring the accuracy of subsequent pixel extractions in R.*
 
-![在 R 中生成的贵阳典型地物光谱签名曲线（含标准差误差棒）。](images/r_spectral_signatures.png)
+### 3.2 R-Based Spectral Signature Statistical Analysis
+Using `terra::extract` and long-format conversion via `tidyverse`, I extracted the spectral response values of typical land covers in Guiyang and plotted their signature curves (Figure 4):
 
----
+::: {.callout-important}
+* **The Red Edge Effect of Vegetation**: In the spectral curve (Plot A), the forest sample (red line) exhibits low reflectance in the visible bands (Bands 1-3) but a sharp surge in the near-infrared band (Band 4). This perfectly corroborates the biophysical characteristic of healthy mesophyll cells strongly reflecting NIR energy.
+* **Absorption Characteristics of Water**: The water sample (blue line) maintains extremely low reflectance across all bands and shows a downward trend in the NIR band, confirming the strong absorption of long-wave energy by water.
+* **High Heterogeneity of Urban Surfaces**: This is the most striking finding. The spectral curve shows that urban pixels (green line) possess massive standard deviations (error bars) across all bands; meanwhile, the density distribution plot (Plot B) reveals an extremely broad and flat reflectance distribution for urban pixels. Statistically, this reflects the highly complex and mixed surface morphology of downtown Guiyang, which comprises concrete, asphalt, metal roofs, and fragmented green spaces.
+:::
 
-## 4. 学习反思 (Reflection)
-
-### 4.1 统计学差异的物理本质
-在实验中，我对贵阳城市样本的 Sentinel 和 Landsat 数据进行了 **Welch t 检验**。结果如下：
-* **统计量**：$t = -214.78$。
-* **显著性**：$p < 2.2e-16$。
-
-这种极显著差异提醒我，遥感中的“不一致”并非单纯的误差，而是源于两者的光谱响应函数以及大气校正算法（BOA）的不同。在跨传感器分析中，执行**传感器定标**是确保数据一致性的关键步骤。
-
-### 4.2 技术成长与未来展望
-通过本周的学习，我不仅学会了封装 `band_fun` 函数来实现自动化提取，更学会了如何用数据去讲述家乡的故事。
-* **技能提升**：掌握了从 SNAP 空间处理到 R 语言统计的可重复性工作流。
-* **未来目标**：我计划探索如何利用机器学习算法，针对贵阳这种复杂地形进行更深度的土地覆盖变化检测。
+![Figure 4: Spectral signature curves of typical land covers in Guiyang generated in R (with standard deviation error bars).](images/spectral_reflectance.png)
 
 ---
 
-## 5. 参考文献 (References)
+## 4. Personal Reflection
 
-* **ESA (2023).** *Sentinel-2 MSI User Guide*. 可访问: [https://sentinel.esa.int/](https://sentinel.esa.int/)
-* **Loveland, T. R., & Dwyer, J. L. (2012).** [Landsat: Building a strong future](https://doi.org/10.1016/j.rse.2011.09.022), *Remote Sensing of Environment*, 122, pp. 22–29.
-* **Wulder, M. A. et al. (2012).** [Opening the archive: How free data has enabled the science and monitoring promise of Landsat](https://doi.org/10.1016/j.rse.2012.01.010), *Remote Sensing of Environment*, 122, pp. 2–10.
+### 4.1 Statistical Significance vs. Physical Meaning
+In this week's practical, I performed a **Welch t-test** on the pixel values of Sentinel and Landsat within the urban areas of my hometown.
+
+![Figure 5: Welch t-test results running in RStudio, demonstrating a highly significant statistical difference in pixel values between the two sensors.](images/test_result.png)
+
+* **Statistical Results**: As shown in Figure 5, $t = -214.78$, $p < 2.2 \times 10^{-16}$, indicating a highly significant difference.
+* **Deep Reflection**: As a researcher, I deeply understand that this "significant difference" does not imply a data processing error; rather, it objectively reflects physical differences between the two sensors—including variations in their spectral response functions, atmospheric correction algorithms (e.g., Sen2Cor for Sentinel vs. LaSRC for Landsat), and respective radiometric calibration coefficients. This reminds me that in future urban climate studies, cross-sensor data fusion cannot simply be pieced together abruptly; precise cross-calibration between sensors must be conducted beforehand.
+
+### 4.2 Skill Growth and Future Vision
+::: {.callout-tip}
+Through this week's learning, I have not only mastered operational tools (SNAP, R, QGIS) but, more importantly, acquired a coding mindset for **Reproducible Research**. Moving forward, I plan to further explore machine learning classification based on these extracted spectral features, using objective data to quantify the true impact of urbanization on the ecological baseline of my hometown over the past decade.
+:::
+
+---
+
+## 5. References
+
+* **Drusch, M., Del Bello, U., Carlier, S., Colin, O., Fernandez, V., Gascon, F., Hoersch, B., Isola, C., Laberinti, P., Martimort, P., & Meygret, A. (2012).** [Sentinel-2: ESA's Optical High-Resolution Mission for GMES Operational Services](https://doi.org/10.1016/j.rse.2011.11.026), *Remote Sensing of Environment*, 120, pp. 25-36. 
+* **Wulder, M. A., Masek, J. G., Cohen, W. B., Loveland, T. R., & Woodcock, C. E. (2012).** [Opening the archive: How free data has enabled the science and monitoring promise of Landsat](https://doi.org/10.1016/j.rse.2012.01.010), *Remote Sensing of Environment*, 122, pp. 2-10. 
+* **Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., & Cartus, O. (2021).** [ESA WorldCover 10 m 2020 v100](https://doi.org/10.5281/zenodo.5571936), *Zenodo*.

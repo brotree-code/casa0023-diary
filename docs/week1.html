@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jianshu Wu">
-<meta name="dcterms.date" content="2026-01-27">
+<meta name="dcterms.date" content="2026-01-24">
 
-<title>Week 1 – CASA0023 Learning Diary</title>
+<title>Week 1: Introduction to Remote Sensing and Spectral Analysis Practice – CASA0023 Learning Diary</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,24 +32,26 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./week2.html" rel="next">
-<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ffd282cb318059e0bcb130885a47f5dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2d04f6a56a99f900a06f3dceb2e66a0f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fa423e886cf517ee378d38a13c608aa9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2d04f6a56a99f900a06f3dceb2e66a0f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -71,6 +73,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -104,53 +107,230 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">CASA0023 Learning Diary</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/brotree-code/casa0023-diary"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week1.html"><span class="chapter-title">Week 1</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week1.html">Week 1: Intro &amp; Spectral</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">CASA0023 Learning Diary</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Index</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./week1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Week 1</span></a>
+  <a href="./week1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 1: Intro &amp; Spectral</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./week2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 2: 传感器展示 (Sensor Presentation)</span></a>
+  <a href="./week2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: Sensor Presentation</span></a>
   </div>
 </li>
     </ul>
@@ -160,27 +340,42 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
+  <ul>
+  <li><a href="#content-summary-independent-thought" id="toc-content-summary-independent-thought" class="nav-link active" data-scroll-target="#content-summary-independent-thought">1. Content Summary &amp; Independent Thought</a>
   <ul class="collapse">
-  <li><a href="#study-area" id="toc-study-area" class="nav-link active" data-scroll-target="#study-area">Study area</a></li>
-  <li><a href="#data-used-metadata" id="toc-data-used-metadata" class="nav-link" data-scroll-target="#data-used-metadata">Data used (metadata)</a></li>
-  <li><a href="#summary-what-i-did-key-ideas" id="toc-summary-what-i-did-key-ideas" class="nav-link" data-scroll-target="#summary-what-i-did-key-ideas">Summary (what I did &amp; key ideas)</a></li>
-  <li><a href="#applications-why-this-matters" id="toc-applications-why-this-matters" class="nav-link" data-scroll-target="#applications-why-this-matters">Applications (why this matters)</a></li>
-  <li><a href="#reflection-what-i-learned-what-confused-me-next-steps" id="toc-reflection-what-i-learned-what-confused-me-next-steps" class="nav-link" data-scroll-target="#reflection-what-i-learned-what-confused-me-next-steps">Reflection (what I learned, what confused me, next steps)</a></li>
-  <li><a href="#repo-notes-gitgithub-hygiene" id="toc-repo-notes-gitgithub-hygiene" class="nav-link" data-scroll-target="#repo-notes-gitgithub-hygiene">Repo notes (Git/GitHub hygiene)</a></li>
-  <li><a href="#glossary-optional" id="toc-glossary-optional" class="nav-link" data-scroll-target="#glossary-optional">Glossary (optional)</a></li>
-  <li><a href="#figures-optional" id="toc-figures-optional" class="nav-link" data-scroll-target="#figures-optional">Figures (optional)</a></li>
+  <li><a href="#physical-fundamentals-of-remote-sensing-emr" id="toc-physical-fundamentals-of-remote-sensing-emr" class="nav-link" data-scroll-target="#physical-fundamentals-of-remote-sensing-emr">1.1 Physical Fundamentals of Remote Sensing &amp; EMR</a></li>
+  <li><a href="#critical-review-of-the-four-resolutions" id="toc-critical-review-of-the-four-resolutions" class="nav-link" data-scroll-target="#critical-review-of-the-four-resolutions">1.2 Critical Review of the Four Resolutions</a></li>
+  <li><a href="#independent-thought-why-choose-my-hometown-guiyang" id="toc-independent-thought-why-choose-my-hometown-guiyang" class="nav-link" data-scroll-target="#independent-thought-why-choose-my-hometown-guiyang">1.3 Independent Thought: Why Choose My Hometown, Guiyang?</a></li>
+  </ul></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">2. Applications</a>
+  <ul class="collapse">
+  <li><a href="#tasseled-cap-transformation-tct-in-urban-morphology" id="toc-tasseled-cap-transformation-tct-in-urban-morphology" class="nav-link" data-scroll-target="#tasseled-cap-transformation-tct-in-urban-morphology">2.1 Tasseled Cap Transformation (TCT) in Urban Morphology</a></li>
+  <li><a href="#cross-sensor-research-insights-from-esa-worldcover" id="toc-cross-sensor-research-insights-from-esa-worldcover" class="nav-link" data-scroll-target="#cross-sensor-research-insights-from-esa-worldcover">2.2 Cross-Sensor Research: Insights from ESA WorldCover</a></li>
+  </ul></li>
+  <li><a href="#technical-workflow-and-statistical-analysis" id="toc-technical-workflow-and-statistical-analysis" class="nav-link" data-scroll-target="#technical-workflow-and-statistical-analysis">3. Technical Workflow and Statistical Analysis</a>
+  <ul class="collapse">
+  <li><a href="#automated-workflow-from-snap-to-r" id="toc-automated-workflow-from-snap-to-r" class="nav-link" data-scroll-target="#automated-workflow-from-snap-to-r">3.1 Automated Workflow from SNAP to R</a></li>
+  <li><a href="#r-based-spectral-signature-statistical-analysis" id="toc-r-based-spectral-signature-statistical-analysis" class="nav-link" data-scroll-target="#r-based-spectral-signature-statistical-analysis">3.2 R-Based Spectral Signature Statistical Analysis</a></li>
+  </ul></li>
+  <li><a href="#personal-reflection" id="toc-personal-reflection" class="nav-link" data-scroll-target="#personal-reflection">4. Personal Reflection</a>
+  <ul class="collapse">
+  <li><a href="#statistical-significance-vs.-physical-meaning" id="toc-statistical-significance-vs.-physical-meaning" class="nav-link" data-scroll-target="#statistical-significance-vs.-physical-meaning">4.1 Statistical Significance vs.&nbsp;Physical Meaning</a></li>
+  <li><a href="#skill-growth-and-future-vision" id="toc-skill-growth-and-future-vision" class="nav-link" data-scroll-target="#skill-growth-and-future-vision">4.2 Skill Growth and Future Vision</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">5. References</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week1.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Week 1</span></h1>
-<p class="subtitle lead">Getting started with remote sensing</p>
+<h1 class="title">Week 1: Introduction to Remote Sensing and Spectral Analysis Practice</h1>
+<p class="subtitle lead">A Comparative Study of Multisource Data (Sentinel-2 &amp; Landsat-9) in My Hometown, Guiyang</p>
 </div>
 
 
@@ -197,7 +392,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 27, 2026</p>
+      <p class="date">January 24, 2026</p>
     </div>
   </div>
   
@@ -209,173 +404,179 @@ window.Quarto = {
 </header>
 
 
-<section id="study-area" class="level2">
-<h2 class="anchored" data-anchor-id="study-area">Study area</h2>
+<section id="content-summary-independent-thought" class="level2">
+<h2 class="anchored" data-anchor-id="content-summary-independent-thought">1. Content Summary &amp; Independent Thought</h2>
+<section id="physical-fundamentals-of-remote-sensing-emr" class="level3">
+<h3 class="anchored" data-anchor-id="physical-fundamentals-of-remote-sensing-emr">1.1 Physical Fundamentals of Remote Sensing &amp; EMR</h3>
+<p>This week’s learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions. Through the lecture, I grasped the core formula of electromagnetic waves: <span class="math inline">\(\lambda = c/v\)</span>, where wavelength is inversely proportional to frequency.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before the sensor detects the Earth’s surface, the energy undergoes complex interactions:</p>
 <ul>
-<li><strong>City:</strong> XXX<br>
-</li>
-<li><strong>Why this city?</strong> (e.g., rapid urban growth / heat risk / green space / flooding / air quality)</li>
-<li><strong>ROI boundary source (if any):</strong> (e.g., GADM level ?, local boundary, manual polygon)</li>
+<li><strong>Atmospheric Interactions</strong>: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.</li>
+<li><strong>Surface Interactions</strong>: Energy is absorbed, transmitted, or reflected by the surface. The sensor’s task is precisely to capture this reflected energy, which carries information about the surface features.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="critical-review-of-the-four-resolutions" class="level3">
+<h3 class="anchored" data-anchor-id="critical-review-of-the-four-resolutions">1.2 Critical Review of the Four Resolutions</h3>
+<p>The lecture emphasized the “four resolutions” that determine the success of remote sensing applications:</p>
+<ul>
+<li><strong>Spatial Resolution</strong>: Determines the smallest observable feature. Sentinel-2’s 10m resolution offers a significant advantage at the urban scale.</li>
+<li><strong>Spectral Resolution</strong>: The number and width of bands. I realized that a “spectral signature” is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.</li>
+<li><strong>Temporal Resolution</strong>: The revisit period, which is crucial for dynamic environmental monitoring.</li>
+<li><strong>Radiometric Resolution</strong>: The sensor’s sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).</li>
 </ul>
 </section>
-<section id="data-used-metadata" class="level2">
-<h2 class="anchored" data-anchor-id="data-used-metadata">Data used (metadata)</h2>
-<section id="sentinel-2" class="level3">
-<h3 class="anchored" data-anchor-id="sentinel-2">Sentinel-2</h3>
+<section id="independent-thought-why-choose-my-hometown-guiyang" class="level3">
+<h3 class="anchored" data-anchor-id="independent-thought-why-choose-my-hometown-guiyang">1.3 Independent Thought: Why Choose My Hometown, Guiyang?</h3>
+<p>I selected my hometown, <strong>Guiyang</strong>, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:</p>
 <ul>
-<li><strong>Product:</strong> Sentinel-2 MSI <strong>L2A (BOA / surface reflectance)</strong></li>
-<li><strong>Date:</strong><br>
-</li>
-<li><strong>Cloud filter:</strong><br>
-</li>
-<li><strong>Tile / Product ID:</strong></li>
+<li><strong>Complexity of Karst Topography</strong>: Guiyang’s rugged terrain leads to a pronounced “Bidirectional Reflectance Distribution Function (BRDF)” effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.</li>
+<li><strong>Data Balancing Act</strong>: While Sentinel-2 excels in spatial precision, Landsat’s historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood.</li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snap_pre_processing.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Pre-processing workflow in SNAP, including resampling and masking Sentinel-2 data for Guiyang.</figcaption>
+</figure>
+</div>
+<hr>
 </section>
-<section id="landsat" class="level3">
-<h3 class="anchored" data-anchor-id="landsat">Landsat</h3>
+</section>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">2. Applications</h2>
+<section id="tasseled-cap-transformation-tct-in-urban-morphology" class="level3">
+<h3 class="anchored" data-anchor-id="tasseled-cap-transformation-tct-in-urban-morphology">2.1 Tasseled Cap Transformation (TCT) in Urban Morphology</h3>
+<p>In practice, I applied the <strong>Tasseled Cap Transformation (TCT)</strong>. This is not just a dimensionality reduction technique, but an extraction of biophysical indicators:</p>
 <ul>
-<li><strong>Product:</strong> Landsat Collection 2 Level 2 (OLI/TIRS)</li>
-<li><strong>Date / Scene ID:</strong><br>
-</li>
-<li><strong>Cloud filter:</strong></li>
+<li><strong>Brightness</strong>: Effectively extracted the high-density built-up areas, such as the newly emerged “Big Data Centers” in Guiyang.</li>
+<li><strong>Greenness</strong>: Helped me identify the green corridors preserved during the rapid expansion of Guiyang, a designated National Forest City.</li>
+<li><strong>Wetness</strong>: Successfully extracted the Nanming River and Hongfeng Lake water systems, which is vital for evaluating the ecological functions of urban blue-green spaces.</li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snap_tct_view.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: TCT RGB rendering of Guiyang (R: Brightness, G: Greenness, B: Wetness). The bright areas clearly illustrate the building density in the urban center.</figcaption>
+</figure>
+</div>
+</section>
+<section id="cross-sensor-research-insights-from-esa-worldcover" class="level3">
+<h3 class="anchored" data-anchor-id="cross-sensor-research-insights-from-esa-worldcover">2.2 Cross-Sensor Research: Insights from ESA WorldCover</h3>
+<p>The <strong>ESA WorldCover 10m</strong> project mentioned in the lecture demonstrates the tremendous potential of 10m resolution in real-time urban monitoring. Compared to traditional 30m Landsat data, high-resolution Sentinel data can significantly reduce “mixed pixels” at urban edges. However, I also recognize that in cloudy, high-altitude regions, single optical applications have bottlenecks. In the future, it is essential to integrate active SAR sensor data capable of “penetrating clouds.”</p>
+<hr>
 </section>
 </section>
-<section id="summary-what-i-did-key-ideas" class="level2">
-<h2 class="anchored" data-anchor-id="summary-what-i-did-key-ideas">Summary (what I did &amp; key ideas)</h2>
-<section id="key-ideas-from-lecture-1" class="level3">
-<h3 class="anchored" data-anchor-id="key-ideas-from-lecture-1">Key ideas from Lecture 1</h3>
-<ul>
-<li>Remote sensing measures <strong>electromagnetic radiation (EMR)</strong> interacting with Earth surface/atmosphere.</li>
-<li>EMR described by <strong>wavelength</strong> and <strong>frequency</strong>:<br>
-<span class="math display">\[\lambda = \frac{c}{v}\]</span></li>
-<li>Different materials have different <strong>spectral responses</strong> → band combos/indices work.</li>
-<li>Observations vary with illumination/viewing geometry (<strong>BRDF</strong>) → comparisons need consistent preprocessing.</li>
-</ul>
-</section>
-<section id="workflow-what-i-did-in-order" class="level3">
-<h3 class="anchored" data-anchor-id="workflow-what-i-did-in-order">Workflow (what I did in order)</h3>
+<section id="technical-workflow-and-statistical-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="technical-workflow-and-statistical-analysis">3. Technical Workflow and Statistical Analysis</h2>
+<section id="automated-workflow-from-snap-to-r" class="level3">
+<h3 class="anchored" data-anchor-id="automated-workflow-from-snap-to-r">3.1 Automated Workflow from SNAP to R</h3>
+<p>My technical pathway achieved a closed loop from spatial processing to statistical modeling:</p>
 <ol type="1">
-<li>Selected city + searched scenes by date &amp; cloud cover.</li>
-<li>Downloaded Sentinel-2 L2A (tile-based) and Landsat L2 (bundle).</li>
-<li>Explored bands/composites in QGIS/SNAP.</li>
-<li>Checked image statistics (histogram/scatterplot).</li>
-<li>(Optional) Exported subsets for later analysis in R.</li>
+<li><strong>SNAP Processing</strong>: Completed resampling, georegistration, and image subsetting based on vector boundaries.</li>
+<li><strong>R Sampling</strong>: Utilized the <code>terra</code> package to extract pixel values and encapsulated a <code>band_fun</code> function to achieve batch extraction and Long Format data tidying.</li>
+<li><strong>QGIS Validation</strong>: Ensured perfect spatial alignment of multi-source imagery within the same geographical space.</li>
 </ol>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/qgis_alignment_LC09.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3-A: Spatial alignment of Landsat-9 imagery and POIs</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/qgis_alignment_S2C.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3-B: Spatial alignment of Sentinel-2 imagery and POIs</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><em>Figure 3: QGIS spatial consistency validation. The perfect alignment of multi-source satellite imagery and my digitized training points (POIs) in the same coordinate system is the core prerequisite ensuring the accuracy of subsequent pixel extractions in R.</em></p>
 </section>
-<section id="practical-1-notes" class="level3">
-<h3 class="anchored" data-anchor-id="practical-1-notes">Practical 1 notes</h3>
+<section id="r-based-spectral-signature-statistical-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="r-based-spectral-signature-statistical-analysis">3.2 R-Based Spectral Signature Statistical Analysis</h3>
+<p>Using <code>terra::extract</code> and long-format conversion via <code>tidyverse</code>, I extracted the spectral response values of typical land covers in Guiyang and plotted their signature curves (Figure 4):</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><strong>Sentinel-2 (Copernicus Browser):</strong> (fill steps + settings)</li>
-<li><strong>QGIS exploration:</strong> (bands, stack, composites, contrast enhancement observation)</li>
-<li><strong>SNAP exploration:</strong> (open zip/MTL, RGB, histogram, scatterplot)</li>
-<li><strong>Resampling / masking decisions (if done):</strong> (NN/bilinear? 10m→20m? why)</li>
+<li><strong>The Red Edge Effect of Vegetation</strong>: In the spectral curve (Plot A), the forest sample (red line) exhibits low reflectance in the visible bands (Bands 1-3) but a sharp surge in the near-infrared band (Band 4). This perfectly corroborates the biophysical characteristic of healthy mesophyll cells strongly reflecting NIR energy.</li>
+<li><strong>Absorption Characteristics of Water</strong>: The water sample (blue line) maintains extremely low reflectance across all bands and shows a downward trend in the NIR band, confirming the strong absorption of long-wave energy by water.</li>
+<li><strong>High Heterogeneity of Urban Surfaces</strong>: This is the most striking finding. The spectral curve shows that urban pixels (green line) possess massive standard deviations (error bars) across all bands; meanwhile, the density distribution plot (Plot B) reveals an extremely broad and flat reflectance distribution for urban pixels. Statistically, this reflects the highly complex and mixed surface morphology of downtown Guiyang, which comprises concrete, asphalt, metal roofs, and fragmented green spaces.</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/spectral_reflectance.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: Spectral signature curves of typical land covers in Guiyang generated in R (with standard deviation error bars).</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="personal-reflection" class="level2">
+<h2 class="anchored" data-anchor-id="personal-reflection">4. Personal Reflection</h2>
+<section id="statistical-significance-vs.-physical-meaning" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-significance-vs.-physical-meaning">4.1 Statistical Significance vs.&nbsp;Physical Meaning</h3>
+<p>In this week’s practical, I performed a <strong>Welch t-test</strong> on the pixel values of Sentinel and Landsat within the urban areas of my hometown.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/test_result.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: Welch t-test results running in RStudio, demonstrating a highly significant statistical difference in pixel values between the two sensors.</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Statistical Results</strong>: As shown in Figure 5, <span class="math inline">\(t = -214.78\)</span>, <span class="math inline">\(p &lt; 2.2 \times 10^{-16}\)</span>, indicating a highly significant difference.</li>
+<li><strong>Deep Reflection</strong>: As a researcher, I deeply understand that this “significant difference” does not imply a data processing error; rather, it objectively reflects physical differences between the two sensors—including variations in their spectral response functions, atmospheric correction algorithms (e.g., Sen2Cor for Sentinel vs.&nbsp;LaSRC for Landsat), and respective radiometric calibration coefficients. This reminds me that in future urban climate studies, cross-sensor data fusion cannot simply be pieced together abruptly; precise cross-calibration between sensors must be conducted beforehand.</li>
 </ul>
 </section>
+<section id="skill-growth-and-future-vision" class="level3">
+<h3 class="anchored" data-anchor-id="skill-growth-and-future-vision">4.2 Skill Growth and Future Vision</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Through this week’s learning, I have not only mastered operational tools (SNAP, R, QGIS) but, more importantly, acquired a coding mindset for <strong>Reproducible Research</strong>. Moving forward, I plan to further explore machine learning classification based on these extracted spectral features, using objective data to quantify the true impact of urbanization on the ecological baseline of my hometown over the past decade.</p>
+</div>
+</div>
+<hr>
 </section>
-<section id="applications-why-this-matters" class="level2">
-<h2 class="anchored" data-anchor-id="applications-why-this-matters">Applications (why this matters)</h2>
-<section id="application-1-urban-vegetation-green-infrastructure" class="level3">
-<h3 class="anchored" data-anchor-id="application-1-urban-vegetation-green-infrastructure">Application 1 — Urban vegetation &amp; green infrastructure</h3>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">5. References</h2>
 <ul>
-<li>Possible indicators: (NDVI, vegetation cover, seasonal change)</li>
-<li>Sensor choice justification:</li>
-<li>Limitations:</li>
-</ul>
-</section>
-<section id="application-2-long-term-urban-change-land-cover" class="level3">
-<h3 class="anchored" data-anchor-id="application-2-long-term-urban-change-land-cover">Application 2 — Long-term urban change / land cover</h3>
-<ul>
-<li>Monitor: (urban expansion, impervious surface, bare soil)</li>
-<li>Why Landsat archive matters:</li>
-<li>Limitations:</li>
-</ul>
-</section>
-<section id="application-3-evidence-informed-policy" class="level3">
-<h3 class="anchored" data-anchor-id="application-3-evidence-informed-policy">Application 3 — Evidence-informed policy</h3>
-<ul>
-<li>Which policy target/metric could EO help quantify?</li>
-<li>Risks: BRDF/seasonality/scale mismatch → need consistent preprocessing &amp; clear definitions.</li>
-</ul>
-</section>
-</section>
-<section id="reflection-what-i-learned-what-confused-me-next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="reflection-what-i-learned-what-confused-me-next-steps">Reflection (what I learned, what confused me, next steps)</h2>
-<section id="sentinel-vs-landsat-my-comparison" class="level3">
-<h3 class="anchored" data-anchor-id="sentinel-vs-landsat-my-comparison">Sentinel vs Landsat (my comparison)</h3>
-<ul>
-<li><strong>Spatial resolution:</strong><br>
-</li>
-<li><strong>Temporal resolution / archive:</strong><br>
-</li>
-<li><strong>Spectral coverage / band overlap:</strong><br>
-</li>
-<li><strong>Products &amp; preprocessing level (L2A / Level-2):</strong><br>
-</li>
-<li><strong>Practical usability (download structure, file sizes, QA):</strong></li>
-</ul>
-</section>
-<section id="software-comparison-qgis-vs-snap-vs-r" class="level3">
-<h3 class="anchored" data-anchor-id="software-comparison-qgis-vs-snap-vs-r">Software comparison (QGIS vs SNAP vs R)</h3>
-<ul>
-<li><strong>QGIS:</strong><br>
-</li>
-<li><strong>SNAP:</strong><br>
-</li>
-<li><strong>R (terra/stars):</strong></li>
-</ul>
-</section>
-<section id="spectral-signatures-what-i-observed" class="level3">
-<h3 class="anchored" data-anchor-id="spectral-signatures-what-i-observed">Spectral signatures (what I observed)</h3>
-<ul>
-<li>Expected patterns across bands (vegetation / water / bare soil / urban)</li>
-<li>How resampling/pixel size could affect signatures:</li>
-</ul>
-</section>
-<section id="assumptions-limitations-this-week" class="level3">
-<h3 class="anchored" data-anchor-id="assumptions-limitations-this-week">Assumptions &amp; limitations (this week)</h3>
-<ul>
-<li>Single-date scene:</li>
-<li>Cloud/shadow:</li>
-<li>Geometry (BRDF) + seasonality:</li>
-<li>Cross-sensor comparability:</li>
-</ul>
-</section>
-<section id="next-steps" class="level3">
-<h3 class="anchored" data-anchor-id="next-steps">Next steps</h3>
-<ul>
-<li>Define a clearer research question tied to a metric/policy.</li>
-<li>Standardise preprocessing (CRS, resampling choice, masking extent).</li>
-<li>More systematic POIs (sampling design, reduce subjectivity).</li>
-</ul>
-</section>
-</section>
-<section id="repo-notes-gitgithub-hygiene" class="level2">
-<h2 class="anchored" data-anchor-id="repo-notes-gitgithub-hygiene">Repo notes (Git/GitHub hygiene)</h2>
-<ul>
-<li>My <code>.gitignore</code> ignores large EO files (e.g., <code>.tif</code>, <code>.jp2</code>, <code>.SAFE</code>, <code>.zip</code>) and data folders (e.g., <code>data/</code>), but keeps <code>docs/</code> for GitHub Pages.</li>
-</ul>
-</section>
-<section id="glossary-optional" class="level2">
-<h2 class="anchored" data-anchor-id="glossary-optional">Glossary (optional)</h2>
-<ul>
-<li><strong>EO:</strong><br>
-</li>
-<li><strong>BOA / TOA:</strong><br>
-</li>
-<li><strong>BRDF:</strong><br>
-</li>
-<li><strong>Resampling:</strong><br>
-</li>
-<li><strong>Spectral signature:</strong></li>
-</ul>
-</section>
-<section id="figures-optional" class="level2">
-<h2 class="anchored" data-anchor-id="figures-optional">Figures (optional)</h2>
-<ul>
-<li>True colour composite (city, date)<br>
-</li>
-<li>False colour composite / histogram / scatterplot (with 1–2 line captions)</li>
+<li><strong>Drusch, M., Del Bello, U., Carlier, S., Colin, O., Fernandez, V., Gascon, F., Hoersch, B., Isola, C., Laberinti, P., Martimort, P., &amp; Meygret, A. (2012).</strong> <a href="https://doi.org/10.1016/j.rse.2011.11.026">Sentinel-2: ESA’s Optical High-Resolution Mission for GMES Operational Services</a>, <em>Remote Sensing of Environment</em>, 120, pp.&nbsp;25-36.</li>
+<li><strong>Wulder, M. A., Masek, J. G., Cohen, W. B., Loveland, T. R., &amp; Woodcock, C. E. (2012).</strong> <a href="https://doi.org/10.1016/j.rse.2012.01.010">Opening the archive: How free data has enabled the science and monitoring promise of Landsat</a>, <em>Remote Sensing of Environment</em>, 122, pp.&nbsp;2-10.</li>
+<li><strong>Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., &amp; Cartus, O. (2021).</strong> <a href="https://doi.org/10.5281/zenodo.5571936">ESA WorldCover 10 m 2020 v100</a>, <em>Zenodo</em>.</li>
 </ul>
 
 
@@ -384,6 +585,19 @@ window.Quarto = {
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -781,21 +995,9 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Index">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Index</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./week2.html" class="pagination-link" aria-label="Week 2: 传感器展示 (Sensor Presentation)">
-        <span class="nav-page-text"><span class="chapter-title">Week 2: 传感器展示 (Sensor Presentation)</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week1.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

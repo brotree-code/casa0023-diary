@@ -1,20 +1,16 @@
 ---
 title: "Week 2: Sensor Presentation"
 subtitle: "Focus on Landsat 8/9 (OLI & TIRS)"
-author: "Jianshu Wu"
-date: last-modified
-format:
-  html:
-    toc: true
-    toc-depth: 2
-    number-sections: false
+date: "2026-01-24"
 ---
 
 ## 1. Sensor Presentation
 
 This week’s core task is to use the `xaringan` package in R to create an interactive HTML presentation about a specific Earth observation sensor.
 
-> 💡 Below is my embedded slide deck about the **Landsat** program. Please click here directly: [**View the full Landsat presentation**](https://brotree-code.github.io/casa0023-presentation/).
+::: {.callout-tip}
+Below is my embedded slide deck about the **Landsat** program. Please click here directly: [**View the full Landsat presentation**](https://brotree-code.github.io/casa0023-presentation/).
+:::
 
 ```{r echo = FALSE, out.width='100%', fig.align='center'}
 knitr::include_url("https://brotree-code.github.io/casa0023-presentation/")
