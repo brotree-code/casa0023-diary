@@ -1,4 +1,3 @@
-````markdown
 ---
 title: "Week 2: Sensor Presentation"
 subtitle: "Focus on Landsat 8/9 (OLI & TIRS)"

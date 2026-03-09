@@ -1,108 +1,97 @@
 ---
-title: "Week 1"
-subtitle: "Getting started with remote sensing"
-author: "Jianshu Wu"
+title: "第一周：遥感导论与光谱分析实战"
+subtitle: "Sentinel-2 与 Landsat-9 在贵阳市的对比研究"
+author: "吴建树 (Jianshu Wu)"
 date: last-modified
 format:
   html:
     toc: true
-    toc-depth: 2
+    toc-depth: 3
     number-sections: false
+    code-fold: true
 ---
 
-## Study area
-- **City:** XXX  
-- **Why this city?** (e.g., rapid urban growth / heat risk / green space / flooding / air quality)
-- **ROI boundary source (if any):** (e.g., GADM level ?, local boundary, manual polygon)
+## 1. 传感器总结与独立思考 (Summary & Independent Thought)
 
-## Data used (metadata)
-### Sentinel-2
-- **Product:** Sentinel-2 MSI **L2A (BOA / surface reflectance)**
-- **Date:**  
-- **Cloud filter:**  
-- **Tile / Product ID:**  
+### 1.1 传感器特性：Sentinel-2 MSI
+本周的学习重点在于理解对地观测传感器的核心参数。在实践中，我处理了覆盖中国贵阳市的 **Sentinel-2 MSI (Level-2A)** 影像。该产品提供地表反射率数据，对于精确的光谱分析至关重要。Sentinel-2 凭借其平衡的“四种分辨率”在城市研究中表现卓越：
 
-### Landsat
-- **Product:** Landsat Collection 2 Level 2 (OLI/TIRS)
-- **Date / Scene ID:**  
-- **Cloud filter:**  
+* **空间分辨率**：核心波段达到 10m，能够捕捉精细的城市纹理。
+* **光谱分辨率**：包含 13 个光谱波段，涵盖从可见光到短波红外（SWIR）。
+* **时间分辨率**：凭借 A/B 双星实现 5 天的重访周期。
+* **辐射分辨率**：12 位深度，能够存储 4,096 个亮度等级。
 
-## Summary (what I did & key ideas)
+![SNAP 中的重采样与裁剪处理过程，展示了针对贵阳行政边界的初步处理。](images/snap_processing_clipping.png)
 
-### Key ideas from Lecture 1
-- Remote sensing measures **electromagnetic radiation (EMR)** interacting with Earth surface/atmosphere.
-- EMR described by **wavelength** and **frequency**:  
-  $$\lambda = \frac{c}{v}$$
-- Different materials have different **spectral responses** → band combos/indices work.
-- Observations vary with illumination/viewing geometry (**BRDF**) → comparisons need consistent preprocessing.
+### 1.2 研究区域选择：为什么选择贵阳？
+贵阳不仅是我的**家乡**，也是研究中国西南山地城市化的典型案例。
 
-### Workflow (what I did in order)
-1. Selected city + searched scenes by date & cloud cover.
-2. Downloaded Sentinel-2 L2A (tile-based) and Landsat L2 (bundle).
-3. Explored bands/composites in QGIS/SNAP.
-4. Checked image statistics (histogram/scatterplot).
-5. (Optional) Exported subsets for later analysis in R.
+* **情感联结**：作为在这座城市长大的人，通过卫星之眼重新审视家乡的变迁，赋予了这项科研任务深层的人文关怀。
+* **研究价值**：贵阳独特的喀斯特地貌和多云气候给光学遥感带来了巨大挑战。
+* **分辨率重要性**：贵阳剧烈的地形起伏和快速的城市扩张，使得 Sentinel-2 的 10m 分辨率在识别碎片化绿地和高密度建筑群时显得尤为重要。
 
-### Practical 1 notes
-- **Sentinel-2 (Copernicus Browser):** (fill steps + settings)
-- **QGIS exploration:** (bands, stack, composites, contrast enhancement observation)
-- **SNAP exploration:** (open zip/MTL, RGB, histogram, scatterplot)
-- **Resampling / masking decisions (if done):** (NN/bilinear? 10m→20m? why)
 
-## Applications (why this matters)
-### Application 1 — Urban vegetation & green infrastructure
-- Possible indicators: (NDVI, vegetation cover, seasonal change)
-- Sensor choice justification:
-- Limitations:
 
-### Application 2 — Long-term urban change / land cover
-- Monitor: (urban expansion, impervious surface, bare soil)
-- Why Landsat archive matters:
-- Limitations:
+### 1.3 独立思考：分辨率的权衡与数据丰裕
+在对比中我发现，Sentinel-2 的高时间分辨率非常适合监测贵阳多云天气下的影像缝隙。然而，Landsat 自 1972 年以来的存档数据对于追踪我记忆中家乡几十年的变迁是不可替代的。这种“时间跨度”与“空间精度”的权衡，说明了多源数据融合才是未来城市研究的必然趋势。
 
-### Application 3 — Evidence-informed policy
-- Which policy target/metric could EO help quantify?
-- Risks: BRDF/seasonality/scale mismatch → need consistent preprocessing & clear definitions.
+---
 
-## Reflection (what I learned, what confused me, next steps)
+## 2. 应用案例：地物增强与全球制图 (Applications)
 
-### Sentinel vs Landsat (my comparison)
-- **Spatial resolution:**  
-- **Temporal resolution / archive:**  
-- **Spectral coverage / band overlap:**  
-- **Products & preprocessing level (L2A / Level-2):**  
-- **Practical usability (download structure, file sizes, QA):**  
+### 2.1 缨帽变换 (Tasseled Cap Transformation, TCT)
+在应用层面，我不仅观察了原始波段，还在 SNAP 中执行了**缨帽变换**。通过波段运算，我得到了三个具有明确物理意义的分量：
 
-### Software comparison (QGIS vs SNAP vs R)
-- **QGIS:**  
-- **SNAP:**  
-- **R (terra/stars):**  
+* **亮度 (Brightness)**：反映了家乡城市建设用地的反射强度。
+* **绿度 (Greenness)**：突出了贵阳作为山水城市丰富的植被信号。
+* **湿度 (Wetness)**：有效识别了南明河及红枫湖等关键水体。
 
-### Spectral signatures (what I observed)
-- Expected patterns across bands (vegetation / water / bare soil / urban)
-- How resampling/pixel size could affect signatures:
+![SNAP 中的 TCT RGB 显示效果图（R:亮度, G:绿度, B:湿度），绿色代表森林，亮粉色代表城市建筑。](images/snap_tasseled_cap_rgb.png)
 
-### Assumptions & limitations (this week)
-- Single-date scene:
-- Cloud/shadow:
-- Geometry (BRDF) + seasonality:
-- Cross-sensor comparability:
+通过生成**散点图 (Scatter Plot)**，我观察到地物在“亮度-绿度”空间中呈现出经典的“缨帽”形状分布。
 
-### Next steps
-- Define a clearer research question tied to a metric/policy.
-- Standardise preprocessing (CRS, resampling choice, masking extent).
-- More systematic POIs (sampling design, reduce subjectivity).
 
-## Repo notes (Git/GitHub hygiene)
-- My `.gitignore` ignores large EO files (e.g., `.tif`, `.jp2`, `.SAFE`, `.zip`) and data folders (e.g., `data/`), but keeps `docs/` for GitHub Pages.
 
-## Glossary (optional)
-- **EO:**  
-- **BOA / TOA:**  
-- **BRDF:**  
-- **Resampling:**  
-- **Spectral signature:**  
+### 2.2 全球尺度应用：ESA WorldCover
+Sentinel-2 数据被广泛应用于 **ESA WorldCover 10m** 等项目。这种高精度地图允许城市规划者从社区尺度区分建筑区与绿色基础设施，这对我分析贵阳的城市绿地可达性具有重要启发。
 
-## Figures (optional)
-- True colour composite (city, date)  
-- False colour composite / histogram / scatterplot (with 1–2 line captions)
+---
+
+## 3. 技术流程：从 SNAP 到 R 的光谱统计分析 (Work Logic)
+
+### 3.1 空间对齐与 POI 采样
+在 QGIS 中，我验证了 Sentinel 和 Landsat 影像的地理配准精度。通过 **同步视图 (Synchronise Views)** 功能，我在家乡熟悉的坐标上精确标注了水体、森林、城市等兴趣点 (POIs) 样本。
+
+![QGIS 验证截图：展示了多源影像图层与数字化 POI 矢量文件的完美空间套合。](images/qgis_verification.png)
+
+### 3.2 基于 R 的光谱签名分析
+在 R 中，我使用 `terra` 包提取了像元值，并计算了不同地物的平均光谱特征：
+
+* **光谱曲线绘制**：我计算了各波段下的平均反射率。正如实验所示，光谱特征代表了地物在不同波长下的“指纹”。
+* **密度图分析**：通过密度图观察到城市像元反射率的高异质性，反映了贵阳复杂的建筑材质分布。
+
+![在 R 中生成的贵阳典型地物光谱签名曲线（含标准差误差棒）。](images/r_spectral_signatures.png)
+
+---
+
+## 4. 学习反思 (Reflection)
+
+### 4.1 统计学差异的物理本质
+在实验中，我对贵阳城市样本的 Sentinel 和 Landsat 数据进行了 **Welch t 检验**。结果如下：
+* **统计量**：$t = -214.78$。
+* **显著性**：$p < 2.2e-16$。
+
+这种极显著差异提醒我，遥感中的“不一致”并非单纯的误差，而是源于两者的光谱响应函数以及大气校正算法（BOA）的不同。在跨传感器分析中，执行**传感器定标**是确保数据一致性的关键步骤。
+
+### 4.2 技术成长与未来展望
+通过本周的学习，我不仅学会了封装 `band_fun` 函数来实现自动化提取，更学会了如何用数据去讲述家乡的故事。
+* **技能提升**：掌握了从 SNAP 空间处理到 R 语言统计的可重复性工作流。
+* **未来目标**：我计划探索如何利用机器学习算法，针对贵阳这种复杂地形进行更深度的土地覆盖变化检测。
+
+---
+
+## 5. 参考文献 (References)
+
+* **ESA (2023).** *Sentinel-2 MSI User Guide*. 可访问: [https://sentinel.esa.int/](https://sentinel.esa.int/)
+* **Loveland, T. R., & Dwyer, J. L. (2012).** [Landsat: Building a strong future](https://doi.org/10.1016/j.rse.2011.09.022), *Remote Sensing of Environment*, 122, pp. 22–29.
+* **Wulder, M. A. et al. (2012).** [Opening the archive: How free data has enabled the science and monitoring promise of Landsat](https://doi.org/10.1016/j.rse.2012.01.010), *Remote Sensing of Environment*, 122, pp. 2–10.
