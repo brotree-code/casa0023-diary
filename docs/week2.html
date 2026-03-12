@@ -430,16 +430,16 @@ window.Quarto = {
 <section id="reproducible-presentation-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="reproducible-presentation-workflow">1.1 <strong>Reproducible Presentation Workflow</strong></h3>
 <ul>
-<li><strong>Xaringan mastery</strong>: Developed a technical presentation using the <strong>xaringan</strong> R package to integrate live code with stylistic slides.</li>
-<li><strong>Reproducibility</strong>: Emphasized a code-driven approach that ensures the seamless transition from data analysis to academic presentation <span class="citation" data-cites="grolemund2022">(<a href="#ref-grolemund2022" role="doc-biblioref">Xie, Allaire, and Grolemund 2022</a>)</span>.</li>
+<li><strong>Using xaringan</strong>: Developed this presentation with the <strong>xaringan</strong> R package to combine live code with a slide-based format.</li>
+<li><strong>Reproducibility</strong>: Focused on a code-based workflow that helps connect data analysis with presentation output <span class="citation" data-cites="grolemund2022">(<a href="#ref-grolemund2022" role="doc-biblioref">Xie, Allaire, and Grolemund 2022</a>)</span>.</li>
 </ul>
 </section>
 <section id="slide-deck-access-and-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="slide-deck-access-and-interaction">1.2 <strong>Slide Deck Access and Interaction</strong></h3>
 <ol type="1">
-<li><strong>Host platform</strong>: Access the full interactive presentation hosted via GitHub Pages for the best user experience.</li>
-<li><strong>On-page viewing</strong>: Utilize the embedded frame below to navigate through the Landsat sensor introduction.</li>
-<li><strong>Full-screen mode</strong>: Click the provided link in the note below to open the deck in a separate browser tab.</li>
+<li><strong>Host platform</strong>: The full interactive presentation is hosted on GitHub Pages for easier access and navigation.</li>
+<li><strong>On-page viewing</strong>: The embedded frame below allows the slides to be viewed directly on the page.</li>
+<li><strong>Full-screen mode</strong>: The link in the note below opens the presentation in a separate browser tab.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -451,7 +451,7 @@ Slide Deck Access
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Below is my embedded slide deck regarding the <strong>Landsat</strong> program. You can interact with the slides directly or <a href="https://brotree-code.github.io/casa0023-presentation/">click here for the full-screen version</a>.</p>
+<p>Below is my embedded slide deck on the <strong>Landsat</strong> program. You can view the slides here or <a href="https://brotree-code.github.io/casa0023-presentation/">click here for the full-screen version</a>.</p>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -466,15 +466,15 @@ Slide Deck Access
 <section id="horizontal-comparison-with-sentinel-2" class="level3">
 <h3 class="anchored" data-anchor-id="horizontal-comparison-with-sentinel-2">2.1 <strong>Horizontal Comparison with Sentinel-2</strong></h3>
 <ul>
-<li><strong>Spatial Resolution</strong>: While Sentinel-2 leads with 10m resolution, Landsat 8/9 remains the standard for long-term consistency at 30m.</li>
-<li><strong>Spectral Advantage</strong>: Landsat’s unique value proposition is its dual-sensor payload, specifically designed for both optical and thermal imaging.</li>
+<li><strong>Spatial Resolution</strong>: Sentinel-2 provides finer spatial resolution in some key optical bands, while Landsat 8/9 offers stronger long-term consistency at 30 m.</li>
+<li><strong>Spectral Advantage</strong>: A key strength of Landsat is that it carries both optical and thermal sensors, which makes it especially useful for urban thermal studies.</li>
 </ul>
 </section>
 <section id="satellite-payloads-and-instrumentation" class="level3">
 <h3 class="anchored" data-anchor-id="satellite-payloads-and-instrumentation">2.2 <strong>Satellite Payloads and Instrumentation</strong></h3>
 <ul>
-<li><strong>OLI (Operational Land Imager)</strong>: Captures data in the visible, near-infrared, and shortwave infrared portions of the spectrum.</li>
-<li><strong>TIRS (Thermal Infrared Sensor)</strong>: Measures land surface temperature using two long-wavelength thermal bands.</li>
+<li><strong>OLI (Operational Land Imager)</strong>: Captures data in the visible, near-infrared, and shortwave infrared parts of the spectrum.</li>
+<li><strong>TIRS (Thermal Infrared Sensor)</strong>: Records thermal information that can be used in land surface temperature analysis.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -486,9 +486,9 @@ Slide Deck Access
 <section id="urban-research-significance" class="level3">
 <h3 class="anchored" data-anchor-id="urban-research-significance">2.3 <strong>Urban Research Significance</strong></h3>
 <ol type="1">
-<li><strong>LST Retrieval</strong>: Extract <strong>Land Surface Temperature (LST)</strong> from thermal bands 10 and 11.</li>
-<li><strong>UHI Analysis</strong>: Identify localized temperature anomalies to map <strong>Urban Heat Islands (UHI)</strong>.</li>
-<li><strong>Climate Policy</strong>: Use data to inform urban planning and mitigate heat-related risks in dense city environments.</li>
+<li><strong>LST Retrieval</strong>: Estimate <strong>Land Surface Temperature (LST)</strong> from Landsat thermal data, most commonly using Band 10.</li>
+<li><strong>UHI Analysis</strong>: Identify local temperature differences to map <strong>Urban Heat Islands (UHI)</strong>.</li>
+<li><strong>Climate Policy</strong>: Use these data to support urban planning and help address heat-related risks in dense city areas.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -500,7 +500,7 @@ Why Landsat for Urban Studies?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The primary advantage lies in its thermal bands (<strong>Bands 10 &amp; 11</strong>), which allow for the retrieval of <strong>Land Surface Temperature (LST)</strong>. This is a critical requirement for studying the <strong>Urban Heat Island (UHI)</strong> effect.</p>
+<p>An important advantage of Landsat is its thermal bands, which make it possible to estimate <strong>Land Surface Temperature (LST)</strong>. This is particularly useful for studying the <strong>Urban Heat Island (UHI)</strong> effect.</p>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -529,19 +529,19 @@ Why Landsat for Urban Studies?
 <td style="text-align: left;"><strong>Optical Resolution</strong></td>
 <td style="text-align: left;">30 m</td>
 <td style="text-align: left;">10 m – 60 m</td>
-<td style="text-align: left;">Sentinel-2 is better for street vegetation mapping.</td>
+<td style="text-align: left;">Sentinel-2 is more suitable for detailed vegetation mapping at street level.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Thermal Infrared</strong></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">No</td>
-<td style="text-align: left;"><strong>Landsat is required for heat mapping</strong>.</td>
+<td style="text-align: left;">Landsat is more suitable for heat mapping because it includes thermal bands.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Data Archive</strong></td>
 <td style="text-align: left;">Since 1972</td>
 <td style="text-align: left;">Since 2015</td>
-<td style="text-align: left;">Landsat is the only option for tracking decadal urban expansion.</td>
+<td style="text-align: left;">Landsat is one of the most important sources for tracking long-term urban expansion.</td>
 </tr>
 </tbody>
 </table>
@@ -553,17 +553,17 @@ Why Landsat for Urban Studies?
 <section id="environmental-indices-and-monitoring" class="level3">
 <h3 class="anchored" data-anchor-id="environmental-indices-and-monitoring">3.1 <strong>Environmental Indices and Monitoring</strong></h3>
 <ul>
-<li><strong>Vegetation Analysis</strong>: Calculating the <strong>NDVI</strong> to quantify the presence and health of urban green spaces.</li>
-<li><strong>Cooling Effects</strong>: Using spectral data to evaluate how green infrastructure mitigates urban temperatures.</li>
+<li><strong>Vegetation Analysis</strong>: Calculate <strong>NDVI</strong> to measure the presence and condition of urban green spaces.</li>
+<li><strong>Cooling Effects</strong>: Use spectral data to examine how green infrastructure may help reduce urban temperatures.</li>
 </ul>
 <p><span class="math display">\[NDVI = \frac{NIR - Red}{NIR + Red}\]</span></p>
 </section>
 <section id="spectral-signature-integrity" class="level3">
 <h3 class="anchored" data-anchor-id="spectral-signature-integrity">3.2 <strong>Spectral Signature Integrity</strong></h3>
 <ol type="1">
-<li><strong>Data Acquisition</strong>: Select appropriate multispectral bands (Red and NIR) for the study area.</li>
-<li><strong>Signature Analysis</strong>: Differentiate between land covers like <strong>asphalt</strong> and <strong>vegetation</strong> by analyzing reflectance curves.</li>
-<li><strong>Validation</strong>: Compare results against ground-truth data or high-resolution imagery to ensure mapping quality.</li>
+<li><strong>Data Acquisition</strong>: Select suitable multispectral bands (Red and NIR) for the study area.</li>
+<li><strong>Signature Analysis</strong>: Distinguish land covers such as <strong>asphalt</strong> and <strong>vegetation</strong> by comparing their reflectance curves.</li>
+<li><strong>Validation</strong>: Compare the results with ground-truth data or high-resolution imagery to improve mapping reliability.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -575,7 +575,7 @@ Spectral Signature Analysis
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Distinguishing between land covers requires analyzing <strong>spectral signatures</strong> across multiple bands to ensure scientific integrity and mapping quality.</p>
+<p>Distinguishing between land covers requires the comparison of <strong>spectral signatures</strong> across multiple bands, which helps improve both interpretation and mapping quality.</p>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -588,8 +588,8 @@ Spectral Signature Analysis
 <section id="identifying-urban-hot-spots" class="level3">
 <h3 class="anchored" data-anchor-id="identifying-urban-hot-spots">3.3 <strong>Identifying Urban Hot Spots</strong></h3>
 <ul>
-<li><strong>Urban Fabric Analysis</strong>: Detecting how different materials (concrete vs.&nbsp;grass) store and emit heat.</li>
-<li><strong>Heat Spot Identification</strong>: Locating critical areas where dense built-up zones significantly exceed ambient temperatures.</li>
+<li><strong>Urban Fabric Analysis</strong>: Explore how different surface materials, such as concrete and grass, absorb and release heat differently.</li>
+<li><strong>Heat Spot Identification</strong>: Identify areas where dense built-up land shows noticeably higher temperatures than surrounding areas.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -605,17 +605,17 @@ Spectral Signature Analysis
 <section id="earth-observation-and-open-data" class="level3">
 <h3 class="anchored" data-anchor-id="earth-observation-and-open-data">4.1 <strong>Earth Observation and Open Data</strong></h3>
 <ul>
-<li><strong>Data Democracy</strong>: The open-access policy of the Landsat archive has fundamentally democratized remote sensing research and enabled long-term environmental monitoring.</li>
-<li><strong>Data Fusion Potential</strong>: Combining Landsat’s thermal precision with Sentinel-2’s spatial detail is the next logical step for precise urban microclimate analysis.</li>
+<li><strong>Data Accessibility</strong>: The open-access Landsat archive has made remote sensing data much easier to use for research and long-term environmental monitoring.</li>
+<li><strong>Data Fusion Potential</strong>: Combining Landsat’s thermal information with Sentinel-2’s finer spatial detail could support more detailed urban microclimate analysis.</li>
 </ul>
 </section>
 <section id="technical-evolution-and-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="technical-evolution-and-workflow">4.2 <strong>Technical Evolution and Workflow</strong></h3>
 <ol type="1">
-<li><strong>Xaringan Learning</strong>: Overcoming the steep learning curve of writing presentations in Markdown and CSS styles.</li>
-<li><strong>Quarto Integration</strong>: Shifting to a Quarto-based ecosystem for unified document and portfolio management <span class="citation" data-cites="kirenz_nd">(<a href="#ref-kirenz_nd" role="doc-biblioref">Kirenz 2023</a>)</span>.</li>
-<li><strong>Reproducibility Mastery</strong>: Embracing the broader trend in scientific communication where code and text are seamlessly integrated <span class="citation" data-cites="xie2022">(<a href="#ref-xie2022" role="doc-biblioref">Xie 2022</a>)</span>.</li>
-<li><strong>Future Research</strong>: Applying these reproducible methods to ensure my future academic work remains transparent and verifiable <span class="citation" data-cites="quarto_quickstart">(<a href="#ref-quarto_quickstart" role="doc-biblioref">Quarto 2022</a>)</span>.</li>
+<li><strong>Xaringan Learning</strong>: Learned how to build presentations using Markdown and CSS, which was challenging at first but useful in practice.</li>
+<li><strong>Quarto Integration</strong>: Began moving toward a Quarto-based workflow for managing documents and portfolio work more consistently <span class="citation" data-cites="kirenz_nd">(<a href="#ref-kirenz_nd" role="doc-biblioref">Kirenz 2023</a>)</span>.</li>
+<li><strong>Reproducibility Mastery</strong>: Gained a better understanding of how code and written explanation can be combined in scientific communication <span class="citation" data-cites="xie2022">(<a href="#ref-xie2022" role="doc-biblioref">Xie 2022</a>)</span>.</li>
+<li><strong>Future Research</strong>: I hope to apply these reproducible methods in future academic work so that my analysis remains clear and verifiable <span class="citation" data-cites="quarto_quickstart">(<a href="#ref-quarto_quickstart" role="doc-biblioref">Quarto 2022</a>)</span>.</li>
 </ol>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -627,13 +627,13 @@ Best Practice: Project Separation
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As emphasized in the module, it is a <strong>“bad idea”</strong> to perform complex analysis and portfolio writing in the same R project; keeping them separate maintains data integrity and clarity.</p>
+<p>As discussed in the module, it is generally better not to carry out complex analysis and portfolio writing in the same R project, because keeping them separate helps maintain clarity and organisation.</p>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/technical_workflow.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 5: Screenshot of the RStudio development environment showing the <strong>Quarto visual editor</strong> and <strong>GitHub</strong> version control integration.</figcaption>
+<figcaption>Figure 5: Screenshot of the RStudio workspace used for portfolio writing, showing the active document and the project file structure.</figcaption>
 </figure>
 </div>
 <hr>
