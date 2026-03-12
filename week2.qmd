@@ -1,6 +1,6 @@
 ---
 title: "Week 2: Sensor Presentation"
-subtitle: "Focus on Landsat 8/9 (OLI & TIRS)"
+subtitle: "Focus on Landsat 8/9 (OLI & TIRS) Test"
 date: "2026-01-24"
 ---
 
