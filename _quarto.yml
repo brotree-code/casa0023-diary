@@ -2,6 +2,9 @@ project:
   type: website  
   output-dir: docs
 
+bibliography: references.bib
+link-citations: true
+
 author: "Jianshu Wu"
 
 website:

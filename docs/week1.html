@@ -22,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -343,7 +363,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#content-summary-independent-thought" id="toc-content-summary-independent-thought" class="nav-link active" data-scroll-target="#content-summary-independent-thought">1. Content Summary &amp; Independent Thought</a>
+  <li><a href="#content-summary" id="toc-content-summary" class="nav-link active" data-scroll-target="#content-summary">1. Content Summary</a>
   <ul class="collapse">
   <li><a href="#physical-fundamentals-of-remote-sensing-emr" id="toc-physical-fundamentals-of-remote-sensing-emr" class="nav-link" data-scroll-target="#physical-fundamentals-of-remote-sensing-emr">1.1 Physical Fundamentals of Remote Sensing &amp; EMR</a></li>
   <li><a href="#critical-review-of-the-four-resolutions" id="toc-critical-review-of-the-four-resolutions" class="nav-link" data-scroll-target="#critical-review-of-the-four-resolutions">1.2 Critical Review of the Four Resolutions</a></li>
@@ -363,6 +383,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#statistical-significance-vs.-physical-meaning" id="toc-statistical-significance-vs.-physical-meaning" class="nav-link" data-scroll-target="#statistical-significance-vs.-physical-meaning">4.1 Statistical Significance vs.&nbsp;Physical Meaning</a></li>
   <li><a href="#skill-growth-and-future-vision" id="toc-skill-growth-and-future-vision" class="nav-link" data-scroll-target="#skill-growth-and-future-vision">4.2 Skill Growth and Future Vision</a></li>
+  <li><a href="#from-tool-user-to-critical-analyst" id="toc-from-tool-user-to-critical-analyst" class="nav-link" data-scroll-target="#from-tool-user-to-critical-analyst">From Tool-User to Critical Analyst</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">5. References</a></li>
   </ul>
@@ -404,11 +425,11 @@ window.Quarto = {
 </header>
 
 
-<section id="content-summary-independent-thought" class="level2">
-<h2 class="anchored" data-anchor-id="content-summary-independent-thought">1. Content Summary &amp; Independent Thought</h2>
+<section id="content-summary" class="level2">
+<h2 class="anchored" data-anchor-id="content-summary">1. Content Summary</h2>
 <section id="physical-fundamentals-of-remote-sensing-emr" class="level3">
 <h3 class="anchored" data-anchor-id="physical-fundamentals-of-remote-sensing-emr">1.1 Physical Fundamentals of Remote Sensing &amp; EMR</h3>
-<p>This week’s learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions. Through the lecture, I grasped the core formula of electromagnetic waves: <span class="math inline">\(\lambda = c/v\)</span>, where wavelength is inversely proportional to frequency.</p>
+<p>This week’s learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions <span class="citation" data-cites="brady2021">(<a href="#ref-brady2021" role="doc-biblioref">Brady 2021</a>)</span>. Through the lecture, I grasped the core formula of electromagnetic waves: <span class="math inline">\(\lambda = c/v\)</span>, where wavelength is inversely proportional to frequency.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -419,7 +440,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before the sensor detects the Earth’s surface, the energy undergoes complex interactions:</p>
+<p>Before the sensor detects the Earth’s surface, the energy undergoes complex interactions <span class="citation" data-cites="tempfli2009">(<a href="#ref-tempfli2009" role="doc-biblioref">Tempfli et al. 2009</a>)</span>:</p>
 <ul>
 <li><strong>Atmospheric Interactions</strong>: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.</li>
 <li><strong>Surface Interactions</strong>: Energy is absorbed, transmitted, or reflected by the surface. The sensor’s task is precisely to capture this reflected energy, which carries information about the surface features.</li>
@@ -431,7 +452,7 @@ Note
 <h3 class="anchored" data-anchor-id="critical-review-of-the-four-resolutions">1.2 Critical Review of the Four Resolutions</h3>
 <p>The lecture emphasized the “four resolutions” that determine the success of remote sensing applications:</p>
 <ul>
-<li><strong>Spatial Resolution</strong>: Determines the smallest observable feature. Sentinel-2’s 10m resolution offers a significant advantage at the urban scale.</li>
+<li><strong>Spatial Resolution</strong>: Determines the smallest observable feature. Sentinel-2’s 10m resolution offers a significant advantage at the urban scale <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>.</li>
 <li><strong>Spectral Resolution</strong>: The number and width of bands. I realized that a “spectral signature” is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.</li>
 <li><strong>Temporal Resolution</strong>: The revisit period, which is crucial for dynamic environmental monitoring.</li>
 <li><strong>Radiometric Resolution</strong>: The sensor’s sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).</li>
@@ -442,7 +463,7 @@ Note
 <p>I selected my hometown, <strong>Guiyang</strong>, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:</p>
 <ul>
 <li><strong>Complexity of Karst Topography</strong>: Guiyang’s rugged terrain leads to a pronounced “Bidirectional Reflectance Distribution Function (BRDF)” effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.</li>
-<li><strong>Data Balancing Act</strong>: While Sentinel-2 excels in spatial precision, Landsat’s historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood.</li>
+<li><strong>Data Balancing Act</strong>: While Sentinel-2 excels in spatial precision, Landsat’s historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood <span class="citation" data-cites="tempfli2009">(<a href="#ref-tempfli2009" role="doc-biblioref">Tempfli et al. 2009</a>)</span>.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -463,16 +484,10 @@ Note
 <li><strong>Greenness</strong>: Helped me identify the green corridors preserved during the rapid expansion of Guiyang, a designated National Forest City.</li>
 <li><strong>Wetness</strong>: Successfully extracted the Nanming River and Hongfeng Lake water systems, which is vital for evaluating the ecological functions of urban blue-green spaces.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/snap_tct_view.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 2: TCT RGB rendering of Guiyang (R: Brightness, G: Greenness, B: Wetness). The bright areas clearly illustrate the building density in the urban center.</figcaption>
-</figure>
-</div>
 </section>
 <section id="cross-sensor-research-insights-from-esa-worldcover" class="level3">
 <h3 class="anchored" data-anchor-id="cross-sensor-research-insights-from-esa-worldcover">2.2 Cross-Sensor Research: Insights from ESA WorldCover</h3>
-<p>The <strong>ESA WorldCover 10m</strong> project mentioned in the lecture demonstrates the tremendous potential of 10m resolution in real-time urban monitoring. Compared to traditional 30m Landsat data, high-resolution Sentinel data can significantly reduce “mixed pixels” at urban edges. However, I also recognize that in cloudy, high-altitude regions, single optical applications have bottlenecks. In the future, it is essential to integrate active SAR sensor data capable of “penetrating clouds.”</p>
+<p>The <strong>ESA WorldCover 10m</strong> project mentioned in the lecture demonstrates the tremendous potential of 10m resolution in real-time urban monitoring. Compared to traditional 30m Landsat data, high-resolution Sentinel data can significantly reduce “mixed pixels” at urban edges <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>. However, I also recognize that in cloudy, high-altitude regions, single optical applications have bottlenecks. In the future, it is essential to integrate active SAR sensor data capable of “penetrating clouds.”</p>
 <hr>
 </section>
 </section>
@@ -541,7 +556,7 @@ Important
 <h2 class="anchored" data-anchor-id="personal-reflection">4. Personal Reflection</h2>
 <section id="statistical-significance-vs.-physical-meaning" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-significance-vs.-physical-meaning">4.1 Statistical Significance vs.&nbsp;Physical Meaning</h3>
-<p>In this week’s practical, I performed a <strong>Welch t-test</strong> on the pixel values of Sentinel and Landsat within the urban areas of my hometown.</p>
+<p>In this week’s practical, I performed a <strong>Welch t-test</strong> on the pixel values of Sentinel-2 and Landsat-9 within the urban areas of my hometown, Guiyang.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/test_result.png" class="img-fluid figure-img"></p>
@@ -550,34 +565,48 @@ Important
 </div>
 <ul>
 <li><strong>Statistical Results</strong>: As shown in Figure 5, <span class="math inline">\(t = -214.78\)</span>, <span class="math inline">\(p &lt; 2.2 \times 10^{-16}\)</span>, indicating a highly significant difference.</li>
-<li><strong>Deep Reflection</strong>: As a researcher, I deeply understand that this “significant difference” does not imply a data processing error; rather, it objectively reflects physical differences between the two sensors—including variations in their spectral response functions, atmospheric correction algorithms (e.g., Sen2Cor for Sentinel vs.&nbsp;LaSRC for Landsat), and respective radiometric calibration coefficients. This reminds me that in future urban climate studies, cross-sensor data fusion cannot simply be pieced together abruptly; precise cross-calibration between sensors must be conducted beforehand.</li>
+<li><strong>Deep Reflection</strong>: As a researcher, I deeply understand that this “significant difference” does not imply a data processing error; rather, it objectively reflects the <strong>inherent physical divergence</strong> between the two sensor systems.</li>
 </ul>
+<blockquote class="blockquote">
+<p>💡 <strong>Physical Mechanism Analysis</strong>:</p>
+<ul>
+<li><strong>Spectral Response Functions (SRF)</strong>: Each sensor “samples” the electromagnetic spectrum through slightly different windows. Even for the “same” Near-Infrared (NIR) band, the bandwidth and center wavelength differ, leading to varying sensitivity to Guiyang’s lush subtropical vegetation <span class="citation" data-cites="butcher2016">(<a href="#ref-butcher2016" role="doc-biblioref">Butcher 2016</a>)</span>.</li>
+<li><strong>Atmospheric Correction Divergence</strong>: The complex aerosol conditions in Guiyang’s mountainous Karst landscape pose challenges for algorithms like Sen2Cor (Sentinel) and LaSRC (Landsat). These subtle differences in atmospheric path radiance removal are amplified in statistical tests.</li>
+<li><strong>Geographic Context</strong>: Guiyang’s rugged terrain introduces bidirectional reflectance distribution function (BRDF) effects. The different overpass times and viewing angles of the two satellites mean they capture the “same” surface under different illumination geometries, which is statistically significant but physically expected.</li>
+</ul>
+<p><strong>Conclusion</strong>: This reminds me that in future urban climate studies, cross-sensor data fusion cannot simply be pieced together abruptly. Precise cross-calibration or the use of Harmonized Landsat Sentinel (HLS) products is a prerequisite for robust longitudinal analysis <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>.</p>
+</blockquote>
 </section>
 <section id="skill-growth-and-future-vision" class="level3">
 <h3 class="anchored" data-anchor-id="skill-growth-and-future-vision">4.2 Skill Growth and Future Vision</h3>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Through this week’s learning, I have not only mastered operational tools (SNAP, R, QGIS) but, more importantly, acquired a coding mindset for <strong>Reproducible Research</strong>. Moving forward, I plan to further explore machine learning classification based on these extracted spectral features, using objective data to quantify the true impact of urbanization on the ecological baseline of my hometown over the past decade.</p>
-</div>
-</div>
+</section>
+<section id="from-tool-user-to-critical-analyst" class="level3">
+<h3 class="anchored" data-anchor-id="from-tool-user-to-critical-analyst">From Tool-User to Critical Analyst</h3>
+<p>Through this week’s learning, I have not only mastered operational tools (SNAP, R, QGIS) but, more importantly, acquired a coding mindset for <strong>Reproducible Research</strong>.</p>
+<ul>
+<li><strong>Methodological Shift</strong>: Moving beyond “point-and-click” software GUI has allowed me to automate the spectral signature extraction process. Using R ensures that my analysis of Guiyang’s urbanization is transparent and repeatable by others—a core tenet of modern geographic data science.</li>
+<li><strong>Overcoming the “Cloud” Bottleneck</strong>: While optical data provided a strong start, the high cloud frequency in Guiyang remains a limitation. Moving forward, I plan to further explore machine learning classification based on these extracted spectral features, but more importantly, I look forward to integrating <strong>SAR (Synthetic Aperture Radar)</strong> data in later weeks to “see through” the clouds.</li>
+<li><strong>Future Vision</strong>: My ultimate goal is to use this methodological prototype to quantify the true impact of rapid urban expansion on the ecological baseline of my hometown over the past decade, providing objective evidence for sustainable urban planning in Karst regions.</li>
+</ul>
 <hr>
 </section>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">5. References</h2>
-<ul>
-<li><strong>Drusch, M., Del Bello, U., Carlier, S., Colin, O., Fernandez, V., Gascon, F., Hoersch, B., Isola, C., Laberinti, P., Martimort, P., &amp; Meygret, A. (2012).</strong> <a href="https://doi.org/10.1016/j.rse.2011.11.026">Sentinel-2: ESA’s Optical High-Resolution Mission for GMES Operational Services</a>, <em>Remote Sensing of Environment</em>, 120, pp.&nbsp;25-36.</li>
-<li><strong>Wulder, M. A., Masek, J. G., Cohen, W. B., Loveland, T. R., &amp; Woodcock, C. E. (2012).</strong> <a href="https://doi.org/10.1016/j.rse.2012.01.010">Opening the archive: How free data has enabled the science and monitoring promise of Landsat</a>, <em>Remote Sensing of Environment</em>, 122, pp.&nbsp;2-10.</li>
-<li><strong>Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., &amp; Cartus, O. (2021).</strong> <a href="https://doi.org/10.5281/zenodo.5571936">ESA WorldCover 10 m 2020 v100</a>, <em>Zenodo</em>.</li>
-</ul>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-brady2021" class="csl-entry" role="listitem">
+Brady, M. 2021. <span>“Remote Sensing for Dummies.”</span> <a href="https://storymaps.arcgis.com/stories/cb1577b0f5bc485c974b4ea19d52282d">https://storymaps.arcgis.com/stories/cb1577b0f5bc485c974b4ea19d52282d</a>.
+</div>
+<div id="ref-butcher2016" class="csl-entry" role="listitem">
+Butcher, Ginger. 2016. <em>Tour of the Electromagnetic Spectrum</em>. Third. National Aeronautics; Space Administration, Washington, DC. <a href="https://science.nasa.gov/wp-content/uploads/2023/08/tour-of-the-ems-tagged-v7-0.pdf">https://science.nasa.gov/wp-content/uploads/2023/08/tour-of-the-ems-tagged-v7-0.pdf</a>.
+</div>
+<div id="ref-jensen2015" class="csl-entry" role="listitem">
+Jensen, John R. 2015. <em>Introductory Digital Image Processing: A Remote Sensing Perspective</em>. Prentice-Hall Inc. <a href="https://read.kortext.com/reader/pdf/1872407/Cover">https://read.kortext.com/reader/pdf/1872407/Cover</a>.
+</div>
+<div id="ref-tempfli2009" class="csl-entry" role="listitem">
+Tempfli, K, Gc Huurneman, Wh Bakker, L. L. Janssen, W Feringa, A Gieske, K Grabmaier, et al. 2009. <em>Principles of Remote Sensing: An Introductory Textbook</em>. International Institute for Geo-Information Science; Earth Observation. <a href="https://webapps.itc.utwente.nl/librarywww/papers_2009/general/principlesremotesensing.pdf">https://webapps.itc.utwente.nl/librarywww/papers_2009/general/principlesremotesensing.pdf</a>.
+</div>
+</div>
 
 
 </section>
