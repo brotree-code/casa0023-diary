@@ -33,6 +33,8 @@ website:
         file: week1.qmd
       - text: "Week 2: Sensor Presentation"
         file: week2.qmd
+      - text: "Week 3: Corrections & Enhancements"
+        file: week3.qmd
 
 format:
   html:
