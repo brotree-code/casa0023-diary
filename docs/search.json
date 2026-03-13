@@ -1,415 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Learning diary",
-    "section": "",
-    "text": "Welcome\nThis is my learning diary for CASA0023: Remotely Sensing Cities and Environments.\nThe diary is organised by week. Each entry follows the same structure:\n\nSummary – key ideas from the lecture/practical, in my own words\n\nApplications – examples of how these ideas are used (papers, policy, real-world cases)\n\nReflection – what I understood well, what I’m unsure about, and how I might use it later\n\n\n\nLinks\n\n🔗 GitHub Repository\n📊 Slides (Week 2): Landsat Program Presentation\n\n\n\nModule overview (quick notes)\n\nAssessment 1 (30%): Group presentation (10 minutes), policy-focused EO pitch\n\nAssessment 2 (70%): Weekly learning diary (this site)\n\n\n\nHow I’m working\n\nTools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)\nData note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "week1.html",
-    "href": "week1.html",
-    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
-    "section": "",
-    "text": "This week’s learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions (Brady 2021). Through the lecture, I grasped the core formula of electromagnetic waves: \\(\\lambda = c/v\\), where wavelength is inversely proportional to frequency.\n\n\n\n\n\n\nNote\n\n\n\nBefore the sensor detects the Earth’s surface, the energy undergoes complex interactions (Tempfli et al. 2009):\n\nAtmospheric Interactions: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.\nSurface Interactions: Energy is absorbed, transmitted, or reflected by the surface. The sensor’s task is precisely to capture this reflected energy, which carries information about the surface features.\n\n\n\n\n\n\nThe lecture emphasized the “four resolutions” that determine the success of remote sensing applications:\n\nSpatial Resolution: Determines the smallest observable feature. Sentinel-2’s 10m resolution offers a significant advantage at the urban scale (Jensen 2015).\nSpectral Resolution: The number and width of bands. I realized that a “spectral signature” is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.\nTemporal Resolution: The revisit period, which is crucial for dynamic environmental monitoring.\nRadiometric Resolution: The sensor’s sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).\n\n\n\n\nI selected my hometown, Guiyang, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:\n\nComplexity of Karst Topography: Guiyang’s rugged terrain leads to a pronounced “Bidirectional Reflectance Distribution Function (BRDF)” effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.\nData Balancing Act: While Sentinel-2 excels in spatial precision, Landsat’s historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood (Tempfli et al. 2009).\n\n\n\n\nFigure 1: Pre-processing workflow in SNAP, including resampling and masking Sentinel-2 data for Guiyang.",
-    "crumbs": [
-      "Week 1: Intro & Spectral"
-    ]
-  },
-  {
-    "objectID": "week1.html#study-area",
-    "href": "week1.html#study-area",
-    "title": "Week 1",
-    "section": "",
-    "text": "City: XXX\n\nWhy this city? (e.g., rapid urban growth / heat risk / green space / flooding / air quality)\nROI boundary source (if any): (e.g., GADM level ?, local boundary, manual polygon)",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#data-used-metadata",
-    "href": "week1.html#data-used-metadata",
-    "title": "Week 1",
-    "section": "Data used (metadata)",
-    "text": "Data used (metadata)\n\nSentinel-2\n\nProduct: Sentinel-2 MSI L2A (BOA / surface reflectance)\nDate:\n\nCloud filter:\n\nTile / Product ID:\n\n\n\nLandsat\n\nProduct: Landsat Collection 2 Level 2 (OLI/TIRS)\nDate / Scene ID:\n\nCloud filter:",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#summary-what-i-did-key-ideas",
-    "href": "week1.html#summary-what-i-did-key-ideas",
-    "title": "Week 1",
-    "section": "Summary (what I did & key ideas)",
-    "text": "Summary (what I did & key ideas)\n\nKey ideas from Lecture 1\n\nRemote sensing measures electromagnetic radiation (EMR) interacting with Earth surface/atmosphere.\nEMR described by wavelength and frequency:\n\\[\\lambda = \\frac{c}{v}\\]\nDifferent materials have different spectral responses → band combos/indices work.\nObservations vary with illumination/viewing geometry (BRDF) → comparisons need consistent preprocessing.\n\n\n\nWorkflow (what I did in order)\n\nSelected city + searched scenes by date & cloud cover.\nDownloaded Sentinel-2 L2A (tile-based) and Landsat L2 (bundle).\nExplored bands/composites in QGIS/SNAP.\nChecked image statistics (histogram/scatterplot).\n(Optional) Exported subsets for later analysis in R.\n\n\n\nPractical 1 notes\n\nSentinel-2 (Copernicus Browser): (fill steps + settings)\nQGIS exploration: (bands, stack, composites, contrast enhancement observation)\nSNAP exploration: (open zip/MTL, RGB, histogram, scatterplot)\nResampling / masking decisions (if done): (NN/bilinear? 10m→20m? why)",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#applications-why-this-matters",
-    "href": "week1.html#applications-why-this-matters",
-    "title": "Week 1",
-    "section": "Applications (why this matters)",
-    "text": "Applications (why this matters)\n\nApplication 1 — Urban vegetation & green infrastructure\n\nPossible indicators: (NDVI, vegetation cover, seasonal change)\nSensor choice justification:\nLimitations:\n\n\n\nApplication 2 — Long-term urban change / land cover\n\nMonitor: (urban expansion, impervious surface, bare soil)\nWhy Landsat archive matters:\nLimitations:\n\n\n\nApplication 3 — Evidence-informed policy\n\nWhich policy target/metric could EO help quantify?\nRisks: BRDF/seasonality/scale mismatch → need consistent preprocessing & clear definitions.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#reflection-what-i-learned-what-confused-me-next-steps",
-    "href": "week1.html#reflection-what-i-learned-what-confused-me-next-steps",
-    "title": "Week 1",
-    "section": "Reflection (what I learned, what confused me, next steps)",
-    "text": "Reflection (what I learned, what confused me, next steps)\n\nSentinel vs Landsat (my comparison)\n\nSpatial resolution:\n\nTemporal resolution / archive:\n\nSpectral coverage / band overlap:\n\nProducts & preprocessing level (L2A / Level-2):\n\nPractical usability (download structure, file sizes, QA):\n\n\n\nSoftware comparison (QGIS vs SNAP vs R)\n\nQGIS:\n\nSNAP:\n\nR (terra/stars):\n\n\n\nSpectral signatures (what I observed)\n\nExpected patterns across bands (vegetation / water / bare soil / urban)\nHow resampling/pixel size could affect signatures:\n\n\n\nAssumptions & limitations (this week)\n\nSingle-date scene:\nCloud/shadow:\nGeometry (BRDF) + seasonality:\nCross-sensor comparability:\n\n\n\nNext steps\n\nDefine a clearer research question tied to a metric/policy.\nStandardise preprocessing (CRS, resampling choice, masking extent).\nMore systematic POIs (sampling design, reduce subjectivity).",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#repo-notes-gitgithub-hygiene",
-    "href": "week1.html#repo-notes-gitgithub-hygiene",
-    "title": "Week 1",
-    "section": "Repo notes (Git/GitHub hygiene)",
-    "text": "Repo notes (Git/GitHub hygiene)\n\nMy .gitignore ignores large EO files (e.g., .tif, .jp2, .SAFE, .zip) and data folders (e.g., data/), but keeps docs/ for GitHub Pages.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#glossary-optional",
-    "href": "week1.html#glossary-optional",
-    "title": "Week 1",
-    "section": "Glossary (optional)",
-    "text": "Glossary (optional)\n\nEO:\n\nBOA / TOA:\n\nBRDF:\n\nResampling:\n\nSpectral signature:",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#figures-optional",
-    "href": "week1.html#figures-optional",
-    "title": "Week 1",
-    "section": "Figures (optional)",
-    "text": "Figures (optional)\n\nTrue colour composite (city, date)\n\nFalse colour composite / histogram / scatterplot (with 1–2 line captions)",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 1</span>"
-    ]
-  },
-  {
-    "objectID": "week2.html",
-    "href": "week2.html",
-    "title": "Week 2: Sensor Presentation",
-    "section": "",
-    "text": "Using xaringan: Developed this presentation with the xaringan R package to combine live code with a slide-based format.\nReproducibility: Focused on a code-based workflow that helps connect data analysis with presentation output (Xie, Allaire, and Grolemund 2022).\n\n\n\n\n\nHost platform: The full interactive presentation is hosted on GitHub Pages for easier access and navigation.\nOn-page viewing: The embedded frame below allows the slides to be viewed directly on the page.\nFull-screen mode: The link in the note below opens the presentation in a separate browser tab.\n\n\n\n\n\n\n\nSlide Deck Access\n\n\n\nBelow is my embedded slide deck on the Landsat program. You can view the slides here or click here for the full-screen version.",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week2.html#传感器总结与独立思考-summary",
-    "href": "week2.html#传感器总结与独立思考-summary",
-    "title": "Week 2: 传感器展示 (Sensor Presentation)",
-    "section": "2. 传感器总结与独立思考 (Summary)",
-    "text": "2. 传感器总结与独立思考 (Summary)\n虽然幻灯片涵盖了 Landsat 的基础知识，但在我的独立探索中，我将其与另一款主流光学传感器 Sentinel-2 进行了横向对比。\n尽管 Sentinel-2 提供了更高的空间分辨率（最高 10米）和更快的重访周期（5天），但 Landsat 在城市气候研究中仍然具有不可替代的地位。这主要是因为它搭载了热红外传感器 (TIRS) 以及拥有无与伦比的历史数据存档。\n表1：城市遥感应用快速对比\n\n\n\n\n\n\n\n\n\n核心特征\nLandsat 8/9 (OLI & TIRS)\nSentinel-2 (MSI)\n对城市研究的启示\n\n\n\n\n光学分辨率\n30米\n10米 - 60米\nSentinel-2 更适合绘制精细的街道级植被图。\n\n\n热红外波段\n有 (原始 100米，重采样至 30米)\n无\nLandsat 是绘制城市热岛效应 (UHI) 不可或缺的工具。\n\n\n数据存档\n自 1972 年起\n自 2015 年起\nLandsat 是追踪几十年跨度城市扩张的唯一选择。",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
-    ]
-  },
-  {
-    "objectID": "week2.html#应用案例与文献-applications",
-    "href": "week2.html#应用案例与文献-applications",
-    "title": "Week 2: 传感器展示 (Sensor Presentation)",
-    "section": "3. 应用案例与文献 (Applications)",
-    "text": "3. 应用案例与文献 (Applications)\n多光谱和热红外数据的结合，使 Landsat 成为城市环境监测的得力工具。一个经典的应用是计算归一化植被指数 (NDVI) 来评估城市绿色基础设施，进而将其与地表温度 (LST) 的变化进行相关性分析。\n这种关系通常使用以下公式进行量化计算：\n\\[NDVI = \\frac{NIR - Red}{NIR + Red}\\]\n对应到 Landsat 8/9 的具体波段，公式转换为：\n\\[NDVI = \\frac{Band 5 - Band 4}{Band 5 + Band 4}\\] ### 案例研究：城市热岛效应 (UHI)\n利用 Landsat 8/9 的热红外波段 (TIRS)，我们可以反演地表温度 (LST)。下方展示了典型的城市热力分布，其中亮红色代表由于密集的建筑和道路引起的高温区域。\n\n\n\nLandsat 衍生出的地表温度 (LST) 展示图。红色区域对应城市热岛。\n\n\n\n分析提示：这类热力图是城市规划中评估绿色基础设施（如公园、屋顶绿化）缓解温度效果的关键依据。",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
-    ]
-  },
-  {
-    "objectID": "week2.html#可选在此处添加一张-uhi-的热力地图",
-    "href": "week2.html#可选在此处添加一张-uhi-的热力地图",
-    "title": "Week 2: 传感器展示 (Sensor Presentation)",
-    "section": "(可选：在此处添加一张 UHI 的热力地图)",
-    "text": "(可选：在此处添加一张 UHI 的热力地图)",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
-    ]
-  },
-  {
-    "objectID": "week2.html#学习反思-reflection",
-    "href": "week2.html#学习反思-reflection",
-    "title": "Week 2: 传感器展示 (Sensor Presentation)",
-    "section": "4. 学习反思 (Reflection)",
-    "text": "4. 学习反思 (Reflection)\n\n关于传感器与对地观测\n本周我最大的收获是认识到开放数据政策 (Open Data Policies) 的至关重要性。Wulder 等人 (2012) 准确地指出，开放 Landsat 存档彻底改变了整个遥感科学的发展轨迹。然而，我也意识到了遥感技术中的“权衡 (trade-offs)”：你无法拥有一切。Landsat 牺牲了部分空间分辨率（30米）来换取更广阔的覆盖范围和热红外探测能力。在未来的工作中，我对数据融合 (Data Fusion) 非常感兴趣——即将 Landsat 的热红外数据与 Sentinel-2 的高分辨率光学数据结合，从而在精确的城市微气候分析中实现“两全其美”。\n\n\n关于技术流程 (可重复性研究)\n除了了解传感器本身，制作这份幻灯片也是一段陡峭但回报丰厚的学习曲线。从传统的 PowerPoint 制作方式过渡到代码驱动的演示文稿 (Xaringan)，并通过 GitHub Pages 将其发布到网上，迫使我深入理解了可重复性 (Reproducibility) 的概念。使用纯文本 (Markdown) 编写幻灯片并直接集成 R 代码，意味着我的数据分析和结果展示不再是脱节的，这对我未来的学术研究大有裨益。",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
-    ]
-  },
-  {
-    "objectID": "week2.html#参考文献-references",
-    "href": "week2.html#参考文献-references",
-    "title": "Week 2: 传感器展示 (Sensor Presentation)",
-    "section": "5. 参考文献 (References)",
-    "text": "5. 参考文献 (References)\n\nWulder, M. A., Masek, J. G., Cohen, W. B., Loveland, T. R., & Woodcock, C. E. (2012). Opening the archive: How free data has enabled the science and monitoring promise of Landsat, Remote Sensing of Environment, 122, pp. 2–10. DOI: https://doi.org/10.1016/j.rse.2012.01.010\nLoveland, T. R., & Dwyer, J. L. (2012). Landsat: Building a strong future, Remote Sensing of Environment, 122, pp. 22–29. DOI: https://doi.org/10.1016/j.rse.2011.09.022",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
-    ]
-  },
-  {
-    "objectID": "week2.html#传感器展示-presentation",
-    "href": "week2.html#传感器展示-presentation",
-    "title": "Week 2: 传感器展示 (Sensor Presentation)",
-    "section": "",
-    "text": "💡 下方是我嵌入的关于 Landsat 计划的幻灯片，请直接点击这里：查看 Landsat 幻灯片全文。",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 2: 传感器展示 (Sensor Presentation)</span>"
-    ]
-  },
-  {
-    "objectID": "week2.html#sensor-presentation",
-    "href": "week2.html#sensor-presentation",
-    "title": "Week 2: Sensor Presentation",
-    "section": "",
-    "text": "Using xaringan: Developed this presentation with the xaringan R package to combine live code with a slide-based format.\nReproducibility: Focused on a code-based workflow that helps connect data analysis with presentation output (Xie, Allaire, and Grolemund 2022).\n\n\n\n\n\nHost platform: The full interactive presentation is hosted on GitHub Pages for easier access and navigation.\nOn-page viewing: The embedded frame below allows the slides to be viewed directly on the page.\nFull-screen mode: The link in the note below opens the presentation in a separate browser tab.\n\n\n\n\n\n\n\nSlide Deck Access\n\n\n\nBelow is my embedded slide deck on the Landsat program. You can view the slides here or click here for the full-screen version.",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week2.html#sensor-summary-and-independent-reflection",
-    "href": "week2.html#sensor-summary-and-independent-reflection",
-    "title": "Week 2: Sensor Presentation",
-    "section": "2. Sensor Summary and Independent Reflection",
-    "text": "2. Sensor Summary and Independent Reflection\nAlthough the slides cover the fundamental knowledge of Landsat, in my independent exploration I conducted a horizontal comparison with another mainstream optical sensor, Sentinel-2.\nAlthough Sentinel-2 provides higher spatial resolution (up to 10 meters) and a faster revisit cycle (5 days), Landsat still holds an irreplaceable position in urban climate research. This is mainly because it carries a Thermal Infrared Sensor (TIRS) and possesses an unparalleled historical data archive.\nTable 1: Quick Comparison for Urban Remote Sensing Applications\n\n\n\n\n\n\n\n\n\nKey Feature\nLandsat 8/9 (OLI & TIRS)\nSentinel-2 (MSI)\nImplications for Urban Research\n\n\n\n\nOptical Resolution\n30 m\n10 m – 60 m\nSentinel-2 is more suitable for mapping fine-scale street-level vegetation.\n\n\nThermal Infrared Bands\nYes (originally 100 m, resampled to 30 m)\nNo\nLandsat is indispensable for mapping Urban Heat Island (UHI) effects.\n\n\nData Archive\nSince 1972\nSince 2015\nLandsat is the only option for tracking urban expansion over decades.",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week2.html#applications-and-literature",
-    "href": "week2.html#applications-and-literature",
-    "title": "Week 2: Sensor Presentation",
-    "section": "3. Applications and Literature",
-    "text": "3. Applications and Literature\nThe combination of multispectral and thermal infrared data makes Landsat a powerful tool for urban environmental monitoring. A classic application is calculating the Normalized Difference Vegetation Index (NDVI) to assess urban green infrastructure, and then analyzing its correlation with Land Surface Temperature (LST).\nThis relationship is typically quantified using the following formula:\n\\[NDVI = \\frac{NIR - Red}{NIR + Red}\\]\nFor Landsat 8/9, the formula corresponds to specific bands as:\n\\[NDVI = \\frac{Band\\ 5 - Band\\ 4}{Band\\ 5 + Band\\ 4}\\]\n\nCase Study: Urban Heat Island (UHI)\nUsing the thermal infrared bands (TIRS) of Landsat 8/9, we can retrieve Land Surface Temperature (LST). The figure below shows a typical urban thermal distribution, where bright red areas represent high-temperature zones caused by dense buildings and roads.\n\n\n\nLand Surface Temperature (LST) derived from Landsat. Red areas indicate urban heat islands.\n\n\n\nAnalysis Tip: Such thermal maps are key evidence in urban planning when evaluating the cooling effects of green infrastructure (e.g., parks and green roofs).",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week2.html#learning-reflection",
-    "href": "week2.html#learning-reflection",
-    "title": "Week 2: Sensor Presentation",
-    "section": "4. Learning Reflection",
-    "text": "4. Learning Reflection\n\nOn Sensors and Earth Observation\nMy biggest takeaway this week is recognizing the crucial importance of Open Data Policies. Wulder et al. (2012) accurately pointed out that opening the Landsat archive fundamentally transformed the trajectory of remote sensing science. However, I also became aware of the “trade-offs” in remote sensing technology: you cannot have everything. Landsat sacrifices some spatial resolution (30 m) in exchange for broader coverage and thermal infrared capability. In future work, I am particularly interested in Data Fusion—combining Landsat’s thermal infrared data with Sentinel-2’s high-resolution optical data to achieve the “best of both worlds” in precise urban microclimate analysis.\n\n\nOn Technical Workflow (Reproducible Research)\nBeyond understanding the sensor itself, producing this slide deck was a steep but rewarding learning curve. Transitioning from traditional PowerPoint-based production to code-driven presentations (Xaringan), and publishing them online via GitHub Pages, forced me to deeply understand the concept of Reproducibility. Writing slides in plain text (Markdown) and directly integrating R code means that my data analysis and presentation of results are no longer disconnected—an approach that will greatly benefit my future academic research.",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week2.html#references",
-    "href": "week2.html#references",
-    "title": "Week 2: Sensor Presentation",
-    "section": "5. References",
-    "text": "5. References\n\n\nKirenz, Jan K. 2023. “Build Presentations in R.” 2023. https://www.kirenz.com/slides/xaringan-demo-slides.html#1.\n\n\nQuarto. 2022. “Quarto - Get Started.” https://quarto.org/docs/books/#quick-start.\n\n\nXie, Yihui. 2022. “With Quarto Coming, Is R Markdown Going Away? No.” April 2022. https://yihui.org/rmarkdown/xaringan.\n\n\nXie, Yihui, J. J. Allaire, and Garrett Grolemund. 2022. R Markdown: The Definitive Guide. Chapman; Hall/CRC. https://bookdown.org/yihui/rmarkdown/.",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week1.html#传感器总结与独立思考-summary-independent-thought",
-    "href": "week1.html#传感器总结与独立思考-summary-independent-thought",
-    "title": "第一周：遥感导论与光谱分析实战",
-    "section": "",
-    "text": "1.1 传感器特性：Sentinel-2 MSI\n本周的学习重点在于理解对地观测传感器的核心参数。在实践中，我处理了覆盖中国贵阳市的 Sentinel-2 MSI (Level-2A) 影像。该产品提供地表反射率数据，对于精确的光谱分析至关重要。Sentinel-2 凭借其平衡的“四种分辨率”在城市研究中表现卓越：\n\n空间分辨率：核心波段达到 10m，能够捕捉精细的城市纹理。\n光谱分辨率：包含 13 个光谱波段，涵盖从可见光到短波红外（SWIR）。\n时间分辨率：凭借 A/B 双星实现 5 天的重访周期。\n辐射分辨率：12 位深度，能够存储 4,096 个亮度等级。\n\n\n\n\nSNAP 中的重采样与裁剪处理过程，展示了针对贵阳行政边界的初步处理。\n\n\n\n\n1.2 研究区域选择：为什么选择贵阳？\n贵阳不仅是我的家乡，也是研究中国西南山地城市化的典型案例。\n\n情感联结：作为在这座城市长大的人，通过卫星之眼重新审视家乡的变迁，赋予了这项科研任务深层的人文关怀。\n研究价值：贵阳独特的喀斯特地貌和多云气候给光学遥感带来了巨大挑战。\n分辨率重要性：贵阳剧烈的地形起伏和快速的城市扩张，使得 Sentinel-2 的 10m 分辨率在识别碎片化绿地和高密度建筑群时显得尤为重要。\n\n\n\n1.3 独立思考：分辨率的权衡与数据丰裕\n在对比中我发现，Sentinel-2 的高时间分辨率非常适合监测贵阳多云天气下的影像缝隙。然而，Landsat 自 1972 年以来的存档数据对于追踪我记忆中家乡几十年的变迁是不可替代的。这种“时间跨度”与“空间精度”的权衡，说明了多源数据融合才是未来城市研究的必然趋势。",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第一周：遥感导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#应用案例地物增强与全球制图-applications",
-    "href": "week1.html#应用案例地物增强与全球制图-applications",
-    "title": "第一周：遥感导论与光谱分析实战",
-    "section": "2. 应用案例：地物增强与全球制图 (Applications)",
-    "text": "2. 应用案例：地物增强与全球制图 (Applications)\n\n2.1 缨帽变换 (Tasseled Cap Transformation, TCT)\n在应用层面，我不仅观察了原始波段，还在 SNAP 中执行了缨帽变换。通过波段运算，我得到了三个具有明确物理意义的分量：\n\n亮度 (Brightness)：反映了家乡城市建设用地的反射强度。\n绿度 (Greenness)：突出了贵阳作为山水城市丰富的植被信号。\n湿度 (Wetness)：有效识别了南明河及红枫湖等关键水体。\n\n\n\n\nSNAP 中的 TCT RGB 显示效果图（R:亮度, G:绿度, B:湿度），绿色代表森林，亮粉色代表城市建筑。\n\n\n通过生成散点图 (Scatter Plot)，我观察到地物在“亮度-绿度”空间中呈现出经典的“缨帽”形状分布。\n\n\n2.2 全球尺度应用：ESA WorldCover\nSentinel-2 数据被广泛应用于 ESA WorldCover 10m 等项目。这种高精度地图允许城市规划者从社区尺度区分建筑区与绿色基础设施，这对我分析贵阳的城市绿地可达性具有重要启发。",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第一周：遥感导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#技术流程从-snap-到-r-的光谱统计分析-work-logic",
-    "href": "week1.html#技术流程从-snap-到-r-的光谱统计分析-work-logic",
-    "title": "第一周：遥感导论与光谱分析实战",
-    "section": "3. 技术流程：从 SNAP 到 R 的光谱统计分析 (Work Logic)",
-    "text": "3. 技术流程：从 SNAP 到 R 的光谱统计分析 (Work Logic)\n\n3.1 空间对齐与 POI 采样\n在 QGIS 中，我验证了 Sentinel 和 Landsat 影像的地理配准精度。通过 同步视图 (Synchronise Views) 功能，我在家乡熟悉的坐标上精确标注了水体、森林、城市等兴趣点 (POIs) 样本。\n\n\n\nQGIS 验证截图：展示了多源影像图层与数字化 POI 矢量文件的完美空间套合。\n\n\n\n\n3.2 基于 R 的光谱签名分析\n在 R 中，我使用 terra 包提取了像元值，并计算了不同地物的平均光谱特征：\n\n光谱曲线绘制：我计算了各波段下的平均反射率。正如实验所示，光谱特征代表了地物在不同波长下的“指纹”。\n密度图分析：通过密度图观察到城市像元反射率的高异质性，反映了贵阳复杂的建筑材质分布。\n\n\n\n\n在 R 中生成的贵阳典型地物光谱签名曲线（含标准差误差棒）。",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第一周：遥感导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#学习反思-reflection",
-    "href": "week1.html#学习反思-reflection",
-    "title": "第一周：遥感导论与光谱分析实战",
-    "section": "4. 学习反思 (Reflection)",
-    "text": "4. 学习反思 (Reflection)\n\n4.1 统计学差异的物理本质\n在实验中，我对贵阳城市样本的 Sentinel 和 Landsat 数据进行了 Welch t 检验。结果如下： * 统计量：\\(t = -214.78\\)。 * 显著性：\\(p &lt; 2.2e-16\\)。\n这种极显著差异提醒我，遥感中的“不一致”并非单纯的误差，而是源于两者的光谱响应函数以及大气校正算法（BOA）的不同。在跨传感器分析中，执行传感器定标是确保数据一致性的关键步骤。\n\n\n4.2 技术成长与未来展望\n通过本周的学习，我不仅学会了封装 band_fun 函数来实现自动化提取，更学会了如何用数据去讲述家乡的故事。 * 技能提升：掌握了从 SNAP 空间处理到 R 语言统计的可重复性工作流。 * 未来目标：我计划探索如何利用机器学习算法，针对贵阳这种复杂地形进行更深度的土地覆盖变化检测。",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第一周：遥感导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#参考文献-references",
-    "href": "week1.html#参考文献-references",
-    "title": "第 1 周：遥感科学导论与光谱分析实战",
-    "section": "5. 参考文献 (References)",
-    "text": "5. 参考文献 (References)\n\nDrusch, M., Del Bello, U., Carlier, S., Colin, O., Fernandez, V., Gascon, F., Hoersch, B., Isola, C., Laberinti, P., Martimort, P., & Meygret, A. (2012). Sentinel-2: ESA’s Optical High-Resolution Mission for GMES Operational Services, Remote Sensing of Environment, 120, pp. 25-36.\nWulder, M. A., Masek, J. G., Cohen, W. B., Loveland, T. R., & Woodcock, C. E. (2012). Opening the archive: How free data has enabled the science and monitoring promise of Landsat, Remote Sensing of Environment, 122, pp. 2-10.\nZanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., & Cartus, O. (2021). ESA WorldCover 10 m 2020 v100, Zenodo.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第 1 周：遥感科学导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#理论总结与独立思考-content-summary-independent-thought",
-    "href": "week1.html#理论总结与独立思考-content-summary-independent-thought",
-    "title": "第 1 周：遥感科学导论与光谱分析实战",
-    "section": "",
-    "text": "1.1 遥感物理基础与电磁辐射 (EMR)\n本周的学习使我认识到遥感并非简单的摄影，而是对电磁辐射能量交互的物理测量。通过讲义，我掌握了电磁波的核心公式：\\(\\lambda = c/v\\)，其中波长与频率成反比。\n在传感器探测地表之前，能量经历了复杂的交互过程：\n\n大气交互：包括瑞利散射（导致天空变蓝且影响可见光波段）、米氏散射（气溶胶引起）和非选择性散射（云层引起）。这解释了为什么在多云的贵阳，光学遥感面临着巨大的大气校正挑战。\n地表交互：能量被地表吸收、透射或反射。传感器的任务正是捕捉这部分携带地物信息的反射能量。\n\n\n\n1.2 四种分辨率的批判性审视\n讲义强调了决定遥感应用成败的“四种分辨率”：\n\n空间分辨率：决定了能看到的最小地物，Sentinel-2 的 10m 分辨率在城市尺度上具有显著优势。\n光谱分辨率：波段的数量和宽度。我意识到“光谱签名”是地物的物理指纹，通过不同波段的响应可以区分极其相似的材料。\n时间分辨率：重访周期。在动态监测中至关重要。\n辐射分辨率：传感器的敏感度，即量化等级（如 12-bit 提供 4096 个亮度级）。\n\n\n\n1.3 独立思考：为什么选择家乡贵阳？\n我选择了我的家乡贵阳作为研究区。贵阳不仅具有情感层面的连接，在地理学上也极具研究价值：\n\n喀斯特地形复杂性：贵阳崎岖的地形导致了显著的“双向反射分布函数 (BRDF)”效应，即观测角度和光照角度会显著改变地物的表观反射率。\n数据权衡 (Balancing Act)：Sentinel-2 虽然在空间精度上表现卓越，但对于追踪我童年记忆中贵阳过去几十年的扩张轨迹，Landsat 的历史存档数据是不可替代的选择。\n\n\n\n\n图 1：在 SNAP 中对贵阳市 Sentinel-2 数据进行重采样与掩膜裁剪的预处理流程。",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第 1 周：遥感科学导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#内容应用与案例分析-applications",
-    "href": "week1.html#内容应用与案例分析-applications",
-    "title": "第 1 周：遥感科学导论与光谱分析实战",
-    "section": "2. 内容应用与案例分析 (Applications)",
-    "text": "2. 内容应用与案例分析 (Applications)\n\n2.1 缨帽变换 (TCT) 在城市形态学中的应用\n在实践中，我应用了 缨帽变换 (Tasseled Cap Transformation)。这不仅仅是一种降维技术，更是一种生物物理指标的提取：\n\n亮度 (Brightness)：有效提取了贵阳近年来兴起的“大数据中心”等高密度建筑区。\n绿度 (Greenness)：帮助我识别了贵阳作为国家森林城市在快速扩张中保留的绿色廊道。\n湿度 (Wetness)：成功提取了南明河与红枫湖水系，这对于评价城市蓝绿空间的生态功能至关重要。\n\n\n\n\n图 2：贵阳市 TCT RGB 渲染图（R:亮度, G:绿度, B:湿度）。亮色区域清晰展示了城市中心的建筑密度。\n\n\n\n\n2.2 跨传感器研究：ESA WorldCover 的启示\n讲义中提到的 ESA WorldCover 10m 项目展示了 10m 分辨率在实时城市监测中的巨大潜力。与传统的 30m Landsat 数据相比，高分辨率 Sentinel 数据能显著减少城市边缘的“混合像元”现象。然而我也认识到，在多云的高原地区，单一的光学应用存在瓶颈，未来必须结合能“穿透云层”的 SAR 主动传感器数据。\n\n\n\n3.1 从 SNAP 到 R 的自动化工作流\n我的技术路径实现了从空间处理到统计建模的闭环：\n\nSNAP 处理：完成了重采样、地理配准以及基于矢量边界的影像裁剪。\nR 语言采样：利用 terra 包提取像元值，并封装了 band_fun 函数实现批量提取和长格式 (Long Format) 整理。\nQGIS 验证：确保了多源影像在相同地理空间下的完美套合。\n\n\n\n\n\n\n\n图 3-A：Landsat-9 影像与 POI 样点的空间套合\n\n\n\n\n\n\n\n图 3-B：Sentinel-2 影像与 POI 样点的空间套合\n\n\n\n\n\n图 3：QGIS 空间一致性验证。多源卫星影像与我数字化的训练样点（POIs）在同一坐标系统下完美对齐，这是保证后续 R 语言像元提取准确性的核心前提。\n\n\n3.2 基于 R 的光谱签名统计分析\n利用 terra::extract 和 tidyverse 的长格式转换，我提取了贵阳市典型地物的光谱响应值，并绘制了特征曲线（图 4）：\n\n植被的红边效应 (Red Edge)：在光谱曲线 (Plot A) 中，森林样本（红线）在可见光波段（Band 1-3）反射率较低，但在近红外波段（Band 4）出现急剧攀升。这完美印证了健康植被叶肉细胞强烈反射 NIR 能量的生物物理特性。\n水体的吸收特性：水体样本（蓝线）在所有波段均保持极低反射率，且在 NIR 波段呈现下降趋势，证实了水体对长波能量的强烈吸收。\n城市地表的极高异质性 (High Heterogeneity)：这是最显著的发现。光谱曲线显示城市像元（绿线）在各波段具有极大的标准差（误差棒）；同时，密度分布图 (Plot B) 显示城市像元的反射率分布极其宽泛平缓。这在统计学上反映了贵阳市中心由混凝土、沥青、金属屋顶和碎片化绿地组成的极其复杂的混合地表形态。\n\n\n\n\n图 4：在 R 中生成的贵阳典型地物光谱签名曲线（含标准差误差棒）。",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第 1 周：遥感科学导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#技术流程与实践逻辑-work-logic",
-    "href": "week1.html#技术流程与实践逻辑-work-logic",
-    "title": "第 1 周：遥感科学导论与光谱分析实战",
-    "section": "3. 技术流程与实践逻辑 (Work Logic)",
-    "text": "3. 技术流程与实践逻辑 (Work Logic)\n\n3.1 从 SNAP 到 R 的自动化工作流\n我的技术路径实现了从空间处理到统计建模的闭环： 1. SNAP 处理：完成了重采样、地理配准以及基于矢量边界的影像裁剪。 2. R 语言采样：利用 terra 包提取像元值，并封装了 band_fun 函数实现批量提取和长格式 (Long Format) 整理。 3. QGIS 验证：确保了多源影像在相同地理空间下的完美套合。\n\n\n\n图 3：QGIS 验证：展示了 Sentinel 和 Landsat 影像在贵阳城区 POI 样点上的高度空间一致性。\n\n\n\n\n3.2 基于 R 的光谱签名统计分析\n利用 terra::extract 和 tidyverse 的长格式转换，我提取了贵阳市典型地物的光谱响应值，并绘制了特征曲线（图 4）：\n\n植被的红边效应 (Red Edge)：在光谱曲线 (Plot A) 中，森林样本（红线）在可见光波段（Band 1-3）反射率较低，但在近红外波段（Band 4）出现急剧攀升。这完美印证了健康植被叶肉细胞强烈反射 NIR 能量的生物物理特性。\n水体的吸收特性：水体样本（蓝线）在所有波段均保持极低反射率，且在 NIR 波段呈现下降趋势，证实了水体对长波能量的强烈吸收。\n城市地表的极高异质性 (High Heterogeneity)：这是最显著的发现。光谱曲线显示城市像元（绿线）在各波段具有极大的标准差（误差棒）；同时，密度分布图 (Plot B) 显示城市像元的反射率分布极其宽泛平缓。这在统计学上反映了贵阳市中心由混凝土、沥青、金属屋顶和碎片化绿地组成的极其复杂的混合地表形态。\n\n\n\n\n图 4：在 R 中生成的贵阳典型地物光谱签名曲线（含标准差误差棒）。",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第 1 周：遥感科学导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#个人反思-personal-reflection",
-    "href": "week1.html#个人反思-personal-reflection",
-    "title": "第 1 周：遥感科学导论与光谱分析实战",
-    "section": "4. 个人反思 (Personal Reflection)",
-    "text": "4. 个人反思 (Personal Reflection)\n\n4.1 统计学显著性 vs. 遥感物理意义\n在本周的实验中，我对 Sentinel 和 Landsat 在家乡城市区域的像元值进行了 Welch t 检验。\n\n\n\n图 5：在 RStudio 中运行的 Welch t 检验结果，显示两类传感器的像元值具有极显著的统计学差异。\n\n\n\n统计结果：如图 5 所示，\\(t = -214.78\\)，\\(p &lt; 2.2 \\times 10^{-16}\\)，具有极显著差异。\n深度反思：作为一名研究者，我深刻理解到“显著差异”并不代表数据处理存在错误，而是客观反映了两者的物理差异——包括光谱响应函数、大气校正算法（如 Sentinel 的 Sen2Cor 与 Landsat 的 LaSRC）以及各自的辐射定标系数的不同。这提醒我，在未来的城市气候研究中，跨传感器的数据融合不能简单粗暴地拼接，必须预先进行精密的传感器间交叉定标 (Cross-calibration)。\n\n\n\n4.2 技能成长与未来愿景\n通过这一周的学习，我不仅掌握了操作工具（SNAP, R, QGIS），更重要的是学会了可重复性研究 (Reproducibility) 的代码思维。未来，我计划进一步探索基于提取的光谱特征进行机器学习分类，用客观的数据量化我家乡过去十年城市化对生态本底的真实影响。",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>第 1 周：遥感科学导论与光谱分析实战</span>"
-    ]
-  },
-  {
-    "objectID": "week1.html#content-summary-independent-thought",
-    "href": "week1.html#content-summary-independent-thought",
-    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
-    "section": "",
-    "text": "This week’s learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions ((Brady 2021)). Through the lecture, I grasped the core formula of electromagnetic waves: \\(\\lambda = c/v\\), where wavelength is inversely proportional to frequency.\n\n\n\n\n\n\nNote\n\n\n\nBefore the sensor detects the Earth’s surface, the energy undergoes complex interactions ((Tempfli et al. 2009)):\n\nAtmospheric Interactions: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.\nSurface Interactions: Energy is absorbed, transmitted, or reflected by the surface. The sensor’s task is precisely to capture this reflected energy, which carries information about the surface features.\n\n\n\n\n\n\nThe lecture emphasized the “four resolutions” that determine the success of remote sensing applications:\n\nSpatial Resolution: Determines the smallest observable feature. Sentinel-2’s 10m resolution offers a significant advantage at the urban scale ((Jensen 2015)).\nSpectral Resolution: The number and width of bands. I realized that a “spectral signature” is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.\nTemporal Resolution: The revisit period, which is crucial for dynamic environmental monitoring.\nRadiometric Resolution: The sensor’s sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).\n\n\n\n\nI selected my hometown, Guiyang, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:\n\nComplexity of Karst Topography: Guiyang’s rugged terrain leads to a pronounced “Bidirectional Reflectance Distribution Function (BRDF)” effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.\nData Balancing Act: While Sentinel-2 excels in spatial precision, Landsat’s historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood ((Tempfli et al. 2009)).\n\n\n\n\nFigure 1: Pre-processing workflow in SNAP, including resampling and masking Sentinel-2 data for Guiyang.",
-    "crumbs": [
-      "Week 1: Intro & Spectral"
-    ]
-  },
-  {
-    "objectID": "week1.html#applications",
-    "href": "week1.html#applications",
-    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
-    "section": "2. Applications",
-    "text": "2. Applications\n\n2.1 Tasseled Cap Transformation (TCT) in Urban Morphology\nIn practice, I applied the Tasseled Cap Transformation (TCT). This is not just a dimensionality reduction technique, but an extraction of biophysical indicators:\n\nBrightness: Effectively extracted the high-density built-up areas, such as the newly emerged “Big Data Centers” in Guiyang.\nGreenness: Helped me identify the green corridors preserved during the rapid expansion of Guiyang, a designated National Forest City.\nWetness: Successfully extracted the Nanming River and Hongfeng Lake water systems, which is vital for evaluating the ecological functions of urban blue-green spaces.\n\n\n\n2.2 Cross-Sensor Research: Insights from ESA WorldCover\nThe ESA WorldCover 10m project mentioned in the lecture demonstrates the tremendous potential of 10m resolution in real-time urban monitoring. Compared to traditional 30m Landsat data, high-resolution Sentinel data can significantly reduce “mixed pixels” at urban edges (Jensen 2015). However, I also recognize that in cloudy, high-altitude regions, single optical applications have bottlenecks. In the future, it is essential to integrate active SAR sensor data capable of “penetrating clouds.”",
-    "crumbs": [
-      "Week 1: Intro & Spectral"
-    ]
-  },
-  {
-    "objectID": "week1.html#technical-workflow-and-statistical-analysis",
-    "href": "week1.html#technical-workflow-and-statistical-analysis",
-    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
-    "section": "3. Technical Workflow and Statistical Analysis",
-    "text": "3. Technical Workflow and Statistical Analysis\n\n3.1 Automated Workflow from SNAP to R\nMy technical pathway achieved a closed loop from spatial processing to statistical modeling:\n\nSNAP Processing: Completed resampling, georegistration, and image subsetting based on vector boundaries.\nR Sampling: Utilized the terra package to extract pixel values and encapsulated a band_fun function to achieve batch extraction and Long Format data tidying.\nQGIS Validation: Ensured perfect spatial alignment of multi-source imagery within the same geographical space.\n\n\n\n\n\n\n\nFigure 3-A: Spatial alignment of Landsat-9 imagery and POIs\n\n\n\n\n\n\n\nFigure 3-B: Spatial alignment of Sentinel-2 imagery and POIs\n\n\n\n\n\nFigure 3: QGIS spatial consistency validation. The perfect alignment of multi-source satellite imagery and my digitized training points (POIs) in the same coordinate system is the core prerequisite ensuring the accuracy of subsequent pixel extractions in R.\n\n\n3.2 R-Based Spectral Signature Statistical Analysis\nUsing terra::extract and long-format conversion via tidyverse, I extracted the spectral response values of typical land covers in Guiyang and plotted their signature curves (Figure 4):\n\n\n\n\n\n\nImportant\n\n\n\n\nThe Red Edge Effect of Vegetation: In the spectral curve (Plot A), the forest sample (red line) exhibits low reflectance in the visible bands (Bands 1-3) but a sharp surge in the near-infrared band (Band 4). This perfectly corroborates the biophysical characteristic of healthy mesophyll cells strongly reflecting NIR energy.\nAbsorption Characteristics of Water: The water sample (blue line) maintains extremely low reflectance across all bands and shows a downward trend in the NIR band, confirming the strong absorption of long-wave energy by water.\nHigh Heterogeneity of Urban Surfaces: This is the most striking finding. The spectral curve shows that urban pixels (green line) possess massive standard deviations (error bars) across all bands; meanwhile, the density distribution plot (Plot B) reveals an extremely broad and flat reflectance distribution for urban pixels. Statistically, this reflects the highly complex and mixed surface morphology of downtown Guiyang, which comprises concrete, asphalt, metal roofs, and fragmented green spaces.\n\n\n\n\n\n\nFigure 4: Spectral signature curves of typical land covers in Guiyang generated in R (with standard deviation error bars).",
-    "crumbs": [
-      "Week 1: Intro & Spectral"
-    ]
-  },
-  {
-    "objectID": "week1.html#personal-reflection",
-    "href": "week1.html#personal-reflection",
-    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
-    "section": "4. Personal Reflection",
-    "text": "4. Personal Reflection\n\n4.1 Statistical Significance vs. Physical Meaning\nIn this week’s practical, I performed a Welch t-test on the pixel values of Sentinel-2 and Landsat-9 within the urban areas of my hometown, Guiyang.\n\n\n\nFigure 5: Welch t-test results running in RStudio, demonstrating a highly significant statistical difference in pixel values between the two sensors.\n\n\n\nStatistical Results: As shown in Figure 5, \\(t = -214.78\\), \\(p &lt; 2.2 \\times 10^{-16}\\), indicating a highly significant difference.\nDeep Reflection: As a researcher, I deeply understand that this “significant difference” does not imply a data processing error; rather, it objectively reflects the inherent physical divergence between the two sensor systems.\n\n\n💡 Physical Mechanism Analysis:\n\nSpectral Response Functions (SRF): Each sensor “samples” the electromagnetic spectrum through slightly different windows. Even for the “same” Near-Infrared (NIR) band, the bandwidth and center wavelength differ, leading to varying sensitivity to Guiyang’s lush subtropical vegetation (Butcher 2016).\nAtmospheric Correction Divergence: The complex aerosol conditions in Guiyang’s mountainous Karst landscape pose challenges for algorithms like Sen2Cor (Sentinel) and LaSRC (Landsat). These subtle differences in atmospheric path radiance removal are amplified in statistical tests.\nGeographic Context: Guiyang’s rugged terrain introduces bidirectional reflectance distribution function (BRDF) effects. The different overpass times and viewing angles of the two satellites mean they capture the “same” surface under different illumination geometries, which is statistically significant but physically expected.\n\nConclusion: This reminds me that in future urban climate studies, cross-sensor data fusion cannot simply be pieced together abruptly. Precise cross-calibration or the use of Harmonized Landsat Sentinel (HLS) products is a prerequisite for robust longitudinal analysis (Jensen 2015).\n\n\n\n4.2 Skill Growth and Future Vision\n\n\nFrom Tool-User to Critical Analyst\nThrough this week’s learning, I have not only mastered operational tools (SNAP, R, QGIS) but, more importantly, acquired a coding mindset for Reproducible Research.\n\nMethodological Shift: Moving beyond “point-and-click” software GUI has allowed me to automate the spectral signature extraction process. Using R ensures that my analysis of Guiyang’s urbanization is transparent and repeatable by others—a core tenet of modern geographic data science.\nOvercoming the “Cloud” Bottleneck: While optical data provided a strong start, the high cloud frequency in Guiyang remains a limitation. Moving forward, I plan to further explore machine learning classification based on these extracted spectral features, but more importantly, I look forward to integrating SAR (Synthetic Aperture Radar) data in later weeks to “see through” the clouds.\nFuture Vision: My ultimate goal is to use this methodological prototype to quantify the true impact of rapid urban expansion on the ecological baseline of my hometown over the past decade, providing objective evidence for sustainable urban planning in Karst regions.",
-    "crumbs": [
-      "Week 1: Intro & Spectral"
-    ]
-  },
-  {
-    "objectID": "week1.html#references",
-    "href": "week1.html#references",
-    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
-    "section": "5. References",
-    "text": "5. References\n\n\nBrady, M. 2021. “Remote Sensing for Dummies.” https://storymaps.arcgis.com/stories/cb1577b0f5bc485c974b4ea19d52282d.\n\n\nButcher, Ginger. 2016. Tour of the Electromagnetic Spectrum. Third. National Aeronautics; Space Administration, Washington, DC. https://science.nasa.gov/wp-content/uploads/2023/08/tour-of-the-ems-tagged-v7-0.pdf.\n\n\nJensen, John R. 2015. Introductory Digital Image Processing: A Remote Sensing Perspective. Prentice-Hall Inc. https://read.kortext.com/reader/pdf/1872407/Cover.\n\n\nTempfli, K, Gc Huurneman, Wh Bakker, L. L. Janssen, W Feringa, A Gieske, K Grabmaier, et al. 2009. Principles of Remote Sensing: An Introductory Textbook. International Institute for Geo-Information Science; Earth Observation. https://webapps.itc.utwente.nl/librarywww/papers_2009/general/principlesremotesensing.pdf.",
-    "crumbs": [
-      "Week 1: Intro & Spectral"
-    ]
-  },
-  {
-    "objectID": "week2.html#content-summary",
-    "href": "week2.html#content-summary",
-    "title": "Week 2: Sensor Presentation",
-    "section": "2. Content Summary",
-    "text": "2. Content Summary\n\n2.1 Horizontal Comparison with Sentinel-2\n\nSpatial Resolution: Sentinel-2 provides finer spatial resolution in some key optical bands, while Landsat 8/9 offers stronger long-term consistency at 30 m.\nSpectral Advantage: A key strength of Landsat is that it carries both optical and thermal sensors, which makes it especially useful for urban thermal studies.\n\n\n\n2.2 Satellite Payloads and Instrumentation\n\nOLI (Operational Land Imager): Captures data in the visible, near-infrared, and shortwave infrared parts of the spectrum.\nTIRS (Thermal Infrared Sensor): Records thermal information that can be used in land surface temperature analysis.\n\n\n\n\nFigure 1: Schematic of the Landsat 8-9 satellite platform highlighting the OLI and TIRS sensor payloads. Source: NASA.\n\n\n\n\n2.3 Urban Research Significance\n\nLST Retrieval: Estimate Land Surface Temperature (LST) from Landsat thermal data, most commonly using Band 10.\nUHI Analysis: Identify local temperature differences to map Urban Heat Islands (UHI).\nClimate Policy: Use these data to support urban planning and help address heat-related risks in dense city areas.\n\n\n\n\n\n\n\nWhy Landsat for Urban Studies?\n\n\n\nAn important advantage of Landsat is its thermal bands, which make it possible to estimate Land Surface Temperature (LST). This is particularly useful for studying the Urban Heat Island (UHI) effect.\n\n\n\n\n\nFigure 2: Spectral band comparison between Landsat 8/9 OLI/TIRS and Sentinel-2 MSI sensors.\n\n\n\n\n\n\n\n\n\n\n\nKey Feature\nLandsat 8/9 (OLI & TIRS)\nSentinel-2 (MSI)\nImplications for Urban Research\n\n\n\n\nOptical Resolution\n30 m\n10 m – 60 m\nSentinel-2 is more suitable for detailed vegetation mapping at street level.\n\n\nThermal Infrared\nYes\nNo\nLandsat is more suitable for heat mapping because it includes thermal bands.\n\n\nData Archive\nSince 1972\nSince 2015\nLandsat is one of the most important sources for tracking long-term urban expansion.",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week2.html#applications",
-    "href": "week2.html#applications",
-    "title": "Week 2: Sensor Presentation",
-    "section": "3. Applications",
-    "text": "3. Applications\n\n3.1 Environmental Indices and Monitoring\n\nVegetation Analysis: Calculate NDVI to measure the presence and condition of urban green spaces.\nCooling Effects: Use spectral data to examine how green infrastructure may help reduce urban temperatures.\n\n\\[NDVI = \\frac{NIR - Red}{NIR + Red}\\]\n\n\n3.2 Spectral Signature Integrity\n\nData Acquisition: Select suitable multispectral bands (Red and NIR) for the study area.\nSignature Analysis: Distinguish land covers such as asphalt and vegetation by comparing their reflectance curves.\nValidation: Compare the results with ground-truth data or high-resolution imagery to improve mapping reliability.\n\n\n\n\n\n\n\nSpectral Signature Analysis\n\n\n\nDistinguishing between land covers requires the comparison of spectral signatures across multiple bands, which helps improve both interpretation and mapping quality.\n\n\n\n\n\nFigure 3: Spectral signature curves of typical land covers in Guiyang generated in R (with standard deviation error bars).\n\n\n\n\n3.3 Identifying Urban Hot Spots\n\nUrban Fabric Analysis: Explore how different surface materials, such as concrete and grass, absorb and release heat differently.\nHeat Spot Identification: Identify areas where dense built-up land shows noticeably higher temperatures than surrounding areas.\n\n\n\n\nFigure 4: Urban Hot Spots",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week2.html#personal-reflection",
-    "href": "week2.html#personal-reflection",
-    "title": "Week 2: Sensor Presentation",
-    "section": "4. Personal Reflection",
-    "text": "4. Personal Reflection\n\n4.1 Earth Observation and Open Data\n\nData Accessibility: The open-access Landsat archive has made remote sensing data much easier to use for research and long-term environmental monitoring.\nData Fusion Potential: Combining Landsat’s thermal information with Sentinel-2’s finer spatial detail could support more detailed urban microclimate analysis.\n\n\n\n4.2 Technical Evolution and Workflow\n\nXaringan Learning: Learned how to build presentations using Markdown and CSS, which was challenging at first but useful in practice.\nQuarto Integration: Began moving toward a Quarto-based workflow for managing documents and portfolio work more consistently (Kirenz 2023).\nReproducibility Mastery: Gained a better understanding of how code and written explanation can be combined in scientific communication (Xie 2022).\nFuture Research: I hope to apply these reproducible methods in future academic work so that my analysis remains clear and verifiable (Quarto 2022).\n\n\n\n\n\n\n\nBest Practice: Project Separation\n\n\n\nAs discussed in the module, it is generally better not to carry out complex analysis and portfolio writing in the same R project, because keeping them separate helps maintain clarity and organisation.\n\n\n\n\n\nFigure 5: Screenshot of the RStudio workspace used for portfolio writing, showing the active document and the project file structure.",
-    "crumbs": [
-      "Week 2: Sensor Presentation"
-    ]
-  },
-  {
-    "objectID": "week1.html#content-summary",
-    "href": "week1.html#content-summary",
-    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
-    "section": "",
-    "text": "This week’s learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions (Brady 2021). Through the lecture, I grasped the core formula of electromagnetic waves: \\(\\lambda = c/v\\), where wavelength is inversely proportional to frequency.\n\n\n\n\n\n\nNote\n\n\n\nBefore the sensor detects the Earth’s surface, the energy undergoes complex interactions (Tempfli et al. 2009):\n\nAtmospheric Interactions: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.\nSurface Interactions: Energy is absorbed, transmitted, or reflected by the surface. The sensor’s task is precisely to capture this reflected energy, which carries information about the surface features.\n\n\n\n\n\n\nThe lecture emphasized the “four resolutions” that determine the success of remote sensing applications:\n\nSpatial Resolution: Determines the smallest observable feature. Sentinel-2’s 10m resolution offers a significant advantage at the urban scale (Jensen 2015).\nSpectral Resolution: The number and width of bands. I realized that a “spectral signature” is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.\nTemporal Resolution: The revisit period, which is crucial for dynamic environmental monitoring.\nRadiometric Resolution: The sensor’s sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).\n\n\n\n\nI selected my hometown, Guiyang, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:\n\nComplexity of Karst Topography: Guiyang’s rugged terrain leads to a pronounced “Bidirectional Reflectance Distribution Function (BRDF)” effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.\nData Balancing Act: While Sentinel-2 excels in spatial precision, Landsat’s historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood (Tempfli et al. 2009).\n\n\n\n\nFigure 1: Pre-processing workflow in SNAP, including resampling and masking Sentinel-2 data for Guiyang.",
-    "crumbs": [
-      "Week 1: Intro & Spectral"
-    ]
-  },
-  {
-    "objectID": "week1.html#sensor-presentation",
-    "href": "week1.html#sensor-presentation",
-    "title": "Week 2: Sensor Presentation",
-    "section": "",
-    "text": "Xaringan mastery: Developed a technical presentation using the xaringan R package to integrate live code with stylistic slides.\nReproducibility: Emphasized a code-driven approach that ensures the seamless transition from data analysis to academic presentation ((Xie, Allaire, and Grolemund 2022)).\n\n\n\n\n\nHost platform: Access the full interactive presentation hosted via GitHub Pages for the best user experience.\nOn-page viewing: Utilize the embedded frame below to navigate through the Landsat sensor introduction.\nFull-screen mode: Click the provided link in the note below to open the deck in a separate browser tab.\n\n\n\n\n\n\n\nSlide Deck Access\n\n\n\nBelow is my embedded slide deck regarding the Landsat program. You can interact with the slides directly or click here for the full-screen version.",
-    "crumbs": [
-      "Week 1: Intro & Spectral"
-    ]
-  },
-  {
     "objectID": "week3.html",
     "href": "week3.html",
     "title": "Week 3 Learning Diary: Remote Sensing Data Corrections and Enhancements",
@@ -457,6 +47,136 @@
     "text": "4. References\n\n\nJensen, John R. 2015. Introductory Digital Image Processing: A Remote Sensing Perspective. 4th ed. Pearson. https://books.google.com/books/about/Introductory_Digital_Image_Processing.html?id=BWx3CgAAQBAJ.\n\n\nJoyce, Karen. 2013. “Radiative Transfer and Atmospheric Correction Video.” 2013. https://www.youtube.com/watch?v=qb4yFwzsnU8&t.\n\n\nSchulte to Bühne, Pettorelli, H. 2018. “Better Together: Integrating and Fusing Multispectral and Radar Satellite Imagery to Inform Biodiversity Monitoring, Ecological Research and Conservation Science.” Methods in Ecology and Evolution 9 (4): 849–65. https://doi.org/10.1111/2041-210X.12942.",
     "crumbs": [
       "Week 3: Corrections & Enhancements"
+    ]
+  },
+  {
+    "objectID": "week1.html",
+    "href": "week1.html",
+    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
+    "section": "",
+    "text": "This week’s learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions (Brady 2021). Through the lecture, I grasped the core formula of electromagnetic waves: \\(\\lambda = c/v\\), where wavelength is inversely proportional to frequency.\n\n\n\n\n\n\nNote\n\n\n\nBefore the sensor detects the Earth’s surface, the energy undergoes complex interactions (Tempfli et al. 2009):\n\nAtmospheric Interactions: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.\nSurface Interactions: Energy is absorbed, transmitted, or reflected by the surface. The sensor’s task is precisely to capture this reflected energy, which carries information about the surface features.\n\n\n\n\n\n\nThe lecture emphasized the “four resolutions” that determine the success of remote sensing applications:\n\nSpatial Resolution: Determines the smallest observable feature. Sentinel-2’s 10m resolution offers a significant advantage at the urban scale (Jensen 2015).\nSpectral Resolution: The number and width of bands. I realized that a “spectral signature” is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.\nTemporal Resolution: The revisit period, which is crucial for dynamic environmental monitoring.\nRadiometric Resolution: The sensor’s sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).\n\n\n\n\nI selected my hometown, Guiyang, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:\n\nComplexity of Karst Topography: Guiyang’s rugged terrain leads to a pronounced “Bidirectional Reflectance Distribution Function (BRDF)” effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.\nData Balancing Act: While Sentinel-2 excels in spatial precision, Landsat’s historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood (Tempfli et al. 2009).\n\n\n\n\nFigure 1: Pre-processing workflow in SNAP, including resampling and masking Sentinel-2 data for Guiyang.",
+    "crumbs": [
+      "Week 1: Intro & Spectral"
+    ]
+  },
+  {
+    "objectID": "week1.html#content-summary",
+    "href": "week1.html#content-summary",
+    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
+    "section": "",
+    "text": "This week’s learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions (Brady 2021). Through the lecture, I grasped the core formula of electromagnetic waves: \\(\\lambda = c/v\\), where wavelength is inversely proportional to frequency.\n\n\n\n\n\n\nNote\n\n\n\nBefore the sensor detects the Earth’s surface, the energy undergoes complex interactions (Tempfli et al. 2009):\n\nAtmospheric Interactions: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.\nSurface Interactions: Energy is absorbed, transmitted, or reflected by the surface. The sensor’s task is precisely to capture this reflected energy, which carries information about the surface features.\n\n\n\n\n\n\nThe lecture emphasized the “four resolutions” that determine the success of remote sensing applications:\n\nSpatial Resolution: Determines the smallest observable feature. Sentinel-2’s 10m resolution offers a significant advantage at the urban scale (Jensen 2015).\nSpectral Resolution: The number and width of bands. I realized that a “spectral signature” is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.\nTemporal Resolution: The revisit period, which is crucial for dynamic environmental monitoring.\nRadiometric Resolution: The sensor’s sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).\n\n\n\n\nI selected my hometown, Guiyang, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:\n\nComplexity of Karst Topography: Guiyang’s rugged terrain leads to a pronounced “Bidirectional Reflectance Distribution Function (BRDF)” effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.\nData Balancing Act: While Sentinel-2 excels in spatial precision, Landsat’s historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood (Tempfli et al. 2009).\n\n\n\n\nFigure 1: Pre-processing workflow in SNAP, including resampling and masking Sentinel-2 data for Guiyang.",
+    "crumbs": [
+      "Week 1: Intro & Spectral"
+    ]
+  },
+  {
+    "objectID": "week1.html#applications",
+    "href": "week1.html#applications",
+    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
+    "section": "2. Applications",
+    "text": "2. Applications\n\n2.1 Tasseled Cap Transformation (TCT) in Urban Morphology\nIn practice, I applied the Tasseled Cap Transformation (TCT). This is not just a dimensionality reduction technique, but an extraction of biophysical indicators:\n\nBrightness: Effectively extracted the high-density built-up areas, such as the newly emerged “Big Data Centers” in Guiyang.\nGreenness: Helped me identify the green corridors preserved during the rapid expansion of Guiyang, a designated National Forest City.\nWetness: Successfully extracted the Nanming River and Hongfeng Lake water systems, which is vital for evaluating the ecological functions of urban blue-green spaces.\n\n\n\n2.2 Cross-Sensor Research: Insights from ESA WorldCover\nThe ESA WorldCover 10m project mentioned in the lecture demonstrates the tremendous potential of 10m resolution in real-time urban monitoring. Compared to traditional 30m Landsat data, high-resolution Sentinel data can significantly reduce “mixed pixels” at urban edges (Jensen 2015). However, I also recognize that in cloudy, high-altitude regions, single optical applications have bottlenecks. In the future, it is essential to integrate active SAR sensor data capable of “penetrating clouds.”",
+    "crumbs": [
+      "Week 1: Intro & Spectral"
+    ]
+  },
+  {
+    "objectID": "week1.html#technical-workflow-and-statistical-analysis",
+    "href": "week1.html#technical-workflow-and-statistical-analysis",
+    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
+    "section": "3. Technical Workflow and Statistical Analysis",
+    "text": "3. Technical Workflow and Statistical Analysis\n\n3.1 Automated Workflow from SNAP to R\nMy technical pathway achieved a closed loop from spatial processing to statistical modeling:\n\nSNAP Processing: Completed resampling, georegistration, and image subsetting based on vector boundaries.\nR Sampling: Utilized the terra package to extract pixel values and encapsulated a band_fun function to achieve batch extraction and Long Format data tidying.\nQGIS Validation: Ensured perfect spatial alignment of multi-source imagery within the same geographical space.\n\n\n\n\n\n\n\nFigure 3-A: Spatial alignment of Landsat-9 imagery and POIs\n\n\n\n\n\n\n\nFigure 3-B: Spatial alignment of Sentinel-2 imagery and POIs\n\n\n\n\n\nFigure 3: QGIS spatial consistency validation. The perfect alignment of multi-source satellite imagery and my digitized training points (POIs) in the same coordinate system is the core prerequisite ensuring the accuracy of subsequent pixel extractions in R.\n\n\n3.2 R-Based Spectral Signature Statistical Analysis\nUsing terra::extract and long-format conversion via tidyverse, I extracted the spectral response values of typical land covers in Guiyang and plotted their signature curves (Figure 4):\n\n\n\n\n\n\nImportant\n\n\n\n\nThe Red Edge Effect of Vegetation: In the spectral curve (Plot A), the forest sample (red line) exhibits low reflectance in the visible bands (Bands 1-3) but a sharp surge in the near-infrared band (Band 4). This perfectly corroborates the biophysical characteristic of healthy mesophyll cells strongly reflecting NIR energy.\nAbsorption Characteristics of Water: The water sample (blue line) maintains extremely low reflectance across all bands and shows a downward trend in the NIR band, confirming the strong absorption of long-wave energy by water.\nHigh Heterogeneity of Urban Surfaces: This is the most striking finding. The spectral curve shows that urban pixels (green line) possess massive standard deviations (error bars) across all bands; meanwhile, the density distribution plot (Plot B) reveals an extremely broad and flat reflectance distribution for urban pixels. Statistically, this reflects the highly complex and mixed surface morphology of downtown Guiyang, which comprises concrete, asphalt, metal roofs, and fragmented green spaces.\n\n\n\n\n\n\nFigure 4: Spectral signature curves of typical land covers in Guiyang generated in R (with standard deviation error bars).",
+    "crumbs": [
+      "Week 1: Intro & Spectral"
+    ]
+  },
+  {
+    "objectID": "week1.html#personal-reflection",
+    "href": "week1.html#personal-reflection",
+    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
+    "section": "4. Personal Reflection",
+    "text": "4. Personal Reflection\n\n4.1 Statistical Significance vs. Physical Meaning\nIn this week’s practical, I performed a Welch t-test on the pixel values of Sentinel-2 and Landsat-9 within the urban areas of my hometown, Guiyang.\n\n\n\nFigure 5: Welch t-test results running in RStudio, demonstrating a highly significant statistical difference in pixel values between the two sensors.\n\n\n\nStatistical Results: As shown in Figure 5, \\(t = -214.78\\), \\(p &lt; 2.2 \\times 10^{-16}\\), indicating a highly significant difference.\nDeep Reflection: As a researcher, I deeply understand that this “significant difference” does not imply a data processing error; rather, it objectively reflects the inherent physical divergence between the two sensor systems.\n\n\n💡 Physical Mechanism Analysis:\n\nSpectral Response Functions (SRF): Each sensor “samples” the electromagnetic spectrum through slightly different windows. Even for the “same” Near-Infrared (NIR) band, the bandwidth and center wavelength differ, leading to varying sensitivity to Guiyang’s lush subtropical vegetation (Butcher 2016).\nAtmospheric Correction Divergence: The complex aerosol conditions in Guiyang’s mountainous Karst landscape pose challenges for algorithms like Sen2Cor (Sentinel) and LaSRC (Landsat). These subtle differences in atmospheric path radiance removal are amplified in statistical tests.\nGeographic Context: Guiyang’s rugged terrain introduces bidirectional reflectance distribution function (BRDF) effects. The different overpass times and viewing angles of the two satellites mean they capture the “same” surface under different illumination geometries, which is statistically significant but physically expected.\n\nConclusion: This reminds me that in future urban climate studies, cross-sensor data fusion cannot simply be pieced together abruptly. Precise cross-calibration or the use of Harmonized Landsat Sentinel (HLS) products is a prerequisite for robust longitudinal analysis (Jensen 2015).\n\n\n\n4.2 Skill Growth and Future Vision\n\n\nFrom Tool-User to Critical Analyst\nThrough this week’s learning, I have not only mastered operational tools (SNAP, R, QGIS) but, more importantly, acquired a coding mindset for Reproducible Research.\n\nMethodological Shift: Moving beyond “point-and-click” software GUI has allowed me to automate the spectral signature extraction process. Using R ensures that my analysis of Guiyang’s urbanization is transparent and repeatable by others—a core tenet of modern geographic data science.\nOvercoming the “Cloud” Bottleneck: While optical data provided a strong start, the high cloud frequency in Guiyang remains a limitation. Moving forward, I plan to further explore machine learning classification based on these extracted spectral features, but more importantly, I look forward to integrating SAR (Synthetic Aperture Radar) data in later weeks to “see through” the clouds.\nFuture Vision: My ultimate goal is to use this methodological prototype to quantify the true impact of rapid urban expansion on the ecological baseline of my hometown over the past decade, providing objective evidence for sustainable urban planning in Karst regions.",
+    "crumbs": [
+      "Week 1: Intro & Spectral"
+    ]
+  },
+  {
+    "objectID": "week1.html#references",
+    "href": "week1.html#references",
+    "title": "Week 1: Introduction to Remote Sensing and Spectral Analysis Practice",
+    "section": "5. References",
+    "text": "5. References\n\n\nBrady, M. 2021. “Remote Sensing for Dummies.” https://storymaps.arcgis.com/stories/cb1577b0f5bc485c974b4ea19d52282d.\n\n\nButcher, Ginger. 2016. Tour of the Electromagnetic Spectrum. Third. National Aeronautics; Space Administration, Washington, DC. https://science.nasa.gov/wp-content/uploads/2023/08/tour-of-the-ems-tagged-v7-0.pdf.\n\n\nJensen, John R. 2015. Introductory Digital Image Processing: A Remote Sensing Perspective. 4th ed. Pearson. https://books.google.com/books/about/Introductory_Digital_Image_Processing.html?id=BWx3CgAAQBAJ.\n\n\nTempfli, K, Gc Huurneman, Wh Bakker, L. L. Janssen, W Feringa, A Gieske, K Grabmaier, et al. 2009. Principles of Remote Sensing: An Introductory Textbook. International Institute for Geo-Information Science; Earth Observation. https://webapps.itc.utwente.nl/librarywww/papers_2009/general/principlesremotesensing.pdf.",
+    "crumbs": [
+      "Week 1: Intro & Spectral"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Learning diary",
+    "section": "",
+    "text": "Welcome\nThis is my learning diary for CASA0023: Remotely Sensing Cities and Environments.\nThe diary is organised by week. Each entry follows the same structure:\n\nSummary – key ideas from the lecture/practical, in my own words\n\nApplications – examples of how these ideas are used (papers, policy, real-world cases)\n\nReflection – what I understood well, what I’m unsure about, and how I might use it later\n\n\n\nLinks\n\n🔗 GitHub Repository\n📊 Slides (Week 2): Landsat Program Presentation\n\n\n\nModule overview (quick notes)\n\nAssessment 1 (30%): Group presentation (10 minutes), policy-focused EO pitch\n\nAssessment 2 (70%): Weekly learning diary (this site)\n\n\n\nHow I’m working\n\nTools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)\nData note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "week2.html",
+    "href": "week2.html",
+    "title": "Week 2: Sensor Presentation",
+    "section": "",
+    "text": "Using xaringan: Developed this presentation with the xaringan R package to combine live code with a slide-based format.\nReproducibility: Focused on a code-based workflow that helps connect data analysis with presentation output (Xie, Allaire, and Grolemund 2022).\n\n\n\n\n\nHost platform: The full interactive presentation is hosted on GitHub Pages for easier access and navigation.\nOn-page viewing: The embedded frame below allows the slides to be viewed directly on the page.\nFull-screen mode: The link in the note below opens the presentation in a separate browser tab.\n\n\n\n\n\n\n\nSlide Deck Access\n\n\n\nBelow is my embedded slide deck on the Landsat program. You can view the slides here or click here for the full-screen version.",
+    "crumbs": [
+      "Week 2: Sensor Presentation"
+    ]
+  },
+  {
+    "objectID": "week2.html#sensor-presentation",
+    "href": "week2.html#sensor-presentation",
+    "title": "Week 2: Sensor Presentation",
+    "section": "",
+    "text": "Using xaringan: Developed this presentation with the xaringan R package to combine live code with a slide-based format.\nReproducibility: Focused on a code-based workflow that helps connect data analysis with presentation output (Xie, Allaire, and Grolemund 2022).\n\n\n\n\n\nHost platform: The full interactive presentation is hosted on GitHub Pages for easier access and navigation.\nOn-page viewing: The embedded frame below allows the slides to be viewed directly on the page.\nFull-screen mode: The link in the note below opens the presentation in a separate browser tab.\n\n\n\n\n\n\n\nSlide Deck Access\n\n\n\nBelow is my embedded slide deck on the Landsat program. You can view the slides here or click here for the full-screen version.",
+    "crumbs": [
+      "Week 2: Sensor Presentation"
+    ]
+  },
+  {
+    "objectID": "week2.html#content-summary",
+    "href": "week2.html#content-summary",
+    "title": "Week 2: Sensor Presentation",
+    "section": "2. Content Summary",
+    "text": "2. Content Summary\n\n2.1 Horizontal Comparison with Sentinel-2\n\nSpatial Resolution: Sentinel-2 provides finer spatial resolution in some key optical bands, while Landsat 8/9 offers stronger long-term consistency at 30 m.\nSpectral Advantage: A key strength of Landsat is that it carries both optical and thermal sensors, which makes it especially useful for urban thermal studies.\n\n\n\n2.2 Satellite Payloads and Instrumentation\n\nOLI (Operational Land Imager): Captures data in the visible, near-infrared, and shortwave infrared parts of the spectrum.\nTIRS (Thermal Infrared Sensor): Records thermal information that can be used in land surface temperature analysis.\n\n\n\n\nFigure 1: Schematic of the Landsat 8-9 satellite platform highlighting the OLI and TIRS sensor payloads. Source: NASA.\n\n\n\n\n2.3 Urban Research Significance\n\nLST Retrieval: Estimate Land Surface Temperature (LST) from Landsat thermal data, most commonly using Band 10.\nUHI Analysis: Identify local temperature differences to map Urban Heat Islands (UHI).\nClimate Policy: Use these data to support urban planning and help address heat-related risks in dense city areas.\n\n\n\n\n\n\n\nWhy Landsat for Urban Studies?\n\n\n\nAn important advantage of Landsat is its thermal bands, which make it possible to estimate Land Surface Temperature (LST). This is particularly useful for studying the Urban Heat Island (UHI) effect.\n\n\n\n\n\nFigure 2: Spectral band comparison between Landsat 8/9 OLI/TIRS and Sentinel-2 MSI sensors.\n\n\n\n\n\n\n\n\n\n\n\nKey Feature\nLandsat 8/9 (OLI & TIRS)\nSentinel-2 (MSI)\nImplications for Urban Research\n\n\n\n\nOptical Resolution\n30 m\n10 m – 60 m\nSentinel-2 is more suitable for detailed vegetation mapping at street level.\n\n\nThermal Infrared\nYes\nNo\nLandsat is more suitable for heat mapping because it includes thermal bands.\n\n\nData Archive\nSince 1972\nSince 2015\nLandsat is one of the most important sources for tracking long-term urban expansion.",
+    "crumbs": [
+      "Week 2: Sensor Presentation"
+    ]
+  },
+  {
+    "objectID": "week2.html#applications",
+    "href": "week2.html#applications",
+    "title": "Week 2: Sensor Presentation",
+    "section": "3. Applications",
+    "text": "3. Applications\n\n3.1 Environmental Indices and Monitoring\n\nVegetation Analysis: Calculate NDVI to measure the presence and condition of urban green spaces.\nCooling Effects: Use spectral data to examine how green infrastructure may help reduce urban temperatures.\n\n\\[NDVI = \\frac{NIR - Red}{NIR + Red}\\]\n\n\n3.2 Spectral Signature Integrity\n\nData Acquisition: Select suitable multispectral bands (Red and NIR) for the study area.\nSignature Analysis: Distinguish land covers such as asphalt and vegetation by comparing their reflectance curves.\nValidation: Compare the results with ground-truth data or high-resolution imagery to improve mapping reliability.\n\n\n\n\n\n\n\nSpectral Signature Analysis\n\n\n\nDistinguishing between land covers requires the comparison of spectral signatures across multiple bands, which helps improve both interpretation and mapping quality.\n\n\n\n\n\nFigure 3: Spectral signature curves of typical land covers in Guiyang generated in R (with standard deviation error bars).\n\n\n\n\n3.3 Identifying Urban Hot Spots\n\nUrban Fabric Analysis: Explore how different surface materials, such as concrete and grass, absorb and release heat differently.\nHeat Spot Identification: Identify areas where dense built-up land shows noticeably higher temperatures than surrounding areas.\n\n\n\n\nFigure 4: Urban Hot Spots",
+    "crumbs": [
+      "Week 2: Sensor Presentation"
+    ]
+  },
+  {
+    "objectID": "week2.html#personal-reflection",
+    "href": "week2.html#personal-reflection",
+    "title": "Week 2: Sensor Presentation",
+    "section": "4. Personal Reflection",
+    "text": "4. Personal Reflection\n\n4.1 Earth Observation and Open Data\n\nData Accessibility: The open-access Landsat archive has made remote sensing data much easier to use for research and long-term environmental monitoring.\nData Fusion Potential: Combining Landsat’s thermal information with Sentinel-2’s finer spatial detail could support more detailed urban microclimate analysis.\n\n\n\n4.2 Technical Evolution and Workflow\n\nXaringan Learning: Learned how to build presentations using Markdown and CSS, which was challenging at first but useful in practice.\nQuarto Integration: Began moving toward a Quarto-based workflow for managing documents and portfolio work more consistently (Kirenz 2023).\nReproducibility Mastery: Gained a better understanding of how code and written explanation can be combined in scientific communication (Xie 2022).\nFuture Research: I hope to apply these reproducible methods in future academic work so that my analysis remains clear and verifiable (Quarto 2022).\n\n\n\n\n\n\n\nBest Practice: Project Separation\n\n\n\nAs discussed in the module, it is generally better not to carry out complex analysis and portfolio writing in the same R project, because keeping them separate helps maintain clarity and organisation.\n\n\n\n\n\nFigure 5: Screenshot of the RStudio workspace used for portfolio writing, showing the active document and the project file structure.",
+    "crumbs": [
+      "Week 2: Sensor Presentation"
+    ]
+  },
+  {
+    "objectID": "week2.html#references",
+    "href": "week2.html#references",
+    "title": "Week 2: Sensor Presentation",
+    "section": "5. References",
+    "text": "5. References\n\n\nKirenz, Jan K. 2023. “Build Presentations in R.” 2023. https://www.kirenz.com/slides/xaringan-demo-slides.html#1.\n\n\nQuarto. 2022. “Quarto - Get Started.” https://quarto.org/docs/books/#quick-start.\n\n\nXie, Yihui. 2022. “With Quarto Coming, Is R Markdown Going Away? No.” April 2022. https://yihui.org/rmarkdown/xaringan.\n\n\nXie, Yihui, J. J. Allaire, and Garrett Grolemund. 2022. R Markdown: The Definitive Guide. Chapman; Hall/CRC. https://bookdown.org/yihui/rmarkdown/.",
+    "crumbs": [
+      "Week 2: Sensor Presentation"
     ]
   }
 ]
