@@ -1,0 +1,45 @@
+<img id="floating-corner-image" src="images/right-corner.jpg" alt="corner image">
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const img = document.getElementById("floating-corner-image");
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+  let resetTimer;
+
+  function handleScroll() {
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - lastScrollY;
+
+    // 限制位移幅度，避免太夸张
+    let offset = 0;
+    if (delta > 0) {
+      // 向下滚动，图片往上
+      offset = -20;
+    } else if (delta < 0) {
+      // 向上滚动，图片往下
+      offset = 20;
+    }
+
+    img.style.transform = `translateY(${offset}px)`;
+
+    // 清除旧的回弹计时
+    clearTimeout(resetTimer);
+
+    // 停止滚动后回到原位
+    resetTimer = setTimeout(() => {
+      img.style.transform = "translateY(0)";
+    }, 120);
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(handleScroll);
+      ticking = true;
+    }
+  });
+});
+</script>

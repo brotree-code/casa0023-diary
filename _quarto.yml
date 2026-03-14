@@ -40,6 +40,9 @@ website:
 format:
   html:
     
+    css: styles.css
+    include-after-body: corner-image.html
+
     theme:
       light: flatly
       dark: darkly
