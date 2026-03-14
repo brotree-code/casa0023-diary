@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jianshu Wu">
-<meta name="dcterms.date" content="2026-01-24">
+<meta name="dcterms.date" content="2026-03-24">
 
-<title>Learning diary – CASA0023 Learning Diary</title>
+<title>Week 4 &amp; 5 Learning Diary: Earth Observation for Urban Policy – CASA0023 Learning Diary</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -75,6 +95,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -274,7 +323,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week4_5.html">Week 4＆5: EO &amp; Policy</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -288,7 +337,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
@@ -312,7 +361,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./week4_5.html" class="sidebar-item-text sidebar-link">
+  <a href="./week4_5.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Week 4＆5: EO &amp; Policy</span></a>
   </div>
 </li>
@@ -326,12 +375,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
-  <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links">Links</a></li>
-  <li><a href="#module-overview-quick-notes" id="toc-module-overview-quick-notes" class="nav-link" data-scroll-target="#module-overview-quick-notes">Module overview (quick notes)</a></li>
-  <li><a href="#how-im-working" id="toc-how-im-working" class="nav-link" data-scroll-target="#how-im-working">How I’m working</a></li>
+  <li><a href="#content-summary" id="toc-content-summary" class="nav-link active" data-scroll-target="#content-summary">1. Content Summary</a>
+  <ul class="collapse">
+  <li><a href="#earth-observation-in-policy-frameworks" id="toc-earth-observation-in-policy-frameworks" class="nav-link" data-scroll-target="#earth-observation-in-policy-frameworks">1.1 Earth Observation in Policy Frameworks</a></li>
+  <li><a href="#addressing-metropolitan-policy-challenges" id="toc-addressing-metropolitan-policy-challenges" class="nav-link" data-scroll-target="#addressing-metropolitan-policy-challenges">1.2 Addressing Metropolitan Policy Challenges</a></li>
+  </ul></li>
+  <li><a href="#applications-of-the-content" id="toc-applications-of-the-content" class="nav-link" data-scroll-target="#applications-of-the-content">2. Applications of the Content</a>
+  <ul class="collapse">
+  <li><a href="#identifying-and-evaluating-eo-datasets" id="toc-identifying-and-evaluating-eo-datasets" class="nav-link" data-scroll-target="#identifying-and-evaluating-eo-datasets">2.1 Identifying and Evaluating EO Datasets</a></li>
+  <li><a href="#demystifying-ndvi-for-policy-interventions" id="toc-demystifying-ndvi-for-policy-interventions" class="nav-link" data-scroll-target="#demystifying-ndvi-for-policy-interventions">2.2 Demystifying NDVI for Policy Interventions</a></li>
+  <li><a href="#workflow-and-policy-matrix" id="toc-workflow-and-policy-matrix" class="nav-link" data-scroll-target="#workflow-and-policy-matrix">2.3 Workflow and Policy Matrix</a></li>
+  </ul></li>
+  <li><a href="#personal-reflection" id="toc-personal-reflection" class="nav-link" data-scroll-target="#personal-reflection">3. Personal Reflection</a>
+  <ul class="collapse">
+  <li><a href="#the-gap-between-academic-remote-sensing-and-policy" id="toc-the-gap-between-academic-remote-sensing-and-policy" class="nav-link" data-scroll-target="#the-gap-between-academic-remote-sensing-and-policy">3.1 The Gap Between Academic Remote Sensing and Policy</a></li>
+  <li><a href="#rethinking-data-justice" id="toc-rethinking-data-justice" class="nav-link" data-scroll-target="#rethinking-data-justice">3.2 Rethinking Data Justice</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">4. References</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week4_5.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -339,8 +401,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Learning diary</h1>
-<p class="subtitle lead">Remotely Sensing Cities and Environments</p>
+<h1 class="title">Week 4 &amp; 5 Learning Diary: Earth Observation for Urban Policy</h1>
+<p class="subtitle lead">Case Study: Ahmedabad Heat Action Plan</p>
 </div>
 
 
@@ -357,7 +419,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 24, 2026</p>
+      <p class="date">March 24, 2026</p>
     </div>
   </div>
   
@@ -369,39 +431,182 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level1">
-<h1>Welcome</h1>
-<p>This is my learning diary for <strong>CASA0023: Remotely Sensing Cities and Environments</strong>.</p>
-<p>The diary is organised by week. Each entry follows the same structure:</p>
+<section id="content-summary" class="level2">
+<h2 class="anchored" data-anchor-id="content-summary">1. Content Summary</h2>
+<section id="earth-observation-in-policy-frameworks" class="level3">
+<h3 class="anchored" data-anchor-id="earth-observation-in-policy-frameworks">1.1 Earth Observation in Policy Frameworks</h3>
+<p>Over the past two weeks, the module shifted from the physical fundamentals of satellite sensors to the critical intersection of <strong>Earth Observation (EO)</strong> and <strong>urban governance</strong>. I realized that EO is no longer a mere technological novelty; it is a fundamental requirement for developing <strong>smart and sustainable cities</strong> <span class="citation" data-cites="gerasopoulos2022">(<a href="#ref-gerasopoulos2022" role="doc-biblioref">Gerasopoulos et al. 2022</a>)</span>. More importantly, I learned that the main task of this part of the module was not simply to describe EO datasets, but to evaluate which kind of remotely sensed evidence could assist a real policy challenge. This made me think more carefully about the relationship between a dataset, a policy goal, and the scale at which intervention takes place. It also helped me see more clearly how local policy challenges can be linked to wider sustainability agendas.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Learning the Shift">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning the Shift
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I learned that traditional urban planning often relied on sparse, ground-based surveys, but modern policy requires <strong>spatially continuous data</strong> to meet environmental challenges.</p>
+</div>
+</div>
 <ul>
-<li><strong>Summary</strong> – key ideas from the lecture/practical, in my own words<br>
-</li>
-<li><strong>Applications</strong> – examples of how these ideas are used (papers, policy, real-world cases)<br>
-</li>
-<li><strong>Reflection</strong> – what I understood well, what I’m unsure about, and how I might use it later</li>
+<li><strong>Ecologically Sound Policies</strong>: According to <span class="citation" data-cites="wellmann2020">(<a href="#ref-wellmann2020" role="doc-biblioref">Wellmann et al. 2020</a>)</span>, I found that the true value of remote sensing lies in its ability to move beyond basic land-cover mapping to <strong>assessing urban ecosystems</strong>.</li>
+<li><strong>Urban Sustainability</strong>: Continuous monitoring allows us to evaluate whether interventions are actively advancing urban sustainability <span class="citation" data-cites="kadhim2016">(<a href="#ref-kadhim2016" role="doc-biblioref">Kadhim, Mourshed, and Bray 2016</a>)</span>.</li>
+<li><strong>Phenological Cycles</strong>: I learned that assessing vegetation health must account for seasonal variations, which requires careful selection of multi-temporal EO datasets <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/policy_image.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: The official ‘Easy Read Version’ of the Ahmedabad Heat Action Plan 2018, emphasizing medical intervention and community-level heat planning.</figcaption>
+</figure>
+</div>
+</section>
+<section id="addressing-metropolitan-policy-challenges" class="level3">
+<h3 class="anchored" data-anchor-id="addressing-metropolitan-policy-challenges">1.2 Addressing Metropolitan Policy Challenges</h3>
+<p>I focused my case study on the <strong>Ahmedabad 2018 Heat Action Plan (HAP)</strong> (Figure 1). My core takeaway is that heatwaves do not affect the city uniformly; the <strong>Urban Heat Island (UHI)</strong> effect makes dense areas much hotter. This means that the policy problem is not only about extreme heat in general, but about identifying where heat exposure is concentrated and which groups may be more vulnerable. I was also struck by how vulnerability is intertwined with <strong>historical urban planning</strong>. As <span class="citation" data-cites="li2022">(<a href="#ref-li2022" role="doc-biblioref">Li et al. 2022</a>)</span> demonstrates, historical zoning often results in low-income neighborhoods experiencing higher temperatures. Figure 1 visually highlights this by focusing on vulnerable populations in informal settlements. For me, this case study showed that EO can support policy most effectively when it is used not just to map environmental conditions, but to reveal uneven risk across urban space.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Linking to Global Agendas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Linking to Global Agendas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I now see how the local implementation of the Ahmedabad HAP directly contributes to <strong>SDG Target 11.5</strong> (reducing disaster deaths) and <strong>Target 13.1</strong> (strengthening resilience).</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/data_search.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: My search in USGS EarthExplorer, identifying a cloud-free Landsat 8-9 scene from 3 May 2025 to capture peak thermal stress in Ahmedabad.</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="applications-of-the-content" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-the-content">2. Applications of the Content</h2>
+<section id="identifying-and-evaluating-eo-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-and-evaluating-eo-datasets">2.1 Identifying and Evaluating EO Datasets</h3>
+<p>To assist the Ahmedabad HAP, I identified <strong>Landsat 8-9 (Path 149, Row 044)</strong> as the optimal dataset (Figure 2).</p>
+<ul>
+<li><strong>The “Data Realization”</strong>: A major learning point occurred when I loaded the Thermal Band (ST_B10). The raw values were huge (<strong>45,169–54,396</strong>). I discovered that these values require conversion using the Landsat scale factor and offset to derive surface temperature in Kelvin (Figure 3):</li>
+</ul>
+<p><span class="math display">\[
+T(K) = DN \times 0.00341802 + 149.0
+\]</span></p>
+<ul>
+<li><strong>Evaluation</strong>: I learned that dataset choice always involves a trade-off between temporal frequency and spatial detail. For this case study, <strong>Landsat strikes an appropriate balance</strong> because it provides both thermal information and a spatial resolution that is still useful for interpreting urban patterns.</li>
 </ul>
 </section>
-<section id="links" class="level1">
-<h1>Links</h1>
-<ul>
-<li>🔗 <a href="https://github.com/brotree-code/casa0023-diary"><strong>GitHub Repository</strong></a></li>
-<li>📊 <a href="https://brotree-code.github.io/casa0023-presentation/"><strong>Slides (Week 2): Landsat Program Presentation</strong></a></li>
-</ul>
+<section id="demystifying-ndvi-for-policy-interventions" class="level3">
+<h3 class="anchored" data-anchor-id="demystifying-ndvi-for-policy-interventions">2.2 Demystifying NDVI for Policy Interventions</h3>
+<p>A key strategy in the HAP is mitigating heat through greening. However, I learned that raw <strong>NDVI</strong> maps are insufficient for policymakers. Following <span class="citation" data-cites="martinez2023">(<a href="#ref-martinez2023" role="doc-biblioref">Martinez and Labib 2023</a>)</span>, I found that NDVI must be <strong>“demystified”</strong> into <strong>actionable categories</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Translating Science to Policy">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Translating Science to Policy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As shown in <strong>Figure 4</strong>, I reclassified the derived NDVI (ranging from -0.32 to 0.52). I used values <strong>&gt; 0.2</strong> as a <strong>simple proxy for greener cover</strong>, while grey areas denote <strong>“Non-vegetated”</strong> surfaces. This allows planners to identify “greening deserts” more easily.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/software_processing_image.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: Initial processing of ST_B10 in QGIS, showing raw DN values that represent the radiant energy of the urban surface before my temperature conversion.</figcaption>
+</figure>
+</div>
 </section>
-<section id="module-overview-quick-notes" class="level1">
-<h1>Module overview (quick notes)</h1>
-<ul>
-<li><strong>Assessment 1 (30%)</strong>: Group presentation (10 minutes), policy-focused EO pitch<br>
-</li>
-<li><strong>Assessment 2 (70%)</strong>: Weekly learning diary (this site)</li>
-</ul>
+<section id="workflow-and-policy-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="workflow-and-policy-matrix">2.3 Workflow and Policy Matrix</h3>
+<p>During the workshop, I developed a conceptual workflow to translate raw radiance into solutions. This simple matrix helped me connect each policy objective with a specific EO indicator and showed that remote sensing becomes more meaningful when it is tied to a concrete decision-making purpose.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Policy Objective</th>
+<th style="text-align: left;">Required EO Metric</th>
+<th style="text-align: left;">Satellite Source</th>
+<th style="text-align: left;">Policy Application</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Identify Heat Vulnerability</td>
+<td style="text-align: left;">Land Surface Temperature (LST)</td>
+<td style="text-align: left;">Landsat 8/9 (TIRS)</td>
+<td style="text-align: left;">Directing emergency services to maximum LST zones (Figure 5).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Urban Greening Assessment</td>
+<td style="text-align: left;">Classified NDVI</td>
+<td style="text-align: left;">Landsat 8 / Sentinel-2</td>
+<td style="text-align: left;">Identifying neighborhoods lacking canopy for priority planting (Figure 4).</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ndvi_result_A.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: My classified NDVI map. I used greenness as a proxy to distinguish potential vegetation (green) from hard-built surfaces (grey).</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lst_overlay_image.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: My overlay analysis of LST atop OpenStreetMap. The pattern suggests that elevated surface temperatures are associated with denser built-up textures in parts of the Ahmedabad region.</figcaption>
+</figure>
+</div>
+<hr>
 </section>
-<section id="how-im-working" class="level1">
-<h1>How I’m working</h1>
-<ul>
-<li>Tools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)</li>
-<li>Data note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.</li>
-</ul>
+</section>
+<section id="personal-reflection" class="level2">
+<h2 class="anchored" data-anchor-id="personal-reflection">3. Personal Reflection</h2>
+<section id="the-gap-between-academic-remote-sensing-and-policy" class="level3">
+<h3 class="anchored" data-anchor-id="the-gap-between-academic-remote-sensing-and-policy">3.1 The Gap Between Academic Remote Sensing and Policy</h3>
+<p>The most profound realization from these weeks is the <strong>friction between scientific perfection and policy utility</strong>. Previously, I focused purely on minimizing errors. However, I now see that policymakers often need <strong>“good enough” data delivered at the right time</strong>. A city planner might prioritise more frequent observations over higher spatial resolution when a heatwave response is time-sensitive.</p>
+</section>
+<section id="rethinking-data-justice" class="level3">
+<h3 class="anchored" data-anchor-id="rethinking-data-justice">3.2 Rethinking Data Justice</h3>
+<p>The overlay analysis in <strong>Figure 5</strong> changed my perspective. I learned that a thermal hotspot is not just a reflection of physics; it is a <strong>visual manifestation of historical inequality</strong>.</p>
+<p>Applying EO data requires us to combine raster data with <strong>socio-economic demographics</strong>. Another limitation I identified is that the Landsat scene covers a much <strong>broader regional footprint</strong> than the city; further clipping would be needed for specific targeting. I also realised that a single image can only capture one moment of heat conditions, which means that future analysis would benefit from comparing multiple dates rather than relying on one scene alone. If I were to extend this work, I would combine thermal and greenness layers with ward-level demographic data so that the results could better support targeted public health intervention. My goal moving forward is to ensure my technical workflows genuinely contribute to <strong>equitable and ecologically sound urban governance</strong>.</p>
+<hr>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">4. References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-gerasopoulos2022" class="csl-entry" role="listitem">
+Gerasopoulos, E., J. Bailey, E. Athanasopoulou, et al. 2022. <span>“Earth Observation: An Integral Part of a Smart and Sustainable City.”</span> <em>Environmental Science &amp; Policy</em> 132: 296–307. <a href="https://doi.org/10.1016/j.envsci.2022.02.033">https://doi.org/10.1016/j.envsci.2022.02.033</a>.
+</div>
+<div id="ref-jensen2015" class="csl-entry" role="listitem">
+Jensen, John R. 2015. <em>Introductory Digital Image Processing: A Remote Sensing Perspective</em>. 4th ed. Prentice-Hall Inc. / Pearson. <a href="https://books.google.com/books/about/Introductory_Digital_Image_Processing.html?id=BWx3CgAAQBAJ">https://books.google.com/books/about/Introductory_Digital_Image_Processing.html?id=BWx3CgAAQBAJ</a>.
+</div>
+<div id="ref-kadhim2016" class="csl-entry" role="listitem">
+Kadhim, N., M. Mourshed, and M. Bray. 2016. <span>“Advances in Remote Sensing Applications for Urban Sustainability.”</span> <em>Euro-Mediterranean Journal for Environmental Integration</em> 1: 7. <a href="https://doi.org/10.1007/s41207-016-0007-4">https://doi.org/10.1007/s41207-016-0007-4</a>.
+</div>
+<div id="ref-li2022" class="csl-entry" role="listitem">
+Li, D., G. D. Newman, B. Wilson, Y. Zhang, and R. D. Brown. 2022. <span>“Modeling the Relationships Between Historical Redlining, Urban Heat, and Heat-Related Emergency Department Visits: An Examination of 11 Texas Cities.”</span> <em>Environment and Planning B: Urban Analytics and City Science</em> 49 (3): 933–52. <a href="https://doi.org/10.1177/23998083211039854">https://doi.org/10.1177/23998083211039854</a>.
+</div>
+<div id="ref-martinez2023" class="csl-entry" role="listitem">
+Martinez, A. de la I., and S. M. Labib. 2023. <span>“Demystifying Normalized Difference Vegetation Index (NDVI) for Greenness Exposure Assessments and Policy Interventions in Urban Greening.”</span> <em>Environmental Research</em> 220: 115155. <a href="https://doi.org/10.1016/j.envres.2022.115155">https://doi.org/10.1016/j.envres.2022.115155</a>.
+</div>
+<div id="ref-wellmann2020" class="csl-entry" role="listitem">
+Wellmann, T., A. Lausch, E. Andersson, et al. 2020. <span>“Remote Sensing in Urban Planning: Contributions Towards Ecologically Sound Policies?”</span> <em>Landscape and Urban Planning</em> 204: 103921. <a href="https://doi.org/10.1016/j.landurbplan.2020.103921">https://doi.org/10.1016/j.landurbplan.2020.103921</a>.
+</div>
+</div>
 
 
 </section>
@@ -824,4 +1029,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week4_5.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
