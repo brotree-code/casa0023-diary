@@ -37,6 +37,8 @@ website:
         file: week3.qmd
       - text: "Week 4＆5: EO & Policy"
         file: week4_5.qmd
+      - text: "Week 6: Google Earth Engine I"
+        file: week6.qmd
 format:
   html:
     
@@ -57,4 +59,5 @@ format:
     toc-depth: 3
     toc-location: right
     code-fold: true
+    code-summary: "Show code"
     number-sections: false

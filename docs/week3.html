@@ -401,6 +401,12 @@ window.Quarto = {
  <span class="menu-text">Week 4＆5: EO &amp; Policy</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6: Google Earth Engine I</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -535,7 +541,7 @@ Why bypass DOS Atmospheric Correction?
 <p>Because Landsat data is collected in separate tiles, I first needed to merge the two neighbouring scenes. I used the <code>terra::mosaic()</code> function, and the overlap was averaged with the <code>mean</code> option. This helped reduce obvious boundaries between the two scenes, although some small differences may still remain because they were taken on different dates.</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mosaicking and Masking to Beijing Boundary</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>beijing_mosaic <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(LC08, LC09, <span class="at">fun=</span><span class="st">"mean"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -586,7 +592,7 @@ Dealing with Non-physical Anomalies
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate NDVI</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ndvi <span class="ot">&lt;-</span> (beijing_sr[[<span class="dv">5</span>]] <span class="sc">-</span> beijing_sr[[<span class="dv">4</span>]]) <span class="sc">/</span> (beijing_sr[[<span class="dv">5</span>]] <span class="sc">+</span> beijing_sr[[<span class="dv">4</span>]])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -611,7 +617,7 @@ Dealing with Non-physical Anomalies
 <h4 class="anchored" data-anchor-id="glcm-texture-structural-interpretation">GLCM Texture: Structural Interpretation</h4>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute GLCM Homogeneity using Band 4</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GLCMTextures)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>textures1 <span class="ot">&lt;-</span> <span class="fu">glcm_textures</span>(</span>
@@ -658,7 +664,7 @@ Dealing with Non-physical Anomalies
 <p>Fusing spectral data with spatial metrics increases dataset dimensionality, making Principal Component Analysis (PCA) a highly effective tool to compress the combined multi-band stack into uncorrelated components without losing critical environmental information <span class="citation" data-cites="schultetobuhne2018">(<a href="#ref-schultetobuhne2018" role="doc-biblioref">Schulte to Bühne and Pettorelli 2018</a>)</span>.</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Fusion: Concatenate the multi-spectral bands and texture features</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>raster_and_texture <span class="ot">&lt;-</span> <span class="fu">c</span>(beijing_sr, textures1)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>

@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jianshu Wu">
+<meta name="dcterms.date" content="2026-02-28">
+
+<title>Week 6 Learning Diary: Google Earth Engine I – CASA0023 Learning Diary</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2d04f6a56a99f900a06f3dceb2e66a0f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fa423e886cf517ee378d38a13c608aa9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2d04f6a56a99f900a06f3dceb2e66a0f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">CASA0023 Learning Diary</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/brotree-code/casa0023-diary"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week6.html">Week 6: Google Earth Engine I</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: Intro &amp; Spectral</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: Sensor Presentation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Corrections &amp; Enhancements</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week4_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4＆5: EO &amp; Policy</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week6.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 6: Google Earth Engine I</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#content-summary" id="toc-content-summary" class="nav-link active" data-scroll-target="#content-summary">1. Content Summary</a>
+  <ul class="collapse">
+  <li><a href="#what-is-google-earth-engine-and-why-does-it-matter" id="toc-what-is-google-earth-engine-and-why-does-it-matter" class="nav-link" data-scroll-target="#what-is-google-earth-engine-and-why-does-it-matter">1.1 What Is Google Earth Engine and Why Does It Matter?</a></li>
+  <li><a href="#gee-data-model-images-collections-and-features" id="toc-gee-data-model-images-collections-and-features" class="nav-link" data-scroll-target="#gee-data-model-images-collections-and-features">1.2 GEE Data Model: Images, Collections, and Features</a></li>
+  <li><a href="#key-analytical-operations-covered" id="toc-key-analytical-operations-covered" class="nav-link" data-scroll-target="#key-analytical-operations-covered">1.3 Key Analytical Operations Covered</a></li>
+  </ul></li>
+  <li><a href="#applications-of-the-content" id="toc-applications-of-the-content" class="nav-link" data-scroll-target="#applications-of-the-content">2. Applications of the Content</a>
+  <ul class="collapse">
+  <li><a href="#workshop-defining-the-study-area" id="toc-workshop-defining-the-study-area" class="nav-link" data-scroll-target="#workshop-defining-the-study-area">2.1 Workshop: Defining the Study Area</a></li>
+  <li><a href="#workshop-first-look-at-raw-landsat-tiles" id="toc-workshop-first-look-at-raw-landsat-tiles" class="nav-link" data-scroll-target="#workshop-first-look-at-raw-landsat-tiles">2.2 Workshop: First Look at Raw Landsat Tiles</a></li>
+  <li><a href="#workshop-filtering-the-landsat-8-collection" id="toc-workshop-filtering-the-landsat-8-collection" class="nav-link" data-scroll-target="#workshop-filtering-the-landsat-8-collection">2.3 Workshop: Filtering the Landsat 8 Collection</a></li>
+  <li><a href="#workshop-loading-the-beijing-administrative-boundary" id="toc-workshop-loading-the-beijing-administrative-boundary" class="nav-link" data-scroll-target="#workshop-loading-the-beijing-administrative-boundary">2.4 Workshop: Loading the Beijing Administrative Boundary</a></li>
+  <li><a href="#workshop-applying-landsat-collection-2-scale-factors" id="toc-workshop-applying-landsat-collection-2-scale-factors" class="nav-link" data-scroll-target="#workshop-applying-landsat-collection-2-scale-factors">2.5 Workshop: Applying Landsat Collection 2 Scale Factors</a></li>
+  <li><a href="#workshop-building-the-median-composite-and-clipping-to-beijing" id="toc-workshop-building-the-median-composite-and-clipping-to-beijing" class="nav-link" data-scroll-target="#workshop-building-the-median-composite-and-clipping-to-beijing">2.6 Workshop: Building the Median Composite and Clipping to Beijing</a></li>
+  <li><a href="#workshop-glcm-texture-analysis" id="toc-workshop-glcm-texture-analysis" class="nav-link" data-scroll-target="#workshop-glcm-texture-analysis">2.7 Workshop: GLCM Texture Analysis</a></li>
+  <li><a href="#workshop-pca-over-the-combined-spectral-texture-stack" id="toc-workshop-pca-over-the-combined-spectral-texture-stack" class="nav-link" data-scroll-target="#workshop-pca-over-the-combined-spectral-texture-stack">2.8 Workshop: PCA over the Combined Spectral-Texture Stack</a></li>
+  <li><a href="#gee-in-urban-remote-sensing-literature-applications" id="toc-gee-in-urban-remote-sensing-literature-applications" class="nav-link" data-scroll-target="#gee-in-urban-remote-sensing-literature-applications">2.9 GEE in Urban Remote Sensing: Literature Applications</a></li>
+  </ul></li>
+  <li><a href="#personal-reflection" id="toc-personal-reflection" class="nav-link" data-scroll-target="#personal-reflection">3. Personal Reflection</a>
+  <ul class="collapse">
+  <li><a href="#from-local-to-cloud-a-genuine-paradigm-shift" id="toc-from-local-to-cloud-a-genuine-paradigm-shift" class="nav-link" data-scroll-target="#from-local-to-cloud-a-genuine-paradigm-shift">3.1 From Local to Cloud: A Genuine Paradigm Shift</a></li>
+  <li><a href="#limitations-and-future-directions" id="toc-limitations-and-future-directions" class="nav-link" data-scroll-target="#limitations-and-future-directions">3.2 Limitations and Future Directions</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">4. References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week6.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 6 Learning Diary: Google Earth Engine I</h1>
+<p class="subtitle lead">Cloud-Based Planetary-Scale Analysis: Landsat Processing, Texture and PCA over Beijing</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jianshu Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 28, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="content-summary" class="level2">
+<h2 class="anchored" data-anchor-id="content-summary">1. Content Summary</h2>
+<section id="what-is-google-earth-engine-and-why-does-it-matter" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-google-earth-engine-and-why-does-it-matter">1.1 What Is Google Earth Engine and Why Does It Matter?</h3>
+<p>This week we moved away from R entirely and into <strong>Google Earth Engine</strong> — which honestly felt like switching from riding a bicycle to getting on a train. The core idea behind <strong>GEE</strong> is that instead of downloading satellite data and processing it locally, everything lives on Google’s servers and your code is sent there to run <span class="citation" data-cites="gorelick2017">(<a href="#ref-gorelick2017" role="doc-biblioref">Gorelick et al. 2017</a>)</span>. I knew this conceptually before the session, but it only really clicked when I realised that even loading a Landsat collection doesn’t actually bring any pixels to my browser — it just creates a <strong>proxy object</strong> that points to data somewhere else.</p>
+<p>The scripting language is <strong>JavaScript</strong>, which I’d never used before. But it turns out you really don’t need much of it:</p>
+<ul>
+<li><strong>Variables</strong> — declared with <code>var</code>, used for everything from numbers to image collections</li>
+<li><strong>Lists</strong> — square bracket arrays for storing multiple values</li>
+<li><strong>Dictionaries</strong> — key-value objects using curly braces</li>
+<li><strong>Functions</strong> — reusable blocks of logic, essential for <code>.map()</code> workflows</li>
+<li><strong><code>print()</code></strong> — the main way to inspect objects in the Console</li>
+</ul>
+<p>The bigger adjustment is getting used to GEE’s own way of thinking about data, where everything is a <strong>server-side object</strong> and nothing actually computes until you explicitly ask for a result <span class="citation" data-cites="gee_book2020">(<a href="#ref-gee_book2020" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Client vs.&nbsp;Server: the Core Mental Model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In GEE, <code>var dataset = ee.ImageCollection(...)</code> does <strong>not</strong> download anything. It creates a “proxy” object on the server. Computation only happens when a terminal action is called — for example <code>Map.addLayer</code>, <code>print</code>, or <code>Export</code>. This <strong>lazy evaluation</strong> model is why GEE can scale to planetary analysis without overloading your browser.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/gee_interface_beijing.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: GEE Code Editor with the map centred on Beijing and the Console confirming the study area point was defined.</figcaption>
+</figure>
+</div>
+</section>
+<section id="gee-data-model-images-collections-and-features" class="level3">
+<h3 class="anchored" data-anchor-id="gee-data-model-images-collections-and-features">1.2 GEE Data Model: Images, Collections, and Features</h3>
+<p>One thing that helped me a lot this week was mapping GEE’s terminology onto things I already knew from R and QGIS. GEE has a small set of core <strong>object classes</strong>, each with its own methods <span class="citation" data-cites="amani2020">(<a href="#ref-amani2020" role="doc-biblioref">Amani et al. 2020</a>)</span>:</p>
+<div id="tbl-objects" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: GEE Core Object Classes and Their Analogies
+</figcaption>
+<div aria-describedby="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Object Class</th>
+<th>Equivalent</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ee.Image</code></td>
+<td>Raster</td>
+<td>A single multi-band raster</td>
+</tr>
+<tr class="even">
+<td><code>ee.ImageCollection</code></td>
+<td>Raster stack</td>
+<td>A set of images (e.g., all Landsat 8 scenes)</td>
+</tr>
+<tr class="odd">
+<td><code>ee.Geometry</code></td>
+<td>Vector</td>
+<td>A point, line, or polygon with no attributes</td>
+</tr>
+<tr class="even">
+<td><code>ee.Feature</code></td>
+<td>Vector + attributes</td>
+<td>A geometry with a property dictionary</td>
+</tr>
+<tr class="odd">
+<td><code>ee.FeatureCollection</code></td>
+<td>Shapefile</td>
+<td>Multiple features combined</td>
+</tr>
+<tr class="even">
+<td><code>ee.Reducer</code></td>
+<td>Aggregation</td>
+<td>A function that summarises data (mean, median, etc.)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Getting this table straight in my head made the code much easier to follow. For instance, reducing a temporal image stack uses <code>ImageCollection.reduce(ee.Reducer.median())</code>, but if you want statistics over a region, you call <code>Image.reduceRegion()</code> — they look similar but operate on completely different axes.</p>
+<p>Something that tripped me up a bit was the concept of <strong>scale in GEE</strong>. Two things worth remembering:</p>
+<ul>
+<li><strong>Scale refers to output resolution</strong> — not the native resolution of the input dataset</li>
+<li><strong>Default scale is zoom-dependent</strong> — if you don’t set it explicitly, GEE guesses based on your current map zoom level, which means the same script can return different numbers just because you scrolled in or out</li>
+</ul>
+<p>That second point is a real <strong>reproducibility</strong> problem <span class="citation" data-cites="gee_book2020">(<a href="#ref-gee_book2020" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why Set Scale Explicitly?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you do not specify <code>scale: 30</code> in a <code>reduceRegion()</code>, GEE will infer the scale from the current map zoom level. This means the same script can return different numerical results depending on how far you are zoomed in — a serious reproducibility issue for any research workflow.</p>
+</div>
+</div>
+</section>
+<section id="key-analytical-operations-covered" class="level3">
+<h3 class="anchored" data-anchor-id="key-analytical-operations-covered">1.3 Key Analytical Operations Covered</h3>
+<p>A lot of what we covered this week was actually familiar from the R practicals — but now running on the <strong>server side</strong>, which changes how you write the code even if the logic is the same:</p>
+<ol type="1">
+<li><strong>Filtering</strong> — image collections by date, geographic bounds, and metadata properties such as <code>CLOUD_COVER</code></li>
+<li><strong>Scaling</strong> — converting stored integer <strong>DN values</strong> to surface reflectance using the Landsat Collection 2 factors</li>
+<li><strong>Reducing</strong> — collapsing a collection to a single composite image via <code>.reduce(ee.Reducer.median())</code></li>
+<li><strong>Mosaicking</strong> — merging overlapping tiles and comparing last-on-top vs.&nbsp;mean strategies</li>
+<li><strong>Texture analysis</strong> — computing <strong>GLCM</strong> measures using <code>glcmTexture()</code> on integer-converted bands</li>
+<li><strong>PCA</strong> — dimensionality reduction via GEE’s Eigen Analysis approach</li>
+<li><strong>Exporting</strong> — saving outputs to Google Drive, Cloud Storage, or as a GEE Asset</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="applications-of-the-content" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-the-content">2. Applications of the Content</h2>
+<section id="workshop-defining-the-study-area" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-defining-the-study-area">2.1 Workshop: Defining the Study Area</h3>
+<p>I applied this week’s workflow to <strong>Beijing</strong> instead of the Delhi example from the lecture. The starting point was simple — just defining a <strong>centre point</strong> and making sure the map jumped to the right place:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 1: Define the Beijing centre point and centre the map</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> Beijing_point <span class="op">=</span> ee<span class="op">.</span><span class="at">Geometry</span><span class="op">.</span><span class="fu">Point</span>([<span class="fl">116.4074</span><span class="op">,</span> <span class="fl">39.9042</span>])<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(Beijing_point<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Study area: Beijing, China"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="workshop-first-look-at-raw-landsat-tiles" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-first-look-at-raw-landsat-tiles">2.2 Workshop: First Look at Raw Landsat Tiles</h3>
+<p>Before doing any filtering, I loaded a raw <strong>Landsat 9</strong> collection just to see what the data actually looks like straight out of the archive:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 2: Load Landsat 9 to visualise the raw tile structure</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> dataset <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2022-01-01'</span><span class="op">,</span> <span class="st">'2022-02-01'</span>)<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(dataset<span class="op">,</span> {<span class="dt">bands</span><span class="op">:</span> [<span class="st">"SR_B4"</span><span class="op">,</span> <span class="st">"SR_B3"</span><span class="op">,</span> <span class="st">"SR_B2"</span>]}<span class="op">,</span> <span class="st">"Landsat 9"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>What I noticed immediately was that the tiles don’t line up neatly. Two issues were obvious:</p>
+<ul>
+<li><strong>Seam lines</strong> — a diagonal boundary is clearly visible in the northern mountain area where two scenes meet</li>
+<li><strong>Brightness differences</strong> — adjacent tiles have different tones because they were captured on different dates under different atmospheric conditions</li>
+</ul>
+<p>This made it obvious why we can’t just use raw imagery for any kind of regional analysis.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/beijing_raw.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: Raw Landsat 9 tiles over Beijing — the diagonal seam between adjacent scenes is clearly visible in the northern mountain area.</figcaption>
+</figure>
+</div>
+</section>
+<section id="workshop-filtering-the-landsat-8-collection" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-filtering-the-landsat-8-collection">2.3 Workshop: Filtering the Landsat 8 Collection</h3>
+<p>Landsat 9 didn’t have enough clear scenes over Beijing in that date range, so I switched to <strong>Landsat 8</strong> with a longer time window. Following the workshop, I used a <strong>cloud cover threshold</strong> of <code>0.1</code> to keep only the clearest scenes. The result was <strong>5 cloud-free scenes</strong>, which was enough to work with:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 3: Filter Landsat 8 to cloud-free scenes over Beijing</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Cloud cover threshold of 0.1 follows the workshop methodology</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> oneimage_study_area_cloud <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2020-01-01'</span><span class="op">,</span> <span class="st">'2022-10-10'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(Beijing_point)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">"CLOUD_COVER"</span><span class="op">,</span> <span class="fl">0.1</span>))<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(oneimage_study_area_cloud<span class="op">,</span> <span class="st">"filtered collection"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="workshop-loading-the-beijing-administrative-boundary" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-loading-the-beijing-administrative-boundary">2.4 Workshop: Loading the Beijing Administrative Boundary</h3>
+<p>Rather than uploading a shapefile, I used the <strong>FAO GAUL</strong> administrative boundary dataset that’s already loaded in GEE. This saved a lot of time — but I immediately hit a problem. When I tried filtering for <code>'Beijing'</code>, GEE returned zero features. After some digging with <code>aggregate_array()</code>, I found out the dataset stores it as <code>'Beijing Shi'</code>. Small thing, but it took a while to figure out:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 4: Load Beijing administrative boundary from FAO GAUL</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: the correct ADM1_NAME is 'Beijing Shi', not 'Beijing'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> Beijing <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">'FAO/GAUL/2015/level1'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">eq</span>(<span class="st">'ADM0_NAME'</span><span class="op">,</span> <span class="st">'China'</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">eq</span>(<span class="st">'ADM1_NAME'</span><span class="op">,</span> <span class="st">'Beijing Shi'</span>))<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(Beijing<span class="op">,</span> {<span class="dt">color</span><span class="op">:</span> <span class="st">'red'</span>}<span class="op">,</span> <span class="st">'Beijing boundary'</span>)<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(Beijing<span class="op">,</span> <span class="dv">9</span>)<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Beijing<span class="op">,</span> <span class="st">'Beijing boundary check'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="workshop-applying-landsat-collection-2-scale-factors" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-applying-landsat-collection-2-scale-factors">2.5 Workshop: Applying Landsat Collection 2 Scale Factors</h3>
+<p>The <strong>Landsat Collection 2</strong> data stores reflectance as integers, so before doing anything analytical you have to convert them to actual <strong>surface reflectance</strong> values. The formula is:</p>
+<p><span class="math display">\[\rho = DN \times 0.0000275 + (-0.2)\]</span></p>
+<p>In GEE, this gets applied as a function <strong>mapped</strong> across every image in the collection. I found the <code>.map()</code> approach intuitive once I understood why for-loops don’t work here — the loop runs on my browser, but the data is on the server, so there’s no way for it to know how many images to iterate over until they’re all downloaded:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 5: Apply Landsat C2 surface reflectance scaling factors</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">applyScaleFactors</span>(image) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> opticalBands <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">'SR_B.'</span>)<span class="op">.</span><span class="fu">multiply</span>(<span class="fl">0.0000275</span>)<span class="op">.</span><span class="fu">add</span>(<span class="op">-</span><span class="fl">0.2</span>)<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> thermalBands <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">'ST_B.*'</span>)<span class="op">.</span><span class="fu">multiply</span>(<span class="fl">0.00341802</span>)<span class="op">.</span><span class="fu">add</span>(<span class="fl">149.0</span>)<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">addBands</span>(opticalBands<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="kw">true</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>              <span class="op">.</span><span class="fu">addBands</span>(thermalBands<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> oneimage_study_area_cloud_scale <span class="op">=</span> oneimage_study_area_cloud<span class="op">.</span><span class="fu">map</span>(applyScaleFactors)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why <code>.map()</code> Instead of a For-Loop?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In GEE, a standard JavaScript for-loop runs on the client side and does not know how many images exist in the server-side collection until they are downloaded. The <code>.map()</code> function sends the entire operation to the server and applies it in parallel across all images — which is both faster and architecturally correct <span class="citation" data-cites="gee_book2020">(<a href="#ref-gee_book2020" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
+</div>
+</div>
+</section>
+<section id="workshop-building-the-median-composite-and-clipping-to-beijing" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-building-the-median-composite-and-clipping-to-beijing">2.6 Workshop: Building the Median Composite and Clipping to Beijing</h3>
+<p>With the scaled collection ready, I reduced it to a single image using the <strong>median reducer</strong> and then clipped it to the Beijing boundary. The <strong>median</strong> makes sense here because with only 5 scenes, any cloud or haze that slipped through the filter would distort a mean — the median is much less sensitive to those outliers:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 6: Reduce to median composite and display as true colour</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> oneimage_study_area_cloud_scale_median <span class="op">=</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    oneimage_study_area_cloud_scale<span class="op">.</span><span class="fu">reduce</span>(ee<span class="op">.</span><span class="at">Reducer</span><span class="op">.</span><span class="fu">median</span>())<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> vis_params <span class="op">=</span> {</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bands</span><span class="op">:</span> [<span class="st">'SR_B4_median'</span><span class="op">,</span> <span class="st">'SR_B3_median'</span><span class="op">,</span> <span class="st">'SR_B2_median'</span>]<span class="op">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="fl">0.0</span><span class="op">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(oneimage_study_area_cloud_scale_median<span class="op">,</span> vis_params<span class="op">,</span> <span class="st">'True Color (432)'</span>)<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 7: Clip the median composite to the Beijing boundary</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> clip <span class="op">=</span> oneimage_study_area_cloud_scale_median<span class="op">.</span><span class="fu">clip</span>(Beijing)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">select</span>([<span class="st">'SR_B1_median'</span><span class="op">,</span><span class="st">'SR_B2_median'</span><span class="op">,</span><span class="st">'SR_B3_median'</span><span class="op">,</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>           <span class="st">'SR_B4_median'</span><span class="op">,</span><span class="st">'SR_B5_median'</span><span class="op">,</span><span class="st">'SR_B6_median'</span><span class="op">,</span><span class="st">'SR_B7_median'</span>])<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> vis_params3 <span class="op">=</span> {</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bands</span><span class="op">:</span> [<span class="st">'SR_B4_median'</span><span class="op">,</span> <span class="st">'SR_B3_median'</span><span class="op">,</span> <span class="st">'SR_B2_median'</span>]<span class="op">,</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(clip<span class="op">,</span> vis_params3<span class="op">,</span> <span class="st">'clip'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why Use the Median Rather Than the Mean?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The median is more robust to outliers such as residual cloud pixels or sensor noise. With a sufficiently large collection, the median effectively removes anomalous high reflectance values caused by clouds and low values caused by shadows. The mean is pulled towards these extremes and would produce a hazier result. It is worth noting, however, that <strong>median compositing</strong> can suppress short-term surface change signals, which may be a limitation for studies focused on rapid land cover transitions.</p>
+</div>
+</div>
+<p>The result came out quite dark, which makes sense given the scenes were mostly acquired in <strong>winter</strong> when vegetation is dormant and the sun angle is low. But the Beijing boundary shape is clearly defined and you can still make out the difference between the <strong>urban core</strong> and the surrounding rural areas.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/beijing_true_colour.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: True Colour median composite clipped to the Beijing municipality boundary. The image is dark due to winter acquisition but the boundary shape and urban core are clearly visible.</figcaption>
+</figure>
+</div>
+</section>
+<section id="workshop-glcm-texture-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-glcm-texture-analysis">2.7 Workshop: GLCM Texture Analysis</h3>
+<p>After getting the clipped composite, I moved on to <strong>GLCM texture analysis</strong>, which captures how much spatial variation there is within a small neighbourhood around each pixel. The idea is that a city block has very different textures compared to a flat agricultural field, even if their average <strong>reflectance values</strong> might be similar <span class="citation" data-cites="amani2020">(<a href="#ref-amani2020" role="doc-biblioref">Amani et al. 2020</a>)</span>.</p>
+<p>There was a gotcha here too. Two issues came up in sequence:</p>
+<ul>
+<li><strong>Integer requirement</strong> — <code>glcmTexture()</code> only works with integer data, so I had to multiply reflectance values by 1000 and cast to <code>Uint16</code> first</li>
+<li><strong>Band name mismatch</strong> — the original regex <code>SR_.._contrast</code> from the workshop failed because after reducing to a median, all band names had a <code>_median</code> suffix; changing to <code>.*_contrast</code> fixed it</li>
+</ul>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 8: Compute GLCM texture (contrast and dissimilarity)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// glcmTexture() requires integer data, so multiply by 1000 and cast first</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Use '.*_contrast|.*_diss' to match band names with the '_median' suffix</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> glcm <span class="op">=</span> clip</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">multiply</span>(<span class="dv">1000</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">toUint16</span>()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">glcmTexture</span>({<span class="dt">size</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">select</span>(<span class="st">'.*_contrast|.*_diss'</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">addBands</span>(clip)<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(glcm<span class="op">,</span> {<span class="dt">min</span><span class="op">:</span> <span class="dv">14</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">650</span>}<span class="op">,</span> <span class="st">'glcm'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>The output shows the <strong>urban core</strong> in brighter magenta tones, which makes sense — more building edges and surface variation means higher <strong>texture values</strong>. The northern mountains also show up quite textured though, which is a reminder that high GLCM values don’t automatically mean urban — <strong>terrain</strong> can produce similar patterns.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/beijing_glcm.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: GLCM texture output for Beijing. Brighter magenta areas indicate higher surface heterogeneity, broadly corresponding to the urban core.</figcaption>
+</figure>
+</div>
+</section>
+<section id="workshop-pca-over-the-combined-spectral-texture-stack" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-pca-over-the-combined-spectral-texture-stack">2.8 Workshop: PCA over the Combined Spectral-Texture Stack</h3>
+<p>The final step was running <strong>PCA</strong> on the combined stack of spectral bands and GLCM texture outputs. In R this would have been a single <code>prcomp()</code> call. In GEE it’s considerably more involved — you have to manually compute the <strong>covariance matrix</strong>, extract <strong>eigenvalues</strong> and <strong>eigenvectors</strong>, then project the data yourself. The code is adapted from the GEE Eigen Analysis guide and took me a while to work through:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Step 9: PCA — set up scale, band names, and study region</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> scale <span class="op">=</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> bandNames <span class="op">=</span> glcm<span class="op">.</span><span class="fu">bandNames</span>()<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> region <span class="op">=</span> Beijing<span class="op">.</span><span class="fu">geometry</span>()<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(region<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(ee<span class="op">.</span><span class="fu">Image</span>()<span class="op">.</span><span class="fu">paint</span>(region<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">,</span> {}<span class="op">,</span> <span class="st">'Region'</span>)<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Mean-centre the data across the Beijing region</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> meanDict <span class="op">=</span> glcm<span class="op">.</span><span class="fu">reduceRegion</span>({</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reducer</span><span class="op">:</span> ee<span class="op">.</span><span class="at">Reducer</span><span class="op">.</span><span class="fu">mean</span>()<span class="op">,</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">geometry</span><span class="op">:</span> region<span class="op">,</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scale</span><span class="op">:</span> scale<span class="op">,</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e9</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> means <span class="op">=</span> ee<span class="op">.</span><span class="at">Image</span><span class="op">.</span><span class="fu">constant</span>(meanDict<span class="op">.</span><span class="fu">values</span>(bandNames))<span class="op">;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> centered <span class="op">=</span> glcm<span class="op">.</span><span class="fu">subtract</span>(means)<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Helper: generate sequential band names (e.g. pc1, pc2 ...)</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> getNewBandNames <span class="op">=</span> <span class="kw">function</span>(prefix) {</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> seq <span class="op">=</span> ee<span class="op">.</span><span class="at">List</span><span class="op">.</span><span class="fu">sequence</span>(<span class="dv">1</span><span class="op">,</span> bandNames<span class="op">.</span><span class="fu">length</span>())<span class="op">;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> seq<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(b) {</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ee<span class="op">.</span><span class="fu">String</span>(prefix)<span class="op">.</span><span class="fu">cat</span>(ee<span class="op">.</span><span class="fu">Number</span>(b)<span class="op">.</span><span class="fu">int</span>())<span class="op">;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">// PCA function: covariance → eigendecomposition → project → normalise by SD</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> getPrincipalComponents <span class="op">=</span> <span class="kw">function</span>(centered<span class="op">,</span> scale<span class="op">,</span> region) {</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> arrays <span class="op">=</span> centered<span class="op">.</span><span class="fu">toArray</span>()<span class="op">;</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> covar <span class="op">=</span> arrays<span class="op">.</span><span class="fu">reduceRegion</span>({</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reducer</span><span class="op">:</span> ee<span class="op">.</span><span class="at">Reducer</span><span class="op">.</span><span class="fu">centeredCovariance</span>()<span class="op">,</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">geometry</span><span class="op">:</span> region<span class="op">,</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scale</span><span class="op">:</span> scale<span class="op">,</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e9</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> covarArray <span class="op">=</span> ee<span class="op">.</span><span class="fu">Array</span>(covar<span class="op">.</span><span class="fu">get</span>(<span class="st">'array'</span>))<span class="op">;</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> eigens <span class="op">=</span> covarArray<span class="op">.</span><span class="fu">eigen</span>()<span class="op">;</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> eigenValues <span class="op">=</span> eigens<span class="op">.</span><span class="fu">slice</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Print percentage variance explained by each component</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> eigenValuesList <span class="op">=</span> eigenValues<span class="op">.</span><span class="fu">toList</span>()<span class="op">.</span><span class="fu">flatten</span>()<span class="op">;</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> total <span class="op">=</span> eigenValuesList<span class="op">.</span><span class="fu">reduce</span>(ee<span class="op">.</span><span class="at">Reducer</span><span class="op">.</span><span class="fu">sum</span>())<span class="op">;</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> percentageVariance <span class="op">=</span> eigenValuesList<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(item) {</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (ee<span class="op">.</span><span class="fu">Number</span>(item)<span class="op">.</span><span class="fu">divide</span>(total))<span class="op">.</span><span class="fu">multiply</span>(<span class="dv">100</span>)<span class="op">.</span><span class="fu">format</span>(<span class="st">'%.2f'</span>)<span class="op">;</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"percentageVariance"</span><span class="op">,</span> percentageVariance)<span class="op">;</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> eigenVectors <span class="op">=</span> eigens<span class="op">.</span><span class="fu">slice</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> arrayImage <span class="op">=</span> arrays<span class="op">.</span><span class="fu">toArray</span>(<span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> principalComponents <span class="op">=</span> ee<span class="op">.</span><span class="fu">Image</span>(eigenVectors)<span class="op">.</span><span class="fu">matrixMultiply</span>(arrayImage)<span class="op">;</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> sdImage <span class="op">=</span> ee<span class="op">.</span><span class="fu">Image</span>(eigenValues<span class="op">.</span><span class="fu">sqrt</span>())</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">arrayProject</span>([<span class="dv">0</span>])<span class="op">.</span><span class="fu">arrayFlatten</span>([<span class="fu">getNewBandNames</span>(<span class="st">'sd'</span>)])<span class="op">;</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> principalComponents</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">arrayProject</span>([<span class="dv">0</span>])</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">arrayFlatten</span>([<span class="fu">getNewBandNames</span>(<span class="st">'pc'</span>)])</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">divide</span>(sdImage)<span class="op">;</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="co">// Run PCA and display the first two components</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pcImage <span class="op">=</span> <span class="fu">getPrincipalComponents</span>(centered<span class="op">,</span> scale<span class="op">,</span> region)<span class="op">;</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(pcImage<span class="op">,</span> {<span class="dt">bands</span><span class="op">:</span> [<span class="st">'pc2'</span><span class="op">,</span> <span class="st">'pc1'</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">2</span>}<span class="op">,</span> <span class="st">'PCA bands 1 and 2'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>The Console output showed <strong>PC1 captured 71.09% of the total variance</strong> and <strong>PC2 a further 16.00%</strong> — so just two components hold over <strong>87%</strong> of the information from the entire multi-band stack. That’s a pretty striking result, and it shows how much <strong>redundancy</strong> there is between the spectral and texture bands. That said, PC1 doesn’t map directly onto anything interpretable like “vegetation” or “built-up area” — you’d need labelled <strong>training data</strong> to make sense of what each component actually represents <span class="citation" data-cites="amani2020">(<a href="#ref-amani2020" role="doc-biblioref">Amani et al. 2020</a>)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/beijing_pca.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: PCA output for Beijing (PC1 and PC2). The Console shows PC1 explains 71.09% of variance and PC2 a further 16.00%.</figcaption>
+</figure>
+</div>
+</section>
+<section id="gee-in-urban-remote-sensing-literature-applications" class="level3">
+<h3 class="anchored" data-anchor-id="gee-in-urban-remote-sensing-literature-applications">2.9 GEE in Urban Remote Sensing: Literature Applications</h3>
+<p>Reading around this week helped me see where GEE sits in the broader research landscape. <span class="citation" data-cites="gorelick2017">Gorelick et al. (<a href="#ref-gorelick2017" role="doc-biblioref">2017</a>)</span> describes GEE as built specifically for the kind of <strong>planetary-scale</strong> work that simply wasn’t possible before cloud computing — and urban remote sensing has been one of the big beneficiaries.</p>
+<p><span class="citation" data-cites="amani2020">Amani et al. (<a href="#ref-amani2020" role="doc-biblioref">2020</a>)</span> surveyed hundreds of GEE papers and found that <strong>urban studies</strong> are among the most common use cases:</p>
+<ul>
+<li><strong>Impervious surface mapping</strong> — tracking built-up area expansion in rapidly growing Asian megacities</li>
+<li><strong>Urban heat island monitoring</strong> — using Landsat thermal bands to map temperature patterns across cities</li>
+<li><strong>Informal settlement detection</strong> — identifying unplanned urban growth at scales previously impossible without cloud computing</li>
+</ul>
+<p>What strikes me is that most of these analyses use the same <strong>Landsat archive</strong> I worked with this week — but applied over decades rather than a two-year window. The GEE Applications topical collection <span class="citation" data-cites="gee_applications">(<a href="#ref-gee_applications" role="doc-biblioref"><span>“<span>Google Earth Engine</span> <span>Applications</span> — <span>Topical Collection</span>”</span> n.d.</a>)</span> documents a wide range of these urban remote sensing studies, and browsing the urban-related entries gives a good sense of what kinds of research questions the platform has made tractable. As Figure 6 shows, the range of urban applications goes well beyond just <strong>land cover mapping</strong> — it spans greening, heat islands, and <strong>4D urban modelling</strong>, all of which depend on the kind of large-scale, multi-temporal processing that GEE enables.</p>
+<p>The <em>Cloud-Based Remote Sensing with Google Earth Engine</em> textbook <span class="citation" data-cites="gee_book2020">(<a href="#ref-gee_book2020" role="doc-biblioref">Cardille et al. 2023</a>)</span> goes into this in more detail in Chapters A1.2 and A1.3, and <span class="citation" data-cites="kochenour2020">Kochenour (<a href="#ref-kochenour2020" role="doc-biblioref">2020</a>)</span> has some nice worked examples of combining different data sources — like pairing <strong>Sentinel-5P</strong> air quality data with urban footprint layers — which would be a nightmare to do locally but is fairly straightforward in GEE.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/gee_urban_app.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 6: GEE application domains from Amani et al.&nbsp;(2020). The Urban category includes urban expansion, heat island mapping, and urban extent delineation. Source: <span class="citation" data-cites="amani2020">Amani et al. (<a href="#ref-amani2020" role="doc-biblioref">2020</a>)</span>.</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="personal-reflection" class="level2">
+<h2 class="anchored" data-anchor-id="personal-reflection">3. Personal Reflection</h2>
+<section id="from-local-to-cloud-a-genuine-paradigm-shift" class="level3">
+<h3 class="anchored" data-anchor-id="from-local-to-cloud-a-genuine-paradigm-shift">3.1 From Local to Cloud: A Genuine Paradigm Shift</h3>
+<p>This was probably the week where I had to do the most mental rewiring. Working in R, I always know where my data is — it’s in my environment, I can print it, I can inspect it at any point. GEE is completely different. The data isn’t on my machine, the computation isn’t happening on my machine, and half the time the code looks like it’s doing something but <strong>nothing has actually happened yet</strong>.</p>
+<p>The biggest shift was learning to stop thinking in terms of “how do I get this data and process it” and start thinking in terms of “what operation do I want to describe, and let the server handle the rest.” Once that clicked, the <strong><code>.map()</code> vs for-loop</strong> distinction made sense, the <strong>lazy evaluation</strong> made sense, and the cryptic errors became slightly less mysterious. Compared to R it feels more like writing a recipe than cooking — you describe what should happen, and someone else executes it.</p>
+<p>The debugging experience was genuinely frustrating at points though. Two problems stood out:</p>
+<ul>
+<li><strong><code>'Beijing Shi'</code> naming</strong> — the FAO GAUL dataset didn’t use the name I expected, and the only way to find the right value was to print the full <strong>attribute table</strong></li>
+<li><strong>GLCM regex mismatch</strong> — the error message just said the <strong>band pattern</strong> didn’t match, without showing me what the actual band names were; in R I’d have just printed the object, but in GEE I had to piece it together from the error output</li>
+</ul>
+<p>I got there eventually, but both took longer than they should have.</p>
+</section>
+<section id="limitations-and-future-directions" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-and-future-directions">3.2 Limitations and Future Directions</h3>
+<ol type="1">
+<li><strong>Vendor lock-in</strong> — GEE is a Google product. Everything we built this week lives in their ecosystem. If access policies change — and Google has shut down products before — there’s no straightforward way to migrate a GEE-based workflow. Open alternatives like <strong>Microsoft Planetary Computer</strong> exist, but they don’t have the same catalogue depth or community yet.</li>
+<li><strong>Debugging difficulty</strong> — Server-side proxy errors are genuinely hard to trace. The <strong>PCA function</strong> is a good example — it’s long, it involves multiple operations, and when something goes wrong the error usually points to the wrong line. A proper debugger would help enormously.</li>
+<li><strong>Methodological caution</strong> — It’s easy to get excited about results when everything renders nicely. But the <strong>median composite</strong> hides short-term changes, the <strong>GLCM output</strong> depends heavily on window size and quantisation choices, and the <strong>PCA components</strong> don’t have obvious physical meanings. Any serious analysis would need proper validation.</li>
+<li><strong>Future use</strong> — I’d like to come back to GEE for a longer-term analysis of Beijing’s <strong>urban greenery</strong>. The <code>linearFit()</code> reducer we covered in the lecture would let me run <strong>NDVI trends</strong> across the full Landsat archive, which could be a useful way to look at how green space has changed as the city expanded. Beijing is interesting for this precisely because there’s been simultaneous <strong>urban growth</strong> and active <strong>greening policy</strong> — those are competing signals, and teasing them apart spatially would be a genuinely useful piece of work.</li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+On Adapting Shared GEE Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>GEE has a large community script repository, and many <strong>PCA implementations</strong> online are adapted from the official GEE Eigen Analysis guide. When using shared code in assessed work, always attribute the source in your script comments and make sure you understand each step. The PCA function used in this practical is adapted directly from the <strong>GEE documentation</strong> and the lecture materials.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">4. References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-amani2020" class="csl-entry" role="listitem">
+Amani, Meisam, Arsalan Ghorbanian, Seyed Ali Ahmadi, Mohammad Kakooei, Armin Moghimi, S. Mohammad Mirmazloumi, Sayyed Hamed Alizadeh Moghaddam, et al. 2020. <span>“Google <span>Earth</span> <span>Engine</span> <span>Cloud</span> <span>Computing</span> <span>Platform</span> for <span>Remote</span> <span>Sensing</span> <span>Big</span> <span>Data</span> <span>Applications</span>: <span>A</span> <span>Comprehensive</span> <span>Review</span>.”</span> <em><span>IEEE</span> Journal of Selected Topics in Applied Earth Observations and Remote Sensing</em> 13: 5326–50. <a href="https://doi.org/10.1109/JSTARS.2020.3021052">https://doi.org/10.1109/JSTARS.2020.3021052</a>.
+</div>
+<div id="ref-gee_book2020" class="csl-entry" role="listitem">
+Cardille, Jeffrey A., Morgan A. Crowley, David Saah, and Nicholas E. Clinton, eds. 2023. <em>Cloud-<span>Based</span> <span>Remote</span> <span>Sensing</span> with <span>Google</span> <span>Earth</span> <span>Engine</span>: <span>Fundamentals</span> and <span>Applications</span></em>. Springer. <a href="https://www.eefabook.org/">https://www.eefabook.org/</a>.
+</div>
+<div id="ref-gee_applications" class="csl-entry" role="listitem">
+<span>“<span>Google Earth Engine</span> <span>Applications</span> — <span>Topical Collection</span>.”</span> n.d. <em>Remote Sensing</em>. MDPI. Accessed May 1, 2023. <a href="https://www.mdpi.com/journal/remotesensing/special_issues/GEE_RS">https://www.mdpi.com/journal/remotesensing/special_issues/GEE_RS</a>.
+</div>
+<div id="ref-gorelick2017" class="csl-entry" role="listitem">
+Gorelick, Noel, Matt Hancher, Mike Dixon, Simon Ilyushchenko, David Thau, and Rebecca Moore. 2017. <span>“Google <span>Earth</span> <span>Engine</span>: <span>Planetary</span>-Scale Geospatial Analysis for Everyone.”</span> <em>Remote Sensing of Environment</em> 202: 18–27. <a href="https://doi.org/10.1016/j.rse.2017.06.031">https://doi.org/10.1016/j.rse.2017.06.031</a>.
+</div>
+<div id="ref-kochenour2020" class="csl-entry" role="listitem">
+Kochenour, Caleb. 2020. <span>“Introduction — <span>Remote</span> <span>Sensing</span> with <span>Google</span> <span>Earth</span> <span>Engine</span>.”</span> Online textbook. <a href="https://calekochenour.github.io/remote-sensing-textbook/introduction.html">https://calekochenour.github.io/remote-sensing-textbook/introduction.html</a>.
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<img id="floating-corner-image" src="images/right-corner.jpg" alt="corner image">
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const img = document.getElementById("floating-corner-image");
+
+  let lastScrollY = window.scrollY;
+
+  let ticking = false;
+
+  let resetTimer;
+
+
+
+  function handleScroll() {
+
+    const currentScrollY = window.scrollY;
+
+    const delta = currentScrollY - lastScrollY;
+
+
+
+    // 限制位移幅度，避免太夸张
+
+    let offset = 0;
+
+    if (delta > 0) {
+
+      // 向下滚动，图片往上
+
+      offset = -20;
+
+    } else if (delta < 0) {
+
+      // 向上滚动，图片往下
+
+      offset = 20;
+
+    }
+
+
+
+    img.style.transform = `translateY(${offset}px)`;
+
+
+
+    // 清除旧的回弹计时
+
+    clearTimeout(resetTimer);
+
+
+
+    // 停止滚动后回到原位
+
+    resetTimer = setTimeout(() => {
+
+      img.style.transform = "translateY(0)";
+
+    }, 120);
+
+
+
+    lastScrollY = currentScrollY;
+
+    ticking = false;
+
+  }
+
+
+
+  window.addEventListener("scroll", () => {
+
+    if (!ticking) {
+
+      window.requestAnimationFrame(handleScroll);
+
+      ticking = true;
+
+    }
+
+  });
+
+});
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week6.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
