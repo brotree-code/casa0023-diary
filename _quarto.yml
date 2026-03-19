@@ -39,6 +39,8 @@ website:
         file: week4_5.qmd
       - text: "Week 6: Google Earth Engine I"
         file: week6.qmd
+      - text: "Week 7: Classification I"
+        file: week7.qmd
 format:
   html:
     

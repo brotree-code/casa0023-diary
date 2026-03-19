@@ -18,7 +18,7 @@ The scripting language is **JavaScript**, which I'd never used before. But it tu
 * **Functions** — reusable blocks of logic, essential for `.map()` workflows
 * **`print()`** — the main way to inspect objects in the Console
 
-The bigger adjustment is getting used to GEE's own way of thinking about data, where everything is a **server-side object** and nothing actually computes until you explicitly ask for a result [@gee_book2020].
+The bigger adjustment is getting used to GEE's own way of thinking about data, where everything is a **server-side object** and nothing actually computes until you explicitly ask for a result [@gee_book2023].
 
 ::: {.callout-note}
 ## Client vs. Server: the Core Mental Model
@@ -49,7 +49,7 @@ Something that tripped me up a bit was the concept of **scale in GEE**. Two thin
 * **Scale refers to output resolution** — not the native resolution of the input dataset
 * **Default scale is zoom-dependent** — if you don't set it explicitly, GEE guesses based on your current map zoom level, which means the same script can return different numbers just because you scrolled in or out
 
-That second point is a real **reproducibility** problem [@gee_book2020].
+That second point is a real **reproducibility** problem [@gee_book2023].
 
 ::: {.callout-important}
 ## Why Set Scale Explicitly?
@@ -182,7 +182,7 @@ var oneimage_study_area_cloud_scale = oneimage_study_area_cloud.map(applyScaleFa
 
 ::: {.callout-note}
 ## Why `.map()` Instead of a For-Loop?
-In GEE, a standard JavaScript for-loop runs on the client side and does not know how many images exist in the server-side collection until they are downloaded. The `.map()` function sends the entire operation to the server and applies it in parallel across all images — which is both faster and architecturally correct [@gee_book2020].
+In GEE, a standard JavaScript for-loop runs on the client side and does not know how many images exist in the server-side collection until they are downloaded. The `.map()` function sends the entire operation to the server and applies it in parallel across all images — which is both faster and architecturally correct [@gee_book2023].
 :::
 
 ### 2.6 Workshop: Building the Median Composite and Clipping to Beijing
@@ -351,7 +351,7 @@ Reading around this week helped me see where GEE sits in the broader research la
 
 What strikes me is that most of these analyses use the same **Landsat archive** I worked with this week — but applied over decades rather than a two-year window. The GEE Applications topical collection [@gee_applications] documents a wide range of these urban remote sensing studies, and browsing the urban-related entries gives a good sense of what kinds of research questions the platform has made tractable. As Figure 6 shows, the range of urban applications goes well beyond just **land cover mapping** — it spans greening, heat islands, and **4D urban modelling**, all of which depend on the kind of large-scale, multi-temporal processing that GEE enables.
 
-The *Cloud-Based Remote Sensing with Google Earth Engine* textbook [@gee_book2020] goes into this in more detail in Chapters A1.2 and A1.3, and @kochenour2020 has some nice worked examples of combining different data sources — like pairing **Sentinel-5P** air quality data with urban footprint layers — which would be a nightmare to do locally but is fairly straightforward in GEE.
+The *Cloud-Based Remote Sensing with Google Earth Engine* textbook [@gee_book2023] goes into this in more detail in Chapters A1.2 and A1.3, and @kochenour2020 has some nice worked examples of combining different data sources — like pairing **Sentinel-5P** air quality data with urban footprint layers — which would be a nightmare to do locally but is fairly straightforward in GEE.
 
 ![Figure 6: GEE application domains from Amani et al. (2020). The Urban category includes urban expansion, heat island mapping, and urban extent delineation. Source: @amani2020.](images/gee_urban_app.png)
 

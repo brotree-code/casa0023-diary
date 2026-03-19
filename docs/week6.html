@@ -407,6 +407,12 @@ window.Quarto = {
  <span class="menu-text">Week 6: Google Earth Engine I</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7: Classification I</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -493,7 +499,7 @@ window.Quarto = {
 <li><strong>Functions</strong> — reusable blocks of logic, essential for <code>.map()</code> workflows</li>
 <li><strong><code>print()</code></strong> — the main way to inspect objects in the Console</li>
 </ul>
-<p>The bigger adjustment is getting used to GEE’s own way of thinking about data, where everything is a <strong>server-side object</strong> and nothing actually computes until you explicitly ask for a result <span class="citation" data-cites="gee_book2020">(<a href="#ref-gee_book2020" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
+<p>The bigger adjustment is getting used to GEE’s own way of thinking about data, where everything is a <strong>server-side object</strong> and nothing actually computes until you explicitly ask for a result <span class="citation" data-cites="gee_book2023">(<a href="#ref-gee_book2023" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -578,7 +584,7 @@ Table&nbsp;1: GEE Core Object Classes and Their Analogies
 <li><strong>Scale refers to output resolution</strong> — not the native resolution of the input dataset</li>
 <li><strong>Default scale is zoom-dependent</strong> — if you don’t set it explicitly, GEE guesses based on your current map zoom level, which means the same script can return different numbers just because you scrolled in or out</li>
 </ul>
-<p>That second point is a real <strong>reproducibility</strong> problem <span class="citation" data-cites="gee_book2020">(<a href="#ref-gee_book2020" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
+<p>That second point is a real <strong>reproducibility</strong> problem <span class="citation" data-cites="gee_book2023">(<a href="#ref-gee_book2023" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -713,7 +719,7 @@ Why <code>.map()</code> Instead of a For-Loop?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In GEE, a standard JavaScript for-loop runs on the client side and does not know how many images exist in the server-side collection until they are downloaded. The <code>.map()</code> function sends the entire operation to the server and applies it in parallel across all images — which is both faster and architecturally correct <span class="citation" data-cites="gee_book2020">(<a href="#ref-gee_book2020" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
+<p>In GEE, a standard JavaScript for-loop runs on the client side and does not know how many images exist in the server-side collection until they are downloaded. The <code>.map()</code> function sends the entire operation to the server and applies it in parallel across all images — which is both faster and architecturally correct <span class="citation" data-cites="gee_book2023">(<a href="#ref-gee_book2023" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
 </div>
 </div>
 </section>
@@ -888,8 +894,8 @@ Show GEE code
 <li><strong>Urban heat island monitoring</strong> — using Landsat thermal bands to map temperature patterns across cities</li>
 <li><strong>Informal settlement detection</strong> — identifying unplanned urban growth at scales previously impossible without cloud computing</li>
 </ul>
-<p>What strikes me is that most of these analyses use the same <strong>Landsat archive</strong> I worked with this week — but applied over decades rather than a two-year window. The GEE Applications topical collection <span class="citation" data-cites="gee_applications">(<a href="#ref-gee_applications" role="doc-biblioref"><span>“<span>Google Earth Engine</span> <span>Applications</span> — <span>Topical Collection</span>”</span> n.d.</a>)</span> documents a wide range of these urban remote sensing studies, and browsing the urban-related entries gives a good sense of what kinds of research questions the platform has made tractable. As Figure 6 shows, the range of urban applications goes well beyond just <strong>land cover mapping</strong> — it spans greening, heat islands, and <strong>4D urban modelling</strong>, all of which depend on the kind of large-scale, multi-temporal processing that GEE enables.</p>
-<p>The <em>Cloud-Based Remote Sensing with Google Earth Engine</em> textbook <span class="citation" data-cites="gee_book2020">(<a href="#ref-gee_book2020" role="doc-biblioref">Cardille et al. 2023</a>)</span> goes into this in more detail in Chapters A1.2 and A1.3, and <span class="citation" data-cites="kochenour2020">Kochenour (<a href="#ref-kochenour2020" role="doc-biblioref">2020</a>)</span> has some nice worked examples of combining different data sources — like pairing <strong>Sentinel-5P</strong> air quality data with urban footprint layers — which would be a nightmare to do locally but is fairly straightforward in GEE.</p>
+<p>What strikes me is that most of these analyses use the same <strong>Landsat archive</strong> I worked with this week — but applied over decades rather than a two-year window. The GEE Applications topical collection <span class="citation" data-cites="gee_applications">(<a href="#ref-gee_applications" role="doc-biblioref"><span>“<span>Google Earth Engine</span> Applications — Topical Collection”</span> n.d.</a>)</span> documents a wide range of these urban remote sensing studies, and browsing the urban-related entries gives a good sense of what kinds of research questions the platform has made tractable. As Figure 6 shows, the range of urban applications goes well beyond just <strong>land cover mapping</strong> — it spans greening, heat islands, and <strong>4D urban modelling</strong>, all of which depend on the kind of large-scale, multi-temporal processing that GEE enables.</p>
+<p>The <em>Cloud-Based Remote Sensing with Google Earth Engine</em> textbook <span class="citation" data-cites="gee_book2023">(<a href="#ref-gee_book2023" role="doc-biblioref">Cardille et al. 2023</a>)</span> goes into this in more detail in Chapters A1.2 and A1.3, and <span class="citation" data-cites="kochenour2020">Kochenour (<a href="#ref-kochenour2020" role="doc-biblioref">2020</a>)</span> has some nice worked examples of combining different data sources — like pairing <strong>Sentinel-5P</strong> air quality data with urban footprint layers — which would be a nightmare to do locally but is fairly straightforward in GEE.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/gee_urban_app.png" class="img-fluid figure-img"></p>
@@ -940,13 +946,13 @@ On Adapting Shared GEE Code
 <h2 class="anchored" data-anchor-id="references">4. References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-amani2020" class="csl-entry" role="listitem">
-Amani, Meisam, Arsalan Ghorbanian, Seyed Ali Ahmadi, Mohammad Kakooei, Armin Moghimi, S. Mohammad Mirmazloumi, Sayyed Hamed Alizadeh Moghaddam, et al. 2020. <span>“Google <span>Earth</span> <span>Engine</span> <span>Cloud</span> <span>Computing</span> <span>Platform</span> for <span>Remote</span> <span>Sensing</span> <span>Big</span> <span>Data</span> <span>Applications</span>: <span>A</span> <span>Comprehensive</span> <span>Review</span>.”</span> <em><span>IEEE</span> Journal of Selected Topics in Applied Earth Observations and Remote Sensing</em> 13: 5326–50. <a href="https://doi.org/10.1109/JSTARS.2020.3021052">https://doi.org/10.1109/JSTARS.2020.3021052</a>.
+Amani, Meisam, Arsalan Ghorbanian, Seyed Ali Ahmadi, Mohammad Kakooei, Armin Moghimi, S. Mohammad Mirmazloumi, Sayyed Hamed Alizadeh Moghaddam, et al. 2020. <span>“Google <span>Earth</span> <span>Engine</span> Cloud Computing Platform for Remote Sensing Big Data Applications: <span>A</span> Comprehensive Review.”</span> <em><span>IEEE</span> Journal of Selected Topics in Applied Earth Observations and Remote Sensing</em> 13: 5326–50. <a href="https://doi.org/10.1109/JSTARS.2020.3021052">https://doi.org/10.1109/JSTARS.2020.3021052</a>.
 </div>
-<div id="ref-gee_book2020" class="csl-entry" role="listitem">
-Cardille, Jeffrey A., Morgan A. Crowley, David Saah, and Nicholas E. Clinton, eds. 2023. <em>Cloud-<span>Based</span> <span>Remote</span> <span>Sensing</span> with <span>Google</span> <span>Earth</span> <span>Engine</span>: <span>Fundamentals</span> and <span>Applications</span></em>. Springer. <a href="https://www.eefabook.org/">https://www.eefabook.org/</a>.
+<div id="ref-gee_book2023" class="csl-entry" role="listitem">
+Cardille, Jeffrey A., Morgan A. Crowley, David Saah, and Nicholas E. Clinton, eds. 2023. <em>Cloud-<span>Based</span> <span>Remote</span> <span>Sensing</span> with <span>Google</span> <span>Earth</span> <span>Engine</span>: <span>Fundamentals</span> and <span>Applications</span></em>. Springer. <a href="https://doi.org/10.1007/978-3-031-26588-4">https://doi.org/10.1007/978-3-031-26588-4</a>.
 </div>
 <div id="ref-gee_applications" class="csl-entry" role="listitem">
-<span>“<span>Google Earth Engine</span> <span>Applications</span> — <span>Topical Collection</span>.”</span> n.d. <em>Remote Sensing</em>. MDPI. Accessed May 1, 2023. <a href="https://www.mdpi.com/journal/remotesensing/special_issues/GEE_RS">https://www.mdpi.com/journal/remotesensing/special_issues/GEE_RS</a>.
+<span>“<span>Google Earth Engine</span> Applications — Topical Collection.”</span> n.d. MDPI <em>Remote Sensing</em> topical collection; MDPI. Accessed May 1, 2023. <a href="https://www.mdpi.com/journal/remotesensing/topical_collections/GEE">https://www.mdpi.com/journal/remotesensing/topical_collections/GEE</a>.
 </div>
 <div id="ref-gorelick2017" class="csl-entry" role="listitem">
 Gorelick, Noel, Matt Hancher, Mike Dixon, Simon Ilyushchenko, David Thau, and Rebecca Moore. 2017. <span>“Google <span>Earth</span> <span>Engine</span>: <span>Planetary</span>-Scale Geospatial Analysis for Everyone.”</span> <em>Remote Sensing of Environment</em> 202: 18–27. <a href="https://doi.org/10.1016/j.rse.2017.06.031">https://doi.org/10.1016/j.rse.2017.06.031</a>.

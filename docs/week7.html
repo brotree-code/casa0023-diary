@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jianshu Wu">
+<meta name="dcterms.date" content="2026-03-07">
+
+<title>Week 7 Learning Diary: Classification I – CASA0023 Learning Diary</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2d04f6a56a99f900a06f3dceb2e66a0f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fa423e886cf517ee378d38a13c608aa9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2d04f6a56a99f900a06f3dceb2e66a0f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">CASA0023 Learning Diary</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/brotree-code/casa0023-diary"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week7.html">Week 7: Classification I</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: Intro &amp; Spectral</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: Sensor Presentation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Corrections &amp; Enhancements</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week4_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4＆5: EO &amp; Policy</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6: Google Earth Engine I</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week7.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 7: Classification I</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#content-summary" id="toc-content-summary" class="nav-link active" data-scroll-target="#content-summary">1. Content Summary</a>
+  <ul class="collapse">
+  <li><a href="#from-pixels-to-labels-the-classification-framework" id="toc-from-pixels-to-labels-the-classification-framework" class="nav-link" data-scroll-target="#from-pixels-to-labels-the-classification-framework">1.1 From Pixels to Labels: The Classification Framework</a></li>
+  <li><a href="#decision-trees-ensembles-and-the-random-forest-classifier" id="toc-decision-trees-ensembles-and-the-random-forest-classifier" class="nav-link" data-scroll-target="#decision-trees-ensembles-and-the-random-forest-classifier">1.2 Decision Trees, Ensembles, and the Random Forest Classifier</a></li>
+  <li><a href="#accuracy-assessment-the-error-matrix" id="toc-accuracy-assessment-the-error-matrix" class="nav-link" data-scroll-target="#accuracy-assessment-the-error-matrix">1.3 Accuracy Assessment: The Error Matrix</a></li>
+  </ul></li>
+  <li><a href="#applications-of-the-content" id="toc-applications-of-the-content" class="nav-link" data-scroll-target="#applications-of-the-content">2. Applications of the Content</a>
+  <ul class="collapse">
+  <li><a href="#workshop-loading-the-study-area" id="toc-workshop-loading-the-study-area" class="nav-link" data-scroll-target="#workshop-loading-the-study-area">2.1 Workshop: Loading the Study Area</a></li>
+  <li><a href="#workshop-two-approaches-to-cloud-handling" id="toc-workshop-two-approaches-to-cloud-handling" class="nav-link" data-scroll-target="#workshop-two-approaches-to-cloud-handling">2.2 Workshop: Two Approaches to Cloud Handling</a></li>
+  <li><a href="#workshop-drawing-training-data-and-cart-classification" id="toc-workshop-drawing-training-data-and-cart-classification" class="nav-link" data-scroll-target="#workshop-drawing-training-data-and-cart-classification">2.3 Workshop: Drawing Training Data and CART Classification</a></li>
+  <li><a href="#workshop-pixel-level-random-forest-with-accuracy-assessment" id="toc-workshop-pixel-level-random-forest-with-accuracy-assessment" class="nav-link" data-scroll-target="#workshop-pixel-level-random-forest-with-accuracy-assessment">2.4 Workshop: Pixel-Level Random Forest with Accuracy Assessment</a></li>
+  <li><a href="#literature-applications-of-supervised-classification" id="toc-literature-applications-of-supervised-classification" class="nav-link" data-scroll-target="#literature-applications-of-supervised-classification">2.5 Literature Applications of Supervised Classification</a></li>
+  </ul></li>
+  <li><a href="#personal-reflection" id="toc-personal-reflection" class="nav-link" data-scroll-target="#personal-reflection">3. Personal Reflection</a>
+  <ul class="collapse">
+  <li><a href="#snow-looks-like-rooftops-and-thats-a-real-problem" id="toc-snow-looks-like-rooftops-and-thats-a-real-problem" class="nav-link" data-scroll-target="#snow-looks-like-rooftops-and-thats-a-real-problem">3.1 Snow Looks Like Rooftops, and That’s a Real Problem</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">4. References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week7.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 7 Learning Diary: Classification I</h1>
+<p class="subtitle lead">Supervised Image Classification and Accuracy Assessment over Chengdu in Google Earth Engine</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jianshu Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 7, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="content-summary" class="level2">
+<h2 class="anchored" data-anchor-id="content-summary">1. Content Summary</h2>
+<section id="from-pixels-to-labels-the-classification-framework" class="level3">
+<h3 class="anchored" data-anchor-id="from-pixels-to-labels-the-classification-framework">1.1 From Pixels to Labels: The Classification Framework</h3>
+<p>This week the focus shifted from <strong>processing</strong> satellite imagery to <strong>interpreting</strong> it — specifically, using supervised classification to assign every pixel a meaningful land cover category. The underlying concept is the <strong>feature vector</strong>: each pixel is described not by what it looks like visually, but by a row of numerical values across spectral bands, and this row becomes the input to a classifier <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>. In Google Earth Engine, this translates to a <strong>FeatureCollection</strong> where each feature holds band reflectance values and a class label, forming the training data.</p>
+<p><span class="citation" data-cites="gisgeography2014">(<a href="#ref-gisgeography2014" role="doc-biblioref">GISGeography 2014</a>)</span> provides a useful practical overview, distinguishing two broad families:</p>
+<ul>
+<li><strong>Supervised classification</strong> — the analyst provides labelled training samples; the algorithm learns a decision boundary from those labels and applies it to the entire image</li>
+<li><strong>Unsupervised classification</strong> — the algorithm itself groups pixels by spectral similarity (e.g.&nbsp;<em>k</em>-means), and the analyst interprets the resulting clusters afterwards</li>
+</ul>
+<p>GEE supports four supervised classifiers directly: <strong>CART</strong>, <strong>Random Forest</strong>, <strong>Naïve Bayes</strong>, and <strong>SVM</strong>. For this week’s practical we focused on <strong>CART</strong> and <strong>Random Forest</strong>, both of which belong to the <strong>decision tree</strong> family <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015, chap. 10</a>)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week7_classification_workflow.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Supervised classification workflow in remote sensing — from category definition and sample selection through classifier training, image classification, post-processing, to final accuracy verification.</figcaption>
+</figure>
+</div>
+</section>
+<section id="decision-trees-ensembles-and-the-random-forest-classifier" class="level3">
+<h3 class="anchored" data-anchor-id="decision-trees-ensembles-and-the-random-forest-classifier">1.2 Decision Trees, Ensembles, and the Random Forest Classifier</h3>
+<p>A <strong>Classification and Regression Tree (CART)</strong> partitions the feature space by repeatedly splitting on the band value that best separates classes, producing a binary tree of <code>if–then</code> rules. Each terminal node — a <strong>leaf node</strong> — holds a class prediction. The depth of the tree, number of nodes, and variable importance scores are all inspectable via <code>classifier.explain()</code> in GEE <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>.</p>
+<p><strong>Random Forest</strong> extends this by training many trees on <strong>bootstrapped subsets</strong> of the training data, with each split considering a random subset of bands. Predictions are aggregated by majority vote. Two properties make this useful:</p>
+<ol type="1">
+<li><strong>Out-of-Bag (OOB) error</strong> — data not used to train any given tree is used to validate it, giving a free internal estimate of generalisation error without a separate hold-out set</li>
+<li><strong>Reduced variance</strong> — averaging across many trees cancels out the high variance of any individual tree</li>
+</ol>
+<div id="tbl-classifiers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-classifiers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Comparison of GEE-supported supervised classifiers
+</figcaption>
+<div aria-describedby="tbl-classifiers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Classifier</th>
+<th>Handles Non-linearity</th>
+<th>Interpretable</th>
+<th>OOB Error</th>
+<th>GEE Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CART</td>
+<td>Partially</td>
+<td>✓ (rules)</td>
+<td>✗</td>
+<td><code>smileCart()</code></td>
+</tr>
+<tr class="even">
+<td>Random Forest</td>
+<td>✓</td>
+<td>✗ (ensemble)</td>
+<td>✓</td>
+<td><code>smileRandomForest()</code></td>
+</tr>
+<tr class="odd">
+<td>Naïve Bayes</td>
+<td>✓ (with assumptions)</td>
+<td>Partially</td>
+<td>✗</td>
+<td><code>naiveBayes()</code></td>
+</tr>
+<tr class="even">
+<td>SVM</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td><code>libsvm()</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><span class="citation" data-cites="pal2005">(<a href="#ref-pal2005" role="doc-biblioref">Pal and Mather 2005</a>)</span> specifically compare SVM against conventional classifiers for remote sensing, finding that <strong>SVM often outperforms maximum likelihood</strong> even with small training sets — a practically important point given that high-quality labelled imagery is expensive to generate.</p>
+</section>
+<section id="accuracy-assessment-the-error-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="accuracy-assessment-the-error-matrix">1.3 Accuracy Assessment: The Error Matrix</h3>
+<p>Once a model is trained and applied, we need to quantify how well it performs. The standard tool is the <strong>error matrix</strong> (also called the confusion matrix), which cross-tabulates predicted labels against reference labels <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span>. From this matrix, several metrics can be derived:</p>
+<p><span class="math display">\[
+\text{Overall Accuracy (OA)} = \frac{\sum_{i=1}^{k} x_{ii}}{N}
+\]</span></p>
+<p>where <span class="math inline">\(x_{ii}\)</span> are the diagonal (correctly classified) counts and <span class="math inline">\(N\)</span> is the total number of test pixels.</p>
+<p>Two class-level measures are critical:</p>
+<ul>
+<li><strong>Producer’s accuracy</strong> — of all pixels that <em>are</em> class <span class="math inline">\(i\)</span> in the reference data, what fraction did we correctly classify? (related to omission error)</li>
+<li><strong>Consumer’s accuracy</strong> (user’s accuracy) — of all pixels we <em>predicted</em> as class <span class="math inline">\(i\)</span>, what fraction truly belong there? (related to commission error)</li>
+</ul>
+<p><span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span> argue that accuracy is multi-dimensional — it encompasses not just correctness but also <strong>completeness</strong>, <strong>consistency</strong>, and <strong>timeliness</strong> — and that the error matrix alone cannot capture all of these facets.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Resubstitution vs.&nbsp;Validation Accuracy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Resubstitution accuracy</strong> applies the trained model back to its own training data — this will always be optimistically high. <strong>Validation accuracy</strong> uses a held-out test set the model has never seen. Only the latter gives a meaningful estimate of how the model will generalise to unseen imagery <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span>.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="applications-of-the-content" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-the-content">2. Applications of the Content</h2>
+<section id="workshop-loading-the-study-area" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-loading-the-study-area">2.1 Workshop: Loading the Study Area</h3>
+<p>I chose <strong>Chengdu</strong> as my study area — it has a really nice mix of land cover types all within one administrative boundary: dense urban core, flat agricultural plains, river corridors, and mountain-edge forest on the western fringe. That variety should make it an interesting case for classification. Loading the study area meant filtering the FAO GAUL Level 2 dataset by <code>ADM2_CODE</code>, which for Chengdu is <strong>13255</strong>:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Load vector data --------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> dataset <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level2"</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> chengdu <span class="op">=</span> dataset<span class="op">.</span><span class="fu">filter</span>(<span class="st">'ADM2_CODE == 13255'</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">setCenter</span>(<span class="fl">104.065</span><span class="op">,</span> <span class="fl">30.659</span><span class="op">,</span> <span class="dv">9</span>)<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(chengdu<span class="op">,</span> {<span class="dt">color</span><span class="op">:</span> <span class="st">'00909F'</span><span class="op">,</span> <span class="dt">fillColor</span><span class="op">:</span> <span class="st">'00000000'</span><span class="op">,</span> <span class="dt">width</span><span class="op">:</span> <span class="dv">2</span>}<span class="op">,</span> <span class="st">'Chengdu boundary'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>One thing worth noting is that <code>ADM2_CODE</code> is a <strong>numeric</strong> field — no quotes around <code>13255</code>. Looking at Figure 2, the boundary is much larger than I expected. It covers not just the city proper but the surrounding counties under Chengdu’s administrative jurisdiction, including the mountainous northwest. This matters for classification because it means the study area includes both dense city and remote mountain terrain — quite different environments that the model needs to handle simultaneously.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week7_chengdu_boundary.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: Chengdu administrative boundary (ADM2_CODE = 13255) from FAO GAUL Level 2. The area extends well beyond the urban core into agricultural plains and mountain areas to the northwest — a much more diverse landscape than a pure “city” study might suggest.</figcaption>
+</figure>
+</div>
+</section>
+<section id="workshop-two-approaches-to-cloud-handling" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-two-approaches-to-cloud-handling">2.2 Workshop: Two Approaches to Cloud Handling</h3>
+<p>Chengdu is famously cloudy — it sits in the Sichuan Basin and locals joke that you rarely see blue sky. This made the cloud handling step particularly important. The workshop offered two strategies, and I ran both to see what the difference actually looks like in practice.</p>
+<p><strong>Approach 1 — Low cloud cover threshold per tile:</strong></p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Approach 1: Low cloud cover --------------------------------</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> divide10000 <span class="op">=</span> <span class="kw">function</span>(image) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">divide</span>(<span class="dv">10000</span>)<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> wayone <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'COPERNICUS/S2_SR_HARMONIZED'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2022-01-01'</span><span class="op">,</span> <span class="st">'2022-10-31'</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                  <span class="op">.</span><span class="fu">filterBounds</span>(chengdu)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">'CLOUDY_PIXEL_PERCENTAGE'</span><span class="op">,</span> <span class="dv">10</span>))<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> wayone_median <span class="op">=</span> wayone<span class="op">.</span><span class="fu">map</span>(divide10000)<span class="op">.</span><span class="fu">median</span>()<span class="op">.</span><span class="fu">clip</span>(chengdu)<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> visualization <span class="op">=</span> {<span class="dt">min</span><span class="op">:</span> <span class="fl">0.0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="fl">0.15</span><span class="op">,</span> <span class="dt">bands</span><span class="op">:</span> [<span class="st">'B4'</span><span class="op">,</span> <span class="st">'B3'</span><span class="op">,</span> <span class="st">'B2'</span>]}<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(wayone_median<span class="op">,</span> visualization<span class="op">,</span> <span class="st">'Way1: Low cloud filter'</span>)<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Way1 image count:'</span><span class="op">,</span> wayone<span class="op">.</span><span class="fu">size</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><strong>Approach 2 — Pixel-level cloud masking using QA60 bitmask:</strong></p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Approach 2: QA60 cloud mask --------------------------------</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">maskS2clouds</span>(image) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> qa <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">'QA60'</span>)<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> cloudBitMask <span class="op">=</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">10</span><span class="op">;</span>   <span class="co">// Bit 10 = clouds</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> cirrusBitMask <span class="op">=</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">11</span><span class="op">;</span>  <span class="co">// Bit 11 = cirrus</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> mask <span class="op">=</span> qa<span class="op">.</span><span class="fu">bitwiseAnd</span>(cloudBitMask)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">and</span>(qa<span class="op">.</span><span class="fu">bitwiseAnd</span>(cirrusBitMask)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>))<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">updateMask</span>(mask)<span class="op">.</span><span class="fu">divide</span>(<span class="dv">10000</span>)<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> waytwo <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'COPERNICUS/S2_SR_HARMONIZED'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2022-01-01'</span><span class="op">,</span> <span class="st">'2022-10-31'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                  <span class="op">.</span><span class="fu">filterBounds</span>(chengdu)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">'CLOUDY_PIXEL_PERCENTAGE'</span><span class="op">,</span> <span class="dv">20</span>))</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                  <span class="op">.</span><span class="fu">map</span>(maskS2clouds)<span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> waytwo_clip <span class="op">=</span> waytwo<span class="op">.</span><span class="fu">median</span>()<span class="op">.</span><span class="fu">clip</span>(chengdu)<span class="op">;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(waytwo_clip<span class="op">,</span> visualization<span class="op">,</span> <span class="st">'Way2: QA60 mask + median'</span>)<span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Way2 image count:'</span><span class="op">,</span> waytwo<span class="op">.</span><span class="fu">size</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why Take the Median?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Even after pixel-level cloud masking, some artefacts remain. Taking the <strong>median</strong> across all images in the collection causes clouds — which have very high reflectance — to be pushed out of the middle of the distribution, leaving cleaner composite pixels <span class="citation" data-cites="gee_book2023">(<a href="#ref-gee_book2023" role="doc-biblioref">Cardille et al. 2023, chap. F2.1</a>)</span>.</p>
+</div>
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week7_cloud_way1.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3-A: Approach 1 — tile-level cloud filter (≤10%). A clear seam line is visible diagonally across the image where two Sentinel-2 tiles from different dates meet.</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week7_cloud_way2.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3-B: Approach 2 — QA60 pixel-level mask + median composite (≤20%). The composite uses more images and masks cloudy pixels individually, but the tile seam remains.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><em>Figure 3: Comparing the two cloud-handling approaches over Chengdu. Both outputs share a visible brightness discontinuity where two satellite tiles meet — this suggests residual scene-to-scene differences that were not fully resolved by either cloud-handling strategy.</em></p>
+<p>Looking at the two outputs side by side, the differences are subtler than I expected. Both retain the diagonal <strong>tile seam</strong> where two Sentinel-2 scenes join. What stands out more to me is the northwest corner: there is clearly <strong>snow on the mountain peaks</strong>, which shows up as bright white. That became relevant later when I tried to classify the image.</p>
+</section>
+<section id="workshop-drawing-training-data-and-cart-classification" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-drawing-training-data-and-cart-classification">2.3 Workshop: Drawing Training Data and CART Classification</h3>
+<p>This was the part of the practical that required the most judgement. I digitised <strong>six land cover classes</strong> as polygons directly on the composite image in GEE — low-albedo urban, water, high-albedo urban, grass, bare earth, and forest. For each class I picked areas that looked spectrally clean and unambiguous on the true-colour composite.</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Training polygons --------------------------------</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> polygons <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>([</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(urban_low<span class="op">,</span>  {<span class="st">'class'</span><span class="op">:</span> <span class="dv">1</span>})<span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(water<span class="op">,</span>      {<span class="st">'class'</span><span class="op">:</span> <span class="dv">2</span>})<span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(urban_high<span class="op">,</span> {<span class="st">'class'</span><span class="op">:</span> <span class="dv">3</span>})<span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(grass<span class="op">,</span>      {<span class="st">'class'</span><span class="op">:</span> <span class="dv">4</span>})<span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(bare_earth<span class="op">,</span> {<span class="st">'class'</span><span class="op">:</span> <span class="dv">5</span>})<span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(forest<span class="op">,</span>     {<span class="st">'class'</span><span class="op">:</span> <span class="dv">6</span>})<span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>])<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> bands <span class="op">=</span> [<span class="st">'B2'</span><span class="op">,</span> <span class="st">'B3'</span><span class="op">,</span> <span class="st">'B4'</span><span class="op">,</span> <span class="st">'B5'</span><span class="op">,</span> <span class="st">'B6'</span><span class="op">,</span> <span class="st">'B7'</span>]<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> classProperty <span class="op">=</span> <span class="st">'class'</span><span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> training <span class="op">=</span> waytwo_clip<span class="op">.</span><span class="fu">select</span>(bands)<span class="op">.</span><span class="fu">sampleRegions</span>({</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">collection</span><span class="op">:</span> polygons<span class="op">,</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">properties</span><span class="op">:</span> [classProperty]<span class="op">,</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">scale</span><span class="op">:</span> <span class="dv">10</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Train CART --------------------------------</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> classifier <span class="op">=</span> ee<span class="op">.</span><span class="at">Classifier</span><span class="op">.</span><span class="fu">smileCart</span>()<span class="op">.</span><span class="fu">train</span>({</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">features</span><span class="op">:</span> training<span class="op">,</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">classProperty</span><span class="op">:</span> classProperty<span class="op">,</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> classified <span class="op">=</span> waytwo_clip<span class="op">.</span><span class="fu">classify</span>(classifier)<span class="op">;</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(classified<span class="op">,</span> {</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">6</span><span class="op">,</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> [<span class="st">'d99282'</span><span class="op">,</span> <span class="st">'466b9f'</span><span class="op">,</span> <span class="st">'ab0000'</span><span class="op">,</span> <span class="st">'dfdfc2'</span><span class="op">,</span> <span class="st">'b3ac9f'</span><span class="op">,</span> <span class="st">'1c5f2c'</span>]</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> <span class="st">'CART classification'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week7_cart_classified.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: CART classification output for Chengdu. Red (high-albedo urban) dominates the northwestern mountain area, where extensive built-up land is unlikely, suggesting misclassification caused by spectral confusion with snow or other bright mountain surfaces.</figcaption>
+</figure>
+</div>
+<p>The result (Figure 4) was more chaotic than I expected, and understanding why took some thought. The most obvious problem is that <strong>red pixels (high-albedo urban) cover the entire northwestern mountain area</strong>, which is visibly forested and snow-capped in the composite — clearly not urban. This is a fundamental spectral confusion issue: <strong>fresh snow and high-reflectance rooftops can appear spectrally similar across the optical bands used here (B2–B7)</strong>. The CART classifier simply cannot tell them apart because in the feature space they look the same <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>.</p>
+<p>This is not something that can be fixed by drawing better training polygons. You could be absolutely precise about where you place <code>urban_high</code> samples — only on rooftops in the city centre — but the classifier will still assign that class to anything in the image with similar reflectance values, including snow. The only real solutions would be to either exclude winter imagery (so no snow), add <strong>NIR or SWIR bands</strong> where snow and built surfaces do differ, or incorporate a <strong>DEM</strong> to mask out high-elevation pixels before classification <span class="citation" data-cites="gisgeography2014">(<a href="#ref-gisgeography2014" role="doc-biblioref">GISGeography 2014</a>)</span>.</p>
+</section>
+<section id="workshop-pixel-level-random-forest-with-accuracy-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-pixel-level-random-forest-with-accuracy-assessment">2.4 Workshop: Pixel-Level Random Forest with Accuracy Assessment</h3>
+<p>Moving to Random Forest was meant to improve on CART by averaging across many trees. The code generates random sample points within each class polygon, splits them 70/30 for training and validation, and trains an ensemble classifier. One practical issue: running 100 trees with 1,000 points per class on a study area this size hit GEE’s <strong>memory limit</strong>, so I reduced to 50 trees and 200 points per class to get it running:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Pixel-level sampling --------------------------------</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pixel_number <span class="op">=</span> <span class="dv">200</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> urban_low_points  <span class="op">=</span> ee<span class="op">.</span><span class="at">FeatureCollection</span><span class="op">.</span><span class="fu">randomPoints</span>(urban_low<span class="op">,</span>  pixel_number)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(i){ <span class="cf">return</span> i<span class="op">.</span><span class="fu">set</span>({<span class="st">'class'</span><span class="op">:</span> <span class="dv">1</span>})<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> water_points      <span class="op">=</span> ee<span class="op">.</span><span class="at">FeatureCollection</span><span class="op">.</span><span class="fu">randomPoints</span>(water<span class="op">,</span>      pixel_number)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(i){ <span class="cf">return</span> i<span class="op">.</span><span class="fu">set</span>({<span class="st">'class'</span><span class="op">:</span> <span class="dv">2</span>})<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> urban_high_points <span class="op">=</span> ee<span class="op">.</span><span class="at">FeatureCollection</span><span class="op">.</span><span class="fu">randomPoints</span>(urban_high<span class="op">,</span> pixel_number)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(i){ <span class="cf">return</span> i<span class="op">.</span><span class="fu">set</span>({<span class="st">'class'</span><span class="op">:</span> <span class="dv">3</span>})<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> grass_points      <span class="op">=</span> ee<span class="op">.</span><span class="at">FeatureCollection</span><span class="op">.</span><span class="fu">randomPoints</span>(grass<span class="op">,</span>      pixel_number)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(i){ <span class="cf">return</span> i<span class="op">.</span><span class="fu">set</span>({<span class="st">'class'</span><span class="op">:</span> <span class="dv">4</span>})<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> bare_earth_points <span class="op">=</span> ee<span class="op">.</span><span class="at">FeatureCollection</span><span class="op">.</span><span class="fu">randomPoints</span>(bare_earth<span class="op">,</span> pixel_number)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(i){ <span class="cf">return</span> i<span class="op">.</span><span class="fu">set</span>({<span class="st">'class'</span><span class="op">:</span> <span class="dv">5</span>})<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> forest_points     <span class="op">=</span> ee<span class="op">.</span><span class="at">FeatureCollection</span><span class="op">.</span><span class="fu">randomPoints</span>(forest<span class="op">,</span>     pixel_number)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(i){ <span class="cf">return</span> i<span class="op">.</span><span class="fu">set</span>({<span class="st">'class'</span><span class="op">:</span> <span class="dv">6</span>})<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> point_sample <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>([</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  urban_low_points<span class="op">,</span> water_points<span class="op">,</span> urban_high_points<span class="op">,</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  grass_points<span class="op">,</span> bare_earth_points<span class="op">,</span> forest_points</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>])<span class="op">.</span><span class="fu">flatten</span>()<span class="op">.</span><span class="fu">randomColumn</span>()<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> split <span class="op">=</span> <span class="fl">0.7</span><span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> training_sample   <span class="op">=</span> point_sample<span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">'random'</span><span class="op">,</span> split))<span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> validation_sample <span class="op">=</span> point_sample<span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">gte</span>(<span class="st">'random'</span><span class="op">,</span> split))<span class="op">;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> training   <span class="op">=</span> waytwo_clip<span class="op">.</span><span class="fu">select</span>(bands)<span class="op">.</span><span class="fu">sampleRegions</span>({<span class="dt">collection</span><span class="op">:</span> training_sample<span class="op">,</span>   <span class="dt">properties</span><span class="op">:</span> [<span class="st">'class'</span>]<span class="op">,</span> <span class="dt">scale</span><span class="op">:</span> <span class="dv">10</span>})<span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> validation <span class="op">=</span> waytwo_clip<span class="op">.</span><span class="fu">select</span>(bands)<span class="op">.</span><span class="fu">sampleRegions</span>({<span class="dt">collection</span><span class="op">:</span> validation_sample<span class="op">,</span> <span class="dt">properties</span><span class="op">:</span> [<span class="st">'class'</span>]<span class="op">,</span> <span class="dt">scale</span><span class="op">:</span> <span class="dv">10</span>})<span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Train &amp; evaluate RF --------------------------------</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> rf1_pixel <span class="op">=</span> ee<span class="op">.</span><span class="at">Classifier</span><span class="op">.</span><span class="fu">smileRandomForest</span>(<span class="dv">50</span>)<span class="op">.</span><span class="fu">train</span>(training<span class="op">,</span> <span class="st">'class'</span>)<span class="op">;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> rf2_pixel <span class="op">=</span> waytwo_clip<span class="op">.</span><span class="fu">classify</span>(rf1_pixel)<span class="op">;</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(rf2_pixel<span class="op">,</span> {</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">6</span><span class="op">,</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> [<span class="st">'d99282'</span><span class="op">,</span> <span class="st">'466b9f'</span><span class="op">,</span> <span class="st">'ab0000'</span><span class="op">,</span> <span class="st">'dfdfc2'</span><span class="op">,</span> <span class="st">'b3ac9f'</span><span class="op">,</span> <span class="st">'1c5f2c'</span>]</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> <span class="st">'RF classification'</span>)<span class="op">;</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> validated    <span class="op">=</span> validation<span class="op">.</span><span class="fu">classify</span>(rf1_pixel)<span class="op">;</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> testAccuracy <span class="op">=</span> validated<span class="op">.</span><span class="fu">errorMatrix</span>(<span class="st">'class'</span><span class="op">,</span> <span class="st">'classification'</span>)<span class="op">;</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation error matrix: '</span><span class="op">,</span> testAccuracy)<span class="op">;</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation overall accuracy: '</span><span class="op">,</span> testAccuracy<span class="op">.</span><span class="fu">accuracy</span>())<span class="op">;</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Consumer accuracy: '</span><span class="op">,</span> testAccuracy<span class="op">.</span><span class="fu">consumersAccuracy</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding the Three Accuracy Figures
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When running the Random Forest, GEE reports three different accuracy numbers. <strong>OOB error</strong> comes from the RF’s internal bootstrapping. <strong>Resubstitution accuracy</strong> re-applies the model to its own training data. <strong>Validation accuracy</strong> uses the held-out test set. Only the last one reflects real-world performance — and the difference between resubstitution and validation accuracy is a direct measure of <strong>overfitting</strong> <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span>.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week7_rf_accuracy.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: Random Forest validation results in the GEE Console. Overall accuracy is 82.4%, with per-class consumer accuracy ranging from 77.1% (forest) to 89.5% (urban_high).</figcaption>
+</figure>
+</div>
+<div id="tbl-accuracy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-accuracy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Random Forest validation accuracy by class
+</figcaption>
+<div aria-describedby="tbl-accuracy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Consumer Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>urban_low</td>
+<td>84.1%</td>
+</tr>
+<tr class="even">
+<td>water</td>
+<td>83.3%</td>
+</tr>
+<tr class="odd">
+<td>urban_high</td>
+<td>89.5%</td>
+</tr>
+<tr class="even">
+<td>grass</td>
+<td>77.4%</td>
+</tr>
+<tr class="odd">
+<td>bare_earth</td>
+<td>83.3%</td>
+</tr>
+<tr class="even">
+<td>forest</td>
+<td>77.1%</td>
+</tr>
+<tr class="odd">
+<td><strong>Overall</strong></td>
+<td><strong>82.4%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The headline <strong>82.4% overall accuracy</strong> looks decent on paper, but the map output still looks fragmented in the same way as CART — the snow/urban confusion in the northwest is still there. This is an important thing to sit with: the accuracy figure only tells you how well the model performed on the test pixels, which were sampled from the same polygons as the training data. If those polygon areas are spectrally unrepresentative of the rest of the image, the number flatters the actual result. As <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span> put it, accuracy has multiple dimensions — internal consistency and external validity are not the same thing.</p>
+</section>
+<section id="literature-applications-of-supervised-classification" class="level3">
+<h3 class="anchored" data-anchor-id="literature-applications-of-supervised-classification">2.5 Literature Applications of Supervised Classification</h3>
+<p><span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015, chap. 9</a>)</span> provides the theoretical grounding for these results — noting that the choice of training sample size, spatial distribution, and the <strong>separability of spectral classes</strong> all profoundly affect output quality. The Chengdu results illustrate this precisely: despite careful polygon placement, the spectral separability between classes was compromised by atmospheric effects.</p>
+<p>At a practical research level, <span class="citation" data-cites="pal2005">(<a href="#ref-pal2005" role="doc-biblioref">Pal and Mather 2005</a>)</span> demonstrated that <strong>SVM outperforms maximum likelihood classification</strong> with small training sets. Given the memory constraints encountered in this practical — which forced reduction to only 200 training points per class — SVM’s sample efficiency advantage becomes practically relevant. <span class="citation" data-cites="gisgeography2014">(<a href="#ref-gisgeography2014" role="doc-biblioref">GISGeography 2014</a>)</span> surveys how classification techniques have evolved from simple parallelepiped methods towards ensemble and deep learning approaches, and <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span> argues that accuracy reporting in remote sensing literature is inconsistent, often reporting only overall accuracy while ignoring producer’s and consumer’s accuracy — exactly the kind of nuance that distinguishes a rigorous analysis from a superficial one.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week7_confusion_matrix_diagram.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 6: Example confusion matrix structure showing producer’s accuracy (row-wise), consumer’s accuracy (column-wise), and overall accuracy (diagonal sum). Source: based on <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span></figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="personal-reflection" class="level2">
+<h2 class="anchored" data-anchor-id="personal-reflection">3. Personal Reflection</h2>
+<section id="snow-looks-like-rooftops-and-thats-a-real-problem" class="level3">
+<h3 class="anchored" data-anchor-id="snow-looks-like-rooftops-and-thats-a-real-problem">3.1 Snow Looks Like Rooftops, and That’s a Real Problem</h3>
+<p>The thing that stuck with me most this week was the snow-urban confusion. I knew conceptually that high-albedo surfaces could cause misclassification, but seeing it play out so dramatically in the Chengdu results made it feel much more concrete. The classifier isn’t doing anything wrong — it genuinely cannot distinguish between fresh snow and high-reflectance rooftops using the optical bands alone. They look identical in reflectance space. What this means in practice is that the accuracy number (82.4%) and the map quality are telling different stories. The accuracy comes from test pixels drawn from the same class polygons as the training data, all of which were located in the flat urban area where snow is not an issue. Out in the mountains, the model is confidently wrong, and the accuracy metric never captures that.</p>
+<p>This connects to something <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span> argue quite forcefully: accuracy is not one thing. The error matrix captures a very specific kind of accuracy — whether the model’s predictions match the reference labels on a held-out sample — but says nothing about spatial consistency, thematic completeness, or whether the classification makes geographic sense. I think this is worth being quite critical about in a research context: papers that report 90%+ accuracy on remote sensing classifications often do so on test data that isn’t spatially independent from training data, which inflates the apparent performance.</p>
+<p>Comparing CART and Random Forest was also interesting. Random Forest is supposed to reduce variance by averaging across many trees, but both outputs looked similarly fragmented here. That suggests the issue is upstream of the classifier — the spectral separability between classes is limited in these bands under Chengdu’s atmospheric conditions. If I were doing this properly I’d probably want to add <strong>SAR data</strong> (which is not affected by haze) or <strong>SWIR bands</strong> where snow and built surfaces do diverge, before trying to classify <span class="citation" data-cites="schultetobuhne2018">(<a href="#ref-schultetobuhne2018" role="doc-biblioref">Schulte to Bühne and Pettorelli 2018</a>)</span>. That feels like a more productive next step than tuning the classifier.</p>
+<p>Looking further ahead, Chengdu’s <strong>Park City</strong> initiative is a genuinely interesting application of this kind of workflow — trying to track whether green space is actually expanding alongside the city rather than just in policy documents. But the results this week are a reminder that getting a reliable land cover classification of Chengdu is harder than it looks, and the atmospheric problem would need to be addressed before you could trust any trend analysis built on top of it.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A Caution on Accuracy Figures in Atmospherically Challenging Regions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The overall accuracy of 82.4% only reflects performance on test pixels sampled from the same training areas — all in the flat urban zone where atmospheric haze is the main issue. In the mountain northwest, where snow causes severe spectral confusion with high-albedo urban surfaces, the classifier is confidently wrong and the accuracy metric never sees it. Always look at the map alongside the numbers <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span>.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">4. References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-barsi2018" class="csl-entry" role="listitem">
+Barsi, Árpád, Zsófia Kugler, István László, György Szabó, and Hasan M. Abdulmutalib. 2018. <span>“Accuracy Dimensions in Remote Sensing.”</span> <em>International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences</em> XLII-3/W4: 61–67. <a href="https://doi.org/10.5194/isprs-archives-XLII-3-W4-61-2018">https://doi.org/10.5194/isprs-archives-XLII-3-W4-61-2018</a>.
+</div>
+<div id="ref-gee_book2023" class="csl-entry" role="listitem">
+Cardille, Jeffrey A., Morgan A. Crowley, David Saah, and Nicholas E. Clinton, eds. 2023. <em>Cloud-<span>Based</span> <span>Remote</span> <span>Sensing</span> with <span>Google</span> <span>Earth</span> <span>Engine</span>: <span>Fundamentals</span> and <span>Applications</span></em>. Springer. <a href="https://doi.org/10.1007/978-3-031-26588-4">https://doi.org/10.1007/978-3-031-26588-4</a>.
+</div>
+<div id="ref-gisgeography2014" class="csl-entry" role="listitem">
+GISGeography. 2014. <span>“Image Classification Techniques in Remote Sensing.”</span> Online. <a href="https://gisgeography.com/image-classification-techniques-remote-sensing/">https://gisgeography.com/image-classification-techniques-remote-sensing/</a>.
+</div>
+<div id="ref-jensen2015" class="csl-entry" role="listitem">
+Jensen, John R. 2015. <em>Introductory Digital Image Processing: A Remote Sensing Perspective</em>. 4th ed. Upper Saddle River, NJ: Prentice-Hall Inc. / Pearson. <a href="https://books.google.com/books/about/Introductory_Digital_Image_Processing.html?id=BWx3CgAAQBAJ">https://books.google.com/books/about/Introductory_Digital_Image_Processing.html?id=BWx3CgAAQBAJ</a>.
+</div>
+<div id="ref-pal2005" class="csl-entry" role="listitem">
+Pal, M., and P. M. Mather. 2005. <span>“Support Vector Machines for Classification in Remote Sensing.”</span> <em>International Journal of Remote Sensing</em> 26 (5): 1007–11. <a href="https://doi.org/10.1080/01431160512331337378">https://doi.org/10.1080/01431160512331337378</a>.
+</div>
+<div id="ref-schultetobuhne2018" class="csl-entry" role="listitem">
+Schulte to Bühne, H., and N. Pettorelli. 2018. <span>“Better Together: Integrating and Fusing Multispectral and Radar Satellite Imagery to Inform Biodiversity Monitoring, Ecological Research and Conservation Science.”</span> <em>Methods in Ecology and Evolution</em> 9 (4): 849–65. <a href="https://doi.org/10.1111/2041-210X.12942">https://doi.org/10.1111/2041-210X.12942</a>.
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<img id="floating-corner-image" src="images/right-corner.jpg" alt="corner image">
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const img = document.getElementById("floating-corner-image");
+
+  let lastScrollY = window.scrollY;
+
+  let ticking = false;
+
+  let resetTimer;
+
+
+
+  function handleScroll() {
+
+    const currentScrollY = window.scrollY;
+
+    const delta = currentScrollY - lastScrollY;
+
+
+
+    // 限制位移幅度，避免太夸张
+
+    let offset = 0;
+
+    if (delta > 0) {
+
+      // 向下滚动，图片往上
+
+      offset = -20;
+
+    } else if (delta < 0) {
+
+      // 向上滚动，图片往下
+
+      offset = 20;
+
+    }
+
+
+
+    img.style.transform = `translateY(${offset}px)`;
+
+
+
+    // 清除旧的回弹计时
+
+    clearTimeout(resetTimer);
+
+
+
+    // 停止滚动后回到原位
+
+    resetTimer = setTimeout(() => {
+
+      img.style.transform = "translateY(0)";
+
+    }, 120);
+
+
+
+    lastScrollY = currentScrollY;
+
+    ticking = false;
+
+  }
+
+
+
+  window.addEventListener("scroll", () => {
+
+    if (!ticking) {
+
+      window.requestAnimationFrame(handleScroll);
+
+      ticking = true;
+
+    }
+
+  });
+
+});
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week7.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
