@@ -43,6 +43,8 @@ website:
         file: week7.qmd
       - text: "Week 8: Classification II"
         file: week8.qmd   
+      - text: "Week 9: Temperature"
+        file: week9.qmd  
 format:
   html:
     

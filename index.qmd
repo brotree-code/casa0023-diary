@@ -23,6 +23,7 @@ Each weekly entry follows the same structure: a **summary** of the key ideas fro
 | [Week 6](week6.qmd) | Google Earth Engine I | Beijing | GEE fundamentals, GLCM texture, PCA |
 | [Week 7](week7.qmd) | Classification I | Chengdu | CART, Random Forest, accuracy assessment |
 | [Week 8](week8.qmd) | Classification II | Chengdu | Spectral unmixing, OBIA, SNIC |
+| [Week 9](week9.qmd) | Temperature & Urban Heat | Beijing | Landsat LST, MODIS time series, heat index, Mann-Kendall |
 
 ---
 
@@ -42,4 +43,4 @@ Each weekly entry follows the same structure: a **summary** of the key ideas fro
 
 # How I'm Working
 
-The workflow evolved across the term. Weeks 1–4 used **R / RStudio** and **QGIS** for local processing, moving to **Google Earth Engine (JavaScript)** from Week 6 onwards. The study areas shifted from my hometown Guiyang, to Beijing, to Ahmedabad, and finally to Chengdu for the classification weeks. Large EO datasets are not stored in the GitHub repository — only the figures used in each diary entry are committed there.
+The workflow evolved across the term. Weeks 1–4 used **R / RStudio** and **QGIS** for local processing, moving to **Google Earth Engine (JavaScript)** from Week 6 onwards — with R returning in Week 9 for post-processing and visualisation alongside GEE. The study areas shifted from my hometown Guiyang, to Beijing, to Ahmedabad, then to Chengdu for the classification weeks, and back to Beijing for the temperature analysis in Week 9. Large EO datasets are not stored in the GitHub repository — only the figures used in each diary entry are committed there.

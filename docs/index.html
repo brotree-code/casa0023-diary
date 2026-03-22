@@ -335,6 +335,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Week 8: Classification II</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9: Temperature</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -449,6 +455,12 @@ ul.task-list li input[type="checkbox"] {
 <td>Chengdu</td>
 <td>Spectral unmixing, OBIA, SNIC</td>
 </tr>
+<tr class="even">
+<td><a href="./week9.html">Week 9</a></td>
+<td>Temperature &amp; Urban Heat</td>
+<td>Beijing</td>
+<td>Landsat LST, MODIS time series, heat index, Mann-Kendall</td>
+</tr>
 </tbody>
 </table>
 <hr>
@@ -471,7 +483,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="how-im-working" class="level1">
 <h1>How I’m Working</h1>
-<p>The workflow evolved across the term. Weeks 1–4 used <strong>R / RStudio</strong> and <strong>QGIS</strong> for local processing, moving to <strong>Google Earth Engine (JavaScript)</strong> from Week 6 onwards. The study areas shifted from my hometown Guiyang, to Beijing, to Ahmedabad, and finally to Chengdu for the classification weeks. Large EO datasets are not stored in the GitHub repository — only the figures used in each diary entry are committed there.</p>
+<p>The workflow evolved across the term. Weeks 1–4 used <strong>R / RStudio</strong> and <strong>QGIS</strong> for local processing, moving to <strong>Google Earth Engine (JavaScript)</strong> from Week 6 onwards — with R returning in Week 9 for post-processing and visualisation alongside GEE. The study areas shifted from my hometown Guiyang, to Beijing, to Ahmedabad, then to Chengdu for the classification weeks, and back to Beijing for the temperature analysis in Week 9. Large EO datasets are not stored in the GitHub repository — only the figures used in each diary entry are committed there.</p>
 
 
 </section>
@@ -503,19 +515,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    // 限制位移幅度，避免太夸张
+    
 
     let offset = 0;
 
     if (delta > 0) {
 
-      // 向下滚动，图片往上
+   
 
       offset = -20;
 
     } else if (delta < 0) {
 
-      // 向上滚动，图片往下
+     
 
       offset = 20;
 
@@ -527,13 +539,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    // 清除旧的回弹计时
+
 
     clearTimeout(resetTimer);
 
 
 
-    // 停止滚动后回到原位
+   
 
     resetTimer = setTimeout(() => {
 
