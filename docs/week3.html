@@ -413,6 +413,12 @@ window.Quarto = {
  <span class="menu-text">Week 7: Classification I</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8: Classification II</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -485,10 +491,8 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="content-summary">1. Content Summary</h2>
 <section id="physical-fundamentals-and-correction-necessity" class="level3">
 <h3 class="anchored" data-anchor-id="physical-fundamentals-and-correction-necessity">1.1 Physical Fundamentals and Correction Necessity</h3>
-<p>This week changed the way I think about satellite imagery. I used to see it as something similar to a digital photo, but now I understand that it is actually a measurement of electromagnetic radiation. Because of that, the original Digital Numbers (DN) cannot be used directly without some form of correction.</p>
-<ul>
-<li><strong>Radiometric Calibration</strong>: This is the first step in turning raw DN values into physically meaningful spectral radiance.</li>
-</ul>
+<p>This week changed the way I think about satellite imagery. I used to see it as something similar to a digital photo, but now I understand that it is actually a measurement of <strong>electromagnetic radiation</strong>. Because of that, the original <strong>Digital Numbers (DN)</strong> cannot be used directly without some form of correction.</p>
+<p>The first step is <strong>radiometric calibration</strong>, which converts raw DN values into physically meaningful <strong>spectral radiance</strong>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -506,13 +510,13 @@ Core Concept: Radiance vs.&nbsp;Reflectance
 <section id="geometric-and-atmospheric-corrections" class="level3">
 <h3 class="anchored" data-anchor-id="geometric-and-atmospheric-corrections">1.2 Geometric and Atmospheric Corrections</h3>
 <ul>
-<li><strong>Geometric Distortions</strong>: These can happen because of the sensor angle or terrain effects, and they are usually corrected with Ground Control Points (GCPs).</li>
-<li><strong>Atmospheric Correction</strong>: The atmosphere can scatter and absorb light, which affects the image. <strong>Dark Object Subtraction (DOS)</strong> is a traditional way to reduce this effect by assuming the darkest pixels should have close to zero reflectance <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>.</li>
+<li><strong>Geometric distortions</strong> — caused by sensor angle or terrain effects, usually corrected with Ground Control Points (GCPs)</li>
+<li><strong>Atmospheric correction</strong> — the atmosphere scatters and absorbs light, shifting apparent reflectance values; <strong>Dark Object Subtraction (DOS)</strong> addresses this by treating the darkest pixels as a near-zero reflectance reference <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span></li>
 </ul>
 </section>
 <section id="topographic-correction-and-enhancements" class="level3">
 <h3 class="anchored" data-anchor-id="topographic-correction-and-enhancements">1.3 Topographic Correction and Enhancements</h3>
-<p>In mountainous areas, slope and aspect can change the amount of sunlight reaching the surface, which affects reflectance values. The <strong>Cosine Correction Model</strong> is one way to reduce this terrain effect by using the incidence angle: <span class="math display">\[\cos i = \cos \theta_0 \cos \theta_s + \sin \theta_0 \sin \theta_s \cos(\Phi_0 - \Phi_s)\]</span></p>
+<p>In mountainous areas, <strong>slope and aspect</strong> can change the amount of sunlight reaching the surface, which affects reflectance values. The <strong>Cosine Correction Model</strong> is one way to reduce this terrain effect by using the <strong>incidence angle</strong>: <span class="math display">\[\cos i = \cos \theta_0 \cos \theta_s + \sin \theta_0 \sin \theta_s \cos(\Phi_0 - \Phi_s)\]</span></p>
 <hr>
 </section>
 </section>
@@ -544,7 +548,7 @@ Why bypass DOS Atmospheric Correction?
 </section>
 <section id="mosaicking-and-rescaling-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="mosaicking-and-rescaling-workflow">2.2 Mosaicking and Rescaling Workflow</h3>
-<p>Because Landsat data is collected in separate tiles, I first needed to merge the two neighbouring scenes. I used the <code>terra::mosaic()</code> function, and the overlap was averaged with the <code>mean</code> option. This helped reduce obvious boundaries between the two scenes, although some small differences may still remain because they were taken on different dates.</p>
+<p>Because Landsat data is collected in separate tiles, I first needed to merge the two neighbouring scenes. I used the <code>terra::mosaic()</code> function, and the overlap was averaged with the <code>mean</code> option. This helped reduce obvious <strong>seam lines</strong> between the two scenes, although some small differences may still remain because they were taken on different dates.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -617,7 +621,7 @@ Dealing with Non-physical Anomalies
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p><strong>Interpretation of Figure 3:</strong> The NDVI map shows generally low vegetation activity across Beijing in early February, which is consistent with winter dormancy. Slightly higher values are visible in some mountain and vegetated areas. Some white gaps remain after cleaning, indicating pixels with invalid or unstable NDVI values that may be linked to residual cloud contamination, very bright surfaces, water, or other problematic pixels. This highlights the importance of quality control before interpretation.</p>
+<p><strong>Interpretation of Figure 3:</strong> The NDVI map shows generally low vegetation activity across Beijing in early February, consistent with <strong>winter dormancy</strong>. Slightly higher values are visible in some mountain and vegetated areas. Some white gaps remain after cleaning, indicating pixels with invalid or unstable NDVI values that may be linked to <strong>residual cloud contamination</strong>, very bright surfaces, water, or other problematic pixels. This highlights the importance of <strong>quality control</strong> before interpretation.</p>
 </section>
 <section id="glcm-texture-structural-interpretation" class="level4">
 <h4 class="anchored" data-anchor-id="glcm-texture-structural-interpretation">GLCM Texture: Structural Interpretation</h4>
@@ -642,7 +646,7 @@ Dealing with Non-physical Anomalies
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p><strong>Interpretation of Figure 4:</strong> The GLCM homogeneity surface ranges from about 0.65 to 1.00 and appears fairly smooth overall. Lower homogeneity is more visible in parts of the urban plain, where dense built-up structures create greater local variation. By contrast, many northern and peripheral areas appear more homogeneous, although this pattern should be interpreted carefully because the 7x7 window may smooth fine-scale differences and mountain terrain can also introduce local texture complexity.</p>
+<p><strong>Interpretation of Figure 4:</strong> The <strong>GLCM homogeneity</strong> surface ranges from about 0.65 to 1.00 and appears fairly smooth overall. Lower homogeneity is more visible in parts of the <strong>urban plain</strong>, where dense built-up structures create greater local variation. By contrast, many northern and peripheral areas appear more homogeneous, although this pattern should be interpreted carefully because the <strong>7×7 window</strong> may smooth fine-scale differences and mountain terrain can also introduce local texture complexity.</p>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
@@ -667,7 +671,7 @@ Dealing with Non-physical Anomalies
 </section>
 <section id="dimensionality-reduction-via-pca" class="level3">
 <h3 class="anchored" data-anchor-id="dimensionality-reduction-via-pca">2.4 Dimensionality Reduction via PCA</h3>
-<p>Fusing spectral data with spatial metrics increases dataset dimensionality, making Principal Component Analysis (PCA) a highly effective tool to compress the combined multi-band stack into uncorrelated components without losing critical environmental information <span class="citation" data-cites="schultetobuhne2018">(<a href="#ref-schultetobuhne2018" role="doc-biblioref">Schulte to Bühne and Pettorelli 2018</a>)</span>.</p>
+<p>Fusing spectral data with spatial metrics increases dimensionality, and <strong>PCA</strong> is a practical way to compress the combined multi-band stack into <strong>uncorrelated components</strong> without discarding too much information <span class="citation" data-cites="schultetobuhne2018">(<a href="#ref-schultetobuhne2018" role="doc-biblioref">Schulte to Bühne and Pettorelli 2018</a>)</span>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -694,7 +698,7 @@ Dealing with Non-physical Anomalies
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p><strong>Interpretation of Figure 5 &amp; 6:</strong> The summary table shows that PC1 explains approximately 76% of the standardized variance. The spatial projection of PC1 suggests that, in addition to broad landscape differences, some of the highest values are likely associated with residual clouds or haze that remain visible in the true-colour composite. Because PCA captures the strongest sources of variance, it is sensitive to extreme reflectance values. This suggests that incomplete cloud masking may have influenced the first component and therefore affected downstream interpretation.</p>
+<p><strong>Interpretation of Figure 5 &amp; 6:</strong> The summary table shows that <strong>PC1 explains approximately 76%</strong> of the standardized variance. The spatial projection of PC1 suggests that, in addition to broad landscape differences, some of the highest values are likely associated with <strong>residual clouds or haze</strong> that remain visible in the true-colour composite. Because PCA captures the strongest sources of variance, it is sensitive to <strong>extreme reflectance values</strong>. This suggests that <strong>incomplete cloud masking</strong> may have influenced the first component and therefore affected downstream interpretation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/pca_summary.png" class="img-fluid figure-img"></p>
@@ -714,15 +718,11 @@ Dealing with Non-physical Anomalies
 <h2 class="anchored" data-anchor-id="personal-reflection">3. Personal Reflection</h2>
 <section id="understanding-the-black-box" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-the-black-box">3.1 Understanding the “Black Box”</h3>
-<p>Even though modern platforms now provide Analysis Ready Data (ARD), I think it is still important to understand what is happening behind the scenes. If I work with raw drone imagery or data from less processed sensors in the future, I will need to understand methods like DOS and radiometric calibration in order to make sure my results are reliable.</p>
+<p>Even though modern platforms provide <strong>Analysis Ready Data (ARD)</strong>, I think it is still worth understanding what is happening underneath. If I work with raw drone imagery or less processed sensors later, knowing methods like <strong>DOS</strong> and <strong>radiometric calibration</strong> will be necessary to trust the results.</p>
 </section>
 <section id="methodological-limitations-and-future-improvements" class="level3">
 <h3 class="anchored" data-anchor-id="methodological-limitations-and-future-improvements">3.2 Methodological Limitations and Future Improvements</h3>
-<p>This week’s exercise made me realise how important pre-processing is for later analysis. There are two main things I would improve next time:</p>
-<ol type="1">
-<li><strong>QA-based Cloud Masking</strong>: In this workflow, I mainly relied on visual checking and simple value-range filtering, which means some remaining cloud or shadow contamination may still be present. In future work, I would like to use the <code>QA_PIXEL</code> band to mask clouds and shadows more properly.</li>
-<li><strong>Topographic Correction</strong>: This would be especially useful for northern Beijing because of the mountainous terrain. I did not include it this time because of time and data limitations, but it would be a valuable next step if I wanted more reliable results in mountain areas.</li>
-</ol>
+<p>This week’s exercise made me realise how important pre-processing is for later analysis. There are two things I would do differently next time. The first is using the <code>QA_PIXEL</code> band for cloud masking rather than relying on visual inspection and simple value-range filtering — the current approach leaves some residual cloud or shadow contamination in the data. The second is topographic correction, which would be particularly relevant for northern Beijing’s mountain areas. I skipped it here due to time constraints, but it would improve reliability in those areas considerably.</p>
 <hr>
 </section>
 </section>

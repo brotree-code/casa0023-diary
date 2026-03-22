@@ -7,28 +7,22 @@ date: "2026-01-24"
 ## 1. Content Summary
 
 ### 1.1 Physical Fundamentals of Remote Sensing & EMR
-This week's learning made me realize that remote sensing is not simply photography, but rather the physical measurement of electromagnetic radiation (EMR) energy interactions [@brady2021]. Through the lecture, I grasped the core formula of electromagnetic waves: $\lambda = c/v$, where wavelength is inversely proportional to frequency.
+This week shifted how I think about satellite data — it is not photography but a physical measurement of **electromagnetic radiation (EMR)** interactions [@brady2021]. The core formula $\lambda = c/v$ captures something simple but important: **wavelength** and **frequency** move in opposite directions.
 
 ::: {.callout-note}
-Before the sensor detects the Earth's surface, the energy undergoes complex interactions [@tempfli2009]:
-
-* **Atmospheric Interactions**: These include Rayleigh scattering (which makes the sky blue and affects visible bands), Mie scattering (caused by aerosols), and non-selective scattering (caused by clouds). This explains why optical remote sensing faces massive atmospheric correction challenges in cloudy Guiyang.
-* **Surface Interactions**: Energy is absorbed, transmitted, or reflected by the surface. The sensor's task is precisely to capture this reflected energy, which carries information about the surface features.
+Before reaching the sensor, the energy goes through a series of interactions [@tempfli2009]. In the atmosphere, **Rayleigh scattering** makes the sky appear blue and affects visible bands, while **Mie scattering** from aerosols and **non-selective scattering** from clouds add further complications — which is exactly why atmospheric correction is such a challenge in persistently cloudy places like Guiyang. Once the energy reaches the surface, it is either **absorbed**, **transmitted**, or **reflected**, and it is this reflected portion that the sensor actually captures.
 :::
 
 ### 1.2 Critical Review of the Four Resolutions
-The lecture emphasized the "four resolutions" that determine the success of remote sensing applications:
+The lecture covered four resolutions that determine what a sensor can and cannot detect:
 
-* **Spatial Resolution**: Determines the smallest observable feature. Sentinel-2's 10m resolution offers a significant advantage at the urban scale [@jensen2015].
-* **Spectral Resolution**: The number and width of bands. I realized that a "spectral signature" is the physical fingerprint of a surface feature, allowing us to distinguish extremely similar materials through their responses across different bands.
-* **Temporal Resolution**: The revisit period, which is crucial for dynamic environmental monitoring.
-* **Radiometric Resolution**: The sensor's sensitivity, or quantization level (e.g., 12-bit provides 4,096 brightness levels).
+* **Spatial resolution** — the smallest observable feature; Sentinel-2's 10m gives it a clear advantage at urban scale [@jensen2015]
+* **Spectral resolution** — the number and width of bands; different materials reflect differently across bands, which is how spectral signatures work as surface fingerprints
+* **Temporal resolution** — the revisit period, which matters most for tracking change over time
+* **Radiometric resolution** — the sensor's quantisation depth; 12-bit means 4,096 brightness levels, affecting how well subtle surface differences are captured
 
 ### 1.3 Independent Thought: Why Choose My Hometown, Guiyang?
-I selected my hometown, **Guiyang**, as the study area. Beyond my emotional connection, Guiyang holds significant research value geographically:
-
-* **Complexity of Karst Topography**: Guiyang's rugged terrain leads to a pronounced "Bidirectional Reflectance Distribution Function (BRDF)" effect, meaning observation and illumination angles significantly alter the apparent reflectance of surface features.
-* **Data Balancing Act**: While Sentinel-2 excels in spatial precision, Landsat's historical data archive remains irreplaceable for tracking the urban expansion trajectory of Guiyang over the past few decades that I recall from my childhood [@tempfli2009].
+I selected my hometown, **Guiyang**, as the study area. Part of it is personal familiarity, but there is also a genuine research reason. Guiyang's rugged **karst terrain** produces a pronounced **BRDF effect**, meaning that observation angle and illumination geometry can noticeably change the apparent reflectance of the same surface — which makes it an interesting test case for cross-sensor comparison. At the same time, while Sentinel-2 has the spatial detail advantage, Landsat's archive going back decades is the only option for tracking how the city has expanded over the years [@tempfli2009].
 
 ![Figure 1: Pre-processing workflow in SNAP, including resampling and masking Sentinel-2 data for Guiyang.](images/snap_pre_processing.png)
 
@@ -37,40 +31,34 @@ I selected my hometown, **Guiyang**, as the study area. Beyond my emotional conn
 ## 2. Applications
 
 ### 2.1 Tasseled Cap Transformation (TCT) in Urban Morphology
-In practice, I applied the **Tasseled Cap Transformation (TCT)**. This is not just a dimensionality reduction technique, but an extraction of biophysical indicators:
+In practice, I applied the **Tasseled Cap Transformation (TCT)**, which extracts three biophysical indicators from the spectral bands:
 
-* **Brightness**: Effectively extracted the high-density built-up areas, such as the newly emerged "Big Data Centers" in Guiyang.
-* **Greenness**: Helped me identify the green corridors preserved during the rapid expansion of Guiyang, a designated National Forest City.
-* **Wetness**: Successfully extracted the Nanming River and Hongfeng Lake water systems, which is vital for evaluating the ecological functions of urban blue-green spaces.
+* **Brightness** — picked out high-density built-up areas, including the newer "Big Data Centers" that have appeared in Guiyang
+* **Greenness** — showed the green corridors that survived rapid urban expansion, useful context given Guiyang's status as a National Forest City
+* **Wetness** — mapped the Nanming River and Hongfeng Lake water systems, relevant for understanding how blue-green space functions in the city
 
 ### 2.2 Cross-Sensor Research: Insights from ESA WorldCover
-The **ESA WorldCover 10m** project mentioned in the lecture demonstrates the tremendous potential of 10m resolution in real-time urban monitoring. Compared to traditional 30m Landsat data, high-resolution Sentinel data can significantly reduce "mixed pixels" at urban edges [@jensen2015]. However, I also recognize that in cloudy, high-altitude regions, single optical applications have bottlenecks. In the future, it is essential to integrate active SAR sensor data capable of "penetrating clouds."
+The **ESA WorldCover 10m** project shows what 10m resolution can do for urban monitoring. Compared to 30m Landsat, higher-resolution Sentinel data reduces the **mixed pixel** problem at urban edges [@jensen2015]. That said, optical sensors still struggle in persistently cloudy places like Guiyang — which is why integrating **SAR** data later in the module seems like the natural next step.
 
 ---
 
 ## 3. Technical Workflow and Statistical Analysis
 
 ### 3.1 Automated Workflow from SNAP to R
-My technical pathway achieved a closed loop from spatial processing to statistical modeling:
-
-1.  **SNAP Processing**: Completed resampling, georegistration, and image subsetting based on vector boundaries.
-2.  **R Sampling**: Utilized the `terra` package to extract pixel values and encapsulated a `band_fun` function to achieve batch extraction and Long Format data tidying.
-3.  **QGIS Validation**: Ensured perfect spatial alignment of multi-source imagery within the same geographical space.
+The workflow ran from **SNAP** through to **R** and **QGIS**. I used SNAP for resampling, georegistration, and subsetting the imagery to the study area boundary. In R, the `terra` package handled pixel extraction — I wrote a `band_fun` function to batch-extract values and convert them into a **long-format table** suitable for plotting. QGIS was then used to cross-check **spatial alignment**, confirming that the Sentinel-2 and Landsat-9 layers and my digitised training points all sat in the same coordinate space (Figure 3).
 
 ::: {layout-ncol=2}
 ![Figure 3-A: Spatial alignment of Landsat-9 imagery and POIs](images/qgis_alignment_LC09.png)
 
 ![Figure 3-B: Spatial alignment of Sentinel-2 imagery and POIs](images/qgis_alignment_S2C.png)
 :::
-*Figure 3: QGIS spatial consistency validation. The perfect alignment of multi-source satellite imagery and my digitized training points (POIs) in the same coordinate system is the core prerequisite ensuring the accuracy of subsequent pixel extractions in R.*
+*Figure 3: QGIS spatial consistency check. Both sensors and the digitised training points align in the same coordinate system — a necessary step before pixel extraction in R.*
 
 ### 3.2 R-Based Spectral Signature Statistical Analysis
 Using `terra::extract` and long-format conversion via `tidyverse`, I extracted the spectral response values of typical land covers in Guiyang and plotted their signature curves (Figure 4):
 
 ::: {.callout-important}
-* **The Red Edge Effect of Vegetation**: In the spectral curve (Plot A), the forest sample (red line) exhibits low reflectance in the visible bands (Bands 1-3) but a sharp surge in the near-infrared band (Band 4). This perfectly corroborates the biophysical characteristic of healthy mesophyll cells strongly reflecting NIR energy.
-* **Absorption Characteristics of Water**: The water sample (blue line) maintains extremely low reflectance across all bands and shows a downward trend in the NIR band, confirming the strong absorption of long-wave energy by water.
-* **High Heterogeneity of Urban Surfaces**: This is the most striking finding. The spectral curve shows that urban pixels (green line) possess massive standard deviations (error bars) across all bands; meanwhile, the density distribution plot (Plot B) reveals an extremely broad and flat reflectance distribution for urban pixels. Statistically, this reflects the highly complex and mixed surface morphology of downtown Guiyang, which comprises concrete, asphalt, metal roofs, and fragmented green spaces.
+The spectral curves show some clear patterns. Forest pixels (Plot A) have low reflectance in the visible bands (Bands 1–3) but jump sharply in near-infrared (Band 4), which is consistent with how healthy leaf cells reflect NIR. Water behaves the opposite way — it stays low across all bands and drops further into NIR, reflecting strong absorption at longer wavelengths. The urban pixels are the most interesting: wide standard deviation error bars across every band, and Plot B shows a broad, flat distribution rather than any clear peak. That heterogeneity makes sense given what downtown Guiyang actually contains — concrete, asphalt, metal roofs, and scattered patches of greenery all mixed together.
 :::
 
 ![Figure 4: Spectral signature curves of typical land covers in Guiyang generated in R (with standard deviation error bars).](images/spectral_reflectance.png)
@@ -84,25 +72,15 @@ In this week's practical, I performed a **Welch t-test** on the pixel values of 
 
 ![Figure 5: Welch t-test results running in RStudio, demonstrating a highly significant statistical difference in pixel values between the two sensors.](images/test_result.png)
 
-* **Statistical Results**: As shown in Figure 5, $t = -214.78$, $p < 2.2 \times 10^{-16}$, indicating a highly significant difference.
-* **Deep Reflection**: As a researcher, I deeply understand that this "significant difference" does not imply a data processing error; rather, it objectively reflects the **inherent physical divergence** between the two sensor systems. 
+As shown in Figure 5, the t-test returned $t = -214.78$, $p < 2.2 \times 10^{-16}$, which is a very significant difference. But this does not mean something went wrong — it reflects genuine **physical differences** between the two sensor systems.
 
-> 💡 **Physical Mechanism Analysis**: 
-> 
-> * **Spectral Response Functions (SRF)**: Each sensor "samples" the electromagnetic spectrum through slightly different windows. Even for the "same" Near-Infrared (NIR) band, the bandwidth and center wavelength differ, leading to varying sensitivity to Guiyang's lush subtropical vegetation [@butcher2016].
-> * **Atmospheric Correction Divergence**: The complex aerosol conditions in Guiyang's mountainous Karst landscape pose challenges for algorithms like Sen2Cor (Sentinel) and LaSRC (Landsat). These subtle differences in atmospheric path radiance removal are amplified in statistical tests.
-> * **Geographic Context**: Guiyang's rugged terrain introduces bidirectional reflectance distribution function (BRDF) effects. The different overpass times and viewing angles of the two satellites mean they capture the "same" surface under different illumination geometries, which is statistically significant but physically expected.
->
-> **Conclusion**: This reminds me that in future urban climate studies, cross-sensor data fusion cannot simply be pieced together abruptly. Precise cross-calibration or the use of Harmonized Landsat Sentinel (HLS) products is a prerequisite for robust longitudinal analysis [@jensen2015].
+The main reasons are worth spelling out. Each sensor samples the electromagnetic spectrum through slightly different windows — even the "same" **NIR band** has different bandwidths and centre wavelengths, which matters for Guiyang's dense subtropical vegetation [@butcher2016]. **Atmospheric correction algorithms** also diverge: Sen2Cor (Sentinel) and LaSRC (Landsat) handle the complex aerosol conditions in Guiyang's karst terrain differently, and those subtle differences get amplified in a t-test. On top of that, Guiyang's rugged terrain introduces **BRDF effects** — the two satellites pass at different times and view angles, so they are literally measuring slightly different things even when pointed at the same spot.
 
-### 4.2 Skill Growth and Future Vision
+The practical takeaway is that **cross-sensor data fusion** needs proper cross-calibration or a **Harmonized Landsat Sentinel (HLS)** product rather than a direct merge [@jensen2015].
 
-### From Tool-User to Critical Analyst
-Through this week's learning, I have not only mastered operational tools (SNAP, R, QGIS) but, more importantly, acquired a coding mindset for **Reproducible Research**. 
+### 4.2 Skill Growth and Future Work
 
-* **Methodological Shift**: Moving beyond "point-and-click" software GUI has allowed me to automate the spectral signature extraction process. Using R ensures that my analysis of Guiyang's urbanization is transparent and repeatable by others—a core tenet of modern geographic data science.
-* **Overcoming the "Cloud" Bottleneck**: While optical data provided a strong start, the high cloud frequency in Guiyang remains a limitation. Moving forward, I plan to further explore machine learning classification based on these extracted spectral features, but more importantly, I look forward to integrating **SAR (Synthetic Aperture Radar)** data in later weeks to "see through" the clouds.
-* **Future Vision**: My ultimate goal is to use this methodological prototype to quantify the true impact of rapid urban expansion on the ecological baseline of my hometown over the past decade, providing objective evidence for sustainable urban planning in Karst regions.
+This week I picked up the operational tools (SNAP, R, QGIS), but the more useful shift was moving toward a **reproducible research** mindset. Automating the **spectral signature extraction** in R means the analysis is transparent and repeatable — which matters if I want to build on it later or share it. Optical data gave a solid start here, but **cloud cover** in Guiyang is a persistent problem that one week of data cannot solve, so I am looking forward to working with **SAR** data in later weeks. The longer-term aim is to use this kind of workflow to track how urban expansion has changed Guiyang's **ecological baseline** over the past decade — something that could actually be useful for planners working in karst regions.
 
 ---
 

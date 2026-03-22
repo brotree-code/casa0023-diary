@@ -9,7 +9,7 @@
 <meta name="author" content="Jianshu Wu">
 <meta name="dcterms.date" content="2026-01-24">
 
-<title>Learning diary – CASA0023 Learning Diary</title>
+<title>Learning Diary – CASA0023 Learning Diary</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -329,6 +329,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Week 7: Classification I</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8: Classification II</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -340,9 +346,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#weekly-entries" id="toc-weekly-entries" class="nav-link" data-scroll-target="#weekly-entries">Weekly Entries</a></li>
   <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links">Links</a></li>
-  <li><a href="#module-overview-quick-notes" id="toc-module-overview-quick-notes" class="nav-link" data-scroll-target="#module-overview-quick-notes">Module overview (quick notes)</a></li>
-  <li><a href="#how-im-working" id="toc-how-im-working" class="nav-link" data-scroll-target="#how-im-working">How I’m working</a></li>
+  <li><a href="#module-overview" id="toc-module-overview" class="nav-link" data-scroll-target="#module-overview">Module Overview</a></li>
+  <li><a href="#how-im-working" id="toc-how-im-working" class="nav-link" data-scroll-target="#how-im-working">How I’m Working</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -352,8 +359,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Learning diary</h1>
-<p class="subtitle lead">Remotely Sensing Cities and Environments</p>
+<h1 class="title">Learning Diary</h1>
+<p class="subtitle lead">Remotely Sensing Cities and Environments — CASA0023</p>
 </div>
 
 
@@ -385,14 +392,66 @@ ul.task-list li input[type="checkbox"] {
 <section id="welcome" class="level1">
 <h1>Welcome</h1>
 <p>This is my learning diary for <strong>CASA0023: Remotely Sensing Cities and Environments</strong>.</p>
-<p>The diary is organised by week. Each entry follows the same structure:</p>
-<ul>
-<li><strong>Summary</strong> – key ideas from the lecture/practical, in my own words<br>
-</li>
-<li><strong>Applications</strong> – examples of how these ideas are used (papers, policy, real-world cases)<br>
-</li>
-<li><strong>Reflection</strong> – what I understood well, what I’m unsure about, and how I might use it later</li>
-</ul>
+<p>Each weekly entry follows the same structure: a <strong>summary</strong> of the key ideas from the lecture and practical, an <strong>applications</strong> section discussing how those ideas appear in research and policy, and a <strong>personal reflection</strong> on what I found interesting, what I struggled with, and where the methods might be useful later.</p>
+<hr>
+</section>
+<section id="weekly-entries" class="level1">
+<h1>Weekly Entries</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Topic</th>
+<th>Study Area</th>
+<th>Key Methods</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./week1.html">Week 1</a></td>
+<td>Introduction &amp; Spectral Analysis</td>
+<td>Guiyang</td>
+<td>TCT, spectral signatures, Welch t-test</td>
+</tr>
+<tr class="even">
+<td><a href="./week2.html">Week 2</a></td>
+<td>Sensor Presentation</td>
+<td>—</td>
+<td>Landsat OLI/TIRS, NDVI, UHI</td>
+</tr>
+<tr class="odd">
+<td><a href="./week3.html">Week 3</a></td>
+<td>Corrections &amp; Enhancements</td>
+<td>Beijing</td>
+<td>Mosaicking, NDVI, GLCM, PCA</td>
+</tr>
+<tr class="even">
+<td><a href="./week4_5.html">Week 4 &amp; 5</a></td>
+<td>EO &amp; Policy</td>
+<td>Ahmedabad</td>
+<td>LST, NDVI classification, Heat Action Plan</td>
+</tr>
+<tr class="odd">
+<td><a href="./week6.html">Week 6</a></td>
+<td>Google Earth Engine I</td>
+<td>Beijing</td>
+<td>GEE fundamentals, GLCM texture, PCA</td>
+</tr>
+<tr class="even">
+<td><a href="./week7.html">Week 7</a></td>
+<td>Classification I</td>
+<td>Chengdu</td>
+<td>CART, Random Forest, accuracy assessment</td>
+</tr>
+<tr class="odd">
+<td><a href="./week8.html">Week 8</a></td>
+<td>Classification II</td>
+<td>Chengdu</td>
+<td>Spectral unmixing, OBIA, SNIC</td>
+</tr>
+</tbody>
+</table>
+<hr>
 </section>
 <section id="links" class="level1">
 <h1>Links</h1>
@@ -400,21 +459,19 @@ ul.task-list li input[type="checkbox"] {
 <li>🔗 <a href="https://github.com/brotree-code/casa0023-diary"><strong>GitHub Repository</strong></a></li>
 <li>📊 <a href="https://brotree-code.github.io/casa0023-presentation/"><strong>Slides (Week 2): Landsat Program Presentation</strong></a></li>
 </ul>
+<hr>
 </section>
-<section id="module-overview-quick-notes" class="level1">
-<h1>Module overview (quick notes)</h1>
+<section id="module-overview" class="level1">
+<h1>Module Overview</h1>
 <ul>
-<li><strong>Assessment 1 (30%)</strong>: Group presentation (10 minutes), policy-focused EO pitch<br>
-</li>
-<li><strong>Assessment 2 (70%)</strong>: Weekly learning diary (this site)</li>
+<li><strong>Assessment 1 (30%)</strong> — Group presentation (10 minutes), policy-focused EO pitch</li>
+<li><strong>Assessment 2 (70%)</strong> — Weekly learning diary (this site)</li>
 </ul>
+<hr>
 </section>
 <section id="how-im-working" class="level1">
-<h1>How I’m working</h1>
-<ul>
-<li>Tools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)</li>
-<li>Data note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.</li>
-</ul>
+<h1>How I’m Working</h1>
+<p>The workflow evolved across the term. Weeks 1–4 used <strong>R / RStudio</strong> and <strong>QGIS</strong> for local processing, moving to <strong>Google Earth Engine (JavaScript)</strong> from Week 6 onwards. The study areas shifted from my hometown Guiyang, to Beijing, to Ahmedabad, and finally to Chengdu for the classification weeks. Large EO datasets are not stored in the GitHub repository — only the figures used in each diary entry are committed there.</p>
 
 
 </section>

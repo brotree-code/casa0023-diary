@@ -8,21 +8,21 @@ date: "2026-02-14"
 
 ### 1.1 Earth Observation in Policy Frameworks
 
-Over the past two weeks, the module shifted from the physical fundamentals of satellite sensors to the critical intersection of **Earth Observation (EO)** and **urban governance**. I realized that EO is no longer a mere technological novelty; it is a fundamental requirement for developing **smart and sustainable cities** [@gerasopoulos2022]. More importantly, I learned that the main task of this part of the module was not simply to describe EO datasets, but to evaluate which kind of remotely sensed evidence could assist a real policy challenge. This made me think more carefully about the relationship between a dataset, a policy goal, and the scale at which intervention takes place. It also helped me see more clearly how local policy challenges can be linked to wider sustainability agendas.
+Over the past two weeks, the module shifted from the physical side of satellite sensors to how **EO** actually feeds into **urban governance**. What I took away is that the task here is not just to describe datasets, but to think about which kind of remotely sensed evidence could genuinely help with a real **policy problem** — and at what scale. That framing made me look at the relationship between data and policy decisions more carefully than I had before [@gerasopoulos2022].
 
 ::: {.callout-important title="Learning the Shift"}
-I learned that traditional urban planning often relied on sparse, ground-based surveys, but modern policy requires **spatially continuous data** to meet environmental challenges.
+Traditional urban planning often relied on sparse, ground-based surveys. What EO offers instead is **spatially continuous, repeatable observation** — which is a fundamentally different kind of evidence for decision-making.
 :::
 
-* **Ecologically Sound Policies**: According to [@wellmann2020], I found that the true value of remote sensing lies in its ability to move beyond basic land-cover mapping to **assessing urban ecosystems**.
-* **Urban Sustainability**: Continuous monitoring allows us to evaluate whether interventions are actively advancing urban sustainability [@kadhim2016].
-* **Phenological Cycles**: I learned that assessing vegetation health must account for seasonal variations, which requires careful selection of multi-temporal EO datasets [@jensen2015].
+* **Ecologically sound policies** — [@wellmann2020] argues remote sensing only becomes genuinely useful when it moves beyond land-cover mapping to assessing urban ecosystems, which is a higher bar than most current applications reach
+* **Monitoring interventions** — continuous observation is what lets us check whether any given policy action is actually working, not just assumed to be [@kadhim2016]
+* **Phenological timing** — vegetation health assessments need multi-temporal data because seasonal patterns affect what indices like NDVI actually represent [@jensen2015]
 
 ![Figure 1: The official 'Easy Read Version' of the Ahmedabad Heat Action Plan 2018, emphasizing medical intervention and community-level heat planning.](images/policy_image.png)
 
 ### 1.2 Addressing Metropolitan Policy Challenges
 
-I focused my case study on the **Ahmedabad 2018 Heat Action Plan (HAP)** (Figure 1). My core takeaway is that heatwaves do not affect the city uniformly; the **Urban Heat Island (UHI)** effect makes dense areas much hotter. This means that the policy problem is not only about extreme heat in general, but about identifying where heat exposure is concentrated and which groups may be more vulnerable. I was also struck by how vulnerability is intertwined with **historical urban planning**. As [@li2022] demonstrates, historical zoning often results in low-income neighborhoods experiencing higher temperatures. Figure 1 visually highlights this by focusing on vulnerable populations in informal settlements. For me, this case study showed that EO can support policy most effectively when it is used not just to map environmental conditions, but to reveal uneven risk across urban space.
+I focused my case study on the **Ahmedabad 2018 Heat Action Plan (HAP)** (Figure 1). The key thing I noticed is that heatwaves do not hit the city evenly — the **Urban Heat Island (UHI)** effect means dense areas run significantly hotter. So the policy problem is not just about extreme heat in general, but about locating where **heat exposure** is concentrated and who is most exposed. [@li2022] makes a related point: **historical zoning** has often left low-income neighbourhoods in precisely the hottest spots. Figure 1 captures this by centering on vulnerable populations in informal settlements. Working through this case made me see how EO is most useful not just for mapping environmental conditions, but for showing where **risk is unevenly distributed**.
 
 ::: {.callout-note title="Linking to Global Agendas"}
 I now see how the local implementation of the Ahmedabad HAP directly contributes to **SDG Target 11.5** (reducing disaster deaths) and **Target 13.1** (strengthening resilience).
@@ -36,19 +36,17 @@ I now see how the local implementation of the Ahmedabad HAP directly contributes
 
 ### 2.1 Identifying and Evaluating EO Datasets
 
-To assist the Ahmedabad HAP, I identified **Landsat 8-9 (Path 149, Row 044)** as the optimal dataset (Figure 2). 
-
-* **The "Data Realization"**: A major learning point occurred when I loaded the Thermal Band (ST_B10). The raw values were huge (**45,169–54,396**). I discovered that these values require conversion using the Landsat scale factor and offset to derive surface temperature in Kelvin (Figure 3):
+To assist the Ahmedabad HAP, I identified **Landsat 8-9 (Path 149, Row 044)** as the dataset to work with (Figure 2). One thing that caught me off guard early on was the raw values in the **Thermal Band (ST_B10)** — they came out in the range 45,169–54,396, which are clearly not temperatures. They need to be converted using the **Landsat scale factor** and offset to get surface temperature in Kelvin:
 
 $$
 T(K) = DN \times 0.00341802 + 149.0
 $$
 
-* **Evaluation**: I learned that dataset choice always involves a trade-off between temporal frequency and spatial detail. For this case study, **Landsat strikes an appropriate balance** because it provides both thermal information and a spatial resolution that is still useful for interpreting urban patterns.
+More broadly, choosing a dataset always involves a trade-off between **temporal frequency** and **spatial detail**. For this particular case, Landsat works well because it provides both thermal information and a spatial resolution that is still interpretable at the urban scale.
 
 ### 2.2 Demystifying NDVI for Policy Interventions
 
-A key strategy in the HAP is mitigating heat through greening. However, I learned that raw **NDVI** maps are insufficient for policymakers. Following [@martinez2023], I found that NDVI must be **"demystified"** into **actionable categories**. 
+A key strategy in the HAP is mitigating heat through greening. However, raw **NDVI** maps are insufficient for policymakers. Following [@martinez2023], NDVI needs to be **"demystified"** into **actionable categories**.
 
 ::: {.callout-tip title="Translating Science to Policy"}
 As shown in **Figure 4**, I reclassified the derived NDVI (ranging from -0.32 to 0.52). I used values **> 0.2** as a **simple proxy for greener cover**, while grey areas denote **"Non-vegetated"** surfaces. This allows planners to identify "greening deserts" more easily.
@@ -75,13 +73,13 @@ During the workshop, I developed a conceptual workflow to translate raw radiance
 
 ### 3.1 The Gap Between Academic Remote Sensing and Policy
 
-The most profound realization from these weeks is the **friction between scientific perfection and policy utility**. Previously, I focused purely on minimizing errors. However, I now see that policymakers often need **"good enough" data delivered at the right time**. A city planner might prioritise more frequent observations over higher spatial resolution when a heatwave response is time-sensitive.
+The tension I kept running into is between getting the data right and actually being useful to a planner. I used to focus mainly on minimising errors, but working through this case made it clear that policymakers often need something that is **good enough and delivered on time**. During a heatwave response, more **frequent observations** might matter more than a finer **spatial resolution**.
 
 ### 3.2 Rethinking Data Justice
 
-The overlay analysis in **Figure 5** changed my perspective. I learned that a thermal hotspot is not just a reflection of physics; it is a **visual manifestation of historical inequality**. 
+The overlay analysis in **Figure 5** shifted how I read thermal maps. A hotspot is not just a physics result — it often reflects where **historical planning decisions** concentrated vulnerable populations. Working with this data properly means pairing raster outputs with **ward-level demographic data**, not treating the map as self-explanatory.
 
-Applying EO data requires us to combine raster data with **socio-economic demographics**. Another limitation I identified is that the Landsat scene covers a much **broader regional footprint** than the city; further clipping would be needed for specific targeting. I also realised that a single image can only capture one moment of heat conditions, which means that future analysis would benefit from comparing multiple dates rather than relying on one scene alone. If I were to extend this work, I would combine thermal and greenness layers with ward-level demographic data so that the results could better support targeted public health intervention. My goal moving forward is to ensure my technical workflows genuinely contribute to **equitable and ecologically sound urban governance**.
+There are also some straightforward limitations I noticed. The Landsat scene covers a much wider area than the city, so further **clipping** would be needed for targeted use. A single image only captures one moment, so comparing **multiple dates** would give a more reliable picture of heat conditions. If I extended this work, combining the **thermal and greenness layers** with socio-economic data would make the outputs more directly actionable for public health planning.
 
 ---
 

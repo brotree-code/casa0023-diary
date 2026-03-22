@@ -6,14 +6,13 @@ date: "2026-01-24"
 
 ## 1. Sensor Presentation
 
-### 1.1 **Reproducible Presentation Workflow**
-* **Using xaringan**: Developed this presentation with the **xaringan** R package to combine live code with a slide-based format.
-* **Reproducibility**: Focused on a code-based workflow that helps connect data analysis with presentation output [@grolemund2022].
+### 1.1 Reproducible Presentation Workflow
 
-### 1.2 **Slide Deck Access and Interaction**
-1. **Host platform**: The full interactive presentation is hosted on GitHub Pages for easier access and navigation.
-2. **On-page viewing**: The embedded frame below allows the slides to be viewed directly on the page.
-3. **Full-screen mode**: The link in the note below opens the presentation in a separate browser tab.
+I built this presentation using the **xaringan** R package, which lets you write slides in Markdown and embed live code alongside the content [@grolemund2022]. The main reason for choosing it was **reproducibility** — keeping the analysis and the presentation in the same code-based workflow means the two stay in sync rather than drifting apart.
+
+### 1.2 Slide Deck Access and Interaction
+
+The full interactive presentation is hosted on **GitHub Pages**. The embedded frame below lets you view the slides directly on the page, and the link in the callout opens a full-screen version in a separate tab.
 
 ::: {.callout-note}
 ### Slide Deck Access
@@ -29,25 +28,24 @@ knitr::include_url("https://brotree-code.github.io/casa0023-presentation/")
 
 ## 2. Content Summary
 
-### 2.1 **Horizontal Comparison with Sentinel-2**
-* **Spatial Resolution**: Sentinel-2 provides finer spatial resolution in some key optical bands, while Landsat 8/9 offers stronger long-term consistency at 30 m.
-* **Spectral Advantage**: A key strength of Landsat is that it carries both optical and thermal sensors, which makes it especially useful for urban thermal studies.
+### 2.1 Horizontal Comparison with Sentinel-2
 
-### 2.2 **Satellite Payloads and Instrumentation**
-* **OLI (Operational Land Imager)**: Captures data in the visible, near-infrared, and shortwave infrared parts of the spectrum.
-* **TIRS (Thermal Infrared Sensor)**: Records thermal information that can be used in land surface temperature analysis.
+Sentinel-2 has finer **spatial resolution** in several key optical bands, but Landsat 8/9 offers stronger **long-term consistency** at 30m. The more distinctive advantage of Landsat is its **thermal sensor** — Sentinel-2 does not carry one, which makes Landsat more useful for urban thermal studies.
+
+### 2.2 Satellite Payloads and Instrumentation
+
+Landsat 8/9 carries two separate instruments:
+
+* **OLI (Operational Land Imager)** — covers visible, near-infrared, and shortwave infrared wavelengths
+* **TIRS (Thermal Infrared Sensor)** — records thermal data used for land surface temperature analysis
+
+That combination — optical and thermal in one platform — is what makes Landsat particularly useful for urban heat studies.
 
 ![Figure 1: Schematic of the Landsat 8-9 satellite platform highlighting the **OLI** and **TIRS** sensor payloads. Source: NASA.](images/landsat_sensor.jpg)
 
-### 2.3 **Urban Research Significance**
-1. **LST Retrieval**: Estimate **Land Surface Temperature (LST)** from Landsat thermal data, most commonly using Band 10.
-2. **UHI Analysis**: Identify local temperature differences to map **Urban Heat Islands (UHI)**.
-3. **Climate Policy**: Use these data to support urban planning and help address heat-related risks in dense city areas.
+### 2.3 Urban Research Significance
 
-::: {.callout-tip}
-### Why Landsat for Urban Studies?
-An important advantage of Landsat is its thermal bands, which make it possible to estimate **Land Surface Temperature (LST)**. This is particularly useful for studying the **Urban Heat Island (UHI)** effect.
-:::
+Landsat's thermal band (Band 10) makes it possible to estimate **Land Surface Temperature (LST)**, which is the basis for **Urban Heat Island (UHI)** analysis. This feeds directly into **urban planning** and heat-related policy work — exactly the kind of application that came up in the week 4/5 Ahmedabad case study.
 
 ![Figure 2: Spectral band comparison between **Landsat 8/9 OLI/TIRS** and **Sentinel-2 MSI** sensors.](images/band_comparison.png)
 
@@ -61,27 +59,26 @@ An important advantage of Landsat is its thermal bands, which make it possible t
 
 ## 3. Applications
 
-### 3.1 **Environmental Indices and Monitoring**
-* **Vegetation Analysis**: Calculate **NDVI** to measure the presence and condition of urban green spaces.
-* **Cooling Effects**: Use spectral data to examine how green infrastructure may help reduce urban temperatures.
+### 3.1 Environmental Indices and Monitoring
+
+NDVI is a straightforward starting point for assessing urban **green space** — it uses the ratio of **near-infrared** and **red reflectance** to measure vegetation presence and condition. Beyond vegetation, the same spectral data can be used to examine how **green infrastructure** affects urban temperatures, since vegetated surfaces generally stay cooler than hard surfaces.
 
 $$NDVI = \frac{NIR - Red}{NIR + Red}$$
 
-### 3.2 **Spectral Signature Integrity**
-1. **Data Acquisition**: Select suitable multispectral bands (Red and NIR) for the study area.
-2. **Signature Analysis**: Distinguish land covers such as **asphalt** and **vegetation** by comparing their reflectance curves.
-3. **Validation**: Compare the results with ground-truth data or high-resolution imagery to improve mapping reliability.
+### 3.2 Spectral Signature Integrity
+
+Working with spectral signatures involves selecting the right bands for the study area, then comparing reflectance curves across land cover types — for instance, distinguishing asphalt from vegetation by how differently they reflect across the spectrum. Validation against ground-truth data or high-resolution imagery helps confirm that the resulting classifications are reliable.
 
 ::: {.callout-important}
 ### Spectral Signature Analysis
-Distinguishing between land covers requires the comparison of **spectral signatures** across multiple bands, which helps improve both interpretation and mapping quality.
+A key practical issue is that spectral signatures are not fixed — the same land cover can look different depending on the season, sensor, or atmospheric conditions. This is why comparing curves from multiple dates or sensors, rather than relying on a single reference, tends to give more reliable classifications.
 :::
 
 ![Figure 3: Spectral signature curves of typical land covers in Guiyang generated in R (with standard deviation error bars).](images/spectral_reflectance2.png)
 
-### 3.3 **Identifying Urban Hot Spots**
-* **Urban Fabric Analysis**: Explore how different surface materials, such as concrete and grass, absorb and release heat differently.
-* **Heat Spot Identification**: Identify areas where dense built-up land shows noticeably higher temperatures than surrounding areas.
+### 3.3 Identifying Urban Hot Spots
+
+Different surface materials absorb and release heat at different rates — **concrete and asphalt** store more heat than grass, which shows up clearly in thermal imagery. Areas with dense **built-up land** tend to sit noticeably warmer than surrounding areas, and mapping that pattern is the starting point for understanding the spatial structure of the **UHI effect**.
 
 ![Figure 4: Urban Hot Spots](images/uhi_map.png)
 
@@ -89,15 +86,13 @@ Distinguishing between land covers requires the comparison of **spectral signatu
 
 ## 4. Personal Reflection
 
-### 4.1 **Earth Observation and Open Data**
-* **Data Accessibility**: The open-access Landsat archive has made remote sensing data much easier to use for research and long-term environmental monitoring.
-* **Data Fusion Potential**: Combining Landsat’s thermal information with Sentinel-2’s finer spatial detail could support more detailed urban microclimate analysis.
+### 4.1 Earth Observation and Open Data
 
-### 4.2 **Technical Evolution and Workflow**
-1. **Xaringan Learning**: Learned how to build presentations using Markdown and CSS, which was challenging at first but useful in practice.
-2. **Quarto Integration**: Began moving toward a Quarto-based workflow for managing documents and portfolio work more consistently [@kirenz_nd].
-3. **Reproducibility Mastery**: Gained a better understanding of how code and written explanation can be combined in scientific communication [@xie2022].
-4. **Future Research**: I hope to apply these reproducible methods in future academic work so that my analysis remains clear and verifiable [@quarto_quickstart].
+The open **Landsat archive** has made a real difference for long-term environmental monitoring — the fact that imagery going back to **1972** is freely available is something I did not fully appreciate before this week. Combining Landsat’s **thermal data** with Sentinel-2’s finer spatial detail seems like an obvious direction for urban **microclimate** work, and something I would like to try in a future project.
+
+### 4.2 Technical Evolution and Workflow
+
+Building the xaringan presentation was harder than expected — learning Markdown and CSS at the same time while also thinking about content took a while. Moving toward a Quarto-based workflow [@kirenz_nd] felt like a natural next step: combining code and written explanation in one document makes it easier to keep the analysis and the write-up in sync [@xie2022]. The reproducibility angle matters to me practically, not just in principle — if I want to revisit this analysis in a year, I need to be able to follow my own steps [@quarto_quickstart].
 
 ::: {.callout-caution}
 ### Best Practice: Project Separation

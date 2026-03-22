@@ -7,9 +7,9 @@ date: "2026-01-31"
 ## 1. Content Summary
 
 ### 1.1 Physical Fundamentals and Correction Necessity
-This week changed the way I think about satellite imagery. I used to see it as something similar to a digital photo, but now I understand that it is actually a measurement of electromagnetic radiation. Because of that, the original Digital Numbers (DN) cannot be used directly without some form of correction.
+This week changed the way I think about satellite imagery. I used to see it as something similar to a digital photo, but now I understand that it is actually a measurement of **electromagnetic radiation**. Because of that, the original **Digital Numbers (DN)** cannot be used directly without some form of correction.
 
-* **Radiometric Calibration**: This is the first step in turning raw DN values into physically meaningful spectral radiance.
+The first step is **radiometric calibration**, which converts raw DN values into physically meaningful **spectral radiance**.
 
 ::: {.callout-note}
 ## Core Concept: Radiance vs. Reflectance
@@ -17,11 +17,11 @@ Radiance is the total energy coming from the ground to the sensor, while reflect
 :::
 
 ### 1.2 Geometric and Atmospheric Corrections
-* **Geometric Distortions**: These can happen because of the sensor angle or terrain effects, and they are usually corrected with Ground Control Points (GCPs).
-* **Atmospheric Correction**: The atmosphere can scatter and absorb light, which affects the image. **Dark Object Subtraction (DOS)** is a traditional way to reduce this effect by assuming the darkest pixels should have close to zero reflectance [@jensen2015].
+* **Geometric distortions** — caused by sensor angle or terrain effects, usually corrected with Ground Control Points (GCPs)
+* **Atmospheric correction** — the atmosphere scatters and absorbs light, shifting apparent reflectance values; **Dark Object Subtraction (DOS)** addresses this by treating the darkest pixels as a near-zero reflectance reference [@jensen2015]
 
 ### 1.3 Topographic Correction and Enhancements
-In mountainous areas, slope and aspect can change the amount of sunlight reaching the surface, which affects reflectance values. The **Cosine Correction Model** is one way to reduce this terrain effect by using the incidence angle:
+In mountainous areas, **slope and aspect** can change the amount of sunlight reaching the surface, which affects reflectance values. The **Cosine Correction Model** is one way to reduce this terrain effect by using the **incidence angle**:
 $$\cos i = \cos \theta_0 \cos \theta_s + \sin \theta_0 \sin \theta_s \cos(\Phi_0 - \Phi_s)$$
 
 ---
@@ -41,7 +41,7 @@ Since these Landsat scenes are provided as Analysis Ready Data (ARD), they have 
 ![Figure 1: USGS Earth Explorer search interface for Beijing tiles.](images/usgs_search.png)
 
 ### 2.2 Mosaicking and Rescaling Workflow
-Because Landsat data is collected in separate tiles, I first needed to merge the two neighbouring scenes. I used the `terra::mosaic()` function, and the overlap was averaged with the `mean` option. This helped reduce obvious boundaries between the two scenes, although some small differences may still remain because they were taken on different dates.
+Because Landsat data is collected in separate tiles, I first needed to merge the two neighbouring scenes. I used the `terra::mosaic()` function, and the overlap was averaged with the `mean` option. This helped reduce obvious **seam lines** between the two scenes, although some small differences may still remain because they were taken on different dates.
 
 ```{r}
 #| eval: false
@@ -104,7 +104,7 @@ plot(ndvi,
      axes = TRUE)
 ```
 
-**Interpretation of Figure 3:** The NDVI map shows generally low vegetation activity across Beijing in early February, which is consistent with winter dormancy. Slightly higher values are visible in some mountain and vegetated areas. Some white gaps remain after cleaning, indicating pixels with invalid or unstable NDVI values that may be linked to residual cloud contamination, very bright surfaces, water, or other problematic pixels. This highlights the importance of quality control before interpretation.
+**Interpretation of Figure 3:** The NDVI map shows generally low vegetation activity across Beijing in early February, consistent with **winter dormancy**. Slightly higher values are visible in some mountain and vegetated areas. Some white gaps remain after cleaning, indicating pixels with invalid or unstable NDVI values that may be linked to **residual cloud contamination**, very bright surfaces, water, or other problematic pixels. This highlights the importance of **quality control** before interpretation.
 
 #### GLCM Texture: Structural Interpretation
 
@@ -130,7 +130,7 @@ plot(
 )
 ```
 
-**Interpretation of Figure 4:** The GLCM homogeneity surface ranges from about 0.65 to 1.00 and appears fairly smooth overall. Lower homogeneity is more visible in parts of the urban plain, where dense built-up structures create greater local variation. By contrast, many northern and peripheral areas appear more homogeneous, although this pattern should be interpreted carefully because the 7x7 window may smooth fine-scale differences and mountain terrain can also introduce local texture complexity.
+**Interpretation of Figure 4:** The **GLCM homogeneity** surface ranges from about 0.65 to 1.00 and appears fairly smooth overall. Lower homogeneity is more visible in parts of the **urban plain**, where dense built-up structures create greater local variation. By contrast, many northern and peripheral areas appear more homogeneous, although this pattern should be interpreted carefully because the **7×7 window** may smooth fine-scale differences and mountain terrain can also introduce local texture complexity.
 
 ::: {layout-ncol=2}
 ![Figure 3: NDVI Analysis of Beijing.](images/ndvi_plot.png)
@@ -140,7 +140,7 @@ plot(
 
 ### 2.4 Dimensionality Reduction via PCA
 
-Fusing spectral data with spatial metrics increases dataset dimensionality, making Principal Component Analysis (PCA) a highly effective tool to compress the combined multi-band stack into uncorrelated components without losing critical environmental information [@schultetobuhne2018].
+Fusing spectral data with spatial metrics increases dimensionality, and **PCA** is a practical way to compress the combined multi-band stack into **uncorrelated components** without discarding too much information [@schultetobuhne2018].
 
 ```{r}
 #| eval: false
@@ -169,7 +169,7 @@ plot(
 )
 ```
 
-**Interpretation of Figure 5 & 6:** The summary table shows that PC1 explains approximately 76% of the standardized variance. The spatial projection of PC1 suggests that, in addition to broad landscape differences, some of the highest values are likely associated with residual clouds or haze that remain visible in the true-colour composite. Because PCA captures the strongest sources of variance, it is sensitive to extreme reflectance values. This suggests that incomplete cloud masking may have influenced the first component and therefore affected downstream interpretation.
+**Interpretation of Figure 5 & 6:** The summary table shows that **PC1 explains approximately 76%** of the standardized variance. The spatial projection of PC1 suggests that, in addition to broad landscape differences, some of the highest values are likely associated with **residual clouds or haze** that remain visible in the true-colour composite. Because PCA captures the strongest sources of variance, it is sensitive to **extreme reflectance values**. This suggests that **incomplete cloud masking** may have influenced the first component and therefore affected downstream interpretation.
 
 ![Figure 5: PCA Summary table showing cumulative proportion of variance.](images/pca_summary.png)
 
@@ -180,13 +180,10 @@ plot(
 ## 3. Personal Reflection
 
 ### 3.1 Understanding the "Black Box"
-Even though modern platforms now provide Analysis Ready Data (ARD), I think it is still important to understand what is happening behind the scenes. If I work with raw drone imagery or data from less processed sensors in the future, I will need to understand methods like DOS and radiometric calibration in order to make sure my results are reliable.
+Even though modern platforms provide **Analysis Ready Data (ARD)**, I think it is still worth understanding what is happening underneath. If I work with raw drone imagery or less processed sensors later, knowing methods like **DOS** and **radiometric calibration** will be necessary to trust the results.
 
 ### 3.2 Methodological Limitations and Future Improvements
-This week’s exercise made me realise how important pre-processing is for later analysis. There are two main things I would improve next time:
-
-1. **QA-based Cloud Masking**: In this workflow, I mainly relied on visual checking and simple value-range filtering, which means some remaining cloud or shadow contamination may still be present. In future work, I would like to use the `QA_PIXEL` band to mask clouds and shadows more properly.
-2. **Topographic Correction**: This would be especially useful for northern Beijing because of the mountainous terrain. I did not include it this time because of time and data limitations, but it would be a valuable next step if I wanted more reliable results in mountain areas.
+This week’s exercise made me realise how important pre-processing is for later analysis. There are two things I would do differently next time. The first is using the `QA_PIXEL` band for cloud masking rather than relying on visual inspection and simple value-range filtering — the current approach leaves some residual cloud or shadow contamination in the data. The second is topographic correction, which would be particularly relevant for northern Beijing's mountain areas. I skipped it here due to time constraints, but it would improve reliability in those areas considerably.
 
 ---
 

@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jianshu Wu">
+<meta name="dcterms.date" content="2026-03-14">
+
+<title>Week 8 Learning Diary: Classification II – CASA0023 Learning Diary</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2d04f6a56a99f900a06f3dceb2e66a0f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fa423e886cf517ee378d38a13c608aa9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2d04f6a56a99f900a06f3dceb2e66a0f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">CASA0023 Learning Diary</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/brotree-code/casa0023-diary"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week8.html">Week 8: Classification II</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: Intro &amp; Spectral</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: Sensor Presentation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Corrections &amp; Enhancements</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week4_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4＆5: EO &amp; Policy</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6: Google Earth Engine I</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7: Classification I</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week8.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 8: Classification II</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#content-summary" id="toc-content-summary" class="nav-link active" data-scroll-target="#content-summary">1. Content Summary</a>
+  <ul class="collapse">
+  <li><a href="#beyond-the-single-class-pixel-sub-pixel-spectral-unmixing" id="toc-beyond-the-single-class-pixel-sub-pixel-spectral-unmixing" class="nav-link" data-scroll-target="#beyond-the-single-class-pixel-sub-pixel-spectral-unmixing">1.1 Beyond the Single-Class Pixel: Sub-pixel Spectral Unmixing</a></li>
+  <li><a href="#object-based-image-analysis-from-pixels-to-meaningful-objects" id="toc-object-based-image-analysis-from-pixels-to-meaningful-objects" class="nav-link" data-scroll-target="#object-based-image-analysis-from-pixels-to-meaningful-objects">1.2 Object-Based Image Analysis: From Pixels to Meaningful Objects</a></li>
+  <li><a href="#superpixels-kmeans-vs-snic" id="toc-superpixels-kmeans-vs-snic" class="nav-link" data-scroll-target="#superpixels-kmeans-vs-snic">1.3 Superpixels: KMeans vs SNIC</a></li>
+  <li><a href="#the-spatial-dependence-problem-in-accuracy-assessment" id="toc-the-spatial-dependence-problem-in-accuracy-assessment" class="nav-link" data-scroll-target="#the-spatial-dependence-problem-in-accuracy-assessment">1.4 The Spatial Dependence Problem in Accuracy Assessment</a></li>
+  </ul></li>
+  <li><a href="#applications-of-the-content" id="toc-applications-of-the-content" class="nav-link" data-scroll-target="#applications-of-the-content">2. Applications of the Content</a>
+  <ul class="collapse">
+  <li><a href="#workshop-overview-and-processing-workflow" id="toc-workshop-overview-and-processing-workflow" class="nav-link" data-scroll-target="#workshop-overview-and-processing-workflow">2.1 Workshop Overview and Processing Workflow</a></li>
+  <li><a href="#workshop-loading-chengdu-and-landsat-8" id="toc-workshop-loading-chengdu-and-landsat-8" class="nav-link" data-scroll-target="#workshop-loading-chengdu-and-landsat-8">2.2 Workshop: Loading Chengdu and Landsat 8</a></li>
+  <li><a href="#workshop-spectral-unmixing-practical-implementation" id="toc-workshop-spectral-unmixing-practical-implementation" class="nav-link" data-scroll-target="#workshop-spectral-unmixing-practical-implementation">2.3 Workshop: Spectral Unmixing — Practical Implementation</a></li>
+  <li><a href="#workshop-snic-superpixel-segmentation-and-obia-classification" id="toc-workshop-snic-superpixel-segmentation-and-obia-classification" class="nav-link" data-scroll-target="#workshop-snic-superpixel-segmentation-and-obia-classification">2.4 Workshop: SNIC Superpixel Segmentation and OBIA Classification</a></li>
+  <li><a href="#literature-from-chengdu-to-urban-mapping-at-scale" id="toc-literature-from-chengdu-to-urban-mapping-at-scale" class="nav-link" data-scroll-target="#literature-from-chengdu-to-urban-mapping-at-scale">2.5 Literature: From Chengdu to Urban Mapping at Scale</a></li>
+  </ul></li>
+  <li><a href="#personal-reflection" id="toc-personal-reflection" class="nav-link" data-scroll-target="#personal-reflection">3. Personal Reflection</a>
+  <ul class="collapse">
+  <li><a href="#three-methods-one-city-very-different-assumptions" id="toc-three-methods-one-city-very-different-assumptions" class="nav-link" data-scroll-target="#three-methods-one-city-very-different-assumptions">3.1 Three Methods, One City, Very Different Assumptions</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">4. References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week8.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 8 Learning Diary: Classification II</h1>
+<p class="subtitle lead">Sub-pixel Spectral Unmixing, Object-Based Image Analysis, and Spatial Dependence in Accuracy Assessment over Chengdu</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jianshu Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 14, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="content-summary" class="level2">
+<h2 class="anchored" data-anchor-id="content-summary">1. Content Summary</h2>
+<section id="beyond-the-single-class-pixel-sub-pixel-spectral-unmixing" class="level3">
+<h3 class="anchored" data-anchor-id="beyond-the-single-class-pixel-sub-pixel-spectral-unmixing">1.1 Beyond the Single-Class Pixel: Sub-pixel Spectral Unmixing</h3>
+<p>The lecture this week opened with a fundamental challenge to the assumption underlying last week’s classification: that every pixel belongs to exactly one land cover class. At 30m Landsat resolution, this is almost never true. A pixel over an urban fringe area might simultaneously contain rooftop, road surface, vegetation, and shadow — and forcing it into a single category discards information that matters for urban density estimation, informal settlement mapping, or vegetation monitoring <span class="citation" data-cites="foody2004">(<a href="#ref-foody2004" role="doc-biblioref">Foody 2004</a>)</span>.</p>
+<p>The solution introduced in the lecture is <strong>linear spectral mixture analysis</strong> (also called <strong>spectral unmixing</strong>), which models the observed pixel reflectance as a weighted sum of <strong>endmember</strong> spectra — spectrally pure reference signatures for each land cover type:</p>
+<p><span class="math display">\[
+\mathbf{r} = \sum_{i=1}^{n} f_i \cdot \mathbf{e}_i + \boldsymbol{\varepsilon}
+\quad \text{subject to} \quad \sum_{i=1}^{n} f_i = 1, \quad f_i \geq 0
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{r}\)</span> is the observed pixel reflectance vector, <span class="math inline">\(f_i\)</span> is the <strong>fractional abundance</strong> of endmember <span class="math inline">\(i\)</span>, <span class="math inline">\(\mathbf{e}_i\)</span> is its spectral signature, and <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> is the residual error. The result per pixel is not a single label but a set of fractions — for instance, 55% urban, 30% vegetation, 15% bare soil <span class="citation" data-cites="jensen2015">(<a href="#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>.</p>
+<p>Two key choices determine the quality of the unmixing:</p>
+<ul>
+<li><strong>Endmember selection</strong> — either defined manually from published spectral libraries, or derived from the image itself by extracting the mean reflectance within digitised training polygons</li>
+<li><strong>Constraints</strong> — unconstrained unmixing can produce negative fractions or fractions summing to more than 1; applying <strong>non-negativity</strong> and <strong>sum-to-one</strong> constraints produces physically meaningful results <span class="citation" data-cites="foody2004">(<a href="#ref-foody2004" role="doc-biblioref">Foody 2004</a>)</span></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week8_unmixing_concept.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Overview of spectral unmixing approaches — supervised unmixing uses known endmembers (E) to solve for abundance fractions (A); unsupervised (blind) unmixing estimates both endmembers and fractions from the image itself. The workshop follows the supervised approach, deriving endmembers from digitised training polygons.</figcaption>
+</figure>
+</div>
+</section>
+<section id="object-based-image-analysis-from-pixels-to-meaningful-objects" class="level3">
+<h3 class="anchored" data-anchor-id="object-based-image-analysis-from-pixels-to-meaningful-objects">1.2 Object-Based Image Analysis: From Pixels to Meaningful Objects</h3>
+<p>The second major concept from the lecture was <strong>Object-Based Image Analysis (OBIA)</strong> — a philosophy shift from classifying individual pixels to first grouping pixels into spatially and spectrally coherent <strong>objects</strong>, then classifying those objects. The lecture covered three approaches to creating these objects <span class="citation" data-cites="gee_book2023">(<a href="#ref-gee_book2023" role="doc-biblioref">Cardille et al. 2023</a>)</span>:</p>
+<ol type="1">
+<li><strong>Image gradient</strong> — detects edges by measuring directional change in intensity; useful for defining object boundaries but not sufficient alone</li>
+<li><strong>Spectral gradient</strong> — computes per-pixel differences between erosion (closest spectra) and dilation (furthest spectra), giving a measure of local spectral variability</li>
+<li><strong>Superpixel segmentation</strong> — groups pixels into compact objects by minimising within-object spectral variance; the main practical approach</li>
+</ol>
+<p>The lecture’s core argument for OBIA over pixel-based classification was that objects can carry <strong>geometric and textural features</strong> that single pixels cannot: shape, perimeter-to-area ratio, within-object standard deviation, and per-object NDVI. For urban mapping specifically, this is important because buildings, roads, and parks differ not just in mean spectral reflectance but in their spatial texture and internal variability <span class="citation" data-cites="matarira2023">(<a href="#ref-matarira2023" role="doc-biblioref">Matarira et al. 2023</a>)</span>.</p>
+<div id="tbl-features" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Feature availability in pixel-based vs.&nbsp;OBIA classification
+</figcaption>
+<div aria-describedby="tbl-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Feature type</th>
+<th>Pixel-based</th>
+<th>OBIA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean spectral value</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>Within-object std dev</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>Shape / compactness</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>Per-object NDVI</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>Context (neighbour class)</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="superpixels-kmeans-vs-snic" class="level3">
+<h3 class="anchored" data-anchor-id="superpixels-kmeans-vs-snic">1.3 Superpixels: KMeans vs SNIC</h3>
+<p>The lecture introduced two superpixel algorithms used in GEE. Both start from a regular seed grid and grow clusters by minimising a distance measure, but they differ in how that distance is defined:</p>
+<ul>
+<li><strong>KMeans</strong> — groups pixels by <strong>spectral distance</strong> only; clusters can span spatially discontinuous areas if they have similar reflectance; produces uniform square-ish objects</li>
+<li><strong>Simple Non-Iterative Clustering (SNIC)</strong> — balances <strong>spectral distance</strong> and <strong>spatial proximity</strong> using a normalised combined metric; produces more naturally shaped objects that follow real-world feature boundaries; does not iterate, making it faster</li>
+</ul>
+<p>The <code>compactness</code> parameter in SNIC controls this balance: high values produce regular grid-like objects (similar to KMeans), while low values allow objects to stretch along spectral edges. The lecture noted that for urban mapping, a lower compactness tends to produce more meaningful objects whose boundaries align with building edges and road networks.</p>
+</section>
+<section id="the-spatial-dependence-problem-in-accuracy-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="the-spatial-dependence-problem-in-accuracy-assessment">1.4 The Spatial Dependence Problem in Accuracy Assessment</h3>
+<p>The third topic — arguably the most conceptually significant — came from <span class="citation" data-cites="karasiak2022">(<a href="#ref-karasiak2022" role="doc-biblioref">Karasiak et al. 2022</a>)</span> and directly challenges the accuracy figures from last week. The standard random train/test split (as used in week 7 with <code>randomColumn()</code>) does not guarantee spatial independence between training and validation data. If training and test pixels come from the same polygon — or from spatially adjacent areas — they are correlated due to <strong>spatial autocorrelation</strong>: nearby pixels tend to look similar regardless of the classifier.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why Random Splits Inflate Accuracy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="citation" data-cites="karasiak2022">(<a href="#ref-karasiak2022" role="doc-biblioref">Karasiak et al. 2022</a>)</span> demonstrate that random train/test splits can inflate reported accuracy substantially, in some cases by around <strong>10–20 percentage points</strong> compared to spatially independent evaluation. The fix is <strong>spatial cross-validation</strong>: dividing the study area into spatial blocks and holding out entire blocks as test sets. This ensures the model is evaluated on genuinely unseen spatial territory, not just unseen pixels from the same neighbourhood as the training data.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="applications-of-the-content" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-the-content">2. Applications of the Content</h2>
+<section id="workshop-overview-and-processing-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-overview-and-processing-workflow">2.1 Workshop Overview and Processing Workflow</h3>
+<p>The workshop this week continues with <strong>Chengdu</strong> as the study area but switches the sensor to <strong>Landsat 8</strong> (30m resolution, 2022), which gives a coarser resolution than last week’s Sentinel-2 but is a useful contrast — at 30m, mixed pixels are far more common, making sub-pixel unmixing particularly relevant. Three practical tasks follow in sequence: loading the Landsat 8 composite, running spectral unmixing and hardening the output, and segmenting the image with SNIC for OBIA classification.</p>
+</section>
+<section id="workshop-loading-chengdu-and-landsat-8" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-loading-chengdu-and-landsat-8">2.2 Workshop: Loading Chengdu and Landsat 8</h3>
+<p>Continuing from week 7, the study area is still Chengdu filtered by <code>ADM2_CODE == 13255</code>. The key difference this week is the sensor — Landsat 8 Collection 2 requires a different scaling function from Sentinel-2, multiplying by <code>0.0000275</code> and adding <code>−0.2</code> rather than dividing by 10000. This brings raw integer DN values back to surface reflectance:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Vector: Chengdu --------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> dataset <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level2"</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> chengdu <span class="op">=</span> dataset<span class="op">.</span><span class="fu">filter</span>(<span class="st">'ADM2_CODE == 13255'</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">setCenter</span>(<span class="fl">104.065</span><span class="op">,</span> <span class="fl">30.659</span><span class="op">,</span> <span class="dv">9</span>)<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(chengdu<span class="op">,</span> {<span class="dt">color</span><span class="op">:</span> <span class="st">'00909F'</span><span class="op">,</span> <span class="dt">fillColor</span><span class="op">:</span> <span class="st">'00000000'</span><span class="op">,</span> <span class="dt">width</span><span class="op">:</span> <span class="dv">2</span>}<span class="op">,</span> <span class="st">'Chengdu boundary'</span>)<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Landsat 8 with scaling --------------------------------</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">applyScaleFactors</span>(image) {</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> opticalBands <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">'SR_B.'</span>)<span class="op">.</span><span class="fu">multiply</span>(<span class="fl">0.0000275</span>)<span class="op">.</span><span class="fu">add</span>(<span class="op">-</span><span class="fl">0.2</span>)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> thermalBands <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">'ST_B.*'</span>)<span class="op">.</span><span class="fu">multiply</span>(<span class="fl">0.00341802</span>)<span class="op">.</span><span class="fu">add</span>(<span class="fl">149.0</span>)<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">addBands</span>(opticalBands<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="kw">true</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>              <span class="op">.</span><span class="fu">addBands</span>(thermalBands<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> oneimage_study_area_cloud <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2022-01-01'</span><span class="op">,</span> <span class="st">'2022-10-10'</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(chengdu)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">"CLOUD_COVER"</span><span class="op">,</span> <span class="dv">1</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">map</span>(applyScaleFactors)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">reduce</span>(ee<span class="op">.</span><span class="at">Reducer</span><span class="op">.</span><span class="fu">median</span>())</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">select</span>([<span class="st">'SR_B1_median'</span><span class="op">,</span><span class="st">'SR_B2_median'</span><span class="op">,</span><span class="st">'SR_B3_median'</span><span class="op">,</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>           <span class="st">'SR_B4_median'</span><span class="op">,</span><span class="st">'SR_B5_median'</span><span class="op">,</span><span class="st">'SR_B6_median'</span><span class="op">,</span><span class="st">'SR_B7_median'</span>])</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">clip</span>(chengdu)<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> vis_params <span class="op">=</span> {<span class="dt">bands</span><span class="op">:</span> [<span class="st">'SR_B4_median'</span><span class="op">,</span><span class="st">'SR_B3_median'</span><span class="op">,</span><span class="st">'SR_B2_median'</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="fl">0.0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="fl">0.3</span>}<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(oneimage_study_area_cloud<span class="op">,</span> vis_params<span class="op">,</span> <span class="st">'True Color (432)'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Comparing this Landsat 8 composite to last week’s Sentinel-2 output immediately reveals the resolution difference — at 30m, individual buildings are no longer distinguishable, and the urban-rural fringe appears as a gradual blend rather than a sharp boundary. This is exactly the condition where sub-pixel unmixing adds most value: at 10m Sentinel-2 resolution, most pixels over the urban core are relatively pure; at 30m Landsat resolution, mixed pixels dominate the entire peri-urban zone. The QA pixel cloud mask was not applied here, as testing showed it incorrectly flags some high-reflectance mountain surfaces in the northwest — the same area that caused snow/urban confusion in last week’s classification <span class="citation" data-cites="gee_book2023">(<a href="#ref-gee_book2023" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
+<p>Unlike the Sentinel-2 composite from week 7 where snow-capped peaks were clearly visible in the northwest, the white areas in the Landsat 8 composite appear more consistent with residual cloud contamination than persistent snow cover, suggesting the median composite has partially suppressed the seasonal snow signal across the available eight scenes — though this would require further confirmation through QA masking or seasonal comparison. This means the snow/urban spectral confusion from week 7 is likely less prominent here, but may be replaced by a cloud/bare-earth confusion that similarly affects the unmixing results.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week8_chengdu_composite.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: Chengdu study area with Landsat 8 true-colour composite (2022 median, 30m). The coarser resolution compared to last week’s Sentinel-2 is immediately visible — urban boundaries appear more diffuse and individual structures are not distinguishable.</figcaption>
+</figure>
+</div>
+</section>
+<section id="workshop-spectral-unmixing-practical-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-spectral-unmixing-practical-implementation">2.3 Workshop: Spectral Unmixing — Practical Implementation</h3>
+<p>The sub-pixel unmixing step is a direct practical application of the lecture theory on linear spectral mixture analysis. I digitised small polygons for four endmember classes in Chengdu — <strong>urban</strong>, <strong>grass</strong>, <strong>bare earth</strong>, and <strong>forest</strong> — reusing the same polygon locations from week 7 where possible, and used the image-derived approach to extract mean reflectance values as endmember spectra. One important adjustment: the Landsat 8 band naming after <code>.reduce(ee.Reducer.median())</code> appends <code>_median</code> to each band name, which needs to match the <code>reduceRegion</code> output keys:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Image-derived endmembers --------------------------------</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">data_extract</span>(image<span class="op">,</span> vector) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> data <span class="op">=</span> image<span class="op">.</span><span class="fu">reduceRegion</span>({</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reducer</span><span class="op">:</span> ee<span class="op">.</span><span class="at">Reducer</span><span class="op">.</span><span class="fu">mean</span>()<span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">geometry</span><span class="op">:</span> vector<span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scale</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e8</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">.</span><span class="fu">values</span>()<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> urban_data     <span class="op">=</span> <span class="fu">data_extract</span>(oneimage_study_area_cloud<span class="op">,</span> urban)<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> grass_data     <span class="op">=</span> <span class="fu">data_extract</span>(oneimage_study_area_cloud<span class="op">,</span> grass)<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> bare_earth_data <span class="op">=</span> <span class="fu">data_extract</span>(oneimage_study_area_cloud<span class="op">,</span> bare_earth)<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> forest_data    <span class="op">=</span> <span class="fu">data_extract</span>(oneimage_study_area_cloud<span class="op">,</span> forest)<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Constrained unmixing --------------------------------</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> fractions_constrained <span class="op">=</span> oneimage_study_area_cloud<span class="op">.</span><span class="fu">unmix</span>(</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  [urban_data<span class="op">,</span> grass_data<span class="op">,</span> bare_earth_data<span class="op">,</span> forest_data]<span class="op">,</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">true</span><span class="op">,</span>  <span class="co">// sum to one</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">true</span>   <span class="co">// non-negative</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(fractions_constrained<span class="op">,</span> {}<span class="op">,</span> <span class="st">'constrained fractions'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Constrained vs.&nbsp;Unconstrained Unmixing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Without constraints, the solution can produce negative fractions or values summing to more than 1 — physically impossible. The two <code>true</code> arguments enforce <strong>non-negativity</strong> and <strong>sum-to-one</strong>, giving a result directly interpretable as proportional area coverage <span class="citation" data-cites="foody2004">(<a href="#ref-foody2004" role="doc-biblioref">Foody 2004</a>)</span>. Running the unconstrained version first is useful for diagnostics: large negative values or totals far from 1 suggest a poorly chosen endmember.</p>
+</div>
+</div>
+<p>To produce a hard classification from the fractions (the “hardening” step described in the lecture), each fraction band is thresholded at 0.5:</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Harden to single class --------------------------------</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> reclassified_urban      <span class="op">=</span> fractions_constrained<span class="op">.</span><span class="fu">expression</span>(<span class="st">'b(0) &gt; .5 ? 1 : 0'</span>)<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> reclassified_grass      <span class="op">=</span> fractions_constrained<span class="op">.</span><span class="fu">expression</span>(<span class="st">'b(1) &gt; .5 ? 2 : 0'</span>)<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> reclassified_bare_earth <span class="op">=</span> fractions_constrained<span class="op">.</span><span class="fu">expression</span>(<span class="st">'b(2) &gt; .5 ? 3 : 0'</span>)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> reclassified_forest     <span class="op">=</span> fractions_constrained<span class="op">.</span><span class="fu">expression</span>(<span class="st">'b(3) &gt; .5 ? 4 : 0'</span>)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> reclassified_all <span class="op">=</span> reclassified_urban</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">add</span>(reclassified_grass)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">add</span>(reclassified_bare_earth)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">add</span>(reclassified_forest)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">clip</span>(chengdu)<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(reclassified_all<span class="op">,</span> {</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> [<span class="st">'d99282'</span><span class="op">,</span> <span class="st">'dfdfc2'</span><span class="op">,</span> <span class="st">'b3ac9f'</span><span class="op">,</span> <span class="st">'1c5f2c'</span>]</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> <span class="st">'hardened sub-pixel'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week8_unmixing_output.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: Constrained spectral unmixing output over Chengdu displayed as RGB — red channel = urban fraction (b0), green channel = grass fraction (b1), blue channel = bare earth fraction (b2). Brighter individual colours indicate higher fractional abundance of that endmember; mixed colours indicate mixed abundance patterns rather than discrete classes. Forest fraction (b3) is not shown as a separate channel.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week8_hardened_subpixel.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: Hardened sub-pixel classification over Chengdu — each pixel assigned to its dominant endmember class (&gt;50% threshold). Colour legend: pink = urban (1), light beige = grass (2), grey-brown = bare earth (3), dark green = forest (4). Pixels where no single class exceeds 50% remain unclassified.</figcaption>
+</figure>
+</div>
+<p>The 0.5 threshold is useful for producing an interpretable map, but it also collapses continuous abundance information back into discrete classes and may underrepresent highly mixed peri-urban pixels where no single endmember dominates — precisely the transitional zones where land use decisions are most consequential.</p>
+</section>
+<section id="workshop-snic-superpixel-segmentation-and-obia-classification" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-snic-superpixel-segmentation-and-obia-classification">2.4 Workshop: SNIC Superpixel Segmentation and OBIA Classification</h3>
+<p>The OBIA workflow follows the lecture’s core concept of first grouping pixels into spatially coherent objects before classifying them. I used a hexagonal seed grid with 40-pixel spacing and ran SNIC with <code>compactness = 1</code>, which allows objects to follow spectral edges rather than enforcing regular shapes. Using Chengdu at 30m Landsat resolution, the objects produced are noticeably larger and less detailed than they would be at Sentinel-2 resolution — each object represents a larger real-world footprint. These parameters were selected heuristically to balance object coherence and computational simplicity, rather than through formal optimisation.</p>
+<details>
+<summary>
+Show GEE code
+</summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- SNIC segmentation --------------------------------</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> seeds <span class="op">=</span> ee<span class="op">.</span><span class="at">Algorithms</span><span class="op">.</span><span class="at">Image</span><span class="op">.</span><span class="at">Segmentation</span><span class="op">.</span><span class="fu">seedGrid</span>(<span class="dv">40</span><span class="op">,</span> <span class="st">"hex"</span>)<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> snic <span class="op">=</span> ee<span class="op">.</span><span class="at">Algorithms</span><span class="op">.</span><span class="at">Image</span><span class="op">.</span><span class="at">Segmentation</span><span class="op">.</span><span class="fu">SNIC</span>({</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">image</span><span class="op">:</span> oneimage_study_area_cloud<span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">compactness</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">connectivity</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">neighborhoodSize</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">seeds</span><span class="op">:</span> seeds</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(snic<span class="op">,</span> {}<span class="op">,</span> <span class="st">'SNIC objects'</span><span class="op">,</span> <span class="kw">true</span><span class="op">,</span> <span class="fl">0.6</span>)<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Per-object statistics --------------------------------</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> clusters <span class="op">=</span> snic<span class="op">.</span><span class="fu">select</span>(<span class="st">'clusters'</span>)<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> stdDev <span class="op">=</span> oneimage_study_area_cloud</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">addBands</span>(clusters)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">reduceConnectedComponents</span>(ee<span class="op">.</span><span class="at">Reducer</span><span class="op">.</span><span class="fu">stdDev</span>()<span class="op">,</span> <span class="st">'clusters'</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> NDVI <span class="op">=</span> snic<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">'SR_B5_median_mean'</span><span class="op">,</span> <span class="st">'SR_B4_median_mean'</span>])<span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- Build object feature image --------------------------------</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> bands <span class="op">=</span> [<span class="st">'SR_B1_median_mean'</span><span class="op">,</span><span class="st">'SR_B2_median_mean'</span><span class="op">,</span><span class="st">'SR_B3_median_mean'</span><span class="op">,</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>             <span class="st">'SR_B4_median_mean'</span><span class="op">,</span><span class="st">'SR_B5_median_mean'</span><span class="op">,</span><span class="st">'SR_B6_median_mean'</span><span class="op">,</span><span class="st">'SR_B7_median_mean'</span>]<span class="op">;</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> objectPropertiesImage <span class="op">=</span> ee<span class="op">.</span><span class="at">Image</span><span class="op">.</span><span class="fu">cat</span>([</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  snic<span class="op">.</span><span class="fu">select</span>(bands)<span class="op">,</span> stdDev<span class="op">,</span> NDVI</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>])<span class="op">.</span><span class="fu">float</span>()<span class="op">;</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">// --------------------- CART on object features --------------------------------</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> points <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>([</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(urban<span class="op">,</span>      {<span class="st">'class'</span><span class="op">:</span> <span class="dv">1</span>})<span class="op">,</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(grass<span class="op">,</span>      {<span class="st">'class'</span><span class="op">:</span> <span class="dv">2</span>})<span class="op">,</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(bare_earth<span class="op">,</span> {<span class="st">'class'</span><span class="op">:</span> <span class="dv">3</span>})<span class="op">,</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  ee<span class="op">.</span><span class="fu">Feature</span>(forest<span class="op">,</span>     {<span class="st">'class'</span><span class="op">:</span> <span class="dv">4</span>})<span class="op">,</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>])<span class="op">;</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> training <span class="op">=</span> objectPropertiesImage<span class="op">.</span><span class="fu">sampleRegions</span>({</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">collection</span><span class="op">:</span> points<span class="op">,</span> <span class="dt">properties</span><span class="op">:</span> [<span class="st">'class'</span>]<span class="op">,</span> <span class="dt">scale</span><span class="op">:</span> <span class="dv">30</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> classifier <span class="op">=</span> ee<span class="op">.</span><span class="at">Classifier</span><span class="op">.</span><span class="fu">smileCart</span>()<span class="op">.</span><span class="fu">train</span>({</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  <span class="dt">features</span><span class="op">:</span> training<span class="op">,</span> <span class="dt">classProperty</span><span class="op">:</span> <span class="st">'class'</span><span class="op">,</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> classified <span class="op">=</span> objectPropertiesImage<span class="op">.</span><span class="fu">classify</span>(classifier)<span class="op">;</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(classified<span class="op">,</span> {</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> [<span class="st">'d99282'</span><span class="op">,</span> <span class="st">'dfdfc2'</span><span class="op">,</span> <span class="st">'b3ac9f'</span><span class="op">,</span> <span class="st">'1c5f2c'</span>]</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> <span class="st">'OBIA classified'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What the Standard Deviation Feature Adds
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Adding within-object standard deviation as a classification feature captures something the mean spectral value cannot: <strong>internal variability</strong>. A park object has low std dev across all bands — uniform grass. A dense urban block has high std dev — rooftops, roads, and shadow all within one object. The workshop notes exactly this: “a park might have a low standard deviation in the object, but an urban area might have a higher standard deviation.” This is the key advantage of OBIA over pixel-based approaches <span class="citation" data-cites="gee_book2023">(<a href="#ref-gee_book2023" role="doc-biblioref">Cardille et al. 2023</a>)</span>.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week8_snic_output.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: SNIC segmentation output over Chengdu — hexagonal seeds grow into spatially coherent objects at 30m Landsat resolution. Objects are larger than they would be at 10m Sentinel-2 resolution, reflecting the coarser input.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/week8_obia_classified.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 6: OBIA CART classification over Chengdu using object-level features (mean reflectance + standard deviation + NDVI). Colour legend: pink = urban (1), light beige = grass (2), grey-brown = bare earth (3), dark green = forest (4). Compare the spatial coherence of objects here against last week’s fragmented pixel-level output.</figcaption>
+</figure>
+</div>
+</section>
+<section id="literature-from-chengdu-to-urban-mapping-at-scale" class="level3">
+<h3 class="anchored" data-anchor-id="literature-from-chengdu-to-urban-mapping-at-scale">2.5 Literature: From Chengdu to Urban Mapping at Scale</h3>
+<p>The workshop methods connect directly to current research on urban mapping in rapidly growing cities. <span class="citation" data-cites="matarira2023">(<a href="#ref-matarira2023" role="doc-biblioref">Matarira et al. 2023</a>)</span> applied exactly this <strong>OBIA-in-GEE</strong> approach to map <strong>informal settlements</strong> in South Africa, fusing Sentinel-1 SAR, Sentinel-2, and PlanetScope data. Their key insight was that <strong>textural features from SAR</strong> — specifically backscatter intensity and coherence — were critical for separating informal settlements from formal housing, because corrugated iron rooftops and concrete rooftops can appear similar in <strong>mean optical reflectance</strong> alone. This is a direct extension of the standard deviation logic from the workshop: the within-object standard deviation captures structural variability that spectral means miss, and SAR adds a <strong>structurally orthogonal</strong> information source.</p>
+<p><span class="citation" data-cites="foody2004">(<a href="#ref-foody2004" role="doc-biblioref">Foody 2004</a>)</span> provides the theoretical case for sub-pixel methods, arguing that the systematic error introduced by forcing mixed pixels into hard categories is largest at <strong>land cover boundaries</strong>. At 30m Landsat resolution over Chengdu, this is particularly relevant: the <strong>peri-urban fringe</strong> — where the city grades into agricultural land — is precisely where mixed pixels dominate and where land use decisions are most consequential for urban expansion monitoring. His chapter also makes a point about <strong>endmember quality</strong> that applies directly here: errors in a single endmember propagate as <strong>systematic bias</strong> across the entire unmixed image, which is why last week’s snow/urban confusion would also affect sub-pixel results if mountain pixels were inadvertently included in the <code>urban_high</code> endmember polygon. Both <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span> and <span class="citation" data-cites="karasiak2022">(<a href="#ref-karasiak2022" role="doc-biblioref">Karasiak et al. 2022</a>)</span> push this critical thread further: <span class="citation" data-cites="barsi2018">(<a href="#ref-barsi2018" role="doc-biblioref">Barsi et al. 2018</a>)</span> argue that accuracy is <strong>multi-dimensional</strong>, and <span class="citation" data-cites="karasiak2022">(<a href="#ref-karasiak2022" role="doc-biblioref">Karasiak et al. 2022</a>)</span> demonstrate empirically that <strong>spatial proximity</strong> between training and test sets routinely overstates performance by margins large enough to affect real-world decisions.</p>
+<hr>
+</section>
+</section>
+<section id="personal-reflection" class="level2">
+<h2 class="anchored" data-anchor-id="personal-reflection">3. Personal Reflection</h2>
+<section id="three-methods-one-city-very-different-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="three-methods-one-city-very-different-assumptions">3.1 Three Methods, One City, Very Different Assumptions</h3>
+<p>Working through <strong>pixel-based classification</strong> (week 7), <strong>sub-pixel unmixing</strong>, and <strong>OBIA</strong> in quick succession clarifies something that is easy to miss when each method is presented in isolation: they make fundamentally different assumptions about what a pixel represents. Pixel-based classification assumes each pixel is <strong>pure</strong>. Unmixing assumes it is a <strong>linear mixture</strong>. OBIA acknowledges that the pixel is the <strong>wrong unit of analysis</strong> altogether and tries to build something more meaningful before classifying.</p>
+<p>For Chengdu at <strong>30m Landsat resolution</strong> — compared to the 10m Sentinel-2 used last week — the <strong>mixed pixel problem</strong> is much more severe. The peri-urban fringe where agricultural land grades into residential development is exactly the zone where Landsat pixels are most mixed and where planning decisions are most consequential. The sub-pixel approach is more honest about this than hard classification, but as <span class="citation" data-cites="foody2004">(<a href="#ref-foody2004" role="doc-biblioref">Foody 2004</a>)</span> points out, validating <strong>fractional abundance estimates</strong> requires high-resolution reference data. OBIA partially sidesteps this by producing objects that can be validated with an error matrix, but the result is sensitive to <strong>segmentation parameters</strong> in ways that are difficult to optimise systematically.</p>
+<p>The <span class="citation" data-cites="karasiak2022">(<a href="#ref-karasiak2022" role="doc-biblioref">Karasiak et al. 2022</a>)</span> finding recasts the <strong>82.4% accuracy</strong> from last week in an uncomfortable light. If training and validation pixels were <strong>spatially proximate</strong> — drawn from the same digitised polygons over Chengdu’s flat urban zone — then the real accuracy on the mountain northwest may be substantially lower. The snow/urban confusion we saw in the CART output is consistent with exactly this <strong>spatial limitation</strong>. For a city government tracking Chengdu’s <strong>Park City</strong> green space expansion using a land cover map, the gap between 82% on correlated pixels and a lower figure on genuinely independent spatial blocks is a practical problem, not just a statistical nuance.</p>
+<p>Looking forward, <span class="citation" data-cites="matarira2023">(<a href="#ref-matarira2023" role="doc-biblioref">Matarira et al. 2023</a>)</span>’s <strong>multi-sensor fusion</strong> approach — combining SAR texture with optical classification — is the direction that would most directly address the problems encountered over both weeks. The atmospheric haze and snow confusion problems in Chengdu are <strong>optical problems</strong>; SAR is not affected by either, and adding <strong>Sentinel-1 backscatter</strong> as an additional feature in the OBIA pipeline would likely improve separability between the classes that optical bands struggle with.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Endmember Quality Is Everything in Spectral Unmixing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A poorly placed endmember polygon — for instance, one that contains shadow or mixed land cover — will produce a biased endmember spectrum that propagates systematic error across the entire unmixed image. Unlike standard classification where one bad training polygon affects only nearby pixels, in unmixing the error is global. <span class="citation" data-cites="foody2004">(<a href="#ref-foody2004" role="doc-biblioref">Foody 2004</a>)</span> recommends collecting multiple small, spectrally pure polygons per class and averaging across them to reduce sensitivity to any single polygon location.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">4. References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-barsi2018" class="csl-entry" role="listitem">
+Barsi, Árpád, Zsófia Kugler, István László, György Szabó, and Hasan M. Abdulmutalib. 2018. <span>“Accuracy Dimensions in Remote Sensing.”</span> <em>International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences</em> XLII-3/W4: 61–67. <a href="https://doi.org/10.5194/isprs-archives-XLII-3-W4-61-2018">https://doi.org/10.5194/isprs-archives-XLII-3-W4-61-2018</a>.
+</div>
+<div id="ref-gee_book2023" class="csl-entry" role="listitem">
+Cardille, Jeffrey A., Morgan A. Crowley, David Saah, and Nicholas E. Clinton, eds. 2023. <em>Cloud-<span>Based</span> <span>Remote</span> <span>Sensing</span> with <span>Google</span> <span>Earth</span> <span>Engine</span>: <span>Fundamentals</span> and <span>Applications</span></em>. Springer. <a href="https://doi.org/10.1007/978-3-031-26588-4">https://doi.org/10.1007/978-3-031-26588-4</a>.
+</div>
+<div id="ref-foody2004" class="csl-entry" role="listitem">
+Foody, Giles M. 2004. <span>“Sub-Pixel Methods in Remote Sensing.”</span> In <em>Remote Sensing Image Analysis: Including the Spatial Domain</em>, edited by Steven M. de Jong and Freek D. van der Meer, 37–49. Remote Sensing and Digital Image Processing. Dordrecht: Springer Netherlands. <a href="https://doi.org/10.1007/978-1-4020-2560-0_3">https://doi.org/10.1007/978-1-4020-2560-0_3</a>.
+</div>
+<div id="ref-jensen2015" class="csl-entry" role="listitem">
+Jensen, John R. 2015. <em>Introductory Digital Image Processing: A Remote Sensing Perspective</em>. 4th ed. Upper Saddle River, NJ: Prentice-Hall Inc. / Pearson. <a href="https://books.google.com/books/about/Introductory_Digital_Image_Processing.html?id=BWx3CgAAQBAJ">https://books.google.com/books/about/Introductory_Digital_Image_Processing.html?id=BWx3CgAAQBAJ</a>.
+</div>
+<div id="ref-karasiak2022" class="csl-entry" role="listitem">
+Karasiak, Nicolas, Jean-François Dejoux, Claude Monteil, and David Sheeren. 2022. <span>“Spatial Dependence Between Training and Test Sets: Another Pitfall of Classification Accuracy Assessment in Remote Sensing.”</span> <em>Machine Learning</em> 111: 2715–40. <a href="https://doi.org/10.1007/s10994-021-05972-1">https://doi.org/10.1007/s10994-021-05972-1</a>.
+</div>
+<div id="ref-matarira2023" class="csl-entry" role="listitem">
+Matarira, Dadirai, Onisimo Mutanga, Maheshvari Naidu, and Marco Vizzari. 2023. <span>“Object-Based Informal Settlement Mapping in <span>Google Earth Engine</span> Using the Integration of <span>Sentinel-1</span>, <span>Sentinel-2</span>, and <span>PlanetScope</span> Satellite Data.”</span> <em>Land</em> 12 (1): 99. <a href="https://doi.org/10.3390/land12010099">https://doi.org/10.3390/land12010099</a>.
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<img id="floating-corner-image" src="images/right-corner.jpg" alt="corner image">
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const img = document.getElementById("floating-corner-image");
+
+  let lastScrollY = window.scrollY;
+
+  let ticking = false;
+
+  let resetTimer;
+
+
+
+  function handleScroll() {
+
+    const currentScrollY = window.scrollY;
+
+    const delta = currentScrollY - lastScrollY;
+
+
+
+    // 限制位移幅度，避免太夸张
+
+    let offset = 0;
+
+    if (delta > 0) {
+
+      // 向下滚动，图片往上
+
+      offset = -20;
+
+    } else if (delta < 0) {
+
+      // 向上滚动，图片往下
+
+      offset = 20;
+
+    }
+
+
+
+    img.style.transform = `translateY(${offset}px)`;
+
+
+
+    // 清除旧的回弹计时
+
+    clearTimeout(resetTimer);
+
+
+
+    // 停止滚动后回到原位
+
+    resetTimer = setTimeout(() => {
+
+      img.style.transform = "translateY(0)";
+
+    }, 120);
+
+
+
+    lastScrollY = currentScrollY;
+
+    ticking = false;
+
+  }
+
+
+
+  window.addEventListener("scroll", () => {
+
+    if (!ticking) {
+
+      window.requestAnimationFrame(handleScroll);
+
+      ticking = true;
+
+    }
+
+  });
+
+});
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brotree-code/casa0023-diary/blob/main/week8.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/brotree-code/casa0023-diary/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

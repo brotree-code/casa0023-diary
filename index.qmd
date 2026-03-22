@@ -1,6 +1,6 @@
 ---
-title: "Learning diary"
-subtitle: "Remotely Sensing Cities and Environments"
+title: "Learning Diary"
+subtitle: "Remotely Sensing Cities and Environments — CASA0023"
 date: "2026-01-24"
 ---
 
@@ -8,23 +8,38 @@ date: "2026-01-24"
 
 This is my learning diary for **CASA0023: Remotely Sensing Cities and Environments**.
 
-The diary is organised by week. Each entry follows the same structure:
+Each weekly entry follows the same structure: a **summary** of the key ideas from the lecture and practical, an **applications** section discussing how those ideas appear in research and policy, and a **personal reflection** on what I found interesting, what I struggled with, and where the methods might be useful later.
 
--   **Summary** – key ideas from the lecture/practical, in my own words\
--   **Applications** – examples of how these ideas are used (papers, policy, real-world cases)\
--   **Reflection** – what I understood well, what I’m unsure about, and how I might use it later
+---
+
+# Weekly Entries
+
+| Week | Topic | Study Area | Key Methods |
+|---|---|---|---|
+| [Week 1](week1.qmd) | Introduction & Spectral Analysis | Guiyang | TCT, spectral signatures, Welch t-test |
+| [Week 2](week2.qmd) | Sensor Presentation | — | Landsat OLI/TIRS, NDVI, UHI |
+| [Week 3](week3.qmd) | Corrections & Enhancements | Beijing | Mosaicking, NDVI, GLCM, PCA |
+| [Week 4 & 5](week4_5.qmd) | EO & Policy | Ahmedabad | LST, NDVI classification, Heat Action Plan |
+| [Week 6](week6.qmd) | Google Earth Engine I | Beijing | GEE fundamentals, GLCM texture, PCA |
+| [Week 7](week7.qmd) | Classification I | Chengdu | CART, Random Forest, accuracy assessment |
+| [Week 8](week8.qmd) | Classification II | Chengdu | Spectral unmixing, OBIA, SNIC |
+
+---
 
 # Links
 
 * 🔗 [**GitHub Repository**](https://github.com/brotree-code/casa0023-diary)
 * 📊 [**Slides (Week 2): Landsat Program Presentation**](https://brotree-code.github.io/casa0023-presentation/)
 
-# Module overview (quick notes)
+---
 
--   **Assessment 1 (30%)**: Group presentation (10 minutes), policy-focused EO pitch\
--   **Assessment 2 (70%)**: Weekly learning diary (this site)
+# Module Overview
 
-# How I’m working
+- **Assessment 1 (30%)** — Group presentation (10 minutes), policy-focused EO pitch
+- **Assessment 2 (70%)** — Weekly learning diary (this site)
 
--   Tools: R / RStudio, Quarto, GitHub Pages (and later Google Earth Engine)
--   Data note: large EO datasets are not uploaded to GitHub; only small figures used in the diary are stored here.
+---
+
+# How I'm Working
+
+The workflow evolved across the term. Weeks 1–4 used **R / RStudio** and **QGIS** for local processing, moving to **Google Earth Engine (JavaScript)** from Week 6 onwards. The study areas shifted from my hometown Guiyang, to Beijing, to Ahmedabad, and finally to Chengdu for the classification weeks. Large EO datasets are not stored in the GitHub repository — only the figures used in each diary entry are committed there.
