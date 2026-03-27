@@ -51,16 +51,18 @@ Classifying by **percentile rank** rather than fixed temperature thresholds mean
 
 I chose **Beijing** as the study area for this week. Beijing municipality is an ideal case for urban heat analysis: it is a large, dense megacity surrounded by mountainous rural areas, meaning the contrast between **hot urban core** and **cooler periphery** is sharp and spatially interpretable. The municipality encompasses both the dense commercial and residential centre and extensive outer districts including mountainous terrain to the north and west.
 
-For administrative boundaries I used **GADM 4.1** rather than FAO GAUL, because GAUL Level 2 returns only 2 features for Beijing — insufficient for meaningful per-district analysis. GADM Level 2 provides the overall municipality boundary (used for `filterBounds` and `clip`), while GADM Level 3 provides **11 spatial units**: 10 outer districts plus one combined central urban area encompassing the six inner districts that GADM aggregates into a single feature.
+For administrative boundaries I used **DataV (Alibaba Cloud)** district-level vector data rather than GADM or FAO GAUL, for two reasons. First, GAUL Level 2 returns only 2 features for Beijing — insufficient for meaningful per-district analysis. Second, GADM Level 3, while providing more subdivisions, aggregates Beijing's six inner city districts (Dongcheng, Xicheng, Chaoyang, Haidian, Fengtai, Shijingshan) into a single combined feature, which obscures the thermal differences between these densely developed but spatially distinct areas. The DataV dataset provides all **16 official administrative districts** of Beijing as separate polygons, fully consistent with the administrative boundaries used in Chinese urban planning. District names were stored as Chinese characters in the source data and were mapped to **romanised pinyin** in GEE before export to ensure compatibility with R and all downstream outputs.
+
+The overall Beijing boundary used for `filterBounds` and `clip` operations is derived by calling `.union()` on the 16-district collection, ensuring complete spatial consistency between the raster clip boundary and the district polygons.
 
 ::: {.callout-note}
-## GAUL vs GADM for Chinese Cities
-FAO/GAUL/2015/level2 filtered to `ADM1_CODE == 899` returns only 2 features for Beijing — the dataset does not subdivide Chinese municipalities at the district level. GADM 4.1 Level 3, uploaded as a GEE Asset, provides **11 meaningful spatial units** and was used for all per-district analysis. The GADM Level 2 union was used for the overall Beijing boundary to ensure spatial consistency.
+## Why Not GADM for Beijing Districts?
+GADM 4.1 Level 3 provides only **11 spatial units** for Beijing — it merges the six inner-city districts (Dongcheng, Xicheng, Chaoyang, Haidian, Fengtai, Shijingshan) into a single polygon labelled "Beijing". This is problematic for heat analysis because these districts have meaningfully different land cover and thermal regimes: Dongcheng and Xicheng are the oldest, most densely built areas; Haidian contains large university campuses and parks; Chaoyang is a mix of commercial high-rises and residential estates. The DataV dataset separates all 16 districts, allowing these contrasts to be resolved.
 :::
 
 ### 2.2 Loading the Study Area Boundary
 
-The Beijing boundary is derived from GADM Level 2 using `.union()` to merge all district polygons into a single municipality outline, and the 11 GADM Level 3 districts are loaded separately for per-unit analysis.
+The 16-district DataV shapefile was uploaded as a GEE Asset after conversion from GeoJSON via QGIS (retaining only the `adcode` and `name` fields to avoid format incompatibilities). A pinyin name field (`name_py`) is added in GEE using a dictionary mapping before any analysis is run. The overall Beijing boundary is derived by `.union()` on the same collection.
 
 <details>
 <summary>Show GEE code</summary>
@@ -78,18 +80,49 @@ var dataset_style = dataset.style({
 
 Map.addLayer(dataset, {}, 'Second Level Administrative Units_1');
 
-// Use GADM Level 2 for Beijing boundary — consistent with district-level data below
-var gadm2 = ee.FeatureCollection('projects/week6-gee-coursework/assets/gadm41_CHN_2');
-var Beijing = gadm2.filter(ee.Filter.eq('NAME_1', 'Beijing')).union();
+// Load DataV 16 districts shapefile (uploaded as GEE Asset)
+var Beijing_level2 = ee.FeatureCollection(
+  'projects/week6-gee-coursework/assets/Beijng'
+);
+
+// Map Chinese district names to pinyin for downstream compatibility
+var pinyinMap = ee.Dictionary({
+  '东城区': 'Dongcheng',
+  '西城区': 'Xicheng',
+  '朝阳区': 'Chaoyang',
+  '丰台区': 'Fengtai',
+  '石景山区': 'Shijingshan',
+  '海淀区': 'Haidian',
+  '门头沟区': 'Mentougou',
+  '房山区': 'Fangshan',
+  '通州区': 'Tongzhou',
+  '顺义区': 'Shunyi',
+  '昌平区': 'Changping',
+  '大兴区': 'Daxing',
+  '怀柔区': 'Huairou',
+  '平谷区': 'Pinggu',
+  '密云区': 'Miyun',
+  '延庆区': 'Yanqing'
+});
+
+Beijing_level2 = Beijing_level2.map(function(feat) {
+  var pinyin = pinyinMap.get(feat.get('name'));
+  return feat.set('name_py', pinyin);
+});
+
+// Derive overall Beijing boundary from union of 16 districts
+var Beijing = Beijing_level2.union();
 
 Map.addLayer(Beijing, {}, 'Beijing');
+print('Beijing spatial units:', Beijing_level2.size());
+print('Unit names:', Beijing_level2.aggregate_array('name_py'));
 ```
 
 </details>
 
 ### 2.3 Landsat 8 Land Surface Temperature
 
-The thermal band **ST_B10** records top-of-atmosphere brightness temperature in **Kelvin**; after applying the standard scale factor and subtracting 273.1, the result is surface temperature in **Celsius**. A cloud cover threshold of **< 10%** is used — Beijing's relatively dry summer climate makes this feasible, and the resulting 13 scenes provide adequate coverage.
+The thermal band **ST_B10** records top-of-atmosphere brightness temperature in **Kelvin**; after applying the standard scale factor and subtracting 273.1, the result is surface temperature in **Celsius**. A strict cloud cover threshold of **< 1%** is used to maximise scene quality over the study period, yielding 13 scenes.
 
 <details>
 <summary>Show GEE code</summary>
@@ -108,7 +141,7 @@ var landsat = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
   .filterDate('2022-01-01', '2022-10-10')
   .filter(ee.Filter.calendarRange(5, 9,'month'))
   .filterBounds(Beijing)
-  .filter(ee.Filter.lt("CLOUD_COVER", 10))
+  .filter(ee.Filter.lt("CLOUD_COVER", 1))
   .map(applyScaleFactors);
 
 print(landsat);
@@ -140,7 +173,7 @@ Map.addLayer(subtracted_mean, vis_params, 'Landsat Temp');
 
 </details>
 
-![Figure 1: Mean summer Land Surface Temperature (May–September 2022) derived from Landsat 8 ST_B10 over Beijing municipality. Higher temperatures (yellow–green) concentrate in the southern plains and the central urban core, while the mountainous northern and western districts (Huairou, Yanqing, Mentougou) remain markedly cooler (deep blue). Note that while the palette extends to red (max = 55°C), the maximum observed mean LST in Beijing stays within the green–yellow range (~35–38°C), confirming that extreme pixel-level temperatures are averaged out across the summer period.](images/week9_landsat_lst.png)
+![Figure 1: Mean summer Land Surface Temperature (May–September 2022) derived from Landsat 8 ST_B10 over Beijing municipality. Higher temperatures (yellow–orange) concentrate in the southern plains — particularly Daxing and Fengtai — and the central urban core (Xicheng, Dongcheng), while the mountainous northern and western districts (Huairou, Yanqing, Mentougou) remain markedly cooler (deep blue–green). The 16-district DataV boundaries are spatially consistent with the raster clip boundary, eliminating the misalignment that arose when using separate data sources for the clip and district layers.](images/week9_landsat_lst.png)
 
 ### 2.4 MODIS Time Series and Per-District Analysis
 
@@ -230,22 +263,17 @@ print(timeseries);
 
 ![Figure 2: MODIS (Aqua + Terra merged) daily mean Land Surface Temperature time series for Beijing, May–September 2022. The 306 observations reveal clear seasonal structure: temperatures peak at approximately **~39°C** in early June, followed by a sharp drop to around **15–16°C** in late June coinciding with the onset of the main monsoon season (though, as discussed in Section 2.6, these extreme lows are heavily influenced by unmasked cloud cover rather than true surface cooling). A secondary warm spell (~37°C) is visible in mid-August before temperatures decline through September to approximately 25–30°C. This intra-seasonal variability would be entirely invisible with Landsat's 16-day revisit.](images/week9_modis_timeseries.png)
 
-![Figure 3: Mean summer LST derived from merged MODIS Aqua and Terra collections (May–September 2022) at **1km resolution** over Beijing municipality. The **central urban core and southern plains** show consistently higher temperatures (yellow–red), while the mountainous northern fringe remains cooler (blue–green) throughout the summer. Comparing this with **Figure 1** (Landsat, 30m), both confirm the same macro-pattern — the urban core and Daxing are the warmest areas, the northern mountain districts the coolest. However, Landsat reveals finer spatial heterogeneity — individual roads, industrial zones, and water bodies are distinguishable — while MODIS smooths these out. This trade-off motivates using Landsat for the spatial **heat index** (Section 2.5) and MODIS for the **temporal trend** (Section 2.6).](images/week9_modis_mean.png)
+![Figure 3: Mean summer LST derived from merged MODIS Aqua and Terra collections (May–September 2022) at **1km resolution** over Beijing municipality. The **central urban core and southern plains** show consistently higher temperatures (yellow–red), while the mountainous northern fringe remains cooler (blue–green) throughout the summer. Comparing this with **Figure 1** (Landsat, 30m), both confirm the same macro-pattern — the inner urban districts and Daxing are the warmest areas, the northern mountain districts the coolest. However, Landsat reveals finer spatial heterogeneity — individual roads, industrial zones, and water bodies are distinguishable — while MODIS smooths these out. This trade-off motivates using Landsat for the spatial **heat index** (Section 2.5) and MODIS for the **temporal trend** (Section 2.6).](images/week9_modis_mean.png)
 
-For the per-district time series, I used `seriesByRegion` to plot a separate line for each administrative unit. With 11 GADM Level 3 districts and 306 merged Aqua+Terra images, the element count (11 × 306 = 3,366) stays within GEE's 5,000 element limit, allowing the full merged dataset to be used.
+For the per-district time series, I used `seriesByRegion` to plot a separate line for each administrative unit. With **16 DataV districts** and 306 merged Aqua+Terra images, the element count (16 × 306 = 4,896) remains within GEE's 5,000 element limit, allowing the full merged dataset to be used without subsampling.
 
 <details>
 <summary>Show GEE code</summary>
 
 ```javascript
-//--------------------------Statistics per level 2---------------------------
+//--------------------------Statistics per district (16 districts)---------------------------
 
-var gadm3 = ee.FeatureCollection('projects/week6-gee-coursework/assets/gadm41_CHN_3');
-var Beijing_level2 = gadm3.filter(ee.Filter.eq('NAME_2', 'Beijing'));
-print('Beijing spatial units:', Beijing_level2.size());
-print('Unit names:', Beijing_level2.aggregate_array('NAME_3'));
-
-Map.addLayer(Beijing_level2, {}, 'Second Level Administrative Units_2');
+Map.addLayer(Beijing_level2, {}, 'Beijing Districts (16)');
 
 print(subtracted_mean);
 
@@ -270,7 +298,7 @@ var timeseries_per_unit = ui.Chart.image.seriesByRegion({
   regions: Beijing_level2,
   reducer: ee.Reducer.mean(),
   scale: 1000,
-  seriesProperty: 'NAME_3',
+  seriesProperty: 'name_py',
   xProperty: 'system:time_start'
 }).setOptions({
   title: 'Average temp per spatial unit',
@@ -288,7 +316,7 @@ print(timeseries_per_unit);
 
 var triplets = aqua_terra.map(function(image) {
   return image.select('LST_Day_1km').reduceRegions({
-    collection: Beijing_level2.select(['GID_3']),
+    collection: Beijing_level2.select(['adcode', 'name_py']),
     reducer: ee.Reducer.mean(),
     scale: 30
   }).filter(ee.Filter.neq('mean', null))
@@ -309,20 +337,20 @@ Export.table.toDrive({
 
 </details>
 
-![Figure 4: Daily MODIS LST per district across Beijing (Aqua + Terra merged, May–September 2022), with all 11 GADM Level 3 districts clearly labelled. The lines separate into two visible clusters: a **warmer group** (Daxing, Beijing central urban area, Shunyi, Fangshan) peaking at approximately **40–42°C** in late May and early June, and a **cooler mountain group** (Huairou, Mentougou, Yanqing, Changping, Miyun, Pinggu) running consistently 5–8°C lower throughout the period. All districts register the sharp late-June temperature drop (some falling below 10°C) associated with monsoon **cloud cover** (see Section 2.6 on cloud contamination), and all show partial recovery in August before declining through September. The persistent spread between the two clusters throughout the summer confirms that the **urban–rural thermal gradient** is a structural feature of Beijing's heat environment, not merely an artefact of a single hot day.](images/week9_modis_per_district.png)
+![Figure 4: Daily MODIS LST per district across Beijing (Aqua + Terra merged, May–September 2022), with all 16 districts labelled in pinyin. Separating the formerly merged inner-city area into its six constituent districts (Dongcheng, Xicheng, Chaoyang, Haidian, Fengtai, Shijingshan) reveals that they do not behave uniformly: the dense historic core (Dongcheng, Xicheng) consistently runs warmer than Haidian (which contains large university campuses and parks) and Shijingshan. A **warmer group** — Xicheng, Dongcheng, Daxing, Fengtai, Chaoyang, Tongzhou — peaks at approximately **40–43°C** in late May and early June, while a **cooler mountain group** — Huairou, Mentougou, Yanqing, Changping, Miyun — runs consistently 5–10°C lower throughout the period. All districts register the sharp late-June temperature drop associated with monsoon **cloud cover** (see Section 2.6), and all show partial recovery in August before declining through September. The separation into 16 districts makes the urban–rural thermal gradient more analytically tractable than the previous 11-unit classification.](images/week9_modis_per_district.png)
 
 ::: {.callout-note}
 ## Why Export Triplets?
-The **triplets CSV** — one row per (district, date, mean LST) — is the format needed for time series modelling in R. With 153 Aqua + 153 Terra images per district, there are sufficient observations to run a **Mann-Kendall trend test** and determine whether any district shows a statistically significant warming or cooling trend over the summer period.
+The **triplets CSV** — one row per (district, date, mean LST) — is the format needed for time series modelling in R. With 153 Aqua + 153 Terra images per district, there are sufficient observations to run a **Mann-Kendall trend test** and determine whether any district shows a statistically significant warming or cooling trend over the summer period. The exported CSV includes both `adcode` (numeric district ID) and `name_py` (romanised district name) for easy joining in R.
 :::
 
 ### 2.5 Heat Index Classification in GEE and R
 
 The final step classifies each district into a **heat hazard level** based on **percentile rank** of mean summer Landsat LST. This replicates the BBC heat vulnerability index methodology. I implemented this in both GEE and R to cross-check results.
 
-One thing I noticed while doing this: the BBC method was originally designed for datasets with hundreds of spatial units (like UK postcodes or wards). Applied to Beijing's 11 districts, the p99 threshold ends up isolating just a single district — which is mathematically fine but feels a bit blunt for only 11 units. A standard deviation-based classification might actually be more appropriate at this scale, though implementing that is a further step I didn't take here.
+One thing I noticed while doing this: the BBC method was originally designed for datasets with hundreds of spatial units (like UK postcodes or wards). Applied to Beijing's 16 districts, the p99 threshold still ends up isolating just one or two districts. This is an improvement over the previous 11-unit analysis — where the same problem was more severe — but the distribution still has limited shape at this spatial resolution. A standard deviation-based classification, or applying the index at sub-district level, would produce a more informative result.
 
-When I cross-checked the GEE output against the R maps, the results didn't match — four districts were showing as the lightest colour in GEE despite clearly having higher temperatures in R. After printing the mean values and percentile boundaries to the console, I found the cause: the classification code uses **strict inequalities** (`.lt()` and `.gt()`) throughout all conditions, meaning if a district's mean LST falls **exactly on a threshold value** it doesn't satisfy either side of the comparison and falls into the final `else` branch with `percentile_cat = 0`. With 11 districts this wasn't a fringe case — Pinggu's mean equalled p40 exactly, Shunyi equalled p70, Beijing equalled p90, and Daxing equalled p99, so 4 out of 11 districts were misclassified. The fix is to replace `.gt()` with `.gte()` for all lower-bound comparisons. This kind of bug would be invisible with hundreds of wards — the probability of any value hitting a threshold exactly approaches zero — but with only 11 features it broke nearly half the classification.
+When I cross-checked the GEE output against the R maps, I found a boundary condition bug: the original classification uses **strict inequalities** throughout, meaning if a district's mean LST falls **exactly on a threshold value** it falls into the `else` branch with `percentile_cat = 0`. The fix is to replace `.gt()` with `.gte()` for all lower-bound comparisons, which has been applied in the code below.
 
 #### GEE Implementation
 
@@ -389,11 +417,11 @@ Export.image.toDrive({
 
 </details>
 
-![Figure 5: Heat hazard index by district across Beijing, classified into five **percentile-based levels** in GEE (after fixing the boundary condition bug — see text above). **Daxing** is at Level 5, the **central urban core** at Level 4, and the northern mountain districts (Huairou, Yanqing, Mentougou) at Levels 1–2, now fully consistent with the R output in **Figure 7** and the spatial LST patterns in **Figures 1 and 3**.](images/week9_heat_index.png)
+![Figure 5: Heat hazard index by district across Beijing, classified into five **percentile-based levels** in GEE. **Xicheng** and **Dongcheng** (the small, densely built historic core) reach the highest levels, reflecting extreme impervious surface density and minimal green cover. **Fengtai** and **Daxing** in the south sit at Levels 3–4, while the northern and western mountain districts (Huairou, Yanqing, Mentougou) are classified at Levels 1–2. The finer 16-district breakdown makes it possible to distinguish the thermal behaviour of the six inner-city districts that were previously merged into a single unit.](images/week9_heat_index.png)
 
 #### R Implementation
 
-The GeoJSON exported from GEE was loaded into R for independent heat index calculation and visualisation using `tmap`. The **percentile breakpoints** for Beijing's 11 districts are: p40 = 32.04°C, p70 = 34.71°C, p90 = 36.34°C, p99 = 36.55°C — a relatively **narrow range of ~7°C** reflecting the mix of warm urban and cool mountain districts.
+The GeoJSON exported from GEE was loaded into R for independent heat index calculation and visualisation using `tmap`. With 16 districts the percentile distribution has more shape than the previous 11-unit analysis, making the classification more interpretable.
 
 <details>
 <summary>Show R code</summary>
@@ -414,7 +442,7 @@ tm1 <- tm_shape(temp) +
   tm_layout(frame = FALSE)
 tm1
 
-# Percentile rank function (from StackExchange)
+# Percentile rank function
 perc.rank <- function(x) trunc(rank(x))/length(x)
 
 percentile <- temp %>% 
@@ -441,9 +469,9 @@ tm2
 
 </details>
 
-![Figure 6: Mean summer Landsat LST per district, Beijing (R/tmap). **Daxing** in the southern plain and the **central urban core** both record the highest mean temperatures (36–37°C range), while **Huairou** in the northeast mountains records the lowest (**30.7°C**). The spread of approximately 6°C is driven primarily by differences in elevation, land cover type, and impervious surface density.](images/week9_r_lst_mean.png)
+![Figure 6: Mean summer Landsat LST per district, Beijing (R/tmap, 16 districts). **Xicheng** and **Dongcheng** record the highest mean temperatures (~37–38°C), consistent with their extremely high impervious surface density and minimal green infrastructure. The southern districts — **Daxing**, **Fengtai**, and **Tongzhou** — also show elevated temperatures (35–36°C), driven by a combination of flat, low-albedo surfaces and expanding peri-urban development. The mountain districts in the north and west (**Huairou**, **Yanqing**, **Mentougou**) record the lowest means (~30–31°C), reflecting higher elevation, lower impervious surface, and greater vegetation cover. The total spread across all 16 districts is approximately 7–8°C.](images/week9_r_lst_mean.png)
 
-![Figure 7: Heat hazard index map produced in R using tmap, reproduced from the GeoJSON exported from GEE. **Daxing** is classified at **Level 5**, the **central urban core** at **Level 4**, and Tongzhou at Level 3–4, while the northern mountain districts (Yanqing, Huairou) sit at **Level 1**. This pattern is consistent with the mean LST map in Figure 6 — both Daxing's flat agricultural plains and the dense impervious surfaces of the urban core drive high summer temperatures, just through different mechanisms. The percentile breakpoints computed in R (p40 = 32.04°C, p70 = 34.71°C, p90 = 36.34°C) confirm the **distribution is narrow** — all 11 districts fall within a ~7°C range — making the **relative ranking** the more policy-relevant metric rather than absolute temperature values.](images/week9_r_heat_map.png)
+![Figure 7: Heat hazard index map produced in R using tmap (16 districts). **Xicheng** and **Dongcheng** reach the highest levels, the **Fengtai** and **Daxing** corridor sits at Levels 3–4, and the northern mountain districts (Yanqing, Huairou, Miyun) fall at **Level 1**. Separating the six inner-city districts — previously merged into a single GADM unit — reveals that they are not thermally uniform: Haidian, which contains major university campuses and Yuanmingyuan Park, sits at a lower level than the historic commercial cores of Xicheng and Dongcheng. This distinction was invisible in the previous 11-unit analysis and is precisely the kind of within-city differentiation that makes a finer administrative boundary worthwhile.](images/week9_r_heat_map.png)
 
 The interactive map overlays the 30m Landsat LST raster with the district-level heat index polygons, allowing inspection of the correspondence between **pixel-level temperature variation** and the **district-level classification**.
 
@@ -474,7 +502,7 @@ interactive
 
 </details>
 
-**Figure 8:** Interactive tmap view overlaying the Landsat LST raster (120m resampled) and the heat hazard district polygons at 70% opacity. This allows inspection of the correspondence between pixel-level temperature and the district-level classification.
+**Figure 8:** Interactive tmap view overlaying the Landsat LST raster (120m resampled) and the heat hazard district polygons at 70% opacity. The raster and district boundaries are now spatially consistent — both derived from the same DataV geometry — eliminating the misalignment visible in earlier versions of the map.
 
 ```{=html}
 <iframe src="images/week9.html" 
@@ -495,32 +523,31 @@ I also ran a **Mann-Kendall trend test** on the MODIS triplets CSV to determine 
 library(tidyverse)
 library(Kendall)
 
+# 1. Read data
 triplets <- read_csv("E:/Remote/week9/triplets_beijing.csv")
 
-# Mann-Kendall per district
+# 2. Mann-Kendall test per district
 results <- triplets %>%
-  group_by(GID_3) %>%
+  group_by(adcode) %>%
   summarise(
     mk_tau = MannKendall(mean)$tau,
     mk_pval = MannKendall(mean)$sl
   )
 
-# Join district names
-name_lookup <- percentile %>% 
-  st_drop_geometry() %>%
-  select(GID_3, NAME_3)
+# 3. Extract district name lookup
+name_lookup <- triplets %>%
+  select(adcode, name_py) %>%
+  distinct()
 
+# 4. Join district names
 results_named <- results %>%
-  left_join(name_lookup, by = "GID_3") %>%
-  select(NAME_3, GID_3, mk_tau, mk_pval)
+  left_join(name_lookup, by = "adcode") %>%
+  select(name_py, adcode, mk_tau, mk_pval)
 
 print(results_named)
 
-# LST distribution by district
-triplets_named <- triplets %>%
-  left_join(name_lookup, by = "GID_3")
-
-ggplot(triplets_named, aes(x = NAME_3, y = mean, fill = NAME_3)) +
+# 5. Boxplot of LST distribution by district
+ggplot(triplets, aes(x = name_py, y = mean, fill = name_py)) +
   geom_boxplot() +
   labs(x = "District", y = "LST (°C)", 
        title = "LST Distribution by Beijing District") +
@@ -530,19 +557,21 @@ ggplot(triplets_named, aes(x = NAME_3, y = mean, fill = NAME_3)) +
 
 </details>
 
-All 11 districts show a **statistically significant negative tau** (all p < 0.001), indicating a consistent **cooling trend** across the summer period. This reflects the seasonal influence of the **East Asian summer monsoon**: temperatures peak in May–June then decline through July–August as monsoon rainfall increases cloud cover and reduces incoming solar radiation. **Daxing** shows the steepest decline (τ = −0.349), consistent with its low-lying plain location most exposed to monsoonal rainfall, while **Yanqing** shows the weakest trend (τ = −0.145), reflecting its more sheltered mountainous position.
+All **16 districts** show a **statistically significant negative tau** (all p < 0.001), indicating a consistent **cooling trend** across the summer period. This reflects the seasonal influence of the **East Asian summer monsoon**: temperatures peak in May–June then decline through July–August as monsoon rainfall increases cloud cover and reduces incoming solar radiation. **Daxing** shows the steepest decline (τ = −0.346), consistent with its low-lying plain location most exposed to monsoonal rainfall, while **Yanqing** shows the weakest trend (τ = −0.151), reflecting its more sheltered mountainous position.
 
-That said, I should note that the monsoon season also brings heavy cloud cover, and I didn't apply any **QA bitmask cloud filtering** to the MODIS data. This means some of those very sharp dips in the time series — particularly the drop to around 7°C visible in early June (Figure 2) — are almost certainly **cloud contamination** rather than real surface cooling. MODIS is an optical sensor and picks up cloud-top temperatures when thick cloud is present. A more rigorous approach would apply the MODIS QA band to mask cloudy pixels before computing the time series. I skipped that step to keep the workflow manageable, but it's worth keeping in mind when interpreting the Mann-Kendall results — the negative tau values might partly reflect increasing cloud cover through the monsoon season rather than pure surface cooling.
+Separating the former "Beijing central urban" unit into its six constituent districts reveals that their Mann-Kendall slopes are similar in magnitude (τ ranging from −0.291 for Haidian to −0.336 for Xicheng), suggesting the monsoon cooling signal is consistent across the inner city, even though their absolute temperature levels differ. This pattern was invisible in the previous 11-unit analysis.
 
-![Figure 9: Boxplot of daily MODIS LST distribution by Beijing district (May–September 2022). **Beijing** (central urban area) shows a high median (~32°C) with a compact IQR, reflecting consistent heat retention by dense impervious surfaces. **Daxing** records the most extreme high-temperature outliers (approaching ~45°C on individual days), consistent with its flat, low-albedo agricultural plains being particularly susceptible to intense daytime heating. The mountain districts — **Huairou**, **Mentougou**, and **Yanqing** — cluster at the lower end (~26–28°C median), confirming the persistent urban–rural thermal gradient observed in the spatial maps (**Figures 1 and 3**). **Shunyi** and **Fangshan** occupy a middle-to-warm position, reflecting their mixed peri-urban character.](images/week9_r_boxplot.png)
+That said, the monsoon season also brings heavy cloud cover, and I didn't apply any **QA bitmask cloud filtering** to the MODIS data. This means some of those very sharp dips in the time series — particularly the drop to around 7°C visible in early June (Figure 2) — are almost certainly **cloud contamination** rather than real surface cooling. MODIS is an optical sensor and picks up cloud-top temperatures when thick cloud is present. The negative tau values likely partly reflect increasing cloud cover through the monsoon season rather than pure surface cooling.
+
+![Figure 9: Boxplot of daily MODIS LST distribution by Beijing district (May–September 2022), all 16 districts. **Xicheng** records the highest median (~35°C) with a compact IQR, reflecting consistent heat retention by dense historic impervious surfaces. **Daxing** and **Fengtai**  records the most extreme high-temperature outliers (approaching ~47°C on individual days), consistent with its flat, low-albedo agricultural and peri-urban plains being particularly susceptible to intense daytime heating. The mountain districts — **Huairou**, **Mentougou**, and **Yanqing** — cluster at the lower end (~26–28°C median), confirming the persistent urban–rural thermal gradient observed in the spatial maps (**Figures 1 and 3**). Critically, the former "Beijing central urban" aggregate is now disaggregated: **Haidian** (~32°C median) sits notably cooler than **Xicheng** (~35°C), a difference attributable to Haidian's university campuses, parks, and less-dense residential fabric.](images/week9_r_boxplot.png)
 
 ### 2.7 Literature: Heat Justice and EO Evidence
 
-[@wilson2020] and [@li2022] both argue that **heat maps only become policy-relevant when overlaid with socio-economic data** — knowing *where* it is hot is less useful than knowing *who* is exposed there and *why*. [@maclachlan2021] provide a direct example in practice: using Landsat LST alongside green space and population density data to identify **priority intervention zones** in Perth, Australia. For Beijing, the heat index produced here (**Figures 5 and 7**) and the LST distribution (**Figure 9**) together show that **Daxing** (Level 5) and the **central urban core** (Level 4) consistently record the highest temperatures — Daxing through its flat, low-albedo agricultural plains, and the urban core through sheer density of impervious surface. Whether those areas also have lower green cover and higher population vulnerability is a question the analysis cannot yet answer, but it is exactly the kind of **equity question** that [@gee_book2023] points towards.
+[@wilson2020] and [@li2022] both argue that **heat maps only become policy-relevant when overlaid with socio-economic data** — knowing *where* it is hot is less useful than knowing *who* is exposed there and *why*. [@maclachlan2021] provide a direct example in practice: using Landsat LST alongside green space and population density data to identify **priority intervention zones** in Perth, Australia. For Beijing, the heat index produced here (**Figures 5 and 7**) and the LST distribution (**Figure 9**) together show that the **inner-city districts** (Xicheng, Dongcheng) and **Daxing** consistently record the highest temperatures — the inner city through extreme impervious surface density and historic building stock, and Daxing through its flat, low-albedo agricultural and peri-urban plains. Whether those areas also have lower green cover and higher population vulnerability is a question the analysis cannot yet answer, but it is exactly the kind of **equity question** that [@gee_book2023] points towards.
 
 ::: {.callout-tip}
 ## Connecting Heat Index to Urban Policy
-The **Level 4–5 districts** identified here — **Daxing** and the **central urban core** — could form the basis for targeted urban greening or heat emergency planning, though for very different reasons: Daxing needs more vegetation cover on its agricultural plains, while the urban core needs shade trees and cool surface materials in its dense street network. Overlaying this heat index with **population density**, elderly population share, and green cover data would transform a thermal map into a genuine **vulnerability assessment**.
+The **Level 4–5 districts** identified here — **Xicheng**, **Dongcheng**, **Fengtai**, and **Daxing** — could form the basis for targeted urban greening or heat emergency planning, though for very different reasons: Daxing needs more vegetation cover on its agricultural plains, while the inner-city districts need shade trees, cool surface materials, and enhanced green infrastructure in their dense street networks. The 16-district breakdown makes it possible to distinguish these mechanistically different cases — a distinction that was impossible with the previous single "Beijing central urban" aggregate. Overlaying this heat index with **population density**, elderly population share, and green cover data would transform a thermal map into a genuine **vulnerability assessment**.
 :::
 
 ---
@@ -551,9 +580,9 @@ The **Level 4–5 districts** identified here — **Daxing** and the **central u
 
 ### 3.1 From Classification to Temperature
 
-Weeks 7 and 8 produced land cover maps of **Chengdu** — urban core, vegetation, bare earth, water. This week asks what those surfaces actually feel like in summer. The connection is immediate and satisfying: the areas that classified as **dense urban or bare earth** in weeks 7 and 8 share the same spectral logic as the hottest zones on the Landsat LST map here (**Figure 1**). The heat index confirms this quantitatively, placing **Daxing** at Level 5 and the **central urban core** at Level 4 — Daxing because of its flat, low-albedo agricultural plains, and the urban core because of the sheer density of impervious surface and building stock.
+Weeks 7 and 8 produced land cover maps of **Chengdu** — urban core, vegetation, bare earth, water. This week asks what those surfaces actually feel like in summer. The connection is immediate and satisfying: the areas that classified as **dense urban or bare earth** in weeks 7 and 8 share the same spectral logic as the hottest zones on the Landsat LST map here (**Figure 1**). The heat index confirms this quantitatively — the dense historic cores of Xicheng and Dongcheng reach the highest levels, while Haidian's campus greenery keeps it measurably cooler than its neighbours.
 
-What surprised me most was the **seasonal structure** in the MODIS time series — and the lesson it taught me about working with raw satellite data. Looking at Figure 2, I first noticed that temperatures peaked in late May and early June rather than July or August as I expected. Then came the dramatic late-June drop, with some districts falling below 10°C. My initial reaction was to interpret this as a powerful seasonal cooling signal driven by the East Asian monsoon rain belt arriving at Beijing's latitude — the **Mann-Kendall analysis** even seemed to confirm this, showing a statistically significant **negative tau** across all 11 districts.
+What surprised me most was the **seasonal structure** in the MODIS time series — and the lesson it taught me about working with raw satellite data. Looking at Figure 2, I first noticed that temperatures peaked in late May and early June rather than July or August as I expected. Then came the dramatic late-June drop, with some districts falling below 10°C. My initial reaction was to interpret this as a powerful seasonal cooling signal driven by the East Asian monsoon rain belt arriving at Beijing's latitude — the **Mann-Kendall analysis** even seemed to confirm this, showing a statistically significant **negative tau** across all 16 districts.
 
 But then I looked more carefully at the physics. A daytime land surface temperature of 7–10°C in Beijing in June is physically implausible — even with heavy rainfall, the ground doesn't cool to near-freezing in summer. What's actually happening is that I didn't apply **QA bitmask cloud filtering** to the MODIS collection, so when thick monsoon cloud cover rolls in, the optical sensor picks up freezing **cloud-top temperatures** and averages them straight into the time series alongside real surface readings. The "dramatic cooling" in the chart is largely a data artefact rather than a real surface phenomenon. It was a useful reminder that a Mann-Kendall test can return a highly significant result and still be telling the wrong physical story if the data preprocessing was incomplete upstream.
 
@@ -568,7 +597,7 @@ The LST data also captures **surface temperature**, not **air temperature**. Roo
 **LST** from Landsat or MODIS measures the temperature of the **surface material** — not the air temperature that people experience. In dense urban areas with dark impervious surfaces, LST can exceed air temperature by **10–15°C**. This distinction matters when translating satellite data into health risk estimates [@maclachlan2021].
 :::
 
-There are also two places in my approach worth being honest about. The cloud contamination issue already covered in Section 2.6 is one — skipping QA bitmasking keeps the workflow clean but does mean the time series statistics are noisier than they should be. The other is the **sample size for the percentile heat index**: this method really comes into its own with hundreds of spatial units like UK wards or US census tracts. With only 11 Beijing districts, the p99 cutoff essentially just isolates the single hottest district, which feels a bit mechanical. The classification would probably be more informative applied at a finer spatial scale — sub-district or grid cell level — where the distribution has more shape to it. Neither of these undermines what I produced here, but they're the first things I'd address if taking this further.
+There are also two places in my approach worth being honest about. The cloud contamination issue already covered in Section 2.6 is one — skipping QA bitmasking keeps the workflow clean but does mean the time series statistics are noisier than they should be. The other is the **sample size for the percentile heat index**: moving from 11 to 16 districts improved the situation — the former aggregated inner-city unit is now resolved into six separate districts with meaningfully different thermal profiles — but 16 units still provides limited distributional shape for a five-level percentile classification. The p99 threshold still isolates only one or two districts at the top. The classification would be more informative applied at a sub-district level (街道/乡镇), but no publicly available vector boundary dataset for Beijing provides that level of granularity in a format compatible with GEE. This remains the primary spatial limitation of the analysis.
 
 ---
 

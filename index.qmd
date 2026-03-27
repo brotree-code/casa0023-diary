@@ -4,10 +4,19 @@ subtitle: "Remotely Sensing Cities and Environments — CASA0023"
 date: "2026-01-24"
 ---
 
+## About Me
+
+Hello everyone, I'm **Jianshu Wu**. I grew up in **Guiyang**, the capital of Guizhou Province in southwest China — a mountainous region renowned for its dramatic karst landscapes, cool summers, and extraordinary cultural diversity. I am **Buyi**, one of the major ethnic groups of Guizhou, whose culture is woven into the landscape itself: Buyi villages traditionally cluster along rivers and terraced fields, our festivals mark the rhythms of the agricultural calendar, and our hand-woven batik textiles carry patterns that have been passed down for generations. Growing up with that connection between people, land, and season gave me an early intuition that places are never just physical space — they carry layers of identity and meaning that no satellite image can fully capture, but that spatial analysis can at least begin to illuminate.
+
+I completed my undergraduate degree at the **School of Information Resource Management, Renmin University of China**, where I developed a foundation in data management, information systems, and spatial thinking. That background made the leap into Earth Observation feel like a natural extension — both fields are ultimately about extracting meaning from large, complex datasets.
+
+I chose CASA0023 because I wanted to move beyond working with pre-processed spatial data and understand how the raw signals from satellites are turned into the maps and indices that underpin urban policy. GEE in particular felt like a tool I needed to actually use, not just read about.
+
+---
+
 # Welcome
 
 This is my learning diary for **CASA0023: Remotely Sensing Cities and Environments**.
-
 Each weekly entry follows the same structure: a **summary** of the key ideas from the lecture and practical, an **applications** section discussing how those ideas appear in research and policy, and a **personal reflection** on what I found interesting, what I struggled with, and where the methods might be useful later.
 
 ---
@@ -31,13 +40,6 @@ Each weekly entry follows the same structure: a **summary** of the key ideas fro
 
 * 🔗 [**GitHub Repository**](https://github.com/brotree-code/casa0023-diary)
 * 📊 [**Slides (Week 2): Landsat Program Presentation**](https://brotree-code.github.io/casa0023-presentation/)
-
----
-
-# Module Overview
-
-- **Assessment 1 (30%)** — Group presentation (10 minutes), policy-focused EO pitch
-- **Assessment 2 (70%)** — Weekly learning diary (this site)
 
 ---
 
